@@ -2,6 +2,8 @@
 
 Personal portfolio website for Matome Mbowene — Software Engineer, AI/ML Specialist, and Dell Young Leader.
 
+Professional dark theme with glassmorphism, deep-blue hero, and subtle section dividers
+
 **Live Site:** https://matomemb.github.io
 
 ---
