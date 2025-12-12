@@ -1,4 +1,4 @@
-# Matome Mbowene | Portfolio
+# Matome Mbowene Portfolio
 
 Personal portfolio website for Matome Mbowene — Software Engineer, AI/ML Specialist, and Dell Young Leader.
 
@@ -8,31 +8,33 @@ Personal portfolio website for Matome Mbowene — Software Engineer, AI/ML Speci
 
 ## Overview
 
-A modern, high-performance portfolio website built with **Tailwind CSS**, **Font Awesome 6**, and **AOS animations**. Designed to showcase production projects, academic achievements, and technical expertise to recruiters and potential collaborators.
+A premium, modern portfolio website featuring **iOS 26-inspired glassmorphism design** with translucent cards, smooth animations, and professional depth. Built with **Tailwind CSS**, **Font Awesome 6**, and **AOS animations** for a high-end feel.
 
 ### Key Features
 
-✨ **Modern Design**
-- Dark theme with gradient accents (#0f172a background, #e2e8f0 text)
-- Professional gradients (Indigo → Purple) with smooth animations
-- Responsive mobile-first design (mobile, tablet, desktop)
+✨ **Glassmorphism Design (iOS 26 Inspired)**
+- Liquid Glass cards with backdrop blur effects and translucent backgrounds
+- Frosted-glass aesthetic with subtle reflections and depth
+- Smooth hover transforms (scale + shadow for "liquid" flow)
+- Modern rounded corners and minimalist layout
+- Premium feel without generic vibes
 
 🎯 **Sections**
 - **Hero:** Profile photo, name, title, summary, social links, resume download
 - **About:** Education (UCT BSc Dec 2025), Dell Young Leader recognition, career passion
-- **Production Projects:** 3 featured projects with stats, tech stacks, repo links
-- **Academic Projects:** 5+ capstone/academic achievements with quantified metrics
-- **Skills:** 15+ technical skills in interactive badge grid
+- **Production Projects:** 3 featured projects with NDA badges (confidential projects marked professionally)
+- **Academic Projects:** 6 capstone/academic achievements with quantified metrics
+- **Skills:** 15+ interactive technical skill badges
 - **Contact:** Formspree form + direct contact links
-- **Navigation:** Sticky navbar with smooth scrolling
+- **Navigation:** Sticky glass navbar with smooth scrolling
 
 🚀 **Performance & UX**
 - AOS fade-up animations on scroll
-- Hover lift effects on project cards
+- Dynamic card hover effects with scale transforms
 - Fast CDN-based assets (Tailwind, Font Awesome, Google Fonts)
 - Smooth scrolling between sections
-- Form feedback animations
 - SEO-optimized meta tags
+- Mobile-first, responsive design
 
 ---
 
@@ -93,33 +95,19 @@ Your site will be live at `https://<your-username>.github.io`
 
 ---
 
-## Customization Guide
+## Design Highlights
 
-### Colors
-Edit CSS variables in the `<style>` section:
-```css
-:root {
-    --primary: #667eea;      /* Indigo */
-    --secondary: #764ba2;    /* Purple */
-    --tertiary: #f093fb;     /* Pink */
-    --bg-dark: #0f172a;      /* Dark background */
-    --text-light: #e2e8f0;   /* Light text */
-}
-```
+### Glassmorphism (iOS 26 Inspired)
+- **Glass Cards:** `backdrop-filter: blur(20px)` with `rgba(255,255,255,0.05)` for frosted effect
+- **Border Treatment:** Subtle white borders at low opacity for definition
+- **Hover States:** Cards scale (1.02x) and lift (-5px) on hover with enhanced shadows
+- **NDA Badges:** Glassmorphic red badges with lock icon for confidential projects
 
-### Content
-- Update hero section with your name, title, and bio
-- Modify project cards with your own projects
-- Add/remove skill badges
-- Update social links (LinkedIn, GitHub, Email)
-
-### Sections
-Each section is wrapped in a `<section>` tag with an `id` for navigation:
-- `#about` — About section
-- `#projects` — Production projects
-- `#academic` — Academic projects
-- `#skills` — Technical skills
-- `#contact` — Contact form
+### Color Palette
+- **Dark Background:** `#0f172a` (dark navy)
+- **Light Text:** `#e2e8f0` (soft white)
+- **Primary Gradient:** Indigo (#667eea) → Purple (#764ba2)
+- **Accent Colors:** Cyan, Orange, Green for project icons
 
 ---
 
@@ -150,6 +138,17 @@ Each section is wrapped in a `<section>` tag with an `id` for navigation:
 - **Lighthouse Score:** 95+ (Performance, Accessibility, Best Practices)
 - **Mobile Optimized:** Fully responsive down to 320px width
 - **CDN-Hosted Assets:** Fast, globally distributed delivery
+
+---
+
+## NDA Projects
+
+The portfolio includes three production projects marked as "Confidential Project (NDA)":
+- **PDF Autofill MVP** — 100% field-mapping accuracy on government forms
+- **Beetroot AI Networker** — RAG-powered African entrepreneur networking
+- **RoadMind AI Smart Helmet** — Real-time hazard detection with sensor fusion
+
+These projects respect NDAs by omitting repository links while showcasing impact and technical achievements.
 
 ---
 
