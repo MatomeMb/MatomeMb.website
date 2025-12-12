@@ -148,6 +148,14 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
+        /* About-specific card: softer, darker, less white contrast to improve readability */
+        .about-card {
+            background: rgba(15, 23, 42, 0.45) !important;
+            backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.04) !important;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+        }
+
         .card-hover {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(148, 163, 184, 0.1);
@@ -316,7 +324,7 @@
             </h2>
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-6" data-aos="fade-right" data-aos-delay="100">
-                <div class="glass-card py-4 rounded-lg">
+                <div class="glass-card about-card py-4 rounded-lg">
                     <p class="text-lg leading-relaxed px-6">
                         As a recent graduate from the <span class="font-bold text-indigo-300">University of Cape Town</span> with a <span class="font-bold">BSc in Computer Science and Computer Engineering</span> (December 2025), I specialize in building production-ready systems that solve real-world problems.
                     </p>
@@ -326,7 +334,7 @@
                 </p>
             </div>
             <div class="space-y-6" data-aos="fade-left" data-aos-delay="100">
-                <div class="glass-card p-6">
+                <div class="glass-card about-card p-6">
                     <h3 class="font-bold text-xl mb-3 flex items-center">
                         <i class="fas fa-award text-yellow-400 mr-3 text-2xl"></i>Dell Young Leader
                     </h3>
@@ -334,7 +342,7 @@
                         Selected for academic excellence and demonstrated leadership (2020-2025). Committed to driving impactful technology solutions and mentoring the next generation of innovators.
                     </p>
                 </div>
-                <div class="glass-card p-6">
+                <div class="glass-card about-card p-6">
                     <h3 class="font-bold text-xl mb-3 flex items-center">
                         <i class="fas fa-rocket text-blue-400 mr-3 text-2xl"></i>Ready to Impact
                     </h3>
@@ -346,6 +354,42 @@
         </div>
         </div>
     </section>
+    <!-- Certifications -->
+    <section class="py-12 px-4 md:px-6" id="certifications">
+        <div class="max-w-5xl mx-auto" data-aos="fade-up">
+            <h3 class="text-3xl font-bold text-center mb-8 section-title">Certifications</h3>
+            <div class="grid sm:grid-cols-3 gap-6">
+                <div class="glass-card p-6 flex items-start gap-4 card-hover">
+                    <div class="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center">
+                        <i class="fas fa-file-pdf text-indigo-300"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Google Cloud Career Launchpad</p>
+                        <p class="text-sm text-slate-400">Foundational cloud engineering and solution design.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex items-start gap-4 card-hover">
+                    <div class="w-10 h-10 rounded-full bg-green-400/10 flex items-center justify-center">
+                        <i class="fas fa-award text-green-300"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold">EMEA Scholar</p>
+                        <p class="text-sm text-slate-400">Regional scholarship and leadership recognition.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex items-start gap-4 card-hover">
+                    <div class="w-10 h-10 rounded-full bg-yellow-400/10 flex items-center justify-center">
+                        <i class="fas fa-certificate text-yellow-300"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold">UCT Training on Academic Integrity (TRAI)</p>
+                        <p class="text-sm text-slate-400">Digital badge for Academic Integrity training.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="w-full max-w-6xl mx-auto px-6"><div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-20"></div></div>
 
     <!-- Production Projects -->
