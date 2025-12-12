@@ -1,226 +1,524 @@
-<!doctype html>
-<html lang="en" class="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Matome Mb — Portfolio</title>
-    <meta name="description" content="Matome Mb — AI Engineer & Full-Stack Developer." />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matome Mbowene | Software Engineer Portfolio</title>
+    <meta name="description" content="Recent BSc Computer Science & Computer Engineering graduate from UCT. Specializing in AI/ML, computer vision, full-stack development, and embedded systems. Dell Young Leader passionate about impactful tech solutions.">
+    <meta name="keywords" content="software engineer, AI, ML, computer vision, embedded systems, full-stack, UCT graduate, Dell Young Leader, Matome Mbowene">
+    <meta property="og:title" content="Matome Mbowene | Software Engineer Portfolio">
+    <meta property="og:description" content="AI/ML specialist and Dell Young Leader. UCT graduate building production-ready systems.">
+    <meta property="og:type" content="website">
 
-    <!-- Tailwind CDN -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = { theme: { extend: {} }, darkMode: 'class' };
-    </script>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
-    <!-- AOS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- AOS Animation CDN -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 
     <style>
-      html { scroll-behavior: smooth; }
-      body { background: radial-gradient(ellipse at top left, rgba(12,12,16,0.8), rgba(2,6,10,1)); }
-      /* card backdrop */
-      .card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)); backdrop-filter: blur(6px); }
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --tertiary: #f093fb;
+            --text-light: #e2e8f0;
+            --text-lighter: #cbd5e1;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-accent: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(240, 147, 251, 0.1) 0%, transparent 70%);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            border-color: rgba(102, 126, 234, 0.4);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.3s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .skill-badge {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
+            border-color: rgba(102, 126, 234, 0.6);
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            transition: color 0.3s ease;
+            color: var(--text-lighter);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .stat-highlight {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 3px solid var(--primary);
+            padding-left: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .gradient-bg::before {
+                top: -100%;
+                right: -100%;
+            }
+        }
     </style>
-  </head>
-  <body class="min-h-screen text-gray-200 antialiased">
+</head>
+<body class="antialiased">
 
-    <header class="max-w-6xl mx-auto px-6 py-6">
-      <nav class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-md bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold">MM</div>
-          <div>
-            <h1 class="text-lg sm:text-xl font-semibold">Matome Mb</h1>
-            <p class="text-sm text-indigo-300">AI Engineer • Full-Stack Developer</p>
-          </div>
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">MM</a>
+            <div class="hidden md:flex gap-8">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#academic" class="nav-link">Academic</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <a href="Matome_Mbowene_Resume_2025_Dec.pdf" download class="hidden md:inline-block px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-sm font-semibold transition">Resume</a>
         </div>
-        <div class="hidden md:flex items-center gap-6">
-          <a href="#projects" class="text-indigo-200 hover:text-white">Projects</a>
-          <a href="#academic" class="text-indigo-200 hover:text-white">Academic</a>
-          <a href="#skills" class="text-indigo-200 hover:text-white">Skills</a>
-          <a href="#contact" class="text-indigo-200 hover:text-white">Contact</a>
-        </div>
-        <button id="themeToggle" class="md:hidden text-indigo-200"><i class="fas fa-moon"></i></button>
-      </nav>
-    </header>
+    </nav>
 
-    <!-- Hero -->
-    <section id="hero" class="max-w-6xl mx-auto px-6 py-10 flex flex-col-reverse lg:flex-row items-center gap-8">
-      <div class="flex-1" data-aos="fade-up">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">Hi, I’m <span class="text-indigo-400">Matome Mb</span></h2>
-        <p class="mt-4 text-gray-300 max-w-xl">I build production-ready AI systems, RAG pipelines and embedded vision solutions. Dell Young Leader alum with experience taking ML projects from prototype to production.</p>
-
-        <div class="mt-6 flex flex-wrap gap-3 items-center">
-          <a href="https://www.linkedin.com/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md transition"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
-          <a href="https://github.com/MatomeMb" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-md transition"><i class="fab fa-github"></i><span>GitHub</span></a>
-          <a href="mailto:hello@matomemb.io" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md transition"><i class="fa fa-envelope"></i><span>Email</span></a>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center text-center px-4 md:px-6 gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="relative z-10 max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="800">
+            <div class="mb-8">
+                <img src="profile.jpg" alt="Matome Mbowene" class="w-32 h-32 md:w-44 md:h-44 rounded-full mx-auto mb-6 border-4 border-white shadow-2xl object-cover ring-4 ring-indigo-400/30">
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+                Matome <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white">Mbowene</span>
+            </h1>
+            <p class="text-xl md:text-3xl font-light mb-8 text-indigo-100">
+                Software Engineer • AI/ML Specialist • Dell Young Leader
+            </p>
+            <p class="text-base md:text-lg mb-10 max-w-3xl mx-auto text-slate-200 leading-relaxed">
+                Recent <span class="font-semibold">BSc Computer Science & Engineering</span> graduate from <span class="font-semibold text-indigo-300">University of Cape Town</span>. Building production-ready systems in AI, computer vision, and embedded technology to solve real-world problems across Africa.
+            </p>
+            <div class="flex justify-center gap-6 text-3xl mb-10">
+                <a href="https://linkedin.com/in/matomembowene" target="_blank" rel="noopener" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-indigo-500 transition transform hover:scale-110 duration-300">
+                    <i class="fab fa-linkedin text-white"></i>
+                </a>
+                <a href="https://github.com/MatomeMb" target="_blank" rel="noopener" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-indigo-500 transition transform hover:scale-110 duration-300">
+                    <i class="fab fa-github text-white"></i>
+                </a>
+                <a href="mailto:matomepontso@gmail.com" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-indigo-500 transition transform hover:scale-110 duration-300">
+                    <i class="fas fa-envelope text-white"></i>
+                </a>
+            </div>
+            <p class="text-lg mb-10 font-light">
+                <i class="fas fa-map-marker-alt text-indigo-300 mr-2"></i>Cape Town, South Africa • <i class="fas fa-phone text-indigo-300 mx-2"></i>+27 67 260 3309 • Available Immediately
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="Matome_Mbowene_Resume_2025_Dec.pdf" download class="btn-primary px-8 py-4 bg-white text-indigo-700 rounded-lg font-bold text-lg hover:shadow-2xl">
+                    <i class="fas fa-download mr-2"></i>Download Resume
+                </a>
+                <a href="#contact" class="px-8 py-4 border-2 border-white rounded-lg font-bold text-lg hover:bg-white/10 transition">
+                    Get in Touch
+                </a>
+            </div>
         </div>
-
-        <div class="mt-6 space-y-1 text-sm text-gray-300">
-          <div><strong class="text-indigo-300">Phone:</strong> <strong class="text-white">+27 67 260 3309</strong></div>
-          <div class="text-sm text-indigo-200">Available immediately • Cape Town</div>
-        </div>
-      </div>
-
-      <div class="w-full sm:w-80 lg:w-96" data-aos="fade-up" data-aos-delay="100">
-        <div class="rounded-2xl p-6 card border border-white/6 shadow-lg">
-          <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1" alt="Profile" class="w-full h-56 object-cover rounded-lg mb-4">
-          <div class="text-sm text-gray-300">AI, ML and systems engineer focused on production deployment, evaluation, and safety.</div>
-        </div>
-      </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="max-w-6xl mx-auto px-6 py-10">
-      <div class="grid md:grid-cols-3 gap-6 items-center">
-        <div class="md:col-span-2" data-aos="fade-up">
-          <h3 class="text-2xl font-bold">About Me</h3>
-          <p class="mt-4 text-gray-300">I'm an engineer who builds reliable AI systems and production pipelines. As a <strong class="text-indigo-300">Dell Young Leader</strong> I combine product thinking with rigorous ML engineering to deliver impact.</p>
-          <ul class="mt-4 text-sm text-gray-300 space-y-2">
-            <li>Production ML: model ops, RAG, vector search (FAISS), OpenAI/GPT integrations</li>
-            <li>Embedded & Edge: STM32, low-latency vision, real-time systems</li>
-            <li>Full-stack: APIs, streamlit prototypes, Spring Boot services</li>
-          </ul>
+    <!-- About Section -->
+    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto" id="about">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
+            About Me
+        </h2>
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6" data-aos="fade-right" data-aos-delay="100">
+                <div class="stat-highlight py-4 rounded-lg">
+                    <p class="text-lg leading-relaxed">
+                        As a recent graduate from the <span class="font-bold text-indigo-300">University of Cape Town</span> with a <span class="font-bold">BSc in Computer Science and Computer Engineering</span> (December 2025), I specialize in building production-ready systems that solve real-world problems.
+                    </p>
+                </div>
+                <p class="text-lg leading-relaxed text-slate-300">
+                    My experience spans <span class="font-semibold text-indigo-300">AI/ML</span>, <span class="font-semibold text-indigo-300">computer vision</span>, <span class="font-semibold text-indigo-300">full-stack development</span>, and <span class="font-semibold text-indigo-300">embedded systems</span>. I'm passionate about leveraging cutting-edge technology to create impactful solutions, particularly in Africa's rapidly growing tech landscape.
+                </p>
+            </div>
+            <div class="space-y-6" data-aos="fade-left" data-aos-delay="100">
+                <div class="bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-400/30 rounded-xl p-6">
+                    <h3 class="font-bold text-xl mb-3 flex items-center">
+                        <i class="fas fa-award text-yellow-400 mr-3 text-2xl"></i>Dell Young Leader
+                    </h3>
+                    <p class="text-slate-300">
+                        Selected for academic excellence and demonstrated leadership (2020-2025). Committed to driving impactful technology solutions and mentoring the next generation of innovators.
+                    </p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-400/30 rounded-xl p-6">
+                    <h3 class="font-bold text-xl mb-3 flex items-center">
+                        <i class="fas fa-rocket text-blue-400 mr-3 text-2xl"></i>Ready to Impact
+                    </h3>
+                    <p class="text-slate-300">
+                        Immediately available and eager to contribute to innovative teams. Seeking opportunities in Cape Town or remote roles where I can apply my expertise to solve complex technical challenges.
+                    </p>
+                </div>
+            </div>
         </div>
-
-        <div data-aos="fade-up" data-aos-delay="120">
-          <div class="p-4 rounded-lg card border border-white/6">
-            <h4 class="font-semibold">Quick Stats</h4>
-            <p class="mt-2 text-sm text-gray-300"><strong class="text-indigo-300">Available:</strong> Immediately</p>
-            <p class="mt-1 text-sm text-gray-300"><strong class="text-indigo-300">Location:</strong> Cape Town</p>
-            <p class="mt-1 text-sm text-gray-300"><strong class="text-indigo-300">Contact:</strong> +27 67 260 3309</p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Production Projects -->
-    <section id="projects" class="max-w-6xl mx-auto px-6 py-10">
-      <h3 class="text-2xl font-bold mb-6" data-aos="fade-up">Production Projects</h3>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <article class="p-6 rounded-xl card border border-white/6 hover:scale-105 transform transition" data-aos="fade-up">
-          <h4 class="font-semibold text-lg">PDF Autofill MVP</h4>
-          <p class="mt-2 text-sm text-gray-300">Automated, validated PDF form filling for South African government forms with end-to-end tests and monitoring.</p>
-          <p class="mt-4 text-indigo-300 font-bold">Result: <strong class="text-white">100% accuracy</strong> on validated form set</p>
-        </article>
+    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto bg-gradient-to-b from-slate-900/50 to-slate-800/50 rounded-3xl my-12" id="projects">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
+            Production Projects
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-slate-800/80 backdrop-blur rounded-2xl p-8 card-hover" data-aos="fade-up">
+                <div class="mb-4 w-12 h-12 bg-gradient-to-br from-indigo-400 to-purple-400 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-file-pdf text-white text-xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">PDF Autofill MVP</h3>
+                <p class="mb-4 text-slate-300">
+                    OCR + LLM system achieving <span class="font-bold text-green-400">100% field-mapping accuracy</span> on South African government forms (PRASA RFQ, SBDs).
+                </p>
+                <div class="mb-4 p-3 bg-slate-700/50 rounded-lg">
+                    <p class="text-sm text-slate-400"><span class="font-semibold text-slate-300">Tech:</span> Python, OpenAI GPT-4, PyMuPDF, Tesseract</p>
+                </div>
+                <a href="https://github.com/MatomeMb/pdf-autofill-mvp" target="_blank" rel="noopener" class="inline-flex items-center text-indigo-400 hover:text-indigo-300 font-semibold transition">
+                    View Repository <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
 
-        <article class="p-6 rounded-xl card border border-white/6 hover:scale-105 transform transition" data-aos="fade-up" data-aos-delay="80">
-          <h4 class="font-semibold text-lg">Beetroot AI Networker (RAG)</h4>
-          <p class="mt-2 text-sm text-gray-300">Retrieval-Augmented Generation stack with FAISS vector DB, GPT-4o integrations and Streamlit demos for rapid validation.</p>
-          <p class="mt-4 text-indigo-300 font-bold">Tech: <strong class="text-white">FAISS • GPT-4o • Streamlit</strong></p>
-        </article>
+            <div class="bg-slate-800/80 backdrop-blur rounded-2xl p-8 card-hover" data-aos="fade-up" data-aos-delay="100">
+                <div class="mb-4 w-12 h-12 bg-gradient-to-br from-green-400 to-teal-400 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-network-wired text-white text-xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Beetroot AI Networker</h3>
+                <p class="mb-4 text-slate-300">
+                    RAG-powered agent connecting African entrepreneurs using <span class="font-bold">FAISS</span> and <span class="font-bold">GPT-4o</span> for intelligent business matching.
+                </p>
+                <div class="mb-4 p-3 bg-slate-700/50 rounded-lg">
+                    <p class="text-sm text-slate-400"><span class="font-semibold text-slate-300">Tech:</span> Python, FAISS, sentence-transformers, Streamlit</p>
+                </div>
+                <a href="https://github.com/MatomeMb/beetroot-ai-networker" target="_blank" rel="noopener" class="inline-flex items-center text-indigo-400 hover:text-indigo-300 font-semibold transition">
+                    View Repository <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
 
-        <article class="p-6 rounded-xl card border border-white/6 hover:scale-105 transform transition" data-aos="fade-up" data-aos-delay="160">
-          <h4 class="font-semibold text-lg">RoadMind AI Smart Helmet</h4>
-          <p class="mt-2 text-sm text-gray-300">Real-time hazard detection on embedded hardware with low-latency alerts and field trials.</p>
-          <p class="mt-4 text-indigo-300 font-bold">Impact: Real-time detection and reduced rider response time</p>
-        </article>
-      </div>
+            <div class="bg-slate-800/80 backdrop-blur rounded-2xl p-8 card-hover" data-aos="fade-up" data-aos-delay="200">
+                <div class="mb-4 w-12 h-12 bg-gradient-to-br from-orange-400 to-red-400 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-helmet-safety text-white text-xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">RoadMind AI Smart Helmet</h3>
+                <p class="mb-4 text-slate-300">
+                    Real-time hazard detection with <span class="font-bold">LIDAR</span>, <span class="font-bold">IMU</span>, and multi-sensor fusion for autonomous vehicles.
+                </p>
+                <div class="mb-4 p-3 bg-slate-700/50 rounded-lg">
+                    <p class="text-sm text-slate-400"><span class="font-semibold text-slate-300">Tech:</span> Python, PyTorch, Embedded C, ROS</p>
+                </div>
+                <a href="https://github.com/MatomeMb/roadmind-ai" target="_blank" rel="noopener" class="inline-flex items-center text-indigo-400 hover:text-indigo-300 font-semibold transition">
+                    View Repository <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
     </section>
 
     <!-- Academic Projects -->
-    <section id="academic" class="max-w-6xl mx-auto px-6 py-10">
-      <h3 class="text-2xl font-bold mb-6" data-aos="fade-up">Academic & Capstone Projects</h3>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="p-4 rounded-lg card border border-white/6" data-aos="fade-up">
-          <h5 class="font-semibold">Image Processing Pipeline</h5>
-          <p class="text-sm mt-1 text-gray-300">Optimized image pipeline delivering <strong class="text-indigo-300">40% throughput gain</strong> on benchmark datasets.</p>
-        </div>
+    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto" id="academic">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
+            Academic & Capstone Projects
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-slate-800/80 rounded-2xl p-8 card-hover" data-aos="fade-up">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-image text-cyan-400 mr-3 text-xl"></i>Image Processing
+                </h3>
+                <p class="text-slate-300 mb-4">
+                    Optimized C++ algorithms for embedded image segmentation achieving <span class="font-bold text-green-400">40% memory/performance improvement</span>.
+                </p>
+            </div>
 
-        <div class="p-4 rounded-lg card border border-white/6" data-aos="fade-up" data-aos-delay="60">
-          <h5 class="font-semibold">Machine Learning (FashionMNIST)</h5>
-          <p class="text-sm mt-1 text-gray-300">ConvNet achieving <strong class="text-indigo-300">89.33%</strong> test accuracy on FashionMNIST.</p>
-        </div>
+            <div class="bg-slate-800/80 rounded-2xl p-8 card-hover" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-brain text-purple-400 mr-3 text-xl"></i>Machine Learning
+                </h3>
+                <p class="text-slate-300 mb-4">
+                    PyTorch neural network achieving <span class="font-bold text-green-400">89.33% accuracy</span> on FashionMNIST (Top 15% of class).
+                </p>
+            </div>
 
-        <div class="p-4 rounded-lg card border border-white/6" data-aos="fade-up" data-aos-delay="120">
-          <h5 class="font-semibold">Systems / Scheduling Research</h5>
-          <p class="text-sm mt-1 text-gray-300">Scheduling improvements showing <strong class="text-indigo-300">~35% improvement</strong> in throughput.</p>
-        </div>
+            <div class="bg-slate-800/80 rounded-2xl p-8 card-hover" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-server text-blue-400 mr-3 text-xl"></i>Systems & Networking
+                </h3>
+                <p class="text-slate-300 mb-4">
+                    CPU scheduling algorithms with <span class="font-bold text-green-400">35% efficiency improvement</span> over baseline implementations.
+                </p>
+            </div>
 
-        <div class="p-4 rounded-lg card border border-white/6" data-aos="fade-up" data-aos-delay="180">
-          <h5 class="font-semibold">MyAdvisor (Full-Stack)</h5>
-          <p class="text-sm mt-1 text-gray-300">Advising web app with auth and analytics supporting <strong class="text-indigo-300">800+ users</strong> in trials.</p>
-        </div>
+            <div class="bg-slate-800/80 rounded-2xl p-8 card-hover" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-code text-green-400 mr-3 text-xl"></i>Full-Stack Engineering
+                </h3>
+                <p class="text-slate-300 mb-4">
+                    MyAdvisor Spring Boot application serving <span class="font-bold text-green-400">800+ students</span> for academic advising and planning.
+                </p>
+            </div>
 
-        <div class="p-4 rounded-lg card border border-white/6" data-aos="fade-up" data-aos-delay="240">
-          <h5 class="font-semibold">STM32 Embedded Prototype</h5>
-          <p class="text-sm mt-1 text-gray-300">Robust embedded pipeline with <strong class="text-indigo-300">100% integrity</strong> checks in hardware-in-loop tests.</p>
+            <div class="bg-slate-800/80 rounded-2xl p-8 card-hover" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-microchip text-orange-400 mr-3 text-xl"></i>Embedded Systems
+                </h3>
+                <p class="text-slate-300 mb-4">
+                    STM32 communication protocols achieving <span class="font-bold text-green-400">100% message integrity</span> under stress conditions.
+                </p>
+            </div>
+
+            <div class="bg-slate-800/80 rounded-2xl p-8 card-hover" data-aos="fade-up" data-aos-delay="500">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-graduation-cap text-indigo-400 mr-3 text-xl"></i>Capstone & Research
+                </h3>
+                <p class="text-slate-300 mb-4">
+                    Intensive applied research and system integration demonstrating mastery across computer science and engineering fundamentals.
+                </p>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- Skills -->
-    <section id="skills" class="max-w-6xl mx-auto px-6 py-10">
-      <h3 class="text-2xl font-bold mb-6" data-aos="fade-up">Skills</h3>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" data-aos="fade-up">
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">Python</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">PyTorch</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">OpenAI</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">FAISS</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">Computer Vision</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">C / C++</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">STM32</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">Spring Boot</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">Docker</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">Git</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">SQL</span>
-        <span class="px-3 py-2 bg-white/4 rounded-md text-sm">REST APIs</span>
-      </div>
+    <!-- Skills Section -->
+    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto bg-gradient-to-b from-slate-900/50 to-slate-800/50 rounded-3xl my-12" id="skills">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
+            Technical Skills
+        </h2>
+        <div class="flex flex-wrap justify-center gap-3 md:gap-4" data-aos="fade-up" data-aos-delay="100">
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Python (Advanced)</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">PyTorch & TensorFlow</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">OpenAI/Anthropic APIs</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">FAISS & Vector DBs</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Computer Vision (OpenCV)</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">C/C++ (Performance)</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Spring Boot & Java</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Git & GitHub</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">CI/CD Pipelines</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Embedded Systems (STM32)</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">PDF Processing & OCR</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">System Design</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Linux/Unix</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">REST APIs</span>
+            <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Agile Methodology</span>
+        </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="max-w-6xl mx-auto px-6 py-10">
-      <h3 class="text-2xl font-bold mb-6" data-aos="fade-up">Contact</h3>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div data-aos="fade-up">
-          <p class="text-gray-300">Prefer email? Use the form — it posts to Formspree. Replace the action URL with your Formspree endpoint.</p>
-          <div class="mt-4 p-6 rounded-lg card border border-white/6">
-            <p class="text-sm text-gray-300">Email: <strong class="text-white">hello@matomemb.io</strong></p>
-            <p class="text-sm text-gray-300 mt-2">Phone: <strong class="text-white">+27 67 260 3309</strong></p>
-          </div>
-        </div>
+    <!-- Contact Section -->
+    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto" id="contact">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
+            Get in Touch
+        </h2>
+        <div class="max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-center text-lg text-slate-300 mb-12">
+                Have an opportunity, question, or just want to chat about AI, embedded systems, or tech in Africa? I'd love to hear from you.
+            </p>
+            <form action="https://formspree.io/f/yourFormId" method="POST" class="space-y-6">
+                <div>
+                    <input 
+                        type="text" 
+                        name="name" 
+                        placeholder="Your Name" 
+                        required 
+                        class="w-full px-6 py-4 bg-slate-800 rounded-xl border border-slate-700 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition text-white placeholder-slate-500"
+                    >
+                </div>
+                <div>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="Your Email" 
+                        required 
+                        class="w-full px-6 py-4 bg-slate-800 rounded-xl border border-slate-700 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition text-white placeholder-slate-500"
+                    >
+                </div>
+                <div>
+                    <textarea 
+                        name="message" 
+                        placeholder="Your Message" 
+                        rows="6" 
+                        required 
+                        class="w-full px-6 py-4 bg-slate-800 rounded-xl border border-slate-700 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition text-white placeholder-slate-500 resize-none"
+                    ></textarea>
+                </div>
+                <button 
+                    type="submit" 
+                    class="btn-primary w-full px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl font-bold text-lg hover:shadow-xl transition"
+                >
+                    <i class="fas fa-paper-plane mr-2"></i>Send Message
+                </button>
+            </form>
 
-        <form data-aos="fade-up" action="https://formspree.io/f/yourFormId" method="POST" class="space-y-4">
-          <div>
-            <label class="block text-sm text-gray-300">Name</label>
-            <input name="name" required class="w-full mt-1 px-3 py-2 rounded-md bg-white/3 border border-white/6 text-white focus:outline-none" />
-          </div>
-          <div>
-            <label class="block text-sm text-gray-300">Email</label>
-            <input name="email" type="email" required class="w-full mt-1 px-3 py-2 rounded-md bg-white/3 border border-white/6 text-white focus:outline-none" />
-          </div>
-          <div>
-            <label class="block text-sm text-gray-300">Message</label>
-            <textarea name="message" rows="4" required class="w-full mt-1 px-3 py-2 rounded-md bg-white/3 border border-white/6 text-white focus:outline-none"></textarea>
-          </div>
-          <div>
-            <button type="submit" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md">Send Message</button>
-          </div>
-        </form>
-      </div>
+            <!-- Contact Links -->
+            <div class="mt-16 pt-12 border-t border-slate-700">
+                <p class="text-center text-slate-400 mb-6">Or reach out directly:</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <a href="https://linkedin.com/in/matomembowene" target="_blank" rel="noopener" class="group p-6 bg-slate-800/50 rounded-xl hover:bg-slate-700 transition text-center">
+                        <i class="fab fa-linkedin text-3xl text-indigo-400 mb-3 group-hover:scale-110 transition inline-block"></i>
+                        <p class="font-semibold">LinkedIn</p>
+                        <p class="text-sm text-slate-400">Professional Network</p>
+                    </a>
+                    <a href="https://github.com/MatomeMb" target="_blank" rel="noopener" class="group p-6 bg-slate-800/50 rounded-xl hover:bg-slate-700 transition text-center">
+                        <i class="fab fa-github text-3xl text-gray-400 mb-3 group-hover:scale-110 transition inline-block"></i>
+                        <p class="font-semibold">GitHub</p>
+                        <p class="text-sm text-slate-400">Code & Projects</p>
+                    </a>
+                    <a href="mailto:matomepontso@gmail.com" class="group p-6 bg-slate-800/50 rounded-xl hover:bg-slate-700 transition text-center">
+                        <i class="fas fa-envelope text-3xl text-red-400 mb-3 group-hover:scale-110 transition inline-block"></i>
+                        <p class="font-semibold">Email</p>
+                        <p class="text-sm text-slate-400">matomepontso@gmail.com</p>
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
-    <footer class="mt-12 border-t border-white/6 py-8">
-      <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="text-sm text-gray-300">Available immediately • Cape Town • <strong class="text-white">+27 67 260 3309</strong></div>
-        <div class="text-sm text-gray-400">© <span id="year"></span> Matome Mb</div>
-      </div>
+    <footer class="py-8 text-center text-slate-500 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <p class="mb-2">&copy; 2025 Matome Mbowene. All rights reserved.</p>
+            <p class="text-sm">
+                Built with <i class="fas fa-heart text-red-400"></i> • 
+                <a href="https://tailwindcss.com" class="hover:text-indigo-400 transition">Tailwind CSS</a> • 
+                <a href="https://michalsnik.github.io/aos/" class="hover:text-indigo-400 transition">AOS Animations</a>
+            </p>
+        </div>
     </footer>
 
-    <!-- AOS + small scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      AOS.init({ once: true, duration: 700 });
-      document.getElementById('year').textContent = new Date().getFullYear();
+        // Initialize AOS animations
+        AOS.init({ 
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
 
-      // simple theme toggle (persist in localStorage)
-      const toggle = document.getElementById('themeToggle');
-      toggle?.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-      });
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Form submission feedback
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function() {
+                const button = this.querySelector('button[type="submit"]');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>Message Sent!';
+                button.disabled = true;
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }, 3000);
+            });
+        }
     </script>
-  </body>
+</body>
 </html>
