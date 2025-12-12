@@ -24,12 +24,13 @@
 
     <style>
         :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --tertiary: #f093fb;
+            --primary: #1e40af;
+            --secondary: #312e81;
+            --tertiary: #1e3a8a;
             --text-light: #e2e8f0;
             --text-lighter: #cbd5e1;
             --bg-dark: #0f172a;
+            --bg-light: #1e293b;
             --bg-card: rgba(30, 41, 59, 0.4);
             --bg-accent: #334155;
         }
@@ -52,9 +53,21 @@
         }
 
         .gradient-bg {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #1e40af 0%, #312e81 100%);
             position: relative;
             overflow: hidden;
+        }
+
+        .section-even {
+            background-color: var(--bg-dark);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-odd {
+            background-color: var(--bg-light);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
 
         .gradient-bg::before {
@@ -64,7 +77,7 @@
             right: -50%;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(240, 147, 251, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
             animation: float 15s ease-in-out infinite;
         }
 
@@ -251,10 +264,11 @@
     </section>
 
     <!-- About Section -->
-    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto" id="about">
-        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
-            About Me
-        </h2>
+    <section class="py-20 px-4 md:px-6 section-odd" id="about">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
+                About Me
+            </h2>
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-6" data-aos="fade-right" data-aos-delay="100">
                 <div class="glass-card py-4 rounded-lg">
@@ -267,7 +281,7 @@
                 </p>
             </div>
             <div class="space-y-6" data-aos="fade-left" data-aos-delay="100">
-                <div class="bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-400/30 rounded-xl p-6">
+                <div class="glass-card p-6">
                     <h3 class="font-bold text-xl mb-3 flex items-center">
                         <i class="fas fa-award text-yellow-400 mr-3 text-2xl"></i>Dell Young Leader
                     </h3>
@@ -275,7 +289,7 @@
                         Selected for academic excellence and demonstrated leadership (2020-2025). Committed to driving impactful technology solutions and mentoring the next generation of innovators.
                     </p>
                 </div>
-                <div class="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-400/30 rounded-xl p-6">
+                <div class="glass-card p-6">
                     <h3 class="font-bold text-xl mb-3 flex items-center">
                         <i class="fas fa-rocket text-blue-400 mr-3 text-2xl"></i>Ready to Impact
                     </h3>
@@ -285,13 +299,15 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- Production Projects -->
-    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto" id="projects">
-        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
-            Production Projects
-        </h2>
+    <section class="py-20 px-4 md:px-6 section-even" id="projects">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
+                Production Projects
+            </h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="glass-card card-hover p-8" data-aos="fade-up">
                 <div class="mb-4 w-12 h-12 bg-gradient-to-br from-indigo-400 to-purple-400 rounded-lg flex items-center justify-center">
@@ -338,16 +354,11 @@
     </section>
 
     <!-- Academic Projects -->
-    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto" id="academic">
-        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
-            Academic & Capstone Projects
-        </h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <!-- Academic Projects -->
-    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto" id="academic">
-        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
-            Academic & Capstone Projects
-        </h2>
+    <section class="py-20 px-4 md:px-6 section-odd" id="academic">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
+                Academic & Capstone Projects
+            </h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="glass-card rounded-2xl p-8 card-hover" data-aos="fade-up">
                 <h3 class="text-2xl font-bold mb-4 flex items-center">
@@ -404,10 +415,13 @@
             </div>
         </div>
     </section>
-        <div class="flex flex-wrap justify-center gap-3 md:gap-4" data-aos="fade-up" data-aos-delay="100">
+        </div>
+    </section>
+
     <!-- Skills Section -->
-    <section class="py-24 px-4 md:px-6 max-w-6xl mx-auto" id="skills">
-        <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-title" data-aos="fade-up">
+    <section class="py-20 px-4 md:px-6 section-even" id="skills">
+        <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
             Technical Skills
         </h2>
         <div class="flex flex-wrap justify-center gap-3 md:gap-4" data-aos="fade-up" data-aos-delay="100">
@@ -427,7 +441,15 @@
             <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">REST APIs</span>
             <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Agile Methodology</span>
         </div>
+        </div>
     </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 px-4 md:px-6 section-odd" id="contact">
+        <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
+            Get in Touch
+        </h2>
         <div class="max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
             <p class="text-center text-lg text-slate-300 mb-12">
                 Have an opportunity, question, or just want to chat about AI, embedded systems, or tech in Africa? I'd love to hear from you.
@@ -493,8 +515,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 text-center text-slate-500 border-t border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 md:px-6">
+    <footer class="py-8 text-center text-slate-500 border-t border-slate-800 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
             <p class="mb-2">&copy; 2025 Matome Mbowene. All rights reserved.</p>
             <p class="text-sm">
                 Built with <i class="fas fa-heart text-red-400"></i> • 
