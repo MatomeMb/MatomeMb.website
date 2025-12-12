@@ -24,13 +24,14 @@
 
     <style>
         :root {
-            --primary: #1e40af;
-            --secondary: #312e81;
-            --tertiary: #1e3a8a;
+            --primary: #94a3b8;
+            --secondary: #64748b;
             --text-light: #e2e8f0;
             --text-lighter: #cbd5e1;
-            --bg-dark: #0f172a;
-            --bg-light: #1e293b;
+            --bg-base: #0f172a; /* base */
+            --card: #1e293b; /* cards */
+            --hero-from: #0b1220; /* charcoal start */
+            --hero-to: #0f172a;   /* charcoal end */
             --bg-card: rgba(30, 41, 59, 0.4);
             --bg-accent: #334155;
         }
@@ -53,7 +54,7 @@
         }
 
         .gradient-bg {
-            background: linear-gradient(135deg, #1e40af 0%, #312e81 100%);
+            background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
             position: relative;
             overflow: hidden;
         }
@@ -264,7 +265,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="py-20 px-4 md:px-6 section-odd" id="about">
+    <section class="py-24 px-4 md:px-6 section-odd" id="about">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
                 About Me
@@ -301,9 +302,10 @@
         </div>
         </div>
     </section>
+    <div class="w-full max-w-6xl mx-auto px-6"><div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-20"></div></div>
 
     <!-- Production Projects -->
-    <section class="py-20 px-4 md:px-6 section-even" id="projects">
+    <section class="py-24 px-4 md:px-6 section-even" id="projects">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
                 Production Projects
@@ -352,9 +354,10 @@
             </div>
         </div>
     </section>
+    <div class="w-full max-w-6xl mx-auto px-6"><div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-20"></div></div>
 
     <!-- Academic Projects -->
-    <section class="py-20 px-4 md:px-6 section-odd" id="academic">
+    <section class="py-24 px-4 md:px-6 section-odd" id="academic">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
                 Academic & Capstone Projects
@@ -413,13 +416,16 @@
                     Intensive applied research and system integration demonstrating mastery across computer science and engineering fundamentals.
                 </p>
             </div>
+            <div class="my-12"></div>
         </div>
     </section>
         </div>
     </section>
 
+    <div class="w-full max-w-6xl mx-auto px-6"><div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-20"></div></div>
+
     <!-- Skills Section -->
-    <section class="py-20 px-4 md:px-6 section-even" id="skills">
+    <section class="py-24 px-4 md:px-6 section-even" id="skills">
         <div class="max-w-7xl mx-auto">
         <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
             Technical Skills
@@ -432,6 +438,7 @@
                 <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">FAISS & Vector DBs</span>
                 <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Computer Vision (OpenCV)</span>
             </div>
+            <div class="my-12"></div>
             <div class="flex flex-wrap gap-3 justify-center">
                 <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">C/C++ (Performance)</span>
                 <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Spring Boot & Java</span>
@@ -439,6 +446,7 @@
                 <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">CI/CD Pipelines</span>
                 <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">Embedded Systems (STM32)</span>
             </div>
+            <div class="my-12"></div>
             <div class="flex flex-wrap gap-3 justify-center">
                 <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">PDF Processing & OCR</span>
                 <span class="skill-badge px-5 py-3 rounded-full text-sm md:text-base font-semibold">System Design</span>
@@ -449,9 +457,10 @@
         </div>
         </div>
     </section>
+    <div class="w-full max-w-6xl mx-auto px-6"><div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-20"></div></div>
 
     <!-- Contact Section -->
-    <section class="py-20 px-4 md:px-6 section-odd" id="contact">
+    <section class="py-24 px-4 md:px-6 section-odd" id="contact">
         <div class="max-w-7xl mx-auto">
         <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title" data-aos="fade-up">
             Get in Touch
@@ -520,6 +529,7 @@
             </div>
         </div>
     </section>
+    <div class="w-full max-w-6xl mx-auto px-6"><div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-20"></div></div>
 
     <!-- Footer -->
     <footer class="py-8 text-center text-slate-500 border-t border-slate-800 bg-slate-900">

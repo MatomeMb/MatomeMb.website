@@ -4,7 +4,7 @@ Personal portfolio website for Matome Mbowene — Software Engineer, AI/ML Speci
 
 **Live Site:** https://matomemb.github.io
 
-Professional dark theme with glassmorphism, deep-blue hero, and subtle section dividers
+Professional dark theme with glassmorphism, charcoal hero, and subtle section dividers
 
 ---
 
