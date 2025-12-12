@@ -8,9 +8,20 @@ Personal portfolio website for Matome Mbowene — Software Engineer, AI/ML Speci
 
 ## Overview
 
-A premium, modern portfolio website featuring **iOS 26-inspired glassmorphism design** with translucent cards, smooth animations, and professional depth. Built with **Tailwind CSS**, **Font Awesome 6**, and **AOS animations** for a high-end feel.
+A premium, modern portfolio website featuring **iOS 26-inspired glassmorphism design** with improved spacing and professional colors. Built with **Tailwind CSS**, **Font Awesome 6**, and **AOS animations** for a high-end feel.
 
-### Key Features
+### Recent Improvements
+✨ **Section Spacing & Layout**
+- Alternating section backgrounds (#0f172a dark, #1e293b light) for visual separation
+- Increased padding (py-20 for all sections) prevents cramped feeling
+- Wider layouts with max-w-7xl for better use of space
+- 2rem top/bottom margins between sections for breathing room
+
+🎨 **Professional Color Scheme**
+- Hero gradient updated to tech-focused blue: linear-gradient(135deg, #1e40af 0%, #312e81 100%)
+- Professional navy/blue instead of vibrant purple
+- Maintains glassmorphism with refined aesthetics
+- Dark backgrounds (#0f172a, #1e293b) provide excellent contrast
 
 ✨ **Glassmorphism Design (iOS 26 Inspired)**
 - Liquid Glass cards with backdrop blur effects and translucent backgrounds
