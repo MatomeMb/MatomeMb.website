@@ -22,6 +22,9 @@
             --card-border: rgba(100, 255, 218, 0.1);
             --gradient-primary: linear-gradient(135deg, #64ffda 0%, #7b4dff 100%);
             --gradient-dark: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            --ai-bg: rgba(10, 25, 47, 0.95);
+            --ai-message-bg: rgba(100, 255, 218, 0.1);
+            --ai-user-bg: rgba(123, 77, 255, 0.1);
         }
 
         * {
@@ -139,6 +142,262 @@
             color: var(--text-primary);
             font-size: 1.5rem;
             cursor: pointer;
+        }
+
+        /* AI Assistant Button */
+        .ai-assistant-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(100, 255, 218, 0.3);
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .ai-assistant-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.5);
+        }
+
+        .ai-assistant-btn.pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(100, 255, 218, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(100, 255, 218, 0);
+            }
+        }
+
+        /* AI Assistant Panel */
+        .ai-assistant-panel {
+            position: fixed;
+            bottom: 5rem;
+            right: 2rem;
+            width: 400px;
+            height: 600px;
+            background: var(--ai-bg);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .ai-assistant-panel.active {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-header {
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ai-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-size: 1.2rem;
+        }
+
+        .ai-title {
+            flex: 1;
+        }
+
+        .ai-name {
+            color: var(--accent-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .ai-status {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .ai-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .ai-close:hover {
+            color: var(--accent-blue);
+        }
+
+        .ai-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ai-message {
+            max-width: 80%;
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-message.assistant {
+            background: var(--ai-message-bg);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .ai-message.user {
+            background: var(--ai-user-bg);
+            border: 1px solid rgba(123, 77, 255, 0.2);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .ai-input-container {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .ai-input-wrapper {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .ai-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .ai-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.1);
+        }
+
+        .ai-send-btn {
+            background: var(--gradient-primary);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            color: var(--primary-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+        }
+
+        .ai-send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .ai-quick-questions {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .quick-question {
+            background: rgba(100, 255, 218, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            color: var(--accent-blue);
+            padding: 0.5rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-question:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
@@ -582,38 +841,6 @@
             transform: translateY(0);
         }
 
-        /* Back to Top */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            background: var(--accent-blue);
-            color: var(--primary-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.3s;
-            z-index: 999;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
-        }
-
         /* Responsive */
         @media (max-width: 992px) {
             .hero-title {
@@ -622,6 +849,11 @@
             
             .section-title {
                 font-size: 2.2rem;
+            }
+
+            .ai-assistant-panel {
+                width: 350px;
+                height: 500px;
             }
         }
 
@@ -672,6 +904,22 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .ai-assistant-panel {
+                width: 100%;
+                height: 70vh;
+                bottom: 0;
+                right: 0;
+                border-radius: 20px 20px 0 0;
+            }
+
+            .ai-assistant-btn {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -715,6 +963,54 @@
             </div>
         </div>
     </nav>
+
+    <!-- AI Assistant Button -->
+    <button class="ai-assistant-btn pulse" id="aiAssistantBtn">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- AI Assistant Panel -->
+    <div class="ai-assistant-panel" id="aiAssistantPanel">
+        <div class="ai-header">
+            <div class="ai-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="ai-title">
+                <div class="ai-name">Matome's AI Assistant</div>
+                <div class="ai-status">
+                    <span class="status-dot"></span>
+                    Online - Ask me about Matome
+                </div>
+            </div>
+            <button class="ai-close" id="aiCloseBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="ai-messages" id="aiMessages">
+            <div class="ai-message assistant">
+                👋 Hello! I'm Matome's AI assistant. I can tell you about his skills, experience, projects, and achievements. What would you like to know?
+            </div>
+        </div>
+
+        <div class="ai-quick-questions">
+            <div class="quick-question" data-question="What are Matome's main skills?">Skills</div>
+            <div class="quick-question" data-question="Tell me about his experience">Experience</div>
+            <div class="quick-question" data-question="What projects has he worked on?">Projects</div>
+            <div class="quick-question" data-question="What is his availability?">Availability</div>
+            <div class="quick-question" data-question="Contact information">Contact</div>
+            <div class="quick-question" data-question="Tell me about his achievements">Achievements</div>
+        </div>
+
+        <div class="ai-input-container">
+            <div class="ai-input-wrapper">
+                <input type="text" class="ai-input" id="aiInput" placeholder="Ask about Matome's skills, projects, or experience...">
+                <button class="ai-send-btn" id="aiSendBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -1068,11 +1364,6 @@
         </div>
     </footer>
 
-    <!-- Back to Top -->
-    <a href="#home" class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-
     <script>
         // Mobile Navigation
         const mobileToggle = document.getElementById('mobileToggle');
@@ -1093,15 +1384,125 @@
             });
         });
 
-        // Back to Top Button
-        const backToTop = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
+        // AI Assistant Functionality
+        const aiAssistantBtn = document.getElementById('aiAssistantBtn');
+        const aiAssistantPanel = document.getElementById('aiAssistantPanel');
+        const aiCloseBtn = document.getElementById('aiCloseBtn');
+        const aiMessages = document.getElementById('aiMessages');
+        const aiInput = document.getElementById('aiInput');
+        const aiSendBtn = document.getElementById('aiSendBtn');
+        const quickQuestions = document.querySelectorAll('.quick-question');
+
+        // Toggle AI Assistant
+        aiAssistantBtn.addEventListener('click', () => {
+            aiAssistantPanel.classList.add('active');
+            aiAssistantBtn.classList.remove('pulse');
+        });
+
+        aiCloseBtn.addEventListener('click', () => {
+            aiAssistantPanel.classList.remove('active');
+            setTimeout(() => aiAssistantBtn.classList.add('pulse'), 1000);
+        });
+
+        // AI Knowledge Base
+        const aiKnowledge = {
+            skills: "Matome has expertise in: • AI/ML & Computer Vision: PyTorch, Computer Vision, OCR (Tesseract), RAG Systems, FAISS, OpenAI/Anthropic APIs • Programming: Python (Advanced), C/C++, Java, JavaScript, Spring Boot • Embedded Systems: STM32, Sensor Fusion, FreeRTOS concepts, LIDAR/IMU integration • Document Processing: PyMuPDF, ReportLab, PDF form fields, enterprise-grade validation",
+            
+            experience: "Current professional roles: 1. Computer Vision & Document Automation Developer: Building 100% accurate OCR+LLM system for surveying diagrams with 6-layer validation. 2. AI Developer at Beetroot: Developing RAG conversational agent for African entrepreneurs using FAISS + GPT-4o. 3. Junior ML & Embedded Engineer at RoadMind AI: Working on sensor fusion and edge-AI for motorcycle hazard detection.",
+            
+            projects: "Key projects: • OCR Document Automation: 100% accuracy system for government forms • RAG Networking Agent: AI system connecting African entrepreneurs • Image Processing System: 40% performance improvement in C++ • Machine Learning Pipeline: 89.33% accuracy on FashionMNIST • Full-Stack Web App: Spring Boot + MySQL app used by 800+ students",
+            
+            availability: "Matome is immediately available for opportunities. He completed his BSc Computer Science & Computer Engineering in December 2025 and is currently working on multiple projects while seeking full-time roles.",
+            
+            contact: "Contact information: • Email: matomepontso@gmail.com • Phone: +27 67 260 3309 • Location: Cape Town, South Africa • LinkedIn/GitHub/Portfolio links available in the navigation",
+            
+            achievements: "Key achievements: • 100% OCR accuracy in production document automation • 89.33% neural network accuracy (top 15% of class) • 35% efficiency improvement in system algorithms • Dell Young Leader scholarship recipient (2020-2025) • Google Cloud EMEA Scholar • Delivered web app serving 800+ users",
+            
+            education: "Education: • BSc Computer Science & Computer Engineering, University of Cape Town (2020-2025) • Relevant coursework: Computer Vision, Machine Learning, Embedded Systems, Algorithms & Data Structures, Software Engineering • 6 Matric distinctions including Physics and Mathematics",
+            
+            "computer vision": "Matome specializes in computer vision with production experience: • Built OCR system with 100% field-mapping accuracy • Implemented real-time image segmentation in C++ • Works with OpenCV, Tesseract, and custom vision pipelines • Currently developing sensor fusion systems for hazard detection",
+            
+            "rag systems": "RAG Systems expertise: • Built production RAG agent using FAISS + sentence-transformers + GPT-4o/Claude • Implemented full ML pipelines from CSV ingestion to retrieval-augmented generation • Developed context-aware systems with fallback mechanisms and enterprise logging",
+            
+            "embedded systems": "Embedded systems experience: • STM32 microcontroller programming • Sensor fusion for LIDAR, IMU, and camera integration • Real-time processing and hardware-software integration • Edge AI model deployment for resource-constrained environments",
+            
+            default: "I can tell you about Matome's: • Skills and technical expertise • Professional experience • Projects and achievements • Availability and contact information • Education background • Specific technologies like Computer Vision, RAG Systems, or Embedded Systems"
+        };
+
+        // Add message to chat
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `ai-message ${isUser ? 'user' : 'assistant'}`;
+            messageDiv.textContent = message;
+            aiMessages.appendChild(messageDiv);
+            aiMessages.scrollTop = aiMessages.scrollHeight;
+        }
+
+        // Process AI response
+        function processAIResponse(query) {
+            const normalizedQuery = query.toLowerCase();
+            
+            // Check for specific topics
+            let response = aiKnowledge.default;
+            
+            for (const [key, value] of Object.entries(aiKnowledge)) {
+                if (normalizedQuery.includes(key) || 
+                    normalizedQuery.split(' ').some(word => key.includes(word))) {
+                    response = value;
+                    break;
+                }
             }
+            
+            // Check for specific keywords
+            if (normalizedQuery.includes('skill') || normalizedQuery.includes('expertise')) {
+                response = aiKnowledge.skills;
+            } else if (normalizedQuery.includes('experience') || normalizedQuery.includes('work')) {
+                response = aiKnowledge.experience;
+            } else if (normalizedQuery.includes('project') || normalizedQuery.includes('build')) {
+                response = aiKnowledge.projects;
+            } else if (normalizedQuery.includes('available') || normalizedQuery.includes('hire')) {
+                response = aiKnowledge.availability;
+            } else if (normalizedQuery.includes('contact') || normalizedQuery.includes('email') || normalizedQuery.includes('phone')) {
+                response = aiKnowledge.contact;
+            } else if (normalizedQuery.includes('achievement') || normalizedQuery.includes('accomplishment')) {
+                response = aiKnowledge.achievements;
+            } else if (normalizedQuery.includes('education') || normalizedQuery.includes('degree')) {
+                response = aiKnowledge.education;
+            }
+            
+            // Add typing delay for realism
+            setTimeout(() => {
+                addMessage(response);
+                aiSendBtn.disabled = false;
+            }, 800);
+        }
+
+        // Handle send button click
+        aiSendBtn.addEventListener('click', () => {
+            const query = aiInput.value.trim();
+            if (query) {
+                addMessage(query, true);
+                aiInput.value = '';
+                aiSendBtn.disabled = true;
+                processAIResponse(query);
+            }
+        });
+
+        // Handle enter key
+        aiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                aiSendBtn.click();
+            }
+        });
+
+        // Handle quick questions
+        quickQuestions.forEach(button => {
+            button.addEventListener('click', () => {
+                const question = button.getAttribute('data-question');
+                addMessage(question, true);
+                aiSendBtn.disabled = true;
+                processAIResponse(question);
+            });
         });
 
         // Fade-in Animation on Scroll
@@ -1183,6 +1584,15 @@
                 mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
             }
         });
+
+        // Auto-open AI assistant after 5 seconds on first visit
+        setTimeout(() => {
+            if (!localStorage.getItem('aiAssistantShown')) {
+                aiAssistantPanel.classList.add('active');
+                aiAssistantBtn.classList.remove('pulse');
+                localStorage.setItem('aiAssistantShown', 'true');
+            }
+        }, 5000);
     </script>
 </body>
 </html>
