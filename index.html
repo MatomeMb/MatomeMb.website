@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matome Mbowene | AI/ML Engineer</title>
+    <meta name="description" content="Matome Mbowene — AI/ML Engineer specializing in Computer Vision, OCR document automation, and RAG systems. Based in Cape Town, South Africa.">
+    <meta name="author" content="Matome Mbowene">
+    <meta name="robots" content="index,follow">
+    <meta property="og:title" content="Matome Mbowene | AI/ML Engineer">
+    <meta property="og:description" content="AI/ML Engineer specializing in Computer Vision, OCR automation, and RAG systems.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     <style>
         /* CRITICAL CSS ONLY - Loads instantly */
         :root {
@@ -22,6 +30,20 @@
             color: var(--text);
             min-height: 100vh;
         }
+
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
         
         /* Loading state */
         body.loading #content { opacity: 0; }
@@ -82,6 +104,33 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(100,255,218,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .tag {
+            background: rgba(100,255,218,0.1);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
         
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
@@ -93,10 +142,11 @@
     <!-- Minimal Navigation -->
     <nav>
         <div class="logo">MM</div>
-        <div style="display: flex; gap: 1.5rem;">
-            <a href="#home" style="color: var(--text-muted); text-decoration: none;">Home</a>
-            <a href="#projects" style="color: var(--text-muted); text-decoration: none;">Projects</a>
-            <a href="#contact" style="color: var(--text-muted); text-decoration: none;">Contact</a>
+        <div class="nav-links" style="display: flex; gap: 1.5rem;">
+            <a href="#home">Home</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
@@ -105,9 +155,7 @@
         <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-content">
-                <div style="width: 150px; height: 150px; background: linear-gradient(45deg, var(--accent), #7b4dff); border-radius: 50%; margin: 0 auto 2rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                    M
-                </div>
+                <img src="profile.jpg" alt="Portrait of Matome Mbowene" width="150" height="150" loading="eager" decoding="async" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 0 auto 2rem; border: 3px solid rgba(100,255,218,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.35); display: block;">
                 <h1>Matome Mbowene</h1>
                 <p style="color: var(--accent); font-size: 1.2rem; margin-bottom: 1rem;">AI/ML Engineer • Computer Vision • RAG Systems</p>
                 <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6;">
@@ -117,6 +165,17 @@
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
                     <a href="#contact" style="background: linear-gradient(45deg, var(--accent), #7b4dff); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500;">Contact Me</a>
                     <a href="#projects" style="border: 2px solid var(--accent); color: var(--accent); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500;">View Projects</a>
+                    <a href="Matome_Mbowene_Resume_2025_Dec.pdf" style="border: 2px solid rgba(100,255,218,0.35); color: var(--text); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500;">Download Resume</a>
+                </div>
+
+                <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                    <a href="mailto:matomepontso@gmail.com" style="color: var(--text-muted); text-decoration: none;">Email</a>
+                    <span style="color: rgba(136,146,176,0.5);">•</span>
+                    <a href="tel:+27672603309" style="color: var(--text-muted); text-decoration: none;">Call</a>
+                    <span style="color: rgba(136,146,176,0.5);">•</span>
+                    <a href="https://linkedin.com/in/matomembowene" style="color: var(--text-muted); text-decoration: none;">LinkedIn</a>
+                    <span style="color: rgba(136,146,176,0.5);">•</span>
+                    <a href="https://github.com/MatomeMb" style="color: var(--text-muted); text-decoration: none;">GitHub</a>
                 </div>
                 
                 <!-- Quick Stats -->
@@ -137,51 +196,118 @@
             </div>
         </section>
 
+        <!-- Experience Section -->
+        <section id="experience" style="padding: 4rem 2rem;">
+            <div class="container">
+                <h2 class="section-title">Recent Experience</h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
+                            <h3 style="color: var(--text);">Computer Vision & Document Automation Developer</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Present • Cape Town</span>
+                        </div>
+                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Collaboration with Aaron Kisten (UCT Geomatics)</div>
+                        <ul style="color: var(--text-muted); line-height: 1.6; padding-left: 1.25rem;">
+                            <li>Built production OCR + LLM system achieving <span style="color: var(--text);">100% field-mapping accuracy</span> on scanned surveying diagrams.</li>
+                            <li>Implemented <span style="color: var(--text);">6-layer validation</span>, confidence scoring, and context-aware mapping with color-coded debug highlighting.</li>
+                            <li>Created editable PDF form fields (AcroFields), robust fallbacks, and enterprise-grade logging.</li>
+                        </ul>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                            <span class="tag">Python</span>
+                            <span class="tag">OpenCV</span>
+                            <span class="tag">OCR</span>
+                            <span class="tag">PDF Forms</span>
+                            <span class="tag">LLMs</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
+                            <h3 style="color: var(--text);">AI Developer (Equity-based)</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Nov 2025 – Present • Cape Town</span>
+                        </div>
+                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Beetroot</div>
+                        <ul style="color: var(--text-muted); line-height: 1.6; padding-left: 1.25rem;">
+                            <li>Developed a RAG conversational agent using FAISS + sentence-transformers + GPT-4o / Claude to connect African entrepreneurs.</li>
+                            <li>Delivered end-to-end pipeline: ingestion → embeddings → persistent index → retrieval → Streamlit demo.</li>
+                            <li>Hardened CI/CD, dependency management, and production safeguards.</li>
+                        </ul>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                            <span class="tag">RAG</span>
+                            <span class="tag">FAISS</span>
+                            <span class="tag">sentence-transformers</span>
+                            <span class="tag">Streamlit</span>
+                            <span class="tag">CI/CD</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
+                            <h3 style="color: var(--text);">Junior ML & Embedded Systems Engineer</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Dec 2025 – Present • Cape Town</span>
+                        </div>
+                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">RoadMind AI</div>
+                        <ul style="color: var(--text-muted); line-height: 1.6; padding-left: 1.25rem;">
+                            <li>Developing sensor fusion pipelines and edge-AI models for real-time hazard detection on motorcycles.</li>
+                            <li>Contributing to firmware and data pipeline architecture for LiDAR, IMU, and camera integration.</li>
+                        </ul>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                            <span class="tag">Embedded</span>
+                            <span class="tag">Sensor Fusion</span>
+                            <span class="tag">Edge AI</span>
+                            <span class="tag">STM32</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Projects Section -->
         <section id="projects" style="padding: 4rem 2rem; background: var(--secondary);">
-            <div style="max-width: 1200px; margin: 0 auto;">
-                <h2 style="text-align: center; margin-bottom: 3rem; color: var(--accent);">Featured Projects</h2>
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                     <!-- Project 1 -->
-                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.1); border-radius: 12px; padding: 1.5rem;">
+                    <div class="card">
                         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                             <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">📄</div>
                             <h3 style="color: var(--text);">OCR Document Automation</h3>
                         </div>
                         <p style="color: var(--text-muted); margin-bottom: 1rem;">100% accurate field mapping from scanned documents with 6-layer validation.</p>
                         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span style="background: rgba(100,255,218,0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">Python</span>
-                            <span style="background: rgba(100,255,218,0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">OpenCV</span>
-                            <span style="background: rgba(100,255,218,0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">GPT-4</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">OpenCV</span>
+                            <span class="tag">LLMs</span>
                         </div>
                     </div>
                     
                     <!-- Project 2 -->
-                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.1); border-radius: 12px; padding: 1.5rem;">
+                    <div class="card">
                         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                             <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">🤖</div>
                             <h3 style="color: var(--text);">RAG AI Assistant</h3>
                         </div>
                         <p style="color: var(--text-muted); margin-bottom: 1rem;">Conversational AI connecting African entrepreneurs using FAISS + GPT-4o.</p>
                         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span style="background: rgba(100,255,218,0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">Python</span>
-                            <span style="background: rgba(100,255,218,0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">FAISS</span>
-                            <span style="background: rgba(100,255,218,0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">Streamlit</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">FAISS</span>
+                            <span class="tag">Streamlit</span>
                         </div>
                     </div>
                     
                     <!-- Project 3 -->
-                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.1); border-radius: 12px; padding: 1.5rem;">
+                    <div class="card">
                         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
                             <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">⚡</div>
                             <h3 style="color: var(--text);">Embedded Navigation</h3>
                         </div>
                         <p style="color: var(--text-muted); margin-bottom: 1rem;">STM32-based system with sensor fusion for real-time hazard detection.</p>
                         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span style="background: rgba(100,255,218,0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">C++</span>
-                            <span style="background: rgba(100,255,218,0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">STM32</span>
-                            <span style="background: rgba(100,255,218,0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">Sensor Fusion</span>
+                            <span class="tag">C++</span>
+                            <span class="tag">STM32</span>
+                            <span class="tag">Sensor Fusion</span>
                         </div>
                     </div>
                 </div>
@@ -193,31 +319,34 @@
             <div style="max-width: 600px; margin: 0 auto;">
                 <h2 style="text-align: center; margin-bottom: 3rem; color: var(--accent);">Get In Touch</h2>
                 
-                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.1); border-radius: 12px; padding: 2rem;">
+                <div class="card" style="padding: 2rem;">
                     <!-- Simple Contact Info -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
                         <div style="text-align: center;">
                             <div style="width: 50px; height: 50px; background: rgba(100,255,218,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--accent);">✉️</div>
                             <div style="color: var(--text-muted);">Email</div>
-                            <div style="color: var(--text); font-weight: 500;">matomepontso@gmail.com</div>
+                            <a href="mailto:matomepontso@gmail.com" style="color: var(--text); font-weight: 500; text-decoration: none;">matomepontso@gmail.com</a>
                         </div>
                         <div style="text-align: center;">
                             <div style="width: 50px; height: 50px; background: rgba(100,255,218,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--accent);">📱</div>
                             <div style="color: var(--text-muted);">Phone</div>
-                            <div style="color: var(--text); font-weight: 500;">+27 67 260 3309</div>
+                            <a href="tel:+27672603309" style="color: var(--text); font-weight: 500; text-decoration: none;">+27 67 260 3309</a>
                         </div>
                     </div>
                     
                     <!-- Simple Form -->
                     <form id="contactForm" onsubmit="submitForm(event)" style="display: flex; flex-direction: column; gap: 1rem;">
                         <div>
-                            <input type="text" placeholder="Your Name" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.2); border-radius: 8px; color: var(--text);">
+                            <label style="display:block; color: var(--text-muted); margin-bottom: 0.35rem;" for="name">Your Name</label>
+                            <input id="name" name="name" type="text" autocomplete="name" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.2); border-radius: 8px; color: var(--text);">
                         </div>
                         <div>
-                            <input type="email" placeholder="Your Email" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.2); border-radius: 8px; color: var(--text);">
+                            <label style="display:block; color: var(--text-muted); margin-bottom: 0.35rem;" for="email">Your Email</label>
+                            <input id="email" name="email" type="email" autocomplete="email" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.2); border-radius: 8px; color: var(--text);">
                         </div>
                         <div>
-                            <textarea placeholder="Your Message" rows="4" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.2); border-radius: 8px; color: var(--text); resize: vertical;"></textarea>
+                            <label style="display:block; color: var(--text-muted); margin-bottom: 0.35rem;" for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="4" autocomplete="off" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(100,255,218,0.2); border-radius: 8px; color: var(--text); resize: vertical;"></textarea>
                         </div>
                         <button type="submit" style="background: linear-gradient(45deg, var(--accent), #7b4dff); color: white; padding: 0.75rem; border: none; border-radius: 8px; font-weight: 500; cursor: pointer;">Send Message</button>
                     </form>
@@ -254,6 +383,8 @@
         // Simple form submission
         function submitForm(event) {
             event.preventDefault();
+            // This is a placeholder. For real submissions on GitHub Pages, wire this to Formspree
+            // or another serverless form provider.
             const formMessage = document.getElementById('formMessage');
             formMessage.textContent = 'Message sent! I\'ll get back to you soon.';
             formMessage.style.display = 'block';
@@ -281,16 +412,16 @@
         });
         
         // Simple counter animation
-        function animateCounter(element, target) {
+        function animateCounter(element, target, decimals) {
             let current = 0;
             const increment = target / 50;
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
-                    element.textContent = target + (element.textContent.includes('%') ? '%' : '');
+                    element.textContent = target.toFixed(decimals) + (element.dataset.suffix || '');
                     clearInterval(timer);
                 } else {
-                    element.textContent = Math.floor(current) + (element.textContent.includes('%') ? '%' : '');
+                    element.textContent = current.toFixed(decimals) + (element.dataset.suffix || '');
                 }
             }, 30);
         }
@@ -302,8 +433,11 @@
                     document.querySelectorAll('.hero-content [style*="font-size: 1.8rem"]').forEach(el => {
                         const text = el.textContent;
                         const target = parseFloat(text);
+                        const suffix = text.replace(String(target), '');
+                        el.dataset.suffix = suffix;
+                        const decimals = (String(target).split('.')[1] || '').length;
                         if (!isNaN(target)) {
-                            animateCounter(el, target);
+                            animateCounter(el, target, decimals);
                         }
                     });
                     observer.disconnect();
@@ -316,7 +450,7 @@
         // Mobile menu toggle (simple)
         if (window.innerWidth < 768) {
             const nav = document.querySelector('nav');
-            const navLinks = nav.querySelector('div');
+            const navLinks = nav.querySelector('.nav-links');
             const toggleBtn = document.createElement('button');
             toggleBtn.innerHTML = '☰';
             toggleBtn.style.background = 'none';
@@ -324,6 +458,7 @@
             toggleBtn.style.color = 'var(--text-muted)';
             toggleBtn.style.fontSize = '1.5rem';
             toggleBtn.style.cursor = 'pointer';
+            toggleBtn.setAttribute('aria-label', 'Toggle navigation menu');
             
             toggleBtn.addEventListener('click', () => {
                 navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
