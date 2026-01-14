@@ -94,6 +94,66 @@
     return null;
   }
 
+  function formatHighlights(kb) {
+    const lines = [];
+    lines.push('Public-safe highlights:');
+    (kb.highlights || []).forEach((h) => lines.push(`- ${h}`));
+    return lines.join('\n');
+  }
+
+  function formatProjectCaseStudy(project) {
+    const cs = project?.caseStudy || {};
+    const lines = [];
+    lines.push(`${project?.name || 'Project'} (public-safe)`);
+    if (cs.outcome) lines.push(`Outcome: ${cs.outcome}`);
+    if (cs.approach) lines.push(`Approach: ${cs.approach}`);
+    if (cs.reliability) lines.push(`Reliability: ${cs.reliability}`);
+    if (Array.isArray(cs.stack) && cs.stack.length) lines.push(`Stack: ${cs.stack.join(', ')}`);
+    if (Array.isArray(cs.links) && cs.links.length) {
+      lines.push('Links:');
+      cs.links.forEach((l) => {
+        if (l?.label && l?.url) lines.push(`- ${l.label}: ${l.url}`);
+      });
+    }
+    lines.push('');
+    lines.push('If you want, ask: “Show skills summary”, “Show experience”, or “How do I contact Matome?”');
+    return lines.join('\n');
+  }
+
+  function pickProject(text, kb) {
+    const t = normalize(text);
+    const projects = kb.projects || [];
+    if (!projects.length) return null;
+
+    // Shortcut keyword routing
+    const keywordToName = [
+      { re: /\bocr\b|\bcomputer vision\b|\bdocument automation\b/, name: 'OCR document automation' },
+      { re: /\brag\b|\bretrieval\b|\bfaiss\b/, name: 'Retrieval assistant (RAG)' },
+      { re: /\bembedded\b|\bedge\b|\bstm32\b|\bsensor\b/, name: 'Embedded / edge foundations' },
+      { re: /\bnda\b|\bconfidential\b/, name: 'Confidential AI product build (NDA)' }
+    ];
+    for (const k of keywordToName) {
+      if (k.re.test(t)) {
+        const hit = projects.find((p) => normalize(p.name) === normalize(k.name));
+        if (hit) return hit;
+      }
+    }
+
+    // Fuzzy match against project names
+    const qTokens = tokenize(text);
+    let best = null;
+    let bestScore = 0;
+    for (const p of projects) {
+      const s = overlapScore(qTokens, tokenize(p.name || ''));
+      if (s > bestScore) {
+        bestScore = s;
+        best = p;
+      }
+    }
+    if (best && bestScore >= 0.25) return best;
+    return null;
+  }
+
   function formatProjects(kb) {
     const lines = [];
     lines.push('Selected case studies (public-safe):');
@@ -101,6 +161,8 @@
       const cs = p.caseStudy || {};
       lines.push(`- ${p.name}: ${cs.outcome || ''}`.trim());
     });
+    lines.push('');
+    lines.push('Tip: ask about a specific project (e.g., “Tell me about OCR” or “Tell me about RAG”).');
     return lines.join('\n');
   }
 
@@ -149,6 +211,18 @@
     }
 
     const t = normalize(text);
+
+    // Specific project deep-dive (more insightful, still grounded)
+    const projectHit = pickProject(text, kb);
+    if (projectHit && /\b(project|case|study|work|tell|about|explain|details)\b/.test(t)) {
+      return { a: formatProjectCaseStudy(projectHit), source: 'Projects (case study)' };
+    }
+
+    // Metrics / impact
+    if (/\b(metric|metrics|impact|results|outcome|kpi|proof)\b/.test(t)) {
+      return { a: formatHighlights(kb), source: 'Highlights' };
+    }
+
     if (/\b(project|case study|case studies|work)\b/.test(t)) {
       return { a: formatProjects(kb), source: 'Projects' };
     }
@@ -160,6 +234,16 @@
     }
     if (/\b(contact|email|reach|linkedin)\b/.test(t)) {
       return { a: formatContact(kb), source: 'Contact' };
+    }
+    if (/\b(experience|background|recent experience)\b/.test(t)) {
+      const lines = [];
+      lines.push('Experience (public-safe):');
+      (kb.experience || []).forEach((e) => {
+        if (!e?.area) return;
+        lines.push(`- ${e.area}`);
+        (e.summary || []).forEach((s) => lines.push(`  - ${s}`));
+      });
+      return { a: lines.join('\n'), source: 'Experience' };
     }
     if (/\b(education|university|uct)\b/.test(t)) {
       return { a: `Education (approved): ${kb.education?.approvedLine || ''}`.trim(), source: 'Education' };
@@ -195,7 +279,15 @@
       'aria-haspopup': 'dialog',
       'aria-expanded': 'false'
     }, []);
-    launcher.textContent = 'Ask about my work';
+    launcher.innerHTML = `
+      <span class="mm-chatbot-launcherIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7 10h10M7 14h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 6h12a4 4 0 0 1 4 4v5a4 4 0 0 1-4 4H11l-5 3v-3H6a4 4 0 0 1-4-4v-5a4 4 0 0 1 4-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="sr-only">Open portfolio assistant</span>
+    `;
 
     const overlay = el('div', { class: 'mm-chatbot-overlay', dataset: { open: 'false' } });
 
@@ -209,8 +301,11 @@
 
     const header = el('div', { class: 'mm-chatbot-header' });
     header.appendChild(el('div', { class: 'mm-chatbot-title' }, [
-      el('strong', { text: 'Portfolio assistant' }),
-      el('span', { text: 'Answers are grounded in public notes only.' })
+      el('div', { class: 'mm-chatbot-mark', text: 'MM' }),
+      el('div', { class: 'mm-chatbot-titleText' }, [
+        el('strong', { text: 'Assistant' }),
+        el('span', { text: 'Grounded in public notes only.' })
+      ])
     ]));
     const closeBtn = el('button', { class: 'mm-chatbot-close', type: 'button', 'aria-label': 'Close assistant' });
     closeBtn.textContent = 'Close';
