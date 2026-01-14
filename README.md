@@ -1,10 +1,10 @@
 # Matome Mbowene Portfolio
 
-Personal portfolio website for Matome Mbowene — Software Engineer, AI/ML Specialist, and Dell Young Leader.
+Single-page, GitHub Pages-friendly portfolio for Matome Mbowene — **Software & AI Engineer**.
 
 **Live Site:** `https://matomemb.github.io`
 
-Single-page, fast-loading portfolio built as a static `index.html` (no build step).
+Single-page, fast-loading portfolio built as a static `index.html` (no build step) with a **local, knowledge-base grounded chatbot** (no external APIs).
 
 ---
 
@@ -16,13 +16,15 @@ This repo is a lightweight GitHub Pages portfolio optimized for:
 - **Performance**: minimal dependencies, fast first paint
 - **Maintainability**: simple structure, easy to edit
 
-### Site Sections
-- **Hero**: positioning, CTAs, resume link, impact stats
-- **About**: credibility and what roles I’m targeting
-- **Experience**: recent roles (OCR/CV, RAG, embedded/edge)
-- **Skills**: grouped technical strengths
-- **Projects**: featured work with short “case study” details
-- **Contact**: direct contact + a form that opens a prefilled email (GitHub Pages-friendly)
+### Site Sections (recruiter-first)
+- **Hero**: positioning, proof links (GitHub/LinkedIn/Credly), low-friction CTAs, impact stats
+- **Case studies**: proof-first project cards (Outcome, Approach, Reliability, Stack)
+- **Experience**: sanitized, NDA-safe summaries
+- **Skills**: grouped strengths
+- **Credibility**: credentials + verification links
+- **About**: neutral, public-safe bio + approved education wording
+- **Contact**: email/LinkedIn + a form that opens a prefilled email (GitHub Pages-friendly)
+- **Chatbot**: site-native assistant grounded in a local knowledge base
 
 ---
 
@@ -32,6 +34,9 @@ This repo is a lightweight GitHub Pages portfolio optimized for:
 - `Matome_Mbowene_Resume_2025_Dec.pdf`: resume PDF
 - `WEBSITE_STATE_REPORT.md`: website state + experiences report
 - `favicon.svg`: vector favicon
+- `chatbot/chatbot_knowledge.json`: public-safe knowledge base (source of truth for chatbot answers)
+- `chatbot/chatbot.js`: chatbot widget logic (local, no logging)
+- `chatbot/chatbot.css`: chatbot widget styles
 
 ---
 
@@ -45,22 +50,21 @@ cd matomemb.github.io
 
 ### 2. Local Preview
 ```bash
-# Windows
-start index.html
-
-# macOS
-open index.html
-
-# Linux
+# Option A (simple): open the file directly
 xdg-open index.html
+
+# Option B (recommended): run a local server
+python -m http.server 8000
 ```
+
+Then visit `http://localhost:8000`.
 
 ### 3. Customize Files
 Replace these files with your own:
 - **`profile.jpg`** — Your profile photo (recommended: 400x400px, .jpg or .png)
 - **`Matome_Mbowene_Resume_2025_Dec.pdf`** — Your resume/CV
 
-### 4. Contact Form (Optional)
+### 4. Contact Form
 By default, the contact form opens a prefilled email (works on GitHub Pages without a backend).
 
 If you want true form submissions, wire it to a provider like Formspree and remove the `mailto:` behavior in `index.html`.
@@ -81,6 +85,11 @@ Your site will be live at `https://<your-username>.github.io`
 - HTML5
 - CSS (inline)
 - Vanilla JavaScript (inline)
+
+## Chatbot Notes (privacy + safety)
+- **Grounded**: answers only from `chatbot/chatbot_knowledge.json`
+- **No logging by default**: no analytics/telemetry and no storage of messages
+- **Safety boundaries**: refuses sensitive academic/legal/medical topics and NDA-probing
 
 ---
 
