@@ -18,13 +18,15 @@ This repo is a lightweight GitHub Pages portfolio optimized for:
 
 ### Site Sections (recruiter-first)
 - **Hero**: positioning, proof links (GitHub/LinkedIn/Credly), low-friction CTAs, impact stats
-- **Case studies**: proof-first project cards (Outcome, Approach, Reliability, Stack)
 - **Experience**: sanitized, NDA-safe summaries
 - **Skills**: grouped strengths
-- **Credibility**: credentials + verification links
+- **Technical breadth**: scannable domain coverage (AI/ML, backend/web, embedded, systems)
+- **Projects**: filterable project cards + a high-level timeline (Outcome, Approach, Reliability, Stack)
+- **Certifications**: public proof links (Credly) + programs
 - **About**: neutral, public-safe bio + approved education wording
 - **Contact**: email/LinkedIn + a form that opens a prefilled email (GitHub Pages-friendly)
-- **Chatbot**: site-native assistant grounded in a local knowledge base
+- **Offline assistant**: keyword-based helper that runs locally in-browser (no API calls)
+- **Chatbot**: site-native assistant grounded in a local knowledge base (no external APIs)
 
 ---
 
@@ -35,6 +37,7 @@ This repo is a lightweight GitHub Pages portfolio optimized for:
 - `chatbot/chatbot_knowledge.json`: public-safe knowledge base (source of truth for chatbot answers)
 - `chatbot/chatbot.js`: chatbot widget logic (local, no logging)
 - `chatbot/chatbot.css`: chatbot widget styles
+- `vendor/portfolio-website/`: imported reference repo (not deployed by GitHub Pages)
 
 ---
 
