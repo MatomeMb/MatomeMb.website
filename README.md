@@ -29,8 +29,6 @@ This repo is a lightweight GitHub Pages portfolio optimized for:
 ## Files
 - `index.html`: website (HTML + inline CSS/JS)
 - `profile.jpg`: profile photo
-- `Matome_Mbowene_Resume_2025_Dec.pdf`: resume PDF
-- `WEBSITE_STATE_REPORT.md`: website state + experiences report
 - `favicon.svg`: vector favicon
 
 ---
@@ -58,7 +56,7 @@ xdg-open index.html
 ### 3. Customize Files
 Replace these files with your own:
 - **`profile.jpg`** — Your profile photo (recommended: 400x400px, .jpg or .png)
-- **`Matome_Mbowene_Resume_2025_Dec.pdf`** — Your resume/CV
+You can optionally add a resume link on the site, but avoid committing private documents containing sensitive personal/academic details.
 
 ### 4. Contact Form (Optional)
 By default, the contact form opens a prefilled email (works on GitHub Pages without a backend).
