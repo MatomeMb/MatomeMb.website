@@ -15,7 +15,7 @@ Matome builds production-focused AI features that hold up in real deployments: i
 - **GitHub**: https://github.com/MatomeMb
 - **LinkedIn**: https://linkedin.com/in/matomembowene
 - **Credly**: https://www.credly.com/users/matome-mbowene
-- **Resume**: Matome_Mbowene_Resume_2025_Dec.pdf (in this site repo)
+- **Resume**: available upon request (email preferred)
 
 ## Education (approved phrasing only)
 - University of Cape Town (Computer Science & Computer Engineering)
@@ -47,7 +47,7 @@ Matome builds production-focused AI features that hold up in real deployments: i
 ## Public-safe outcomes (approved)
 - **100% OCR field-mapping accuracy** on a defined document set using a validation-first approach.
 - **35% scheduling efficiency improvement** from workflow automation work (public-safe summary).
-- **800+ users supported** via delivered full-stack functionality (public-safe summary).
+- Delivered full-stack functionality for real users (public-safe summary).
 - **89.33% model accuracy** on FashionMNIST (public/public-demo context).
 
 ## Experience (sanitized summaries)
