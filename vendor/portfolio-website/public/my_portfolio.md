@@ -1,14 +1,13 @@
 # Matome Mbowene - AI/ML Developer Portfolio
 
 ## About Me
-Final-year BSc Computer Science & Computer Engineering student at the University of Cape Town and proud Dell Young Leader. Passionate about AI and machine learning with **proven track record** of achieving high-performance models and leading collaborative development teams. My expertise spans neural networks, reinforcement learning, computer vision, and full-stack development, with strong leadership skills developed through the Dell Young Leaders program.
+Software engineer focused on production AI/ML systems (computer vision, document automation, and retrieval). Dell Young Leaders Scholar with experience shipping end-to-end solutions and collaborating across teams.
 
 **📞 Contact Information:**
 - **Email:** matomepontso@gmail.com
-- **Phone:** +27 67 260 3309
 - **LinkedIn:** [linkedin.com/in/matomembowene](https://www.linkedin.com/in/matomembowene)
 - **Location:** Cape Town, Western Cape, South Africa
-- **GitHub:** Available upon request (private repositories)
+- **GitHub:** [github.com/MatomeMb](https://github.com/MatomeMb)
 
 ---
 
@@ -206,7 +205,7 @@ Focus on building solutions that solve genuine problems and create tangible valu
 
 I'm actively seeking opportunities in AI/ML development, software engineering, and technical leadership roles where I can contribute to innovative solutions while continuing to grow as both a technical expert and collaborative leader.
 
-**🚀 Available:** Immediate (Graduating July 2025)  
+**🚀 Available:** Open to opportunities  
 **📧 Best Contact:** matomepontso@gmail.com  
 **⚡ Response Time:** Within 24 hours  
 **📱 LinkedIn:** [linkedin.com/in/matomembowene](https://www.linkedin.com/in/matomembowene)

@@ -284,7 +284,7 @@ firebase deploy
 
 ### Contact Information
 - **Email**: [matomepontso@gmail.com](mailto:matomepontso@gmail.com)
-- **Phone**: [+27 67 260 3309](tel:+27672603309)
+- **Phone**: (available upon request)
 - **LinkedIn**: [linkedin.com/in/matomembowene](https://linkedin.com/in/matomembowene)
 - **GitHub**: [github.com/MatomeMb](https://github.com/MatomeMb)
 

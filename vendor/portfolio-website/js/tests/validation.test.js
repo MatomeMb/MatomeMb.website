@@ -117,7 +117,7 @@ describe('Validation Utilities', () => {
 
     describe('validatePhone', () => {
         test('should validate correct phone formats', () => {
-            expect(ValidationUtils.validatePhone('+27123456789')).toBe(true);
+            expect(ValidationUtils.validatePhone('+27000000000')).toBe(true);
             expect(ValidationUtils.validatePhone('0123456789')).toBe(true);
             expect(ValidationUtils.validatePhone('+1-555-123-4567')).toBe(true);
         });
