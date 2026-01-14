@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matome Mbowene | AI/ML Engineer</title>
-    <meta name="description" content="Matome Mbowene — AI/ML Engineer specializing in Computer Vision, OCR document automation, and RAG systems. Based in Cape Town, South Africa.">
+    <title>Matome Mbowene | Software &amp; AI Engineer</title>
+    <meta name="description" content="Matome Mbowene — Software & AI engineer building production OCR/document automation, retrieval (RAG), and backend systems. Based in Cape Town, South Africa.">
     <meta name="author" content="Matome Mbowene">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://matomemb.github.io/">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="alternate icon" href="favicon.svg">
-    <meta property="og:title" content="Matome Mbowene | AI/ML Engineer">
-    <meta property="og:description" content="AI/ML Engineer specializing in Computer Vision, OCR automation, and RAG systems.">
+    <meta property="og:title" content="Matome Mbowene | Software &amp; AI Engineer">
+    <meta property="og:description" content="Software & AI engineer building production OCR/document automation, retrieval (RAG), and backend systems.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="profile.jpg">
     <meta property="og:url" content="https://matomemb.github.io/">
@@ -20,12 +20,31 @@
     <style>
         /* CRITICAL CSS ONLY - Loads instantly */
         :root {
+            /* Colors */
             --primary: #0a192f;
             --secondary: #112240;
             --accent: #64ffda;
+            --accent-2: #7b4dff;
             --text: #e6f1ff;
             --text-muted: #8892b0;
             --shadow: rgba(0,0,0,0.35);
+            --border: rgba(100,255,218,0.14);
+
+            /* Typography */
+            --fs-900: 2.25rem;
+            --fs-700: 1.5rem;
+            --fs-600: 1.125rem;
+            --lh-body: 1.7;
+
+            /* Spacing */
+            --s-1: 0.25rem;
+            --s-2: 0.5rem;
+            --s-3: 0.75rem;
+            --s-4: 1rem;
+            --s-5: 1.5rem;
+            --s-6: 2rem;
+            --s-7: 3rem;
+            --s-8: 4rem;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -84,10 +103,28 @@
             border-bottom: 1px solid rgba(100, 255, 218, 0.1);
         }
         
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid rgba(100,255,218,0.25);
+            color: var(--text);
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .nav-toggle:hover { border-color: rgba(100,255,218,0.45); }
+
         .logo {
             font-weight: 700;
             font-size: 1.5rem;
-            background: linear-gradient(90deg, var(--accent), #7b4dff);
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -119,15 +156,15 @@
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: var(--fs-900);
             margin-bottom: 1rem;
             background: linear-gradient(90deg, var(--text), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        h2 { font-size: 1.75rem; }
-        h3 { font-size: 1.1rem; }
+        h2 { font-size: var(--fs-700); }
+        h3 { font-size: var(--fs-600); }
 
         .section-title {
             text-align: center;
@@ -142,9 +179,27 @@
 
         .card {
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(100,255,218,0.1);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
+        }
+
+        main:focus { outline: none; }
+
+        .section { padding: var(--s-8) var(--s-6); }
+        .section.alt { background: var(--secondary); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--s-6);
+        }
+
+        .row {
+            display: flex;
+            gap: var(--s-4);
+            flex-wrap: wrap;
+            align-items: center;
         }
 
         .tag {
@@ -241,126 +296,166 @@
         }
         
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
+            h1 { font-size: 1.9rem; }
             .hero { padding: 5rem 1rem 1rem; }
+            nav { padding: 0.9rem 1rem; }
+
+            .nav-toggle { display: inline-flex; align-items: center; gap: 0.5rem; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                padding: 1rem;
+                border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav[data-menu-open="true"] .nav-links { display: flex; }
+
+            .section { padding: 3rem 1rem; }
         }
     </style>
 </head>
 <body class="loading">
     <a class="skip-link" href="#content">Skip to content</a>
     <!-- Minimal Navigation -->
-    <nav>
+    <nav aria-label="Primary" data-menu-open="false">
         <div class="logo">MM</div>
-        <div class="nav-links" style="display: flex; gap: 1.5rem;">
+        <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="nav-menu" aria-expanded="false">
+            Menu
+        </button>
+        <div class="nav-links" id="nav-menu">
             <a href="#home">Home</a>
-            <a href="#about">About</a>
+            <a href="#projects">Case studies</a>
             <a href="#experience">Experience</a>
             <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
+            <a href="#certifications">Credibility</a>
+            <a href="#about">About</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <div id="content">
+    <main id="content" tabindex="-1">
         <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-content">
                 <img src="profile.jpg" alt="Portrait of Matome Mbowene" width="150" height="150" loading="eager" decoding="async" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 0 auto 2rem; border: 3px solid rgba(100,255,218,0.35); box-shadow: 0 12px 30px var(--shadow); display: block;">
                 <h1>Matome Mbowene</h1>
-                <p style="color: var(--accent); font-size: 1.2rem; margin-bottom: 1rem;">AI/ML Engineer • Computer Vision • RAG Systems</p>
-                <p class="muted" style="margin-bottom: 2rem; line-height: 1.7;">
-                    I build production-ready AI systems with measurable impact, from OCR automation to scalable retrieval pipelines.
-                    Based in Cape Town, South Africa.
+                <p style="color: var(--accent); font-size: 1.05rem; margin-bottom: 0.75rem; font-weight: 600;">Software &amp; AI Engineer • OCR/CV • Retrieval (RAG) • Backend</p>
+                <p class="muted" style="margin-bottom: 1.5rem; line-height: var(--lh-body); max-width: 60ch; margin-left: auto; margin-right: auto;">
+                    I build production-focused AI features that ship: document automation, retrieval pipelines, and services—measured, validated, and designed for reliability.
                 </p>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
-                    <a class="btn btn-primary" href="#contact">Contact</a>
-                    <a class="btn btn-secondary" href="#projects">Projects</a>
+
+                <div class="row" style="justify-content: center; margin-bottom: 1.25rem;">
+                    <a class="btn btn-primary" href="mailto:matomepontso@gmail.com">Email</a>
+                    <a class="btn btn-secondary" href="https://linkedin.com/in/matomembowene" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a class="btn btn-tertiary" href="#projects">Case studies</a>
                     <a class="btn btn-tertiary" href="Matome_Mbowene_Resume_2025_Dec.pdf">Resume (PDF)</a>
                 </div>
 
-                <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
-                    <a rel="me" href="mailto:matomepontso@gmail.com" style="color: var(--text-muted); text-decoration: none;">Email</a>
-                    <span style="color: rgba(136,146,176,0.5);">•</span>
-                    <a rel="me" href="tel:+27672603309" style="color: var(--text-muted); text-decoration: none;">Call</a>
-                    <span style="color: rgba(136,146,176,0.5);">•</span>
-                    <a rel="me noopener noreferrer" href="https://linkedin.com/in/matomembowene" target="_blank" style="color: var(--text-muted); text-decoration: none;">LinkedIn</a>
-                    <span style="color: rgba(136,146,176,0.5);">•</span>
+                <div class="row" style="justify-content: center; margin-bottom: 1.5rem; font-size: 0.95rem;">
                     <a rel="me noopener noreferrer" href="https://github.com/MatomeMb" target="_blank" style="color: var(--text-muted); text-decoration: none;">GitHub</a>
+                    <span style="color: rgba(136,146,176,0.5);">•</span>
+                    <a rel="me noopener noreferrer" href="https://www.credly.com/users/matome-mbowene" target="_blank" style="color: var(--text-muted); text-decoration: none;">Credly</a>
+                    <span style="color: rgba(136,146,176,0.5);">•</span>
+                    <a rel="me noopener noreferrer" href="mailto:matomepontso@gmail.com" style="color: var(--text-muted); text-decoration: none;">matomepontso@gmail.com</a>
                 </div>
+
+                <p class="muted" style="margin-bottom: 0.5rem;">Based in Cape Town • Open to hybrid/remote roles</p>
                 
                 <!-- Quick Stats -->
                 <div class="kpi-grid">
                     <div class="kpi">
-                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">100%</div>
+                        <div class="kpi-value" data-kpi="100" data-suffix="%">100%</div>
                         <div class="kpi-label">OCR Field-Mapping Accuracy</div>
                     </div>
                     <div class="kpi">
-                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">89.33%</div>
+                        <div class="kpi-value" data-kpi="89.33" data-suffix="%">89.33%</div>
                         <div class="kpi-label">Model Accuracy (FashionMNIST)</div>
                     </div>
                     <div class="kpi">
-                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">35%</div>
+                        <div class="kpi-value" data-kpi="35" data-suffix="%">35%</div>
                         <div class="kpi-label">Scheduling Efficiency Gain</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About / Credibility -->
-        <section id="about" style="padding: 4rem 2rem; background: var(--secondary);">
+        <!-- Proof-first Case Studies -->
+        <section id="projects" class="section alt">
             <div class="container">
-                <h2 class="section-title">About</h2>
+                <h2 class="section-title">Case studies</h2>
+                <p class="muted" style="text-align: center; max-width: 70ch; margin: 0 auto var(--s-7); line-height: var(--lh-body);">
+                    Public-safe case studies focused on outcomes and reliability. Confidential work is described at a high level only.
+                </p>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                     <div class="card">
-                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">What I do</h3>
-                        <p class="muted" style="line-height: 1.7;">
-                            I focus on building end-to-end AI systems that ship: data ingestion, validation, retrieval, model integration,
-                            observability, and user-facing delivery. I care about correctness, robustness, and measurable outcomes.
-                        </p>
-                        <hr class="subtle-divider">
-                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">What I’m looking for</h3>
-                        <p class="muted" style="line-height: 1.7;">
-                            Roles in software engineering, AI/ML engineering, and backend/cloud engineering. Open to hybrid or remote.
-                        </p>
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">OCR document automation</h3>
+                        <p class="muted" style="margin-bottom: 1rem; line-height: var(--lh-body);">Production document-to-structured-data pipeline designed for correctness and auditability.</p>
+                        <ul class="list">
+                            <li><strong style="color: var(--text);">Outcome:</strong> 100% OCR field-mapping accuracy on a defined document set.</li>
+                            <li><strong style="color: var(--text);">Approach:</strong> validation-first extraction, confidence scoring, and structured mapping.</li>
+                            <li><strong style="color: var(--text);">Reliability:</strong> multi-layer checks, fallbacks, and audit logging for traceability.</li>
+                            <li><strong style="color: var(--text);">Stack:</strong> Python, OpenCV, OCR tooling, PDF/structured outputs, LLM APIs where appropriate.</li>
+                            <li><strong style="color: var(--text);">Links:</strong> <a href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">GitHub (selected work)</a> • Details available on request.</li>
+                        </ul>
                     </div>
 
                     <div class="card">
-                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Education & Programs</h3>
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Retrieval assistant (RAG)</h3>
+                        <p class="muted" style="margin-bottom: 1rem; line-height: var(--lh-body);">Retrieval pipeline built for fast lookup and conservative behavior when evidence is weak.</p>
                         <ul class="list">
-                            <li>BSc Computer Science &amp; Computer Engineering — University of Cape Town</li>
-                            <li>Dell Young Leaders Scholar</li>
-                            <li>Google Cloud Career Launchpad (EMEA)</li>
-                            <li>Google Cloud skill badge: Multimodal RAG (Gemini) — <a href="https://www.credly.com/users/matome-mbowene" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">Credly</a></li>
+                            <li><strong style="color: var(--text);">Outcome:</strong> responsive retrieval demo with reproducible indexing runs (public-safe summary).</li>
+                            <li><strong style="color: var(--text);">Approach:</strong> ingestion → embeddings → persistent index → retrieval → response generation.</li>
+                            <li><strong style="color: var(--text);">Reliability:</strong> retrieval gating, deterministic index persistence, and operational safeguards.</li>
+                            <li><strong style="color: var(--text);">Stack:</strong> Python, FAISS, sentence-transformers, UI demo tooling.</li>
+                            <li><strong style="color: var(--text);">Links:</strong> <a href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">GitHub</a> • Details available on request.</li>
                         </ul>
-                        <hr class="subtle-divider">
-                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Core strengths</h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="tag">Production AI</span>
-                            <span class="tag">Computer Vision</span>
-                            <span class="tag">OCR</span>
-                            <span class="tag">RAG</span>
-                            <span class="tag">Backend APIs</span>
-                            <span class="tag">CI/CD</span>
-                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Embedded / edge foundations</h3>
+                        <p class="muted" style="margin-bottom: 1rem; line-height: var(--lh-body);">Real-time pipeline and integration foundations, focused on timing consistency and reliability under constraints.</p>
+                        <ul class="list">
+                            <li><strong style="color: var(--text);">Outcome:</strong> contributed to reliable real-time pipeline foundations (public-safe).</li>
+                            <li><strong style="color: var(--text);">Approach:</strong> sensor integration patterns and defensive data handling.</li>
+                            <li><strong style="color: var(--text);">Reliability:</strong> latency and timing considerations; robustness in constrained contexts.</li>
+                            <li><strong style="color: var(--text);">Stack:</strong> embedded tooling, sensor integration, edge AI fundamentals (high level).</li>
+                            <li><strong style="color: var(--text);">Links:</strong> Details available on request.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Confidential AI product build (NDA)</h3>
+                        <p class="muted" style="margin-bottom: 1rem; line-height: var(--lh-body);">Work described at a high level only.</p>
+                        <ul class="list">
+                            <li><strong style="color: var(--text);">Outcome:</strong> improved production readiness and delivery foundations (public-safe).</li>
+                            <li><strong style="color: var(--text);">Approach:</strong> architecture and delivery practices at a high level.</li>
+                            <li><strong style="color: var(--text);">Reliability:</strong> validation patterns, release hygiene, and operational checks (no internal artifacts).</li>
+                            <li><strong style="color: var(--text);">Stack:</strong> backend/services, LLM APIs, CI/CD practices (high level).</li>
+                            <li><strong style="color: var(--text);">Links:</strong> High-level discussion available in interviews.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" style="padding: 4rem 2rem;">
+        <section id="experience" class="section">
             <div class="container">
                 <h2 class="section-title">Recent Experience</h2>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                <div class="grid">
                     <div class="card">
                         <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
-                            <h3 style="color: var(--text);">Computer Vision & Document Automation Developer</h3>
-                            <span style="color: var(--text-muted); font-size: 0.9rem;">Present • Cape Town</span>
+                            <h3 style="color: var(--text);">Computer vision &amp; document automation</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Recent</span>
                         </div>
-                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Collaboration with Aaron Kisten (UCT Geomatics)</div>
                         <ul class="list">
                             <li>Built production OCR + LLM system achieving <span style="color: var(--text);">100% field-mapping accuracy</span> on scanned surveying diagrams.</li>
                             <li>Implemented <span style="color: var(--text);">6-layer validation</span>, confidence scoring, and context-aware mapping with color-coded debug highlighting.</li>
@@ -371,18 +466,17 @@
                             <span class="tag">OpenCV</span>
                             <span class="tag">OCR</span>
                             <span class="tag">PDF Forms</span>
-                            <span class="tag">LLMs</span>
+                            <span class="tag">LLM APIs</span>
                         </div>
                     </div>
 
                     <div class="card">
                         <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
-                            <h3 style="color: var(--text);">AI Developer (Equity-based)</h3>
-                            <span style="color: var(--text-muted); font-size: 0.9rem;">Nov 2025 – Present • Cape Town</span>
+                            <h3 style="color: var(--text);">Retrieval systems (RAG)</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Recent</span>
                         </div>
-                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Beetroot</div>
                         <ul class="list">
-                            <li>Developed a RAG conversational agent using FAISS + sentence-transformers + GPT-4o / Claude to connect African entrepreneurs.</li>
+                            <li>Developed a RAG conversational agent using FAISS + sentence-transformers + LLM APIs to connect users to relevant information.</li>
                             <li>Delivered end-to-end pipeline: ingestion → embeddings → persistent index → retrieval → Streamlit demo.</li>
                             <li>Hardened CI/CD, dependency management, and production safeguards.</li>
                         </ul>
@@ -397,10 +491,9 @@
 
                     <div class="card">
                         <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
-                            <h3 style="color: var(--text);">Junior ML & Embedded Systems Engineer</h3>
-                            <span style="color: var(--text-muted); font-size: 0.9rem;">Dec 2025 – Present • Cape Town</span>
+                            <h3 style="color: var(--text);">Embedded / edge fundamentals</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Recent</span>
                         </div>
-                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">RoadMind AI</div>
                         <ul class="list">
                             <li>Developing sensor fusion pipelines and edge-AI models for real-time hazard detection on motorcycles.</li>
                             <li>Contributing to firmware and data pipeline architecture for LiDAR, IMU, and camera integration.</li>
@@ -418,11 +511,11 @@
         </section>
 
         <!-- Skills -->
-        <section id="skills" style="padding: 4rem 2rem; background: var(--secondary);">
+        <section id="skills" class="section alt">
             <div class="container">
                 <h2 class="section-title">Skills</h2>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                <div class="grid">
                     <div class="card">
                         <h3 style="color: var(--text); margin-bottom: 0.75rem;">AI / ML</h3>
                         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
@@ -462,112 +555,71 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" style="padding: 4rem 2rem; background: var(--secondary);">
+        <!-- Certifications / Credibility -->
+        <section id="certifications" class="section alt">
             <div class="container">
-                <h2 class="section-title">Featured Projects</h2>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                    <!-- Project 1 -->
+                <h2 class="section-title">Credibility</h2>
+                <div class="grid">
                     <div class="card">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">📄</div>
-                            <h3 style="color: var(--text);">OCR Document Automation</h3>
-                        </div>
-                        <p class="muted" style="margin-bottom: 1rem;">Production OCR + LLM pipeline for document-to-structured-data automation.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag">Python</span>
-                            <span class="tag">OpenCV</span>
-                            <span class="tag">LLMs</span>
-                        </div>
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Credentials</h3>
                         <ul class="list">
-                            <li><strong style="color: var(--text);">Outcome:</strong> 100% field-mapping accuracy with multi-layer validation.</li>
-                            <li><strong style="color: var(--text);">Engineering:</strong> confidence scoring, fallbacks, and audit logging.</li>
-                            <li><strong style="color: var(--text);">Delivery:</strong> editable PDF form fields (AcroFields).</li>
+                            <li>Dell Young Leaders</li>
+                            <li>Google Cloud Career Launchpad (EMEA)</li>
+                            <li>Google Cloud skill badge: Multimodal RAG (Gemini) — <a href="https://www.credly.com/users/matome-mbowene" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">Credly</a></li>
                         </ul>
-                        <details>
-                            <summary class="details-summary">Case study details</summary>
-                            <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
-                                Built for real-world scanned documents with noisy layouts. Emphasis was on reliability: validation layers,
-                                explainable mapping, and production-grade logging to support debugging and operational confidence.
-                            </div>
-                        </details>
                     </div>
-                    
-                    <!-- Project 2 -->
                     <div class="card">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">🤖</div>
-                            <h3 style="color: var(--text);">RAG AI Assistant</h3>
-                        </div>
-                        <p class="muted" style="margin-bottom: 1rem;">RAG assistant connecting and matching African entrepreneurs via fast retrieval + LLM responses.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag">Python</span>
-                            <span class="tag">FAISS</span>
-                            <span class="tag">Streamlit</span>
-                        </div>
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Verification links</h3>
                         <ul class="list">
-                            <li><strong style="color: var(--text);">Pipeline:</strong> ingestion → embeddings → persistent index → retrieval → generation.</li>
-                            <li><strong style="color: var(--text);">Ops:</strong> improved CI/CD, dependency management, and safeguards.</li>
-                        </ul>
-                        <details>
-                            <summary class="details-summary">Case study details</summary>
-                            <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
-                                Focused on reproducibility and safety: deterministic indexing, persistence, and guardrails to avoid
-                                low-confidence or hallucinated outputs where retrieval was weak.
-                            </div>
-                        </details>
-                    </div>
-                    
-                    <!-- Project 3 -->
-                    <div class="card">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">⚡</div>
-                            <h3 style="color: var(--text);">Embedded Navigation</h3>
-                        </div>
-                        <p class="muted" style="margin-bottom: 1rem;">Sensor fusion + edge-AI foundations for real-time hazard detection.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag">C++</span>
-                            <span class="tag">STM32</span>
-                            <span class="tag">Sensor Fusion</span>
-                        </div>
-                        <ul class="list">
-                            <li><strong style="color: var(--text);">Focus:</strong> real-time pipelines and reliability under constraints.</li>
-                            <li><strong style="color: var(--text);">Hardware:</strong> LiDAR, IMU, and camera integration.</li>
-                        </ul>
-                        <details>
-                            <summary class="details-summary">Case study details</summary>
-                            <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
-                                Emphasis on signal integrity and latency. Contributed to firmware/data architecture decisions to ensure
-                                consistent sensor timing and robust downstream consumption.
-                            </div>
-                        </details>
-                    </div>
-
-                    <!-- Project 4 (Discreet NDA Work) -->
-                    <div class="card">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                            <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">🔒</div>
-                            <h3 style="color: var(--text);">Confidential AI Product Build (NDA)</h3>
-                        </div>
-                        <p class="muted" style="margin-bottom: 1rem;">Ongoing work on an AI-driven product with details limited by NDA.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag">Architecture</span>
-                            <span class="tag">Backend</span>
-                            <span class="tag">LLMs</span>
-                            <span class="tag">CI/CD</span>
-                        </div>
-                        <ul class="list">
-                            <li><strong style="color: var(--text);">Focus:</strong> engineering foundations, production readiness, and delivery cadence.</li>
-                            <li><strong style="color: var(--text);">Note:</strong> scope and artifacts can be discussed at a high level in interviews.</li>
+                            <li><a href="https://linkedin.com/in/matomembowene" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">LinkedIn</a></li>
+                            <li><a href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">GitHub</a></li>
+                            <li><a href="https://www.credly.com/users/matome-mbowene" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">Credly</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- About (neutral, public-safe) -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">How I work</h3>
+                        <p class="muted" style="line-height: var(--lh-body);">
+                            I build end-to-end AI features that hold up in production: ingestion, validation, retrieval, model integration, observability, and delivery.
+                            My focus is correctness and reliability—clear interfaces, defensive checks, and measurable outcomes.
+                        </p>
+                        <hr class="subtle-divider">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">What I’m looking for</h3>
+                        <p class="muted" style="line-height: var(--lh-body);">
+                            Software engineering, AI/ML engineering, and backend/cloud roles. Open to hybrid or remote opportunities.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Education (approved)</h3>
+                        <p class="muted" style="line-height: var(--lh-body); margin-bottom: 0.75rem;">
+                            University of Cape Town (Computer Science &amp; Computer Engineering)
+                        </p>
+                        <hr class="subtle-divider">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Core strengths</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="tag">Production OCR</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">Backend services</span>
+                            <span class="tag">CI/CD</span>
+                            <span class="tag">Reliability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
-        <section id="contact" style="padding: 4rem 2rem;">
+        <section id="contact" class="section">
             <div style="max-width: 600px; margin: 0 auto;">
                 <h2 style="text-align: center; margin-bottom: 3rem; color: var(--accent);">Get In Touch</h2>
                 
@@ -575,18 +627,32 @@
                     <!-- Simple Contact Info -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
                         <div style="text-align: center;">
-                            <div style="width: 50px; height: 50px; background: rgba(100,255,218,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--accent);">✉️</div>
+                            <div style="width: 50px; height: 50px; background: rgba(100,255,218,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--accent);" aria-hidden="true">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
                             <div style="color: var(--text-muted);">Email</div>
                             <a href="mailto:matomepontso@gmail.com" style="color: var(--text); font-weight: 500; text-decoration: none;">matomepontso@gmail.com</a>
                         </div>
                         <div style="text-align: center;">
-                            <div style="width: 50px; height: 50px; background: rgba(100,255,218,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--accent);">📱</div>
-                            <div style="color: var(--text-muted);">Phone</div>
-                            <a href="tel:+27672603309" style="color: var(--text); font-weight: 500; text-decoration: none;">+27 67 260 3309</a>
+                            <div style="width: 50px; height: 50px; background: rgba(100,255,218,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--accent);" aria-hidden="true">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16 8a4 4 0 0 0-8 0v8a4 4 0 0 0 8 0V8Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 2v2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 20v2" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div style="color: var(--text-muted);">LinkedIn</div>
+                            <a href="https://linkedin.com/in/matomembowene" target="_blank" rel="noopener noreferrer" style="color: var(--text); font-weight: 500; text-decoration: none;">linkedin.com/in/matomembowene</a>
                         </div>
                     </div>
                     
                     <!-- Simple Form -->
+                    <p class="muted" style="margin-bottom: 1rem; line-height: var(--lh-body);">
+                        Note: this form opens your email client with a pre-filled message (no server, no data storage).
+                    </p>
                     <form id="contactForm" onsubmit="submitForm(event)" style="display: flex; flex-direction: column; gap: 1rem;">
                         <div>
                             <label style="display:block; color: var(--text-muted); margin-bottom: 0.35rem;" for="name">Your Name</label>
@@ -620,17 +686,61 @@
         <footer style="background: var(--secondary); padding: 2rem; text-align: center; color: var(--text-muted); border-top: 1px solid rgba(100,255,218,0.1);">
             <div style="max-width: 1200px; margin: 0 auto;">
                 <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(90deg, var(--accent), #7b4dff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">MM</div>
-                <p>Building the future with AI, Computer Vision, and Embedded Systems</p>
+                <p>Software &amp; AI engineering — reliable systems, measurable outcomes</p>
                 <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2026 Matome Mbowene • Cape Town, South Africa</p>
             </div>
         </footer>
-    </div>
+    </main>
 
     <!-- Minimal JavaScript -->
     <script>
         // Show content immediately
         document.body.classList.remove('loading');
         document.body.classList.add('loaded');
+
+        // Accessible mobile nav toggle (progressive enhancement)
+        (function initNav() {
+            const nav = document.querySelector('nav');
+            const toggle = document.querySelector('.nav-toggle');
+            const menu = document.getElementById('nav-menu');
+            if (!nav || !toggle || !menu) return;
+
+            function setOpen(open) {
+                nav.setAttribute('data-menu-open', open ? 'true' : 'false');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+            }
+
+            setOpen(false);
+
+            toggle.addEventListener('click', () => {
+                const isOpen = nav.getAttribute('data-menu-open') === 'true';
+                setOpen(!isOpen);
+                if (!isOpen) menu.querySelector('a')?.focus();
+                else toggle.focus();
+            });
+
+            menu.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', () => {
+                    if (window.matchMedia('(max-width: 768px)').matches) {
+                        setOpen(false);
+                        toggle.focus();
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key !== 'Escape') return;
+                const isOpen = nav.getAttribute('data-menu-open') === 'true';
+                if (!isOpen) return;
+                setOpen(false);
+                toggle.focus();
+            });
+
+            window.addEventListener('resize', () => {
+                if (!window.matchMedia('(max-width: 768px)').matches) setOpen(false);
+            });
+        })();
         
         // Simple form submission
         function submitForm(event) {
@@ -688,15 +798,11 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    document.querySelectorAll('.hero-content [style*="font-size: 1.8rem"]').forEach(el => {
-                        const text = el.textContent;
-                        const target = parseFloat(text);
-                        const suffix = text.replace(String(target), '');
-                        el.dataset.suffix = suffix;
+                    document.querySelectorAll('.kpi-value[data-kpi]').forEach(el => {
+                        const target = parseFloat(el.dataset.kpi || '');
                         const decimals = (String(target).split('.')[1] || '').length;
-                        if (!isNaN(target)) {
-                            animateCounter(el, target, decimals);
-                        }
+                        el.dataset.suffix = el.dataset.suffix || '';
+                        if (!isNaN(target)) animateCounter(el, target, decimals);
                     });
                     observer.disconnect();
                 }
@@ -704,35 +810,11 @@
         }, { threshold: 0.5 });
         
         observer.observe(document.querySelector('.hero'));
-        
-        // Mobile menu toggle (simple)
-        if (window.innerWidth < 768) {
-            const nav = document.querySelector('nav');
-            const navLinks = nav.querySelector('.nav-links');
-            const toggleBtn = document.createElement('button');
-            toggleBtn.innerHTML = '☰';
-            toggleBtn.style.background = 'none';
-            toggleBtn.style.border = 'none';
-            toggleBtn.style.color = 'var(--text-muted)';
-            toggleBtn.style.fontSize = '1.5rem';
-            toggleBtn.style.cursor = 'pointer';
-            toggleBtn.setAttribute('aria-label', 'Toggle navigation menu');
-            
-            toggleBtn.addEventListener('click', () => {
-                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            });
-            
-            nav.appendChild(toggleBtn);
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.right = '0';
-            navLinks.style.background = 'var(--primary)';
-            navLinks.style.padding = '1rem';
-            navLinks.style.display = 'none';
-        }
     </script>
+
+    <!-- Chatbot widget (local, grounded) -->
+    <link rel="stylesheet" href="chatbot/chatbot.css">
+    <script defer src="chatbot/chatbot.js"></script>
 
     <!-- Structured data (basic Person profile) -->
     <script type="application/ld+json">
@@ -740,7 +822,7 @@
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Matome Mbowene",
-            "jobTitle": "AI/ML Engineer",
+            "jobTitle": "Software & AI Engineer",
             "image": "https://matomemb.github.io/profile.jpg",
             "url": "https://matomemb.github.io/",
             "sameAs": [
