@@ -7,11 +7,16 @@
     <meta name="description" content="Matome Mbowene — AI/ML Engineer specializing in Computer Vision, OCR document automation, and RAG systems. Based in Cape Town, South Africa.">
     <meta name="author" content="Matome Mbowene">
     <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://matomemb.github.io/">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.svg">
     <meta property="og:title" content="Matome Mbowene | AI/ML Engineer">
     <meta property="og:description" content="AI/ML Engineer specializing in Computer Vision, OCR automation, and RAG systems.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="profile.jpg">
+    <meta property="og:url" content="https://matomemb.github.io/">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0a192f">
     <style>
         /* CRITICAL CSS ONLY - Loads instantly */
         :root {
@@ -20,6 +25,7 @@
             --accent: #64ffda;
             --text: #e6f1ff;
             --text-muted: #8892b0;
+            --shadow: rgba(0,0,0,0.35);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,6 +41,21 @@
             outline: 2px solid var(--accent);
             outline-offset: 2px;
         }
+
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: 1rem;
+            background: var(--secondary);
+            color: var(--text);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(100,255,218,0.25);
+            z-index: 2000;
+            text-decoration: none;
+        }
+
+        .skip-link:focus { left: 1rem; }
         
         .nav-links a {
             color: var(--text-muted);
@@ -105,6 +126,9 @@
             -webkit-text-fill-color: transparent;
         }
 
+        h2 { font-size: 1.75rem; }
+        h3 { font-size: 1.1rem; }
+
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
@@ -131,6 +155,90 @@
             font-size: 0.85rem;
             display: inline-block;
         }
+
+        .muted { color: var(--text-muted); }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent), #7b4dff);
+            color: white;
+        }
+
+        .btn-secondary {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-tertiary {
+            border-color: rgba(100,255,218,0.35);
+            color: var(--text);
+            background: transparent;
+        }
+
+        .kpi-grid {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .kpi {
+            text-align: center;
+            min-width: 160px;
+        }
+
+        .kpi-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .kpi-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .details-summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.6rem;
+            border-radius: 10px;
+            border: 1px solid rgba(100,255,218,0.18);
+            background: rgba(100,255,218,0.06);
+            color: var(--text);
+            margin-top: 0.75rem;
+        }
+
+        details summary::-webkit-details-marker { display: none; }
+
+        .subtle-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(100,255,218,0.1);
+            margin: 1rem 0;
+        }
+
+        .list {
+            color: var(--text-muted);
+            line-height: 1.7;
+            padding-left: 1.25rem;
+        }
         
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
@@ -139,12 +247,15 @@
     </style>
 </head>
 <body class="loading">
+    <a class="skip-link" href="#content">Skip to content</a>
     <!-- Minimal Navigation -->
     <nav>
         <div class="logo">MM</div>
         <div class="nav-links" style="display: flex; gap: 1.5rem;">
             <a href="#home">Home</a>
+            <a href="#about">About</a>
             <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </div>
@@ -155,42 +266,83 @@
         <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-content">
-                <img src="profile.jpg" alt="Portrait of Matome Mbowene" width="150" height="150" loading="eager" decoding="async" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 0 auto 2rem; border: 3px solid rgba(100,255,218,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.35); display: block;">
+                <img src="profile.jpg" alt="Portrait of Matome Mbowene" width="150" height="150" loading="eager" decoding="async" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 0 auto 2rem; border: 3px solid rgba(100,255,218,0.35); box-shadow: 0 12px 30px var(--shadow); display: block;">
                 <h1>Matome Mbowene</h1>
                 <p style="color: var(--accent); font-size: 1.2rem; margin-bottom: 1rem;">AI/ML Engineer • Computer Vision • RAG Systems</p>
-                <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6;">
-                    BSc Computer Science & Engineering graduate specializing in production AI systems. 
-                    Built 100% accurate OCR automation and scalable RAG systems.
+                <p class="muted" style="margin-bottom: 2rem; line-height: 1.7;">
+                    I build production-ready AI systems with measurable impact, from OCR automation to scalable retrieval pipelines.
+                    Based in Cape Town, South Africa.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
-                    <a href="#contact" style="background: linear-gradient(45deg, var(--accent), #7b4dff); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500;">Contact Me</a>
-                    <a href="#projects" style="border: 2px solid var(--accent); color: var(--accent); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500;">View Projects</a>
-                    <a href="Matome_Mbowene_Resume_2025_Dec.pdf" style="border: 2px solid rgba(100,255,218,0.35); color: var(--text); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500;">Download Resume</a>
+                    <a class="btn btn-primary" href="#contact">Contact</a>
+                    <a class="btn btn-secondary" href="#projects">Projects</a>
+                    <a class="btn btn-tertiary" href="Matome_Mbowene_Resume_2025_Dec.pdf">Resume (PDF)</a>
                 </div>
 
                 <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
-                    <a href="mailto:matomepontso@gmail.com" style="color: var(--text-muted); text-decoration: none;">Email</a>
+                    <a rel="me" href="mailto:matomepontso@gmail.com" style="color: var(--text-muted); text-decoration: none;">Email</a>
                     <span style="color: rgba(136,146,176,0.5);">•</span>
-                    <a href="tel:+27672603309" style="color: var(--text-muted); text-decoration: none;">Call</a>
+                    <a rel="me" href="tel:+27672603309" style="color: var(--text-muted); text-decoration: none;">Call</a>
                     <span style="color: rgba(136,146,176,0.5);">•</span>
-                    <a href="https://linkedin.com/in/matomembowene" style="color: var(--text-muted); text-decoration: none;">LinkedIn</a>
+                    <a rel="me noopener noreferrer" href="https://linkedin.com/in/matomembowene" target="_blank" style="color: var(--text-muted); text-decoration: none;">LinkedIn</a>
                     <span style="color: rgba(136,146,176,0.5);">•</span>
-                    <a href="https://github.com/MatomeMb" style="color: var(--text-muted); text-decoration: none;">GitHub</a>
+                    <a rel="me noopener noreferrer" href="https://github.com/MatomeMb" target="_blank" style="color: var(--text-muted); text-decoration: none;">GitHub</a>
                 </div>
                 
                 <!-- Quick Stats -->
-                <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent);">100%</div>
-                        <div style="color: var(--text-muted); font-size: 0.9rem;">OCR Accuracy</div>
+                <div class="kpi-grid">
+                    <div class="kpi">
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">100%</div>
+                        <div class="kpi-label">OCR Field-Mapping Accuracy</div>
                     </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent);">89.33%</div>
-                        <div style="color: var(--text-muted); font-size: 0.9rem;">AI Model</div>
+                    <div class="kpi">
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">89.33%</div>
+                        <div class="kpi-label">Model Accuracy (FashionMNIST)</div>
                     </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent);">35%</div>
-                        <div style="color: var(--text-muted); font-size: 0.9rem;">Efficiency Gain</div>
+                    <div class="kpi">
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">35%</div>
+                        <div class="kpi-label">Scheduling Efficiency Gain</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About / Credibility -->
+        <section id="about" style="padding: 4rem 2rem; background: var(--secondary);">
+            <div class="container">
+                <h2 class="section-title">About</h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">What I do</h3>
+                        <p class="muted" style="line-height: 1.7;">
+                            I focus on building end-to-end AI systems that ship: data ingestion, validation, retrieval, model integration,
+                            observability, and user-facing delivery. I care about correctness, robustness, and measurable outcomes.
+                        </p>
+                        <hr class="subtle-divider">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">What I’m looking for</h3>
+                        <p class="muted" style="line-height: 1.7;">
+                            Roles in software engineering, AI/ML engineering, and backend/cloud engineering. Open to hybrid or remote.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Education & Programs</h3>
+                        <ul class="list">
+                            <li>BSc Computer Science & Computer Engineering — University of Cape Town</li>
+                            <li>Dell Young Leaders Scholar</li>
+                            <li>Google Cloud Career Launchpad (EMEA)</li>
+                        </ul>
+                        <hr class="subtle-divider">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Core strengths</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="tag">Production AI</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">OCR</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">Backend APIs</span>
+                            <span class="tag">CI/CD</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,7 +360,7 @@
                             <span style="color: var(--text-muted); font-size: 0.9rem;">Present • Cape Town</span>
                         </div>
                         <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Collaboration with Aaron Kisten (UCT Geomatics)</div>
-                        <ul style="color: var(--text-muted); line-height: 1.6; padding-left: 1.25rem;">
+                        <ul class="list">
                             <li>Built production OCR + LLM system achieving <span style="color: var(--text);">100% field-mapping accuracy</span> on scanned surveying diagrams.</li>
                             <li>Implemented <span style="color: var(--text);">6-layer validation</span>, confidence scoring, and context-aware mapping with color-coded debug highlighting.</li>
                             <li>Created editable PDF form fields (AcroFields), robust fallbacks, and enterprise-grade logging.</li>
@@ -228,7 +380,7 @@
                             <span style="color: var(--text-muted); font-size: 0.9rem;">Nov 2025 – Present • Cape Town</span>
                         </div>
                         <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Beetroot</div>
-                        <ul style="color: var(--text-muted); line-height: 1.6; padding-left: 1.25rem;">
+                        <ul class="list">
                             <li>Developed a RAG conversational agent using FAISS + sentence-transformers + GPT-4o / Claude to connect African entrepreneurs.</li>
                             <li>Delivered end-to-end pipeline: ingestion → embeddings → persistent index → retrieval → Streamlit demo.</li>
                             <li>Hardened CI/CD, dependency management, and production safeguards.</li>
@@ -248,7 +400,7 @@
                             <span style="color: var(--text-muted); font-size: 0.9rem;">Dec 2025 – Present • Cape Town</span>
                         </div>
                         <div style="color: var(--text-muted); margin-bottom: 0.75rem;">RoadMind AI</div>
-                        <ul style="color: var(--text-muted); line-height: 1.6; padding-left: 1.25rem;">
+                        <ul class="list">
                             <li>Developing sensor fusion pipelines and edge-AI models for real-time hazard detection on motorcycles.</li>
                             <li>Contributing to firmware and data pipeline architecture for LiDAR, IMU, and camera integration.</li>
                         </ul>
@@ -257,6 +409,51 @@
                             <span class="tag">Sensor Fusion</span>
                             <span class="tag">Edge AI</span>
                             <span class="tag">STM32</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" style="padding: 4rem 2rem; background: var(--secondary);">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">AI / ML</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="tag">PyTorch</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">OCR</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">FAISS</span>
+                            <span class="tag">sentence-transformers</span>
+                            <span class="tag">LLM APIs</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Backend / Data</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="tag">Python</span>
+                            <span class="tag">Java</span>
+                            <span class="tag">Spring Boot</span>
+                            <span class="tag">REST APIs</span>
+                            <span class="tag">SQL / MySQL</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">NumPy</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Systems / Shipping</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="tag">Git</span>
+                            <span class="tag">Docker</span>
+                            <span class="tag">CI/CD</span>
+                            <span class="tag">Linux</span>
+                            <span class="tag">Observability</span>
+                            <span class="tag">Testing</span>
                         </div>
                     </div>
                 </div>
@@ -275,12 +472,24 @@
                             <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">📄</div>
                             <h3 style="color: var(--text);">OCR Document Automation</h3>
                         </div>
-                        <p style="color: var(--text-muted); margin-bottom: 1rem;">100% accurate field mapping from scanned documents with 6-layer validation.</p>
+                        <p class="muted" style="margin-bottom: 1rem;">Production OCR + LLM pipeline for document-to-structured-data automation.</p>
                         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
                             <span class="tag">Python</span>
                             <span class="tag">OpenCV</span>
                             <span class="tag">LLMs</span>
                         </div>
+                        <ul class="list">
+                            <li><strong style="color: var(--text);">Outcome:</strong> 100% field-mapping accuracy with multi-layer validation.</li>
+                            <li><strong style="color: var(--text);">Engineering:</strong> confidence scoring, fallbacks, and audit logging.</li>
+                            <li><strong style="color: var(--text);">Delivery:</strong> editable PDF form fields (AcroFields).</li>
+                        </ul>
+                        <details>
+                            <summary class="details-summary">Case study details</summary>
+                            <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
+                                Built for real-world scanned documents with noisy layouts. Emphasis was on reliability: validation layers,
+                                explainable mapping, and production-grade logging to support debugging and operational confidence.
+                            </div>
+                        </details>
                     </div>
                     
                     <!-- Project 2 -->
@@ -289,12 +498,23 @@
                             <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">🤖</div>
                             <h3 style="color: var(--text);">RAG AI Assistant</h3>
                         </div>
-                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Conversational AI connecting African entrepreneurs using FAISS + GPT-4o.</p>
+                        <p class="muted" style="margin-bottom: 1rem;">RAG assistant connecting and matching African entrepreneurs via fast retrieval + LLM responses.</p>
                         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
                             <span class="tag">Python</span>
                             <span class="tag">FAISS</span>
                             <span class="tag">Streamlit</span>
                         </div>
+                        <ul class="list">
+                            <li><strong style="color: var(--text);">Pipeline:</strong> ingestion → embeddings → persistent index → retrieval → generation.</li>
+                            <li><strong style="color: var(--text);">Ops:</strong> improved CI/CD, dependency management, and safeguards.</li>
+                        </ul>
+                        <details>
+                            <summary class="details-summary">Case study details</summary>
+                            <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
+                                Focused on reproducibility and safety: deterministic indexing, persistence, and guardrails to avoid
+                                low-confidence or hallucinated outputs where retrieval was weak.
+                            </div>
+                        </details>
                     </div>
                     
                     <!-- Project 3 -->
@@ -303,12 +523,23 @@
                             <div style="width: 40px; height: 40px; background: rgba(100,255,218,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">⚡</div>
                             <h3 style="color: var(--text);">Embedded Navigation</h3>
                         </div>
-                        <p style="color: var(--text-muted); margin-bottom: 1rem;">STM32-based system with sensor fusion for real-time hazard detection.</p>
+                        <p class="muted" style="margin-bottom: 1rem;">Sensor fusion + edge-AI foundations for real-time hazard detection.</p>
                         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
                             <span class="tag">C++</span>
                             <span class="tag">STM32</span>
                             <span class="tag">Sensor Fusion</span>
                         </div>
+                        <ul class="list">
+                            <li><strong style="color: var(--text);">Focus:</strong> real-time pipelines and reliability under constraints.</li>
+                            <li><strong style="color: var(--text);">Hardware:</strong> LiDAR, IMU, and camera integration.</li>
+                        </ul>
+                        <details>
+                            <summary class="details-summary">Case study details</summary>
+                            <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
+                                Emphasis on signal integrity and latency. Contributed to firmware/data architecture decisions to ensure
+                                consistent sensor timing and robust downstream consumption.
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -369,7 +600,7 @@
             <div style="max-width: 1200px; margin: 0 auto;">
                 <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(90deg, var(--accent), #7b4dff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">MM</div>
                 <p>Building the future with AI, Computer Vision, and Embedded Systems</p>
-                <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2025 Matome Mbowene • Cape Town, South Africa</p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2026 Matome Mbowene • Cape Town, South Africa</p>
             </div>
         </footer>
     </div>
@@ -383,16 +614,22 @@
         // Simple form submission
         function submitForm(event) {
             event.preventDefault();
-            // This is a placeholder. For real submissions on GitHub Pages, wire this to Formspree
-            // or another serverless form provider.
+            // GitHub Pages-friendly "submission": open the user's mail client with a prefilled email.
+            // If you want a real form backend, switch to Formspree (or similar) later.
+            const name = document.getElementById('name')?.value?.trim() || '';
+            const email = document.getElementById('email')?.value?.trim() || '';
+            const message = document.getElementById('message')?.value?.trim() || '';
+            const subject = encodeURIComponent(`Portfolio inquiry from ${name || 'Website visitor'}`);
+            const body = encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`
+            );
+            window.location.href = `mailto:matomepontso@gmail.com?subject=${subject}&body=${body}`;
+
             const formMessage = document.getElementById('formMessage');
-            formMessage.textContent = 'Message sent! I\'ll get back to you soon.';
+            formMessage.textContent = 'Opening your email client… If it doesn’t open, please email me directly at matomepontso@gmail.com.';
             formMessage.style.display = 'block';
             formMessage.style.color = '#4ade80';
-            event.target.reset();
-            
-            // In production: Send to backend API
-            console.log('Form submitted');
+            // Do not reset immediately (user may want to copy message if mail client fails)
         }
         
         // Smooth scrolling for anchor links
@@ -473,6 +710,27 @@
             navLinks.style.background = 'var(--primary)';
             navLinks.style.padding = '1rem';
             navLinks.style.display = 'none';
+        }
+    </script>
+
+    <!-- Structured data (basic Person profile) -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Matome Mbowene",
+            "jobTitle": "AI/ML Engineer",
+            "image": "https://matomemb.github.io/profile.jpg",
+            "url": "https://matomemb.github.io/",
+            "sameAs": [
+                "https://linkedin.com/in/matomembowene",
+                "https://github.com/MatomeMb"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Cape Town",
+                "addressCountry": "ZA"
+            }
         }
     </script>
 </body>
