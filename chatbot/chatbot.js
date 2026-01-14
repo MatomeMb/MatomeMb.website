@@ -2,7 +2,10 @@
 (function () {
   'use strict';
 
+  // Prefer embedding the knowledge base into the HTML to avoid any network 404s.
+  // Fallback to fetching the JSON file only if the embedded payload is missing.
   const KNOWLEDGE_URL = 'chatbot/chatbot_knowledge.json';
+  const EMBEDDED_KB_ID = 'mm-chatbot-kb';
 
   const state = {
     kb: null,
@@ -327,7 +330,22 @@
     return { setOpen };
   }
 
+  function loadEmbeddedKnowledge() {
+    try {
+      const elKb = document.getElementById(EMBEDDED_KB_ID);
+      if (!elKb) return null;
+      const raw = (elKb.textContent || '').trim();
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (_) {
+      return null;
+    }
+  }
+
   async function loadKnowledge() {
+    const embedded = loadEmbeddedKnowledge();
+    if (embedded) return embedded;
+
     const res = await fetch(KNOWLEDGE_URL, { cache: 'no-store' });
     if (!res.ok) throw new Error('Failed to load knowledge base');
     return await res.json();
