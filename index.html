@@ -126,7 +126,7 @@
         .logo {
             font-weight: 700;
             font-size: 1.5rem;
-            color: var(--text);
+            color: #e5e7eb; /* neutral (avoid bluish tint) */
             letter-spacing: -0.03em;
         }
         
@@ -154,7 +154,7 @@
             content: '';
             position: absolute;
             width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
             top: 10%; right: 10%;
             animation: heroGlow 10s ease-in-out infinite;
         }
@@ -164,8 +164,8 @@
             position: absolute;
             inset: 0;
             pointer-events: none;
-            background: radial-gradient(circle at 20% 20%, rgba(79, 70, 229, 0.09), transparent 55%),
-                        radial-gradient(circle at 80% 60%, rgba(37, 99, 235, 0.07), transparent 55%);
+            background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.04), transparent 55%),
+                        radial-gradient(circle at 80% 60%, rgba(148, 163, 184, 0.06), transparent 55%);
             animation: heroWash 16s ease-in-out infinite;
         }
 
@@ -536,7 +536,7 @@
         <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-content">
-                <img src="profile.jpg" alt="Portrait of Matome Mbowene" width="150" height="150" loading="eager" decoding="async" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 0 auto 2rem; border: 3px solid rgba(59,130,246,0.35); box-shadow: 0 12px 30px var(--shadow); display: block;">
+                <img src="profile.jpg" alt="Portrait of Matome Mbowene" width="150" height="150" loading="eager" decoding="async" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 0 auto 2rem; border: 3px solid rgba(148,163,184,0.35); box-shadow: 0 12px 30px var(--shadow); display: block;">
                 <h1>Matome Mbowene</h1>
                 <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 0.75rem; font-weight: 600;">Software &amp; AI Engineer • OCR/CV • Retrieval (RAG) • Backend</p>
                 <p class="muted" style="margin-bottom: 1.5rem; line-height: var(--lh-body); max-width: 60ch; margin-left: auto; margin-right: auto;">
