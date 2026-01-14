@@ -277,6 +277,58 @@
             display: inline-block;
         }
 
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .tool-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.75rem;
+        }
+
+        .tool-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(148,163,184,0.08);
+            border: 1px solid rgba(148,163,184,0.18);
+            color: var(--text);
+            text-decoration: none;
+            transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .tool-logo:hover {
+            transform: translateY(-2px);
+            border-color: rgba(148,163,184,0.30);
+            background: rgba(148,163,184,0.10);
+        }
+
+        .tool-logo svg { width: 22px; height: 22px; }
+
+        .tool-logo[data-brand="accent"] {
+            color: var(--accent);
+            background: rgba(34,197,94,0.10);
+            border-color: rgba(34,197,94,0.22);
+        }
+
+        .tool-logo[data-brand="accent"]:hover {
+            border-color: rgba(34,197,94,0.35);
+            background: rgba(34,197,94,0.14);
+        }
+
         .muted { color: var(--text-muted); }
         .btn {
             display: inline-flex;
@@ -715,38 +767,156 @@
                 <div class="grid">
                     <div class="card">
                         <h3 style="color: var(--text); margin-bottom: 0.75rem;">AI / ML</h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="tag">PyTorch</span>
-                            <span class="tag">Computer Vision</span>
-                            <span class="tag">OCR</span>
-                            <span class="tag">RAG</span>
-                            <span class="tag">FAISS</span>
-                            <span class="tag">sentence-transformers</span>
-                            <span class="tag">LLM APIs</span>
+                        <div class="tool-row" aria-label="AI and ML tools">
+                            <a class="tool-logo" data-brand="accent" href="https://pytorch.org/" target="_blank" rel="noopener noreferrer" aria-label="PyTorch" title="PyTorch">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M7 7.5c-2.5 2.5-2.5 6.6 0 9.1s6.6 2.5 9.1 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17 7.5a5.6 5.6 0 0 1 0 7.9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">PyTorch</span>
+                            </a>
+                            <a class="tool-logo" href="https://opencv.org/" target="_blank" rel="noopener noreferrer" aria-label="OpenCV" title="OpenCV">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12 4.5a3.5 3.5 0 1 1-3.5 3.5A3.5 3.5 0 0 1 12 4.5Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M6 13.5a3.5 3.5 0 1 1-3.5 3.5A3.5 3.5 0 0 1 6 13.5Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M18 13.5a3.5 3.5 0 1 1-3.5 3.5A3.5 3.5 0 0 1 18 13.5Z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span class="sr-only">OpenCV</span>
+                            </a>
+                            <a class="tool-logo" href="https://github.com/facebookresearch/faiss" target="_blank" rel="noopener noreferrer" aria-label="FAISS" title="FAISS">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M7 6h10M7 10h7M7 14h10M7 18h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">FAISS</span>
+                            </a>
+                            <a class="tool-logo" href="https://www.sbert.net/" target="_blank" rel="noopener noreferrer" aria-label="Sentence Transformers" title="sentence-transformers">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M6 7h12M6 12h12M6 17h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">sentence-transformers</span>
+                            </a>
+                            <a class="tool-logo" href="https://streamlit.io/" target="_blank" rel="noopener noreferrer" aria-label="Streamlit" title="Streamlit">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M5 18c4-10 10-10 14-12-4 6-7 10-14 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="sr-only">Streamlit</span>
+                            </a>
+                            <a class="tool-logo" href="https://platform.openai.com/" target="_blank" rel="noopener noreferrer" aria-label="LLM APIs" title="LLM APIs">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M4 12h3M17 12h3M12 4v3M12 17v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">LLM APIs</span>
+                            </a>
                         </div>
+                        <p class="muted" style="margin-top: 0.75rem; line-height: 1.7;">Computer vision, OCR, retrieval (RAG), and production-focused evaluation.</p>
                     </div>
                     <div class="card">
                         <h3 style="color: var(--text); margin-bottom: 0.75rem;">Backend / Data</h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="tag">Python</span>
-                            <span class="tag">Java</span>
-                            <span class="tag">Spring Boot</span>
-                            <span class="tag">REST APIs</span>
-                            <span class="tag">SQL / MySQL</span>
-                            <span class="tag">Pandas</span>
-                            <span class="tag">NumPy</span>
+                        <div class="tool-row" aria-label="Backend and data tools">
+                            <a class="tool-logo" data-brand="accent" href="https://www.python.org/" target="_blank" rel="noopener noreferrer" aria-label="Python" title="Python">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M8 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3v3H9a3 3 0 0 1-1-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                    <path d="M16 17a3 3 0 0 1-3 3h-2a3 3 0 0 1-3-3v-3h7a3 3 0 0 1 1 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="sr-only">Python</span>
+                            </a>
+                            <a class="tool-logo" href="https://www.java.com/" target="_blank" rel="noopener noreferrer" aria-label="Java" title="Java">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M8 17c2 1 6 1 8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M10 14c1 1 3 1 4 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M12 3c2 2-2 3 0 5s-2 3 0 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">Java</span>
+                            </a>
+                            <a class="tool-logo" href="https://spring.io/projects/spring-boot" target="_blank" rel="noopener noreferrer" aria-label="Spring Boot" title="Spring Boot">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12 3c5 0 9 4 9 9s-4 9-9 9S3 17 3 12 7 3 12 3Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M8 13c3-4 7-4 8-6-1 4-3 8-8 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="sr-only">Spring Boot</span>
+                            </a>
+                            <a class="tool-logo" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" target="_blank" rel="noopener noreferrer" aria-label="REST APIs" title="REST APIs">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 9H3v6h2M21 9h-2v6h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">REST APIs</span>
+                            </a>
+                            <a class="tool-logo" href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer" aria-label="MySQL" title="MySQL">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M6 18c2-5 6-8 12-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M10 18c2-3 5-5 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">MySQL</span>
+                            </a>
+                            <a class="tool-logo" href="https://pandas.pydata.org/" target="_blank" rel="noopener noreferrer" aria-label="Pandas" title="Pandas">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M8 5v14M12 3v18M16 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">Pandas</span>
+                            </a>
+                            <a class="tool-logo" href="https://numpy.org/" target="_blank" rel="noopener noreferrer" aria-label="NumPy" title="NumPy">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M7 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">NumPy</span>
+                            </a>
                         </div>
+                        <p class="muted" style="margin-top: 0.75rem; line-height: 1.7;">APIs, validation, data modeling, and maintainable services.</p>
                     </div>
                     <div class="card">
                         <h3 style="color: var(--text); margin-bottom: 0.75rem;">Systems / Shipping</h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="tag">Git</span>
-                            <span class="tag">Docker</span>
-                            <span class="tag">CI/CD</span>
-                            <span class="tag">Linux</span>
-                            <span class="tag">Observability</span>
-                            <span class="tag">Testing</span>
+                        <div class="tool-row" aria-label="Systems and shipping tools">
+                            <a class="tool-logo" href="https://git-scm.com/" target="_blank" rel="noopener noreferrer" aria-label="Git" title="Git">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M7 7l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M7 7v6a2 2 0 0 0 2 2h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">Git</span>
+                            </a>
+                            <a class="tool-logo" href="https://www.docker.com/" target="_blank" rel="noopener noreferrer" aria-label="Docker" title="Docker">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M4 14h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M8 10h2v2H8v-2ZM11 10h2v2h-2v-2ZM14 10h2v2h-2v-2Z" fill="currentColor"/>
+                                    <path d="M6 14c0 4 3 6 6 6s6-2 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">Docker</span>
+                            </a>
+                            <a class="tool-logo" href="https://docs.github.com/en/actions" target="_blank" rel="noopener noreferrer" aria-label="CI/CD (GitHub Actions)" title="CI/CD (GitHub Actions)">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M8 7l8 5-8 5V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                    <path d="M4 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">CI/CD</span>
+                            </a>
+                            <a class="tool-logo" href="https://www.linux.org/" target="_blank" rel="noopener noreferrer" aria-label="Linux" title="Linux">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12 3c3 0 5 4 5 7s-2 5-5 5-5-2-5-5 2-7 5-7Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M8 20c1-2 3-3 4-3s3 1 4 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">Linux</span>
+                            </a>
+                            <a class="tool-logo" href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer" aria-label="Observability (OpenTelemetry)" title="Observability (OpenTelemetry)">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span class="sr-only">Observability</span>
+                            </a>
+                            <a class="tool-logo" href="https://testing-library.com/" target="_blank" rel="noopener noreferrer" aria-label="Testing" title="Testing">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M9 3h6v2H9V3Z" fill="currentColor"/>
+                                    <path d="M8 5h8v16H8V5Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M10 10h4M10 14h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="sr-only">Testing</span>
+                            </a>
                         </div>
+                        <p class="muted" style="margin-top: 0.75rem; line-height: 1.7;">Pragmatic shipping discipline: version control, containers, automation, and reliability checks.</p>
                     </div>
                 </div>
             </div>
