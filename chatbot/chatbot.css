@@ -56,7 +56,7 @@
   justify-content: space-between;
   gap: 12px;
   border-bottom: 1px solid rgba(148,163,184,0.18);
-  background: rgba(17, 24, 39, 0.85);
+  background: rgba(18, 20, 26, 0.85);
 }
 
 .mm-chatbot-title {
@@ -154,7 +154,7 @@
 .mm-chatbot-footer {
   padding: 12px;
   border-top: 1px solid rgba(148,163,184,0.18);
-  background: rgba(17, 24, 39, 0.65);
+  background: rgba(18, 20, 26, 0.65);
   display: grid;
   gap: 10px;
 }
