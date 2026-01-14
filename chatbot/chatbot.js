@@ -201,13 +201,23 @@
     ].join('\n');
   }
 
+  function contactActions(kb) {
+    const links = kb?.links || {};
+    const actions = [];
+    if (links.email) actions.push({ label: 'Email', url: links.email });
+    if (links.linkedin) actions.push({ label: 'LinkedIn', url: links.linkedin });
+    if (links.github) actions.push({ label: 'GitHub', url: links.github });
+    return actions;
+  }
+
   function answerFromKb(text, kb) {
     const safety = kb.safety || {};
 
     if (isSensitivePrompt(text)) {
-      if (isNdaProbe(text)) return { a: safety.refusals?.nda || 'Some work is under NDA.', source: 'Safety policy' };
-      if (/degree|graduat/i.test(text)) return { a: safety.refusals?.degreeStatus || 'I can’t comment on degree status.', source: 'Safety policy' };
-      return { a: safety.refusals?.sensitive || 'I can’t help with that.', source: 'Safety policy' };
+      const actions = contactActions(kb);
+      if (isNdaProbe(text)) return { a: safety.refusals?.nda || 'Some work is under NDA.', source: 'Safety policy', actions };
+      if (/degree|graduat/i.test(text)) return { a: safety.refusals?.degreeStatus || 'I can’t comment on degree status.', source: 'Safety policy', actions };
+      return { a: safety.refusals?.sensitive || 'I can’t help with that.', source: 'Safety policy', actions };
     }
 
     const t = normalize(text);
@@ -233,7 +243,7 @@
       return { a: formatCredibility(kb), source: 'Certifications' };
     }
     if (/\b(contact|email|reach|linkedin)\b/.test(t)) {
-      return { a: formatContact(kb), source: 'Contact' };
+      return { a: formatContact(kb), source: 'Contact', actions: contactActions(kb) };
     }
     if (/\b(experience|background|recent experience)\b/.test(t)) {
       const lines = [];
@@ -255,13 +265,35 @@
     const faqHit = pickFaqAnswer(text, kb.faq || []);
     if (faqHit) return { a: faqHit.a, source: 'FAQ' };
 
-    return { a: safety.refusals?.unknown || 'I don’t have that detail in my public portfolio notes.', source: 'Safety policy' };
+    return {
+      a: safety.refusals?.unknown || 'I don’t have that detail in my public portfolio notes.',
+      source: 'Safety policy',
+      actions: contactActions(kb)
+    };
   }
 
-  function appendMessage(bodyEl, role, text, meta) {
+  function appendMessage(bodyEl, role, text, meta, actions) {
     const msg = el('div', { class: 'mm-chatbot-msg', dataset: { role } });
     msg.appendChild(el('div', { class: 'mm-chatbot-bubble', text }));
     if (meta) msg.appendChild(el('div', { class: 'mm-chatbot-meta', text: meta }));
+
+    if (Array.isArray(actions) && actions.length) {
+      const row = el('div', { class: 'mm-chatbot-actions', 'aria-label': 'Quick actions' });
+      actions.slice(0, 3).forEach((a) => {
+        if (!a?.label || !a?.url) return;
+        const isMailto = String(a.url).startsWith('mailto:');
+        const link = el('a', {
+          class: 'mm-chatbot-action',
+          href: a.url,
+          ...(isMailto ? {} : { target: '_blank', rel: 'noopener noreferrer' }),
+          'aria-label': a.label,
+          text: a.label
+        });
+        row.appendChild(link);
+      });
+      msg.appendChild(row);
+    }
+
     bodyEl.appendChild(msg);
     bodyEl.scrollTop = bodyEl.scrollHeight;
   }
@@ -358,7 +390,7 @@
 
       const out = answerFromKb(trimmed, state.kb);
       const meta = out.source ? `Source: ${out.source}` : null;
-      appendMessage(body, 'bot', out.a, meta);
+      appendMessage(body, 'bot', out.a, meta, out.actions);
     }
 
     function seedSuggestions() {
