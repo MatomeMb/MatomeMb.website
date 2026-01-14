@@ -1,0 +1,346 @@
+/* Portfolio chatbot: local, grounded, no logging. */
+(function () {
+  'use strict';
+
+  const KNOWLEDGE_URL = 'chatbot/chatbot_knowledge.json';
+
+  const state = {
+    kb: null,
+    open: false,
+    lastFocus: null
+  };
+
+  function $(sel, root = document) {
+    return root.querySelector(sel);
+  }
+
+  function el(tag, attrs = {}, children = []) {
+    const n = document.createElement(tag);
+    Object.entries(attrs).forEach(([k, v]) => {
+      if (k === 'class') n.className = v;
+      else if (k === 'dataset') Object.assign(n.dataset, v);
+      else if (k.startsWith('aria-')) n.setAttribute(k, String(v));
+      else if (k === 'text') n.textContent = String(v);
+      else n.setAttribute(k, String(v));
+    });
+    children.forEach((c) => n.appendChild(c));
+    return n;
+  }
+
+  function normalize(s) {
+    return (s || '')
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function tokenize(s) {
+    const t = normalize(s).split(' ').filter(Boolean);
+    // Remove very common stop-words; keep it minimal to avoid unexpected behavior
+    const stop = new Set(['the', 'a', 'an', 'and', 'or', 'to', 'of', 'in', 'on', 'for', 'with', 'is', 'are', 'do', 'does', 'can', 'you', 'i']);
+    return t.filter((w) => !stop.has(w));
+  }
+
+  function overlapScore(aTokens, bTokens) {
+    if (!aTokens.length || !bTokens.length) return 0;
+    const b = new Set(bTokens);
+    let hit = 0;
+    aTokens.forEach((t) => { if (b.has(t)) hit += 1; });
+    return hit / Math.max(aTokens.length, bTokens.length);
+  }
+
+  function isSensitivePrompt(text) {
+    const t = normalize(text);
+    const patterns = [
+      /disciplin/i,
+      /exclusion/i,
+      /registrar/i,
+      /transcript/i,
+      /\bcode(s)?\b/i,
+      /medical/i,
+      /health/i,
+      /legal/i,
+      /case\s+number/i,
+      /degree/i,
+      /graduat/i,
+      /\bnda\b.*(client|company|name)/i,
+      /(client|company)\s+name/i
+    ];
+    return patterns.some((re) => re.test(t));
+  }
+
+  function isNdaProbe(text) {
+    const t = normalize(text);
+    return /\bnda\b/i.test(t) || /(client|company)\s+name/i.test(t) || /who\s+was\s+it\s+for/i.test(t);
+  }
+
+  function pickFaqAnswer(text, faq) {
+    const qTokens = tokenize(text);
+    let best = null;
+    let bestScore = 0;
+    for (const item of faq || []) {
+      const s = overlapScore(qTokens, tokenize(item.q));
+      if (s > bestScore) {
+        bestScore = s;
+        best = item;
+      }
+    }
+    // Conservative threshold to avoid mismatched answers
+    if (best && bestScore >= 0.25) return best;
+    return null;
+  }
+
+  function formatProjects(kb) {
+    const lines = [];
+    lines.push('Selected case studies (public-safe):');
+    (kb.projects || []).forEach((p) => {
+      const cs = p.caseStudy || {};
+      lines.push(`- ${p.name}: ${cs.outcome || ''}`.trim());
+    });
+    return lines.join('\n');
+  }
+
+  function formatSkills(kb) {
+    const s = kb.skills || {};
+    const lines = [];
+    lines.push('Skills summary:');
+    if (s.ocrComputerVision?.length) lines.push(`- OCR / Computer Vision: ${s.ocrComputerVision.join('; ')}`);
+    if (s.retrievalRag?.length) lines.push(`- Retrieval (RAG): ${s.retrievalRag.join('; ')}`);
+    if (s.backendServices?.length) lines.push(`- Backend / Services: ${s.backendServices.join('; ')}`);
+    if (s.shippingDiscipline?.length) lines.push(`- Shipping discipline: ${s.shippingDiscipline.join('; ')}`);
+    if (s.embeddedFundamentals?.length) lines.push(`- Embedded fundamentals: ${s.embeddedFundamentals.join('; ')}`);
+    return lines.join('\n');
+  }
+
+  function formatCredibility(kb) {
+    const lines = [];
+    lines.push('Credibility (public-safe):');
+    (kb.certifications || []).forEach((c) => {
+      if (c.proof) lines.push(`- ${c.name} (proof: ${c.proof})`);
+      else lines.push(`- ${c.name}`);
+    });
+    lines.push(`- GitHub: ${kb.links.github}`);
+    lines.push(`- LinkedIn: ${kb.links.linkedin}`);
+    lines.push(`- Credly: ${kb.links.credly}`);
+    return lines.join('\n');
+  }
+
+  function formatContact(kb) {
+    return [
+      'Contact:',
+      `- Email: ${kb.links.email.replace('mailto:', '')}`,
+      `- LinkedIn: ${kb.links.linkedin}`,
+      `- GitHub: ${kb.links.github}`,
+      `- Credly: ${kb.links.credly}`
+    ].join('\n');
+  }
+
+  function answerFromKb(text, kb) {
+    const safety = kb.safety || {};
+
+    if (isSensitivePrompt(text)) {
+      if (isNdaProbe(text)) return { a: safety.refusals?.nda || 'Some work is under NDA.', source: 'Safety policy' };
+      if (/degree|graduat/i.test(text)) return { a: safety.refusals?.degreeStatus || 'I can’t comment on degree status.', source: 'Safety policy' };
+      return { a: safety.refusals?.sensitive || 'I can’t help with that.', source: 'Safety policy' };
+    }
+
+    const t = normalize(text);
+    if (/\b(project|case study|case studies|work)\b/.test(t)) {
+      return { a: formatProjects(kb), source: 'Projects' };
+    }
+    if (/\b(skill|stack|tech|technology)\b/.test(t)) {
+      return { a: formatSkills(kb), source: 'Skills' };
+    }
+    if (/\b(cert|badge|credly|credential)\b/.test(t)) {
+      return { a: formatCredibility(kb), source: 'Certifications' };
+    }
+    if (/\b(contact|email|reach|linkedin)\b/.test(t)) {
+      return { a: formatContact(kb), source: 'Contact' };
+    }
+    if (/\b(education|university|uct)\b/.test(t)) {
+      return { a: `Education (approved): ${kb.education?.approvedLine || ''}`.trim(), source: 'Education' };
+    }
+    if (/\b(role|roles|looking for|availability|remote|hybrid)\b/.test(t)) {
+      return { a: kb.profile?.workPolicy || safety.refusals?.unknown, source: 'Work policy' };
+    }
+
+    const faqHit = pickFaqAnswer(text, kb.faq || []);
+    if (faqHit) return { a: faqHit.a, source: 'FAQ' };
+
+    return { a: safety.refusals?.unknown || 'I don’t have that detail in my public portfolio notes.', source: 'Safety policy' };
+  }
+
+  function appendMessage(bodyEl, role, text, meta) {
+    const msg = el('div', { class: 'mm-chatbot-msg', dataset: { role } });
+    msg.appendChild(el('div', { class: 'mm-chatbot-bubble', text }));
+    if (meta) msg.appendChild(el('div', { class: 'mm-chatbot-meta', text: meta }));
+    bodyEl.appendChild(msg);
+    bodyEl.scrollTop = bodyEl.scrollHeight;
+  }
+
+  function focusables(root) {
+    return Array.from(root.querySelectorAll('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])'))
+      .filter((n) => !n.hasAttribute('disabled') && n.getAttribute('aria-hidden') !== 'true');
+  }
+
+  function mountWidget() {
+    const launcher = el('button', {
+      class: 'mm-chatbot-launcher',
+      type: 'button',
+      'aria-label': 'Open portfolio assistant',
+      'aria-haspopup': 'dialog',
+      'aria-expanded': 'false'
+    }, []);
+    launcher.textContent = 'Ask about my work';
+
+    const overlay = el('div', { class: 'mm-chatbot-overlay', dataset: { open: 'false' } });
+
+    const panel = el('div', {
+      class: 'mm-chatbot-panel',
+      role: 'dialog',
+      'aria-modal': 'true',
+      'aria-label': 'Portfolio assistant',
+      dataset: { open: 'false' }
+    });
+
+    const header = el('div', { class: 'mm-chatbot-header' });
+    header.appendChild(el('div', { class: 'mm-chatbot-title' }, [
+      el('strong', { text: 'Portfolio assistant' }),
+      el('span', { text: 'Answers are grounded in public notes only.' })
+    ]));
+    const closeBtn = el('button', { class: 'mm-chatbot-close', type: 'button', 'aria-label': 'Close assistant' });
+    closeBtn.textContent = 'Close';
+    header.appendChild(closeBtn);
+
+    const body = el('div', { class: 'mm-chatbot-body' });
+    const suggestions = el('div', { class: 'mm-chatbot-suggestions', 'aria-label': 'Suggested questions' });
+
+    const input = el('textarea', {
+      class: 'mm-chatbot-input',
+      rows: '2',
+      placeholder: 'Ask about skills, projects, certifications, or contact…',
+      'aria-label': 'Message'
+    });
+    const sendBtn = el('button', { class: 'mm-chatbot-send', type: 'button' });
+    sendBtn.textContent = 'Send';
+
+    const footer = el('div', { class: 'mm-chatbot-footer' }, [
+      el('div', { class: 'mm-chatbot-inputRow' }, [input, sendBtn]),
+      el('div', { class: 'mm-chatbot-disclaimer', text: 'No messages are stored. This assistant answers only from a local knowledge base and refuses sensitive or NDA-specific requests.' })
+    ]);
+
+    panel.appendChild(header);
+    panel.appendChild(body);
+    panel.appendChild(suggestions);
+    panel.appendChild(footer);
+
+    document.body.appendChild(launcher);
+    document.body.appendChild(overlay);
+    document.body.appendChild(panel);
+
+    function setOpen(open) {
+      state.open = open;
+      panel.dataset.open = open ? 'true' : 'false';
+      overlay.dataset.open = open ? 'true' : 'false';
+      launcher.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) {
+        state.lastFocus = document.activeElement;
+        input.focus();
+      } else {
+        (state.lastFocus || launcher).focus();
+      }
+    }
+
+    function handleSend(text) {
+      const trimmed = (text || '').trim();
+      if (!trimmed) return;
+      appendMessage(body, 'user', trimmed);
+      input.value = '';
+
+      const out = answerFromKb(trimmed, state.kb);
+      const meta = out.source ? `Source: ${out.source}` : null;
+      appendMessage(body, 'bot', out.a, meta);
+    }
+
+    function seedSuggestions() {
+      const items = [
+        { label: 'What roles are you looking for?', value: 'What roles is Matome looking for?' },
+        { label: 'Show case studies', value: 'Show case studies' },
+        { label: 'Skills summary', value: 'Skills summary' },
+        { label: 'Certifications', value: 'What certifications are publicly verifiable?' },
+        { label: 'Contact', value: 'How do I contact Matome?' }
+      ];
+      suggestions.innerHTML = '';
+      items.forEach((it) => {
+        const b = el('button', { class: 'mm-chatbot-chip', type: 'button' });
+        b.textContent = it.label;
+        b.addEventListener('click', () => handleSend(it.value));
+        suggestions.appendChild(b);
+      });
+    }
+
+    launcher.addEventListener('click', () => {
+      if (!state.kb) return;
+      setOpen(!state.open);
+    });
+    closeBtn.addEventListener('click', () => setOpen(false));
+    overlay.addEventListener('click', () => setOpen(false));
+
+    sendBtn.addEventListener('click', () => handleSend(input.value));
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSend(input.value);
+      }
+      if (e.key === 'Escape') setOpen(false);
+    });
+
+    // Focus trap when open
+    panel.addEventListener('keydown', (e) => {
+      if (!state.open) return;
+      if (e.key === 'Escape') setOpen(false);
+      if (e.key !== 'Tab') return;
+      const f = focusables(panel);
+      if (!f.length) return;
+      const first = f[0];
+      const last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    // Initial message
+    appendMessage(
+      body,
+      'bot',
+      'Hi — I can answer questions about skills, case studies, credibility, and contact using Matome’s public portfolio notes only.',
+      'Grounded: local knowledge base'
+    );
+
+    seedSuggestions();
+
+    return { setOpen };
+  }
+
+  async function loadKnowledge() {
+    const res = await fetch(KNOWLEDGE_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to load knowledge base');
+    return await res.json();
+  }
+
+  // Init
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      state.kb = await loadKnowledge();
+      mountWidget();
+    } catch (e) {
+      // Fail silently (no logging by default).
+    }
+  });
+})();
+
