@@ -1,0 +1,87 @@
+name: Generate resume.pdf
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - "resume.html"
+      - ".github/workflows/generate-resume-pdf.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-resume-pdf
+  cancel-in-progress: false
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Puppeteer
+        run: npm install --no-audit --no-fund puppeteer@latest
+
+      - name: Generate resume.pdf from resume.html
+        run: node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const puppeteer = require('puppeteer');
+
+          (async () => {
+            const resumeHtmlPath = path.resolve(process.cwd(), 'resume.html');
+            if (!fs.existsSync(resumeHtmlPath)) {
+              console.error('resume.html not found at', resumeHtmlPath);
+              process.exit(1);
+            }
+
+            const browser = await puppeteer.launch({
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+
+            try {
+              const page = await browser.newPage();
+              await page.goto('file://' + resumeHtmlPath, { waitUntil: 'networkidle0' });
+
+              const outPath = path.resolve(process.cwd(), 'resume.pdf');
+              await page.pdf({
+                path: outPath,
+                format: 'A4',
+                printBackground: true,
+                margin: {
+                  top: '12mm',
+                  right: '12mm',
+                  bottom: '12mm',
+                  left: '12mm'
+                }
+              });
+
+              console.log('Wrote', outPath);
+            } finally {
+              await browser.close();
+            }
+          })().catch((err) => {
+            console.error(err);
+            process.exit(1);
+          });
+NODE
+
+      - name: Commit resume.pdf (if changed)
+        run: |
+          if git diff --quiet -- resume.pdf; then
+            echo "resume.pdf unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add resume.pdf
+          git commit -m "Update resume.pdf [skip ci]"
+          git push
