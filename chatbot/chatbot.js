@@ -191,6 +191,17 @@
     return lines.join('\n');
   }
 
+  function credibilityActions(kb) {
+    const actions = [];
+    (kb.certifications || []).forEach((c) => {
+      if (c?.name && c?.proof) actions.push({ label: c.name, url: c.proof });
+    });
+    if (kb?.links?.credly) actions.push({ label: 'Credly', url: kb.links.credly });
+    if (kb?.links?.github) actions.push({ label: 'GitHub', url: kb.links.github });
+    if (kb?.links?.linkedin) actions.push({ label: 'LinkedIn', url: kb.links.linkedin });
+    return actions;
+  }
+
   function formatContact(kb) {
     return [
       'Contact:',
@@ -244,7 +255,7 @@
       return { a: formatSkills(kb), source: 'Skills' };
     }
     if (/\b(cert|badge|credly|credential)\b/.test(t)) {
-      return { a: formatCredibility(kb), source: 'Certifications' };
+      return { a: formatCredibility(kb), source: 'Certifications', actions: credibilityActions(kb) };
     }
     if (/\b(contact|email|reach|linkedin)\b/.test(t)) {
       return { a: formatContact(kb), source: 'Contact', actions: contactActions(kb) };
