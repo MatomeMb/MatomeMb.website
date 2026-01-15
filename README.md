@@ -82,6 +82,15 @@ firebase use matome-portfolio
 firebase deploy --only hosting
 ```
 
+### GitHub Actions auto-deploy (recommended)
+This repo also includes a GitHub Action that can deploy to Firebase Hosting on every push.
+
+1) In Google Cloud Console, create a **service account key** for Firebase Hosting deploys (JSON).
+2) In GitHub repo settings → Secrets and variables → Actions → New repository secret:
+   - Name: `FIREBASE_SERVICE_ACCOUNT_MATOME_PORTFOLIO`
+   - Value: paste the full JSON key contents
+3) Push to `main` (or to `cursor/website-long-dashes-3500`) to deploy.
+
 ### Notes
 - If `resume.pdf` is missing, the Resume page will still load, but the PDF download link won’t work until `resume.pdf` exists in the repo root.
 - On Blaze (pay-as-you-go), set a Billing budget + alerts to avoid unexpected charges.
