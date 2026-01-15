@@ -56,11 +56,11 @@
   "certifications": [
     {
       "name": "Dell Young Leaders",
-      "proof": "https://www.dell.com/en-us/search/dell%20young%20leaders"
+      "proof": "https://www.dellyoungleaders.organs"
     },
     {
       "name": "Google Cloud Career Launchpad (EMEA)",
-      "proof": "https://cloud.google.com/learn/training/career-launchpad"
+      "proof": "https://cloud.google.com/edu/faculty/career-launchpad"
     },
     {
       "name": "Google Cloud skill badge: Multimodal RAG (Gemini)",
