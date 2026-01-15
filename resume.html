@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://matomemb.github.io/resume.html" />
+  <title>Resume | Matome Mbowene</title>
+  <meta name="description" content="Matome Mbowene — Software & AI Engineer. Public-safe resume designed for printing / saving as PDF." />
+  <meta name="theme-color" content="#0b0f14" />
+  <style>
+    :root{
+      --bg:#0b0f14;--card:#12141a;--accent:#22c55e;--accent2:#16a34a;
+      --text:#f8fafc;--muted:#a1aab8;--border:rgba(148,163,184,0.16);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      padding: 1.5rem 1rem 3rem;
+    }
+    .container{width:min(980px,100%);margin:0 auto}
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-bottom: 1rem;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:0.45rem;
+      padding:0.55rem 0.85rem;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.20);
+      background:rgba(148,163,184,0.08);
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:750;
+    }
+    .pill:hover{border-color:rgba(34,197,94,0.35);background:rgba(34,197,94,0.10)}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:0.45rem;
+      padding:0.6rem 0.95rem;
+      border-radius:999px;
+      border:1px solid rgba(34,197,94,0.28);
+      background:rgba(34,197,94,0.12);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:800;
+    }
+    .btn:hover{border-color:rgba(34,197,94,0.45);background:rgba(34,197,94,0.16)}
+    .sheet{
+      background:rgba(255,255,255,0.04);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding: 1.5rem;
+    }
+    header h1{margin:0;letter-spacing:-0.02em}
+    header .role{margin:0.25rem 0 0;color:var(--muted);font-weight:700}
+    .meta{
+      display:flex;
+      gap:0.75rem;
+      flex-wrap:wrap;
+      margin-top:0.75rem;
+      color:var(--muted);
+      font-weight:650;
+      font-size:0.95rem;
+    }
+    .meta a{color:var(--text);text-decoration:underline;text-underline-offset:3px}
+    .meta a:hover{color:var(--accent)}
+    hr{border:0;border-top:1px solid rgba(148,163,184,0.16);margin:1.25rem 0}
+    h2{margin:0 0 0.6rem;font-size:1.05rem;letter-spacing:-0.01em}
+    p,li{color:var(--muted);line-height:1.7}
+    ul{margin:0.5rem 0 0;padding-left:1.15rem}
+    .grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:1.25rem}
+    @media (max-width: 860px){.grid{grid-template-columns:1fr}}
+    .tagrow{display:flex;flex-wrap:wrap;gap:0.5rem}
+    .tag{border:1px solid rgba(148,163,184,0.22);background:rgba(148,163,184,0.08);color:var(--muted);padding:0.28rem 0.55rem;border-radius:999px;font-size:0.9rem;font-weight:700}
+    .item-title{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline}
+    .item-title strong{color:var(--text)}
+    .item-title span{color:var(--muted);font-size:0.92rem}
+    .note{font-size:0.92rem}
+
+    /* Print */
+    @media print{
+      body{background:#fff;color:#000;padding:0}
+      .topbar{display:none}
+      .sheet{border:0;border-radius:0;box-shadow:none;background:#fff;padding:0.6in}
+      .meta a{color:#000;text-decoration:none}
+      .tag{border:1px solid #ddd;background:#f6f6f6;color:#111}
+      p,li,.meta,.role{color:#222}
+      hr{border-top:1px solid #ddd}
+      a{color:#000}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar" aria-label="Resume actions">
+      <a class="pill" href="./">← Back to portfolio</a>
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+        <a class="pill" href="mailto:matomepontso@gmail.com?subject=Resume%20request%20-%20Matome%20Mbowene">Email</a>
+        <button class="btn" type="button" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+    </div>
+
+    <main class="sheet" role="document" aria-label="Resume">
+      <header>
+        <h1>Matome Mbowene</h1>
+        <p class="role">Software &amp; AI Engineer — production OCR / document automation, retrieval (RAG), backend systems</p>
+        <div class="meta">
+          <span>Cape Town, South Africa</span>
+          <span>•</span>
+          <a href="mailto:matomepontso@gmail.com">matomepontso@gmail.com</a>
+          <span>•</span>
+          <a href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer">github.com/MatomeMb</a>
+          <span>•</span>
+          <a href="https://linkedin.com/in/matomembowene" target="_blank" rel="noopener noreferrer">linkedin.com/in/matomembowene</a>
+        </div>
+      </header>
+
+      <hr />
+
+      <div class="grid">
+        <section>
+          <h2>Summary</h2>
+          <p>
+            I build production-focused AI features that ship: document automation, retrieval pipelines, and services—measured, validated, and designed for reliability.
+            I’m comfortable across the stack and I optimize for correctness, maintainability, and clear delivery.
+          </p>
+
+          <hr />
+
+          <h2>Selected outcomes (public-safe)</h2>
+          <ul>
+            <li><strong style="color:var(--text)">100%</strong> OCR field‑mapping accuracy on a defined document set using validation-first design.</li>
+            <li><strong style="color:var(--text)">89.33%</strong> FashionMNIST model accuracy (public demo context).</li>
+            <li><strong style="color:var(--text)">35%</strong> scheduling efficiency improvement (public-safe summary).</li>
+          </ul>
+
+          <hr />
+
+          <h2>Experience (public-safe highlights)</h2>
+          <div style="margin-top:0.75rem;">
+            <div class="item-title">
+              <strong>Computer vision &amp; document automation</strong>
+              <span>Recent</span>
+            </div>
+            <ul>
+              <li>Built a validation-first OCR pipeline with confidence scoring and auditability.</li>
+              <li>Designed layered checks and fallbacks to reduce silent extraction errors.</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <div class="item-title">
+              <strong>Retrieval systems (RAG)</strong>
+              <span>Recent</span>
+            </div>
+            <ul>
+              <li>Developed a RAG assistant pipeline with reproducible indexing and conservative guardrails.</li>
+              <li>Improved “proof” signals by linking outputs back to sources where possible.</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <div class="item-title">
+              <strong>Embedded / edge fundamentals</strong>
+              <span>Recent</span>
+            </div>
+            <ul>
+              <li>Contributed to latency-aware, reliability-first pipeline design (public-safe summary).</li>
+            </ul>
+          </div>
+
+          <p class="note" style="margin-top:0.85rem;">
+            Some work is under NDA; I can discuss engineering approach and outcomes at a high level.
+          </p>
+        </section>
+
+        <aside>
+          <h2>Skills</h2>
+          <div class="tagrow" aria-label="Skills">
+            <span class="tag">Python</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">OCR</span>
+            <span class="tag">RAG</span>
+            <span class="tag">FAISS</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Java</span>
+            <span class="tag">C/C++</span>
+            <span class="tag">CI/CD</span>
+            <span class="tag">Linux</span>
+            <span class="tag">Testing</span>
+            <span class="tag">Observability</span>
+          </div>
+
+          <hr />
+
+          <h2>Education (approved)</h2>
+          <p>University of Cape Town (Computer Science &amp; Computer Engineering)</p>
+
+          <hr />
+
+          <h2>Certifications &amp; programs</h2>
+          <ul>
+            <li>Google Cloud skill badge(s) — <a href="https://www.credly.com/users/matome-mbowene" target="_blank" rel="noopener noreferrer">Credly</a></li>
+            <li>Dell Young Leaders — <a href="https://www.dellyoungleaders.org" target="_blank" rel="noopener noreferrer">Program</a></li>
+            <li>Google Cloud Career Launchpad (EMEA) — <a href="https://cloud.google.com/edu/faculty/career-launchpad" target="_blank" rel="noopener noreferrer">Program</a></li>
+          </ul>
+
+          <hr />
+
+          <h2>Case studies</h2>
+          <ul>
+            <li><a href="case-studies/ocr-document-automation.html">OCR Document Automation</a></li>
+            <li><a href="case-studies/rag-assistant.html">RAG Assistant</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
