@@ -89,7 +89,7 @@ This document provides **implementable**, public-safe UX + content + chatbot spe
 
 ## Prioritized backlog (with acceptance criteria)
 
-### P0 — Must-fix now (blocking credibility/UX)
+### P0 - Must-fix now (blocking credibility/UX)
 1) **Education wording: remove degree completion implication**
    - **What**: Use neutral phrasing only: “University of Cape Town (Computer Science & Computer Engineering)”.
    - **Why**: Constraint: do not claim degree completion; avoid misrepresentation risk.
@@ -119,7 +119,7 @@ This document provides **implementable**, public-safe UX + content + chatbot spe
      - Menu can be opened/closed with Enter/Space, closed with Escape.
      - Focus does not get trapped; tab order remains logical.
 
-### P1 — High-impact improvements
+### P1 - High-impact improvements
 5) **Project cards → consistent case-study structure**
    - **What**: Standardize each project to: Outcome, Approach, Reliability, Stack, Links.
    - **Why**: Turns “descriptions” into “proof of competence.”
@@ -147,7 +147,7 @@ This document provides **implementable**, public-safe UX + content + chatbot spe
      - Hero image ≤ 80KB (target) and dimensions appropriate (e.g., 400×400).
      - No layout shift (width/height preserved).
 
-### P2 — Polish
+### P2 - Polish
 9) **Replace emoji icons with SVG icons**
    - **What**: Use a consistent icon set (inline SVG).
    - **Why**: Brand consistency, accessibility, enterprise tone.
@@ -173,7 +173,7 @@ This document provides **implementable**, public-safe UX + content + chatbot spe
 
 ### Hero
 - **Headline**: “Software & AI Engineer building reliable OCR, retrieval, and backend systems.”
-- **Body (1–2 sentences)**: “I ship production-focused AI features—document automation, RAG pipelines, and services—with measurable outcomes and careful validation.”
+- **Body (1–2 sentences)**: “I ship production-focused AI features, document automation, RAG pipelines, and services, with measurable outcomes and careful validation.”
 - **Proof/links**: LinkedIn, GitHub, Credly, Resume PDF.
 - **Must NOT mention**: degree completion, sensitive academic/legal/medical details, NDA org names.
 
@@ -197,7 +197,7 @@ This document provides **implementable**, public-safe UX + content + chatbot spe
 
 ### Projects (case studies)
 - **Headline**: “Case studies (public-safe).”
-- **Body**: “Short case studies focused on outcomes, engineering approach, and reliability—without exposing confidential details.”
+- **Body**: “Short case studies focused on outcomes, engineering approach, and reliability, without exposing confidential details.”
 - **Proof/links**: Repo/demo/write-up links where public; screenshots/diagrams where safe.
 - **Must NOT mention**: client/company names under NDA; internal artifacts.
 
@@ -215,7 +215,7 @@ This document provides **implementable**, public-safe UX + content + chatbot spe
 
 ### Footer
 - **Headline**: “Matome Mbowene.”
-- **Body**: “Software & AI engineering—reliable systems, measurable outcomes.”
+- **Body**: “Software & AI engineering, reliable systems, measurable outcomes.”
 - **Proof/links**: Repeat GitHub/LinkedIn/Credly.
 - **Must NOT mention**: sensitive details.
 
@@ -225,7 +225,7 @@ This document provides **implementable**, public-safe UX + content + chatbot spe
 
 ### Hero
 - **Headline**: Software & AI Engineer building reliable OCR, retrieval, and backend systems.
-- **Subheadline**: Production-focused work across document automation, RAG pipelines, and services—measured, validated, and built to ship.
+- **Subheadline**: Production-focused work across document automation, RAG pipelines, and services, measured, validated, and built to ship.
 - **CTA 1 (primary)**: Email me
 - **CTA 2 (primary)**: View LinkedIn
 - **Secondary CTAs (optional)**: View projects • View GitHub • View Credly • Resume (PDF)
@@ -237,7 +237,7 @@ This document provides **implementable**, public-safe UX + content + chatbot spe
 - Google Cloud badge (Credly verified)
 
 ### About (single paragraph)
-I build end-to-end AI features that hold up in production: ingestion, validation, retrieval, model integration, observability, and delivery. My focus is correctness and reliability—clear interfaces, defensive checks, and measurable outcomes.
+I build end-to-end AI features that hold up in production: ingestion, validation, retrieval, model integration, observability, and delivery. My focus is correctness and reliability: clear interfaces, defensive checks, and measurable outcomes.
 
 ### Experience bullets (NDA-safe, role-based)
 **Document automation (OCR + CV)**
@@ -256,7 +256,7 @@ I build end-to-end AI features that hold up in production: ingestion, validation
 - **Outcome**: [measurable result, user impact, speed, accuracy, reliability metric]
 - **Approach**: [high-level design: ingestion → validation → core logic → outputs; why this design]
 - **Reliability**: [validation layers, tests, fallbacks, monitoring/logging, error handling]
-- **Stack**: [languages, core libraries, infra—keep vendor-neutral where needed]
+- **Stack**: [languages, core libraries, infra, keep vendor-neutral where needed]
 - **Links**: [GitHub/demo/write-up] or “Details available on request.”
 
 ### Discreet education line (single line)
@@ -475,7 +475,7 @@ The chatbot should use a single KB file stored in the repo (see `chatbot/knowled
 
 ## 7) Implementation options (A/B) + step-by-step plans
 
-### Option A — No backend (GitHub Pages-friendly, no external APIs)
+### Option A - No backend (GitHub Pages-friendly, no external APIs)
 **Approach**: intent-based Q&A + lightweight search over a local knowledge base.
 
 **Key characteristics**
@@ -521,7 +521,7 @@ The chatbot should use a single KB file stored in the repo (see `chatbot/knowled
 - Safety probes: NDA / degree completion / sensitive topics return refusal.
 - Content grounding: unknown questions return “not in KB”.
 
-### Option B — LLM-backed, serverless (retrieval over KB)
+### Option B - LLM-backed, serverless (retrieval over KB)
 **Approach**: serverless function performs retrieval over the KB and calls an LLM with strict grounding + refusal rules.
 
 **Key characteristics**

@@ -463,7 +463,7 @@
     appendMessage(
       body,
       'bot',
-      'Hi — I can answer questions about skills, case studies, credibility, and contact using Matome’s public portfolio notes only.',
+      'Hi. I can answer questions about skills, case studies, credibility, and contact using Matome’s public portfolio notes only.',
       'Grounded: local knowledge base'
     );
 

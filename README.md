@@ -1,6 +1,6 @@
 # Matome Mbowene Portfolio
 
-Single-page, GitHub Pages-friendly portfolio for Matome Mbowene — **Software & AI Engineer**.
+Single-page, GitHub Pages-friendly portfolio for Matome Mbowene, **Software & AI Engineer**.
 
 **Live Site:** `https://matomemb.github.io`
 
@@ -62,7 +62,7 @@ Then visit `http://localhost:8000`.
 
 ### 3. Customize Files
 Replace these files with your own:
-- **`profile.jpg`** — Your profile photo (recommended: 400x400px, .jpg or .png)
+- **`profile.jpg`**: Your profile photo (recommended: 400x400px, .jpg or .png)
 You can optionally add a resume link on the site, but avoid committing private documents containing sensitive personal/academic details.
 
 ### 4. Contact Form
@@ -105,7 +105,7 @@ Your site will be live at `https://<your-username>.github.io`
 
 ## License
 
-MIT License — Feel free to fork, modify, and use as a template for your own portfolio.
+MIT License. Feel free to fork, modify, and use as a template for your own portfolio.
 
 ---
 
