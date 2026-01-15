@@ -225,7 +225,11 @@
     // Specific project deep-dive (more insightful, still grounded)
     const projectHit = pickProject(text, kb);
     if (projectHit && /\b(project|case|study|work|tell|about|explain|details)\b/.test(t)) {
-      return { a: formatProjectCaseStudy(projectHit), source: 'Projects (case study)' };
+      const links = projectHit?.caseStudy?.links || [];
+      const linkActions = Array.isArray(links)
+        ? links.filter((l) => l?.label && l?.url).map((l) => ({ label: l.label, url: l.url }))
+        : [];
+      return { a: formatProjectCaseStudy(projectHit), source: 'Projects (case study)', actions: linkActions.length ? linkActions : undefined };
     }
 
     // Metrics / impact

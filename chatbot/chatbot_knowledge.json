@@ -113,7 +113,34 @@
         "reliability": "Reproducible indexing, retrieval gating when evidence is weak, and operational safeguards.",
         "stack": ["Python", "FAISS", "sentence-transformers", "UI demo tooling"],
         "links": [
-          { "label": "GitHub", "url": "https://github.com/MatomeMb" }
+          { "label": "Repo", "url": "https://github.com/MatomeMb/personal-codex-agent" }
+        ]
+      }
+    },
+    {
+      "name": "FashionMNIST classifier",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "89.33% test accuracy on FashionMNIST (public/public-demo context).",
+        "approach": "End-to-end training pipeline with reproducible evaluation runs.",
+        "reliability": "Clear metrics, validation, and repeatable experiments.",
+        "stack": ["Python", "PyTorch"],
+        "links": [
+          { "label": "Repo", "url": "https://github.com/MatomeMb/FashionMNIST-Classifier" }
+        ]
+      }
+    },
+    {
+      "name": "Scheduling & systems exercises",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "Benchmarked scheduling approaches and built deterministic simulations (public-safe summary).",
+        "approach": "Algorithm comparison and measurement-driven iteration.",
+        "reliability": "Deterministic tests and repeatable runs.",
+        "stack": ["Python", "Java"],
+        "links": [
+          { "label": "Scheduling repo", "url": "https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos" },
+          { "label": "Java repo", "url": "https://github.com/MatomeMb/number-range-summarizer" }
         ]
       }
     },
@@ -125,7 +152,10 @@
         "approach": "Sensor integration patterns and timing-consistency considerations.",
         "reliability": "Defensive design for constrained, real-time contexts.",
         "stack": ["Embedded tooling (high level)", "Sensor integration", "Edge AI fundamentals"],
-        "links": []
+        "links": [
+          { "label": "C++ image processing repo", "url": "https://github.com/MatomeMb/Connected-Components-Image-Processor" },
+          { "label": "C++ simulation repo", "url": "https://github.com/MatomeMb/Slide-Puzzle-Game-Simulation" }
+        ]
       }
     },
     {
