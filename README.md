@@ -2,7 +2,7 @@
 
 Single-page, GitHub Pages-friendly portfolio for Matome Mbowene, **Software & AI Engineer**.
 
-**Live Site:** `https://matomembowene.co.za`
+**Live Site:** `https://www.matomembowene.co.za`
 
 Single-page, fast-loading portfolio built as a static `index.html` (no build step) with a **local, knowledge-base grounded chatbot** (no external APIs).
 

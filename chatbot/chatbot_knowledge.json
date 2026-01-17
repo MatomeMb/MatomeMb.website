@@ -17,7 +17,7 @@
     "github": "https://github.com/MatomeMb",
     "linkedin": "https://linkedin.com/in/matomembowene",
     "credly": "https://www.credly.com/users/matome-mbowene",
-    "resume": "https://matomembowene.co.za/resume.html"
+    "resume": "https://www.matomembowene.co.za/resume.html"
   },
   "education": {
     "approvedLine": "University of Cape Town (Computer Science & Computer Engineering)"
@@ -100,7 +100,7 @@
         "reliability": "Multi-layer checks, fallbacks, and audit logging for traceability.",
         "stack": ["Python", "OpenCV", "OCR tooling", "PDF/structured outputs", "LLM APIs (as needed)"],
         "links": [
-          { "label": "Case study", "url": "https://matomembowene.co.za/case-studies/ocr-document-automation.html" },
+          { "label": "Case study", "url": "https://www.matomembowene.co.za/case-studies/ocr-document-automation.html" },
           { "label": "GitHub (selected work)", "url": "https://github.com/MatomeMb" }
         ]
       }
@@ -114,7 +114,7 @@
         "reliability": "Reproducible indexing, retrieval gating when evidence is weak, and operational safeguards.",
         "stack": ["Python", "FAISS", "sentence-transformers", "UI demo tooling"],
         "links": [
-          { "label": "Case study", "url": "https://matomembowene.co.za/case-studies/rag-assistant.html" },
+          { "label": "Case study", "url": "https://www.matomembowene.co.za/case-studies/rag-assistant.html" },
           { "label": "Repo", "url": "https://github.com/MatomeMb/personal-codex-agent" }
         ]
       }
@@ -230,7 +230,7 @@
     {
       "id": "resume",
       "q": "Where can I view Matome’s resume?",
-      "a": "You can view a public-safe, print-friendly resume at https://matomembowene.co.za/resume.html (use “Print / Save as PDF” for a PDF copy)."
+      "a": "You can view a public-safe, print-friendly resume at https://www.matomembowene.co.za/resume.html (use “Print / Save as PDF” for a PDF copy)."
     },
     {
       "id": "nda",
