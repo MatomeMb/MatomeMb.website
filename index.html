@@ -179,6 +179,13 @@
             overflow: hidden;
         }
         
+        @media (max-width: 480px) {
+            .hero {
+                min-height: auto;
+                padding: 4rem 1rem 2rem;
+            }
+        }
+        
         .hero::before {
             content: '';
             position: absolute;
@@ -881,7 +888,7 @@
         
         @media (max-width: 768px) {
             h1 { font-size: 1.9rem; }
-            .hero { padding: 5rem 1rem 1rem; }
+            .hero { padding: 5rem 1rem 1rem; min-height: auto; }
             nav { padding: 0.9rem 1rem; }
 
             .nav-toggle { display: inline-flex; align-items: center; gap: 0.5rem; }
@@ -900,6 +907,11 @@
             nav[data-menu-open="true"] .nav-links { display: flex; }
 
             .section { padding: 3rem 1rem; }
+            
+            img[src="profile.jpg"] {
+                width: 120px !important;
+                height: 120px !important;
+            }
         }
     </style>
 </head>
