@@ -530,36 +530,6 @@
             display: block;
         }
 
-        .stack-table {
-            display: grid;
-            gap: 0.75rem;
-        }
-
-        .stack-table-row {
-            display: grid;
-            grid-template-columns: minmax(140px, 180px) 1fr;
-            gap: 0.75rem;
-            align-items: start;
-        }
-
-        .stack-table-label {
-            color: var(--text-muted);
-            font-weight: 700;
-            font-size: 0.82rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .stack-table-values {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        @media (max-width: 720px) {
-            .stack-table-row { grid-template-columns: 1fr; }
-        }
-
         .sr-only {
             position: absolute;
             width: 1px;
@@ -570,13 +540,6 @@
             clip: rect(0, 0, 0, 0);
             white-space: nowrap;
             border: 0;
-        }
-
-        .tool-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-top: 0.75rem;
         }
 
         .tool-logo {
@@ -1009,31 +972,6 @@
             color: var(--text-muted);
             font-size: 0.9rem;
             margin-top: 0.35rem;
-        }
-
-        .logo-strip {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            align-items: center;
-            margin-top: 0.75rem;
-        }
-
-        .logo-chip {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(148,163,184,0.18);
-            background: rgba(148,163,184,0.08);
-        }
-
-        .logo-chip img {
-            width: 24px;
-            height: 24px;
-            display: block;
         }
 
         .featured-picks {
@@ -1559,389 +1497,206 @@
 
         <section id="tech-stack" class="section section-subtle">
             <div class="container">
-                <h2 class="section-title">Tech stack &amp; tools</h2>
+                <h2 class="section-title">Tech stack</h2>
                 <p class="muted" style="text-align: center; max-width: 860px; margin: 0 auto 2rem; line-height: 1.7;">
-                    All tools and stacks are consolidated here for quick scanning. Private work is listed at a high level.
+                    One consolidated view of the tools and platforms used across public and private projects.
                 </p>
 
-                <div class="grid">
-                    <div class="card">
-                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Logo index</h3>
+                <div class="card">
+                    <h3 style="color: var(--text); margin-bottom: 0.75rem;">Core tools &amp; platforms</h3>
 
-                        <div class="logo-group-title">AI / ML</div>
-                        <div class="logo-grid">
-                            <a class="logo-item" href="https://pytorch.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" alt="PyTorch" loading="lazy">
-                                <span class="logo-label">PyTorch</span>
-                            </a>
-                            <a class="logo-item" href="https://opencv.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="OpenCV" loading="lazy">
-                                <span class="logo-label">OpenCV</span>
-                            </a>
-                            <a class="logo-item" href="https://platform.openai.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="OpenAI" loading="lazy">
-                                <span class="logo-label">OpenAI</span>
-                            </a>
-                            <a class="logo-item" href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/huggingface.svg" alt="Hugging Face" loading="lazy">
-                                <span class="logo-label">Hugging Face</span>
-                            </a>
-                            <a class="logo-item" href="https://github.com/facebookresearch/faiss" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/meta.svg" alt="FAISS" loading="lazy">
-                                <span class="logo-label">FAISS</span>
-                            </a>
-                            <a class="logo-item" href="https://streamlit.io/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg" alt="Streamlit" loading="lazy">
-                                <span class="logo-label">Streamlit</span>
-                            </a>
-                            <a class="logo-item" href="https://groq.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/groq.svg" alt="GROQ" loading="lazy">
-                                <span class="logo-label">GROQ</span>
-                            </a>
-                        </div>
-
-                        <div class="logo-group-title">Backend / Data</div>
-                        <div class="logo-grid">
-                            <a class="logo-item" href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy">
-                                <span class="logo-label">Node.js</span>
-                            </a>
-                            <a class="logo-item" href="https://www.java.com/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy">
-                                <span class="logo-label">Java</span>
-                            </a>
-                            <a class="logo-item" href="https://spring.io/projects/spring-boot" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" alt="Spring Boot" loading="lazy">
-                                <span class="logo-label">Spring Boot</span>
-                            </a>
-                            <a class="logo-item" href="https://expressjs.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/express.svg" alt="Express.js" loading="lazy">
-                                <span class="logo-label">Express.js</span>
-                            </a>
-                            <a class="logo-item" href="https://www.fastify.io/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/fastify.svg" alt="Fastify" loading="lazy">
-                                <span class="logo-label">Fastify</span>
-                            </a>
-                            <a class="logo-item" href="https://www.postgresql.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy">
-                                <span class="logo-label">PostgreSQL</span>
-                            </a>
-                            <a class="logo-item" href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy">
-                                <span class="logo-label">MySQL</span>
-                            </a>
-                            <a class="logo-item" href="https://supabase.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" alt="Supabase" loading="lazy">
-                                <span class="logo-label">Supabase</span>
-                            </a>
-                            <a class="logo-item" href="https://pandas.pydata.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="Pandas" loading="lazy">
-                                <span class="logo-label">Pandas</span>
-                            </a>
-                            <a class="logo-item" href="https://numpy.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" alt="NumPy" loading="lazy">
-                                <span class="logo-label">NumPy</span>
-                            </a>
-                            <a class="logo-item" href="https://vercel.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vercel.svg" alt="Vercel Edge" loading="lazy">
-                                <span class="logo-label">Vercel Edge</span>
-                            </a>
-                            <a class="logo-item" href="https://www.cloudflare.com/products/r2/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cloudflare.svg" alt="Cloudflare R2" loading="lazy">
-                                <span class="logo-label">Cloudflare R2</span>
-                            </a>
-                            <a class="logo-item" href="https://stripe.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/stripe.svg" alt="Stripe" loading="lazy">
-                                <span class="logo-label">Stripe</span>
-                            </a>
-                        </div>
-
-                        <div class="logo-group-title">Frontend / Platform</div>
-                        <div class="logo-grid">
-                            <a class="logo-item" href="https://nextjs.org/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nextdotjs.svg" alt="Next.js" loading="lazy">
-                                <span class="logo-label">Next.js</span>
-                            </a>
-                            <a class="logo-item" href="https://react.dev/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" loading="lazy">
-                                <span class="logo-label">React</span>
-                            </a>
-                            <a class="logo-item" href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="TypeScript" loading="lazy">
-                                <span class="logo-label">TypeScript</span>
-                            </a>
-                            <a class="logo-item" href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy">
-                                <span class="logo-label">Tailwind CSS</span>
-                            </a>
-                            <a class="logo-item" href="https://turbo.build/repo" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/turborepo.svg" alt="Turborepo" loading="lazy">
-                                <span class="logo-label">Turborepo</span>
-                            </a>
-                        </div>
-
-                        <div class="logo-group-title">Infra / Tooling</div>
-                        <div class="logo-grid">
-                            <a class="logo-item" href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" loading="lazy">
-                                <span class="logo-label">Docker</span>
-                            </a>
-                            <a class="logo-item" href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlecloud.svg" alt="Google Cloud" loading="lazy">
-                                <span class="logo-label">Google Cloud</span>
-                            </a>
-                            <a class="logo-item" href="https://www.terraform.io/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" loading="lazy">
-                                <span class="logo-label">Terraform</span>
-                            </a>
-                            <a class="logo-item" href="https://github.com/features/actions" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" alt="GitHub Actions" loading="lazy">
-                                <span class="logo-label">GitHub Actions</span>
-                            </a>
-                            <a class="logo-item" href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" loading="lazy">
-                                <span class="logo-label">Git</span>
-                            </a>
-                            <a class="logo-item" href="https://www.linux.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" alt="Linux" loading="lazy">
-                                <span class="logo-label">Linux</span>
-                            </a>
-                            <a class="logo-item" href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opentelemetry.svg" alt="OpenTelemetry" loading="lazy">
-                                <span class="logo-label">OpenTelemetry</span>
-                            </a>
-                            <a class="logo-item" href="https://testing-library.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/testinglibrary.svg" alt="Testing Library" loading="lazy">
-                                <span class="logo-label">Testing Library</span>
-                            </a>
-                            <a class="logo-item" href="https://www.npmjs.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/npm.svg" alt="npm" loading="lazy">
-                                <span class="logo-label">npm</span>
-                            </a>
-                            <a class="logo-item" href="https://eslint.org/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/eslint.svg" alt="ESLint" loading="lazy">
-                                <span class="logo-label">ESLint</span>
-                            </a>
-                            <a class="logo-item" href="https://www.postman.com/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postman.svg" alt="Postman" loading="lazy">
-                                <span class="logo-label">Postman</span>
-                            </a>
-                            <a class="logo-item" href="https://curl.se/" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/curl.svg" alt="cURL" loading="lazy">
-                                <span class="logo-label">cURL</span>
-                            </a>
-                            <a class="logo-item" href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">
-                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/githubcopilot.svg" alt="GitHub Copilot" loading="lazy">
-                                <span class="logo-label">Copilot CLI</span>
-                            </a>
-                            <a class="logo-item" href="https://www.rust-lang.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" alt="Rust" loading="lazy">
-                                <span class="logo-label">Rust</span>
-                            </a>
-                            <a class="logo-item" href="https://webassembly.org/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/webassembly/webassembly-original.svg" alt="WebAssembly" loading="lazy">
-                                <span class="logo-label">WASM</span>
-                            </a>
-                            <a class="logo-item" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy">
-                                <span class="logo-label">JavaScript</span>
-                            </a>
-                        </div>
-
-                        <div class="logo-group-title">Also used (no public logo)</div>
-                        <div class="stack-tags">
-                            <span class="tag">FlatBuffers</span>
-                            <span class="tag">Ed25519</span>
-                            <span class="tag">Zstandard (Zstd)</span>
-                            <span class="tag">Neon</span>
-                            <span class="tag">JWT</span>
-                            <span class="tag">Docker Compose</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Commerce compiler platform</h3>
-                        <div class="stack-table">
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Commerce Compiler</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Rust (MVP)</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Binary Format</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">FlatBuffers</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Semantic Vectors</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">CLIP (ViT-B/32)</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Signing</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Ed25519</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Compression</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Zstandard (Zstd)</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">API</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Node.js</span>
-                                    <span class="tag">Vercel Edge</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Database</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">PostgreSQL</span>
-                                    <span class="tag">Supabase</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Storage</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Cloudflare R2</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Browser Extension</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Vanilla JS</span>
-                                    <span class="tag">WASM</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="logo-group-title">AI / ML</div>
+                    <div class="logo-grid">
+                        <a class="logo-item" href="https://pytorch.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" alt="PyTorch" loading="lazy">
+                            <span class="logo-label">PyTorch</span>
+                        </a>
+                        <a class="logo-item" href="https://opencv.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="OpenCV" loading="lazy">
+                            <span class="logo-label">OpenCV</span>
+                        </a>
+                        <a class="logo-item" href="https://platform.openai.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="OpenAI" loading="lazy">
+                            <span class="logo-label">OpenAI</span>
+                        </a>
+                        <a class="logo-item" href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/huggingface.svg" alt="Hugging Face" loading="lazy">
+                            <span class="logo-label">Hugging Face</span>
+                        </a>
+                        <a class="logo-item" href="https://github.com/facebookresearch/faiss" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/meta.svg" alt="FAISS" loading="lazy">
+                            <span class="logo-label">FAISS</span>
+                        </a>
+                        <a class="logo-item" href="https://streamlit.io/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg" alt="Streamlit" loading="lazy">
+                            <span class="logo-label">Streamlit</span>
+                        </a>
+                        <a class="logo-item" href="https://groq.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/groq.svg" alt="GROQ" loading="lazy">
+                            <span class="logo-label">GROQ</span>
+                        </a>
                     </div>
 
-                    <div class="card">
-                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Product platform (private)</h3>
-                        <h4 style="margin: 0 0 0.5rem; color: var(--text);">Core technologies</h4>
-                        <div class="stack-table">
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Frontend</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Next.js 15</span>
-                                    <span class="tag">React 18</span>
-                                    <span class="tag">TypeScript</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Backend</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Express.js</span>
-                                    <span class="tag">Fastify</span>
-                                    <span class="tag">Node.js</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Database</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">PostgreSQL 15</span>
-                                    <span class="tag">Supabase</span>
-                                    <span class="tag">Neon</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Async Jobs</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Cloud Tasks</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Auth</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Supabase Auth</span>
-                                    <span class="tag">JWT</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">AI Integration</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">GROQ API</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Payments</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Stripe</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Styling</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Tailwind CSS</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Build Tool</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Turborepo</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Containers</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Docker</span>
-                                    <span class="tag">Docker Compose</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Infrastructure</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Cloud Run</span>
-                                    <span class="tag">Terraform</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="logo-group-title">Backend / Data</div>
+                    <div class="logo-grid">
+                        <a class="logo-item" href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy">
+                            <span class="logo-label">Node.js</span>
+                        </a>
+                        <a class="logo-item" href="https://www.java.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy">
+                            <span class="logo-label">Java</span>
+                        </a>
+                        <a class="logo-item" href="https://spring.io/projects/spring-boot" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" alt="Spring Boot" loading="lazy">
+                            <span class="logo-label">Spring Boot</span>
+                        </a>
+                        <a class="logo-item" href="https://expressjs.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/express.svg" alt="Express.js" loading="lazy">
+                            <span class="logo-label">Express.js</span>
+                        </a>
+                        <a class="logo-item" href="https://www.fastify.io/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/fastify.svg" alt="Fastify" loading="lazy">
+                            <span class="logo-label">Fastify</span>
+                        </a>
+                        <a class="logo-item" href="https://www.postgresql.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy">
+                            <span class="logo-label">PostgreSQL</span>
+                        </a>
+                        <a class="logo-item" href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy">
+                            <span class="logo-label">MySQL</span>
+                        </a>
+                        <a class="logo-item" href="https://supabase.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" alt="Supabase" loading="lazy">
+                            <span class="logo-label">Supabase</span>
+                        </a>
+                        <a class="logo-item" href="https://pandas.pydata.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="Pandas" loading="lazy">
+                            <span class="logo-label">Pandas</span>
+                        </a>
+                        <a class="logo-item" href="https://numpy.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" alt="NumPy" loading="lazy">
+                            <span class="logo-label">NumPy</span>
+                        </a>
+                        <a class="logo-item" href="https://vercel.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vercel.svg" alt="Vercel Edge" loading="lazy">
+                            <span class="logo-label">Vercel Edge</span>
+                        </a>
+                        <a class="logo-item" href="https://www.cloudflare.com/products/r2/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cloudflare.svg" alt="Cloudflare R2" loading="lazy">
+                            <span class="logo-label">Cloudflare R2</span>
+                        </a>
+                        <a class="logo-item" href="https://stripe.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/stripe.svg" alt="Stripe" loading="lazy">
+                            <span class="logo-label">Stripe</span>
+                        </a>
+                    </div>
 
-                        <h4 style="margin: 1rem 0 0.5rem; color: var(--text);">Development tools</h4>
-                        <div class="stack-table">
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Language</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">TypeScript</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Linting</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">ESLint</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Package Manager</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">npm</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">Version Control</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">Git</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">API Testing</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">cURL</span>
-                                    <span class="tag">Postman</span>
-                                </div>
-                            </div>
-                            <div class="stack-table-row">
-                                <div class="stack-table-label">AI Assistant</div>
-                                <div class="stack-table-values">
-                                    <span class="tag">GitHub Copilot CLI</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="logo-group-title">Frontend / Platform</div>
+                    <div class="logo-grid">
+                        <a class="logo-item" href="https://nextjs.org/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nextdotjs.svg" alt="Next.js" loading="lazy">
+                            <span class="logo-label">Next.js</span>
+                        </a>
+                        <a class="logo-item" href="https://react.dev/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" loading="lazy">
+                            <span class="logo-label">React</span>
+                        </a>
+                        <a class="logo-item" href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="TypeScript" loading="lazy">
+                            <span class="logo-label">TypeScript</span>
+                        </a>
+                        <a class="logo-item" href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy">
+                            <span class="logo-label">Tailwind CSS</span>
+                        </a>
+                        <a class="logo-item" href="https://turbo.build/repo" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/turborepo.svg" alt="Turborepo" loading="lazy">
+                            <span class="logo-label">Turborepo</span>
+                        </a>
+                    </div>
+
+                    <div class="logo-group-title">Infra / Tooling</div>
+                    <div class="logo-grid">
+                        <a class="logo-item" href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" loading="lazy">
+                            <span class="logo-label">Docker</span>
+                        </a>
+                        <a class="logo-item" href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlecloud.svg" alt="Google Cloud" loading="lazy">
+                            <span class="logo-label">Google Cloud</span>
+                        </a>
+                        <a class="logo-item" href="https://www.terraform.io/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" loading="lazy">
+                            <span class="logo-label">Terraform</span>
+                        </a>
+                        <a class="logo-item" href="https://github.com/features/actions" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" alt="GitHub Actions" loading="lazy">
+                            <span class="logo-label">GitHub Actions</span>
+                        </a>
+                        <a class="logo-item" href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" loading="lazy">
+                            <span class="logo-label">Git</span>
+                        </a>
+                        <a class="logo-item" href="https://www.linux.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" alt="Linux" loading="lazy">
+                            <span class="logo-label">Linux</span>
+                        </a>
+                        <a class="logo-item" href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opentelemetry.svg" alt="OpenTelemetry" loading="lazy">
+                            <span class="logo-label">OpenTelemetry</span>
+                        </a>
+                        <a class="logo-item" href="https://testing-library.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/testinglibrary.svg" alt="Testing Library" loading="lazy">
+                            <span class="logo-label">Testing Library</span>
+                        </a>
+                        <a class="logo-item" href="https://www.npmjs.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/npm.svg" alt="npm" loading="lazy">
+                            <span class="logo-label">npm</span>
+                        </a>
+                        <a class="logo-item" href="https://eslint.org/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/eslint.svg" alt="ESLint" loading="lazy">
+                            <span class="logo-label">ESLint</span>
+                        </a>
+                        <a class="logo-item" href="https://www.postman.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postman.svg" alt="Postman" loading="lazy">
+                            <span class="logo-label">Postman</span>
+                        </a>
+                        <a class="logo-item" href="https://curl.se/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/curl.svg" alt="cURL" loading="lazy">
+                            <span class="logo-label">cURL</span>
+                        </a>
+                        <a class="logo-item" href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/githubcopilot.svg" alt="GitHub Copilot" loading="lazy">
+                            <span class="logo-label">Copilot CLI</span>
+                        </a>
+                        <a class="logo-item" href="https://www.rust-lang.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" alt="Rust" loading="lazy">
+                            <span class="logo-label">Rust</span>
+                        </a>
+                        <a class="logo-item" href="https://webassembly.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/webassembly/webassembly-original.svg" alt="WebAssembly" loading="lazy">
+                            <span class="logo-label">WASM</span>
+                        </a>
+                        <a class="logo-item" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy">
+                            <span class="logo-label">JavaScript</span>
+                        </a>
+                    </div>
+
+                    <div class="logo-group-title">Additional technologies</div>
+                    <div class="stack-tags">
+                        <span class="tag">FlatBuffers</span>
+                        <span class="tag">Ed25519</span>
+                        <span class="tag">Zstandard (Zstd)</span>
+                        <span class="tag">CLIP (ViT-B/32)</span>
+                        <span class="tag">Cloud Tasks</span>
+                        <span class="tag">Cloud Run</span>
+                        <span class="tag">Supabase Auth</span>
+                        <span class="tag">JWT</span>
+                        <span class="tag">Docker Compose</span>
+                        <span class="tag">Neon</span>
                     </div>
                 </div>
             </div>
