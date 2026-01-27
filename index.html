@@ -40,26 +40,60 @@
 
         [data-theme="light"] {
             /* Colors - Light Mode (softened) */
-            --primary: #f3f5f8;
-            --secondary: #e9eef4;
+            --primary: #e8edf2;
+            --secondary: #dfe6ee;
             --accent: #16a34a;
             --accent-2: #15803d;
             --text: #0f172a;
             --text-muted: #475569;
-            --shadow: rgba(15,23,42,0.08);
-            --border: rgba(15,23,42,0.14);
+            --shadow: rgba(15,23,42,0.1);
+            --border: rgba(15,23,42,0.16);
         }
 
         @media (prefers-color-scheme: light) {
             :root:not([data-theme]) {
-                --primary: #f3f5f8;
-                --secondary: #e9eef4;
+                --primary: #e8edf2;
+                --secondary: #dfe6ee;
                 --accent: #16a34a;
                 --accent-2: #15803d;
                 --text: #0f172a;
                 --text-muted: #475569;
-                --shadow: rgba(15,23,42,0.08);
-                --border: rgba(15,23,42,0.14);
+                --shadow: rgba(15,23,42,0.1);
+                --border: rgba(15,23,42,0.16);
+            }
+        }
+
+        [data-theme="light"] .card {
+            background: rgba(15,23,42,0.04);
+            border-color: rgba(15,23,42,0.14);
+        }
+
+        [data-theme="light"] #projects,
+        [data-theme="light"] #writing {
+            background: rgba(15,23,42,0.03) !important;
+        }
+
+        [data-theme="light"] input,
+        [data-theme="light"] textarea {
+            background: rgba(15,23,42,0.04);
+            border-color: rgba(15,23,42,0.18);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root:not([data-theme]) .card {
+                background: rgba(15,23,42,0.04);
+                border-color: rgba(15,23,42,0.14);
+            }
+
+            :root:not([data-theme]) #projects,
+            :root:not([data-theme]) #writing {
+                background: rgba(15,23,42,0.03) !important;
+            }
+
+            :root:not([data-theme]) input,
+            :root:not([data-theme]) textarea {
+                background: rgba(15,23,42,0.04);
+                border-color: rgba(15,23,42,0.18);
             }
         }
 
