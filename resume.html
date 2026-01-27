@@ -7,7 +7,16 @@
   <link rel="canonical" href="https://www.matomembowene.co.za/resume.html" />
   <title>Resume | Matome Mbowene</title>
   <meta name="description" content="Matome Mbowene, Software & AI Engineer. Public-safe resume designed for printing / saving as PDF." />
+  <meta property="og:title" content="Resume | Matome Mbowene" />
+  <meta property="og:description" content="Public-safe resume for Matome Mbowene, Software & AI Engineer." />
+  <meta property="og:type" content="profile" />
+  <meta property="og:image" content="https://www.matomembowene.co.za/og-resume.svg" />
+  <meta property="og:image:alt" content="Matome Mbowene resume overview" />
+  <meta property="og:url" content="https://www.matomembowene.co.za/resume.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.matomembowene.co.za/og-resume.svg" />
   <meta name="theme-color" content="#0b0f14" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <style>
     :root{
       --bg:#0b0f14;--card:#12141a;--accent:#22c55e;--accent2:#16a34a;
@@ -62,6 +71,10 @@
       border-radius:16px;
       padding: 1.5rem;
     }
+    .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;margin:1rem 0 1.25rem}
+    .kpi-card{border:1px solid var(--border);background:rgba(255,255,255,0.03);border-radius:12px;padding:0.75rem}
+    .kpi-card strong{color:var(--accent);font-size:1.1rem}
+    .kpi-card span{color:var(--muted);font-weight:700}
     header h1{margin:0;letter-spacing:-0.02em}
     header .role{margin:0.25rem 0 0;color:var(--muted);font-weight:700}
     .meta{
@@ -87,6 +100,9 @@
     .item-title strong{color:var(--text)}
     .item-title span{color:var(--muted);font-size:0.92rem}
     .note{font-size:0.92rem}
+    .timeline{border-left:1px solid rgba(148,163,184,0.18);margin-top:0.75rem;padding-left:0.9rem}
+    .timeline-item{margin-bottom:0.85rem}
+    .timeline-item strong{color:var(--text)}
 
     /* Print */
     @media print{
@@ -98,6 +114,7 @@
       p,li,.meta,.role{color:#222}
       hr{border-top:1px solid #ddd}
       a{color:#000}
+      .kpi-card{border:1px solid #ddd;background:#f6f6f6}
     }
   </style>
 </head>
@@ -136,6 +153,21 @@
           <span>Updated: 2026-01-15</span>
         </div>
       </header>
+
+      <div class="kpi-row" aria-label="At a glance">
+        <div class="kpi-card">
+          <strong>100%</strong>
+          <span>OCR field-mapping accuracy</span>
+        </div>
+        <div class="kpi-card">
+          <strong>89.33%</strong>
+          <span>FashionMNIST test accuracy</span>
+        </div>
+        <div class="kpi-card">
+          <strong>35%</strong>
+          <span>Scheduling efficiency gain</span>
+        </div>
+      </div>
 
       <hr />
 
@@ -189,6 +221,24 @@
             <ul>
               <li>Contributed to latency-aware, reliability-first pipeline design (public-safe summary).</li>
             </ul>
+          </div>
+
+          <hr />
+
+          <h2>Timeline (high level)</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <strong>Production OCR systems</strong>
+              <div class="note">Validation-first extraction, auditability, and reliability guardrails.</div>
+            </div>
+            <div class="timeline-item">
+              <strong>Retrieval systems (RAG)</strong>
+              <div class="note">Deterministic indexing, evidence-first responses, and safe fallbacks.</div>
+            </div>
+            <div class="timeline-item">
+              <strong>Backend + systems work</strong>
+              <div class="note">APIs, data modeling, and systems-level performance considerations.</div>
+            </div>
           </div>
 
           <p class="note" style="margin-top:0.85rem;">

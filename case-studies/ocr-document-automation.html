@@ -7,7 +7,16 @@
   <link rel="canonical" href="https://www.matomembowene.co.za/case-studies/ocr-document-automation.html">
   <title>OCR Document Automation | Case Study</title>
   <meta name="description" content="Case study: validation-first OCR document automation focused on correctness, auditability, and operational reliability.">
+  <meta property="og:title" content="OCR Document Automation | Case Study">
+  <meta property="og:description" content="Validation-first OCR automation focused on correctness, auditability, and operational reliability.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://www.matomembowene.co.za/case-studies/og-ocr.svg">
+  <meta property="og:image:alt" content="OCR Document Automation case study">
+  <meta property="og:url" content="https://www.matomembowene.co.za/case-studies/ocr-document-automation.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.matomembowene.co.za/case-studies/og-ocr.svg">
   <meta name="theme-color" content="#0b0f14">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <style>
     :root{
       --primary:#0b0f14;--secondary:#12141a;--accent:#22c55e;--accent2:#16a34a;
@@ -27,7 +36,9 @@
     .kpi strong{color:var(--accent);font-size:1.25rem}
     ul{margin:.75rem 0 0;padding-left:1.2rem;color:var(--muted);line-height:1.7}
     .tagrow{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
-    .tag{border:1px solid rgba(148,163,184,.22);background:rgba(148,163,184,.08);color:var(--muted);padding:.3rem .55rem;border-radius:999px;font-size:.9rem;font-weight:700}
+    .tag{border:1px solid rgba(148,163,184,.22);background:rgba(148,163,184,.08);color:var(--muted);padding:.3rem .55rem;border-radius:999px;font-size:.9rem;font-weight:700;display:inline-flex;align-items:center;gap:.35rem}
+    .tag img{width:14px;height:14px;display:block}
+    .logo-mono{filter:invert(1)}
     .cta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
     .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1rem;border-radius:999px;text-decoration:none;font-weight:800;border:1px solid rgba(34,197,94,.28);background:rgba(34,197,94,.12);color:var(--text)}
     .btn:hover{border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.16)}
@@ -50,11 +61,30 @@
       Details are intentionally public-safe.
     </p>
 
+    <div class="grid" style="margin-top: 1rem;">
+      <section class="card">
+        <h2>Problem</h2>
+        <p class="para">OCR outputs looked plausible but were hard to trust without reliable validation and clear failure signals.</p>
+      </section>
+      <section class="card">
+        <h2>Approach</h2>
+        <p class="para">Layered validation, confidence scoring, and structured mapping to catch errors early and explain them.</p>
+      </section>
+      <section class="card">
+        <h2>Outcome</h2>
+        <p class="para">100% field‑mapping accuracy on a defined set with traceable outputs ready for review.</p>
+      </section>
+    </div>
+
     <div class="grid">
       <section class="card">
         <div class="kpi"><strong>100%</strong><span style="color:var(--muted);font-weight:700;">field-mapping accuracy (defined set)</span></div>
         <div class="tagrow">
-          <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">OCR</span><span class="tag">Validation</span><span class="tag">Auditability</span>
+          <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" aria-hidden="true" loading="lazy">Python</span>
+          <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="" aria-hidden="true" loading="lazy">OpenCV</span>
+          <span class="tag">OCR</span>
+          <span class="tag">Validation</span>
+          <span class="tag">Auditability</span>
         </div>
       </section>
 

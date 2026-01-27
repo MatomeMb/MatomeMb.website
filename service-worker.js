@@ -2,8 +2,8 @@
    Goals: faster repeat visits + basic offline resilience + stale-while-revalidate.
    No analytics, no logging. */
 
-const CACHE_NAME = 'mm-portfolio-v3';
-const STATIC_CACHE = 'mm-portfolio-static-v3';
+const CACHE_NAME = 'mm-portfolio-v4';
+const STATIC_CACHE = 'mm-portfolio-static-v4';
 
 const CORE_ASSETS = [
   '/',
@@ -14,6 +14,7 @@ const CORE_ASSETS = [
   '/favicon.svg',
   '/profile.jpg',
   '/og-image.svg',
+  '/og-resume.svg',
   '/robots.txt',
   '/sitemap.xml',
   '/.well-known/security.txt',
@@ -21,17 +22,22 @@ const CORE_ASSETS = [
   '/chatbot/chatbot.js',
   '/chatbot/chatbot_knowledge.json',
   '/case-studies/ocr-document-automation.html',
-  '/case-studies/rag-assistant.html'
+  '/case-studies/rag-assistant.html',
+  '/case-studies/og-ocr.svg',
+  '/case-studies/og-rag.svg'
 ];
 
 // Static assets that rarely change
 const STATIC_ASSETS = [
   '/favicon.svg',
   '/og-image.svg',
+  '/og-resume.svg',
   '/profile.jpg',
   '/robots.txt',
   '/sitemap.xml',
-  '/.well-known/security.txt'
+  '/.well-known/security.txt',
+  '/case-studies/og-ocr.svg',
+  '/case-studies/og-rag.svg'
 ];
 
 self.addEventListener('install', (event) => {
