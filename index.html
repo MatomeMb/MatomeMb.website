@@ -22,6 +22,7 @@
     <meta name="color-scheme" content="dark light">
     <link rel="preload" as="image" href="profile.jpg">
     <link rel="manifest" href="site.webmanifest">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; font-src 'self' data:; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests">
     <style>
         /* CRITICAL CSS ONLY - Loads instantly */
@@ -31,6 +32,18 @@
             --secondary: #12141a; /* neutral graphite */
             --accent: #22c55e;    /* professional emerald */
             --accent-2: #16a34a;  /* deeper green */
+            --text: #f8fafc;
+            --text-muted: #a1aab8;
+            --shadow: rgba(0,0,0,0.35);
+            --border: rgba(148,163,184,0.16);
+            --focus: var(--accent);
+        }
+
+        [data-theme="dark"] {
+            --primary: #0b0f14;
+            --secondary: #12141a;
+            --accent: #22c55e;
+            --accent-2: #16a34a;
             --text: #f8fafc;
             --text-muted: #a1aab8;
             --shadow: rgba(0,0,0,0.35);
@@ -68,11 +81,6 @@
             border-color: rgba(15,23,42,0.14);
         }
 
-        [data-theme="light"] #projects,
-        [data-theme="light"] #writing {
-            background: rgba(15,23,42,0.03) !important;
-        }
-
         [data-theme="light"] input,
         [data-theme="light"] textarea {
             background: rgba(15,23,42,0.04);
@@ -83,11 +91,6 @@
             :root:not([data-theme]) .card {
                 background: rgba(15,23,42,0.04);
                 border-color: rgba(15,23,42,0.14);
-            }
-
-            :root:not([data-theme]) #projects,
-            :root:not([data-theme]) #writing {
-                background: rgba(15,23,42,0.03) !important;
             }
 
             :root:not([data-theme]) input,
@@ -235,6 +238,27 @@
         .theme-toggle svg {
             width: 18px;
             height: 18px;
+        }
+
+        .motion-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 160ms var(--ease-out);
+            margin-left: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .motion-toggle:hover {
+            border-color: var(--accent);
+            background: rgba(34,197,94,0.1);
         }
         
         .nav-links {
@@ -474,6 +498,7 @@
 
         .section { padding: var(--s-8) var(--s-6); }
         .section.alt { background: var(--secondary); }
+        .section-subtle { background: var(--secondary); }
 
         .grid {
             display: grid;
@@ -886,6 +911,15 @@
             border: 1px solid rgba(148,163,184,0.18);
             background: rgba(148,163,184,0.08);
             text-align: left;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .proof-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34,197,94,0.35);
+            background: rgba(34,197,94,0.10);
         }
 
         .proof-value {
@@ -898,6 +932,76 @@
             color: var(--text-muted);
             font-size: 0.9rem;
             margin-top: 0.35rem;
+        }
+
+        .logo-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            margin-top: 0.75rem;
+        }
+
+        .logo-chip {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(148,163,184,0.18);
+            background: rgba(148,163,184,0.08);
+        }
+
+        .logo-chip img {
+            width: 24px;
+            height: 24px;
+            display: block;
+        }
+
+        .featured-picks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem auto 1.25rem;
+        }
+
+        .featured-card {
+            text-decoration: none;
+            color: inherit;
+            border-color: rgba(148,163,184,0.18);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34,197,94,0.35);
+            background: rgba(34,197,94,0.06);
+        }
+
+        .stack-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .stack-label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .stack-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .contact-meta {
+            margin: -2rem auto 2rem;
         }
 
         .kpi-grid {
@@ -1038,6 +1142,15 @@
             .hero::before, .hero::after { animation: none !important; }
         }
 
+        html[data-reduce-motion="true"] { scroll-behavior: auto; }
+
+        html[data-reduce-motion="true"] *,
+        html[data-reduce-motion="true"] *::before,
+        html[data-reduce-motion="true"] *::after {
+            animation: none !important;
+            transition: none !important;
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 1.9rem; }
             .hero { padding: 5rem 1rem 1rem; min-height: auto; }
@@ -1133,6 +1246,9 @@
                     <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
                 </svg>
             </button>
+            <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Toggle reduced motion">
+                Motion
+            </button>
         </div>
     </nav>
 
@@ -1190,23 +1306,24 @@
                     <a href="https://www.credly.com/users/matome-mbowene" target="_blank" rel="noopener noreferrer">Credly</a>
                 </div>
 
-                <div class="proof-strip" aria-label="Proof highlights">
-                    <div class="proof-item">
+                <div class="muted" style="font-weight: 700; margin-bottom: 0.6rem;">Impact highlights</div>
+                <div class="proof-strip" aria-label="Impact highlights">
+                    <a class="proof-item" href="case-studies/ocr-document-automation.html" aria-label="Open OCR Document Automation case study">
                         <div class="proof-value">100%</div>
                         <div class="proof-label">OCR field-mapping accuracy</div>
-                    </div>
-                    <div class="proof-item">
+                    </a>
+                    <a class="proof-item" href="https://github.com/MatomeMb/FashionMNIST-Classifier" target="_blank" rel="noopener noreferrer" aria-label="Open FashionMNIST repository">
                         <div class="proof-value">89.33%</div>
                         <div class="proof-label">FashionMNIST model accuracy</div>
-                    </div>
-                    <div class="proof-item">
+                    </a>
+                    <a class="proof-item" href="https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos" target="_blank" rel="noopener noreferrer" aria-label="Open scheduling algorithms repository">
                         <div class="proof-value">35%</div>
                         <div class="proof-label">Scheduling efficiency gain</div>
-                    </div>
-                    <div class="proof-item">
+                    </a>
+                    <a class="proof-item" href="https://www.credly.com/users/matome-mbowene" target="_blank" rel="noopener noreferrer" aria-label="Open Credly profile">
                         <div class="proof-value">Credly</div>
                         <div class="proof-label">Google Cloud badge verified</div>
-                    </div>
+                    </a>
                 </div>
 
                 <p class="muted" style="margin-bottom: 0.5rem;">Based in Cape Town • Open to hybrid/remote roles</p>
@@ -1215,6 +1332,46 @@
                     <a class="repo-link" href="https://github.com/MatomeMb/personal-codex-agent" target="_blank" rel="noopener noreferrer">RAG repo <span aria-hidden="true">↗</span></a>
                     <a class="repo-link" href="https://github.com/MatomeMb/FashionMNIST-Classifier" target="_blank" rel="noopener noreferrer">CV repo <span aria-hidden="true">↗</span></a>
                     <a class="repo-link" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer">All repos <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="proof" class="section section-subtle">
+            <div class="container">
+                <h2 class="section-title">Proof &amp; references</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">References available</h3>
+                        <p class="muted" style="line-height: 1.7; margin-bottom: 1rem;">
+                            Professional references are available on request. Happy to share context and outcomes aligned to each role.
+                        </p>
+                        <p class="muted" style="line-height: 1.7;">
+                            Public-safe proof is included throughout this site via case studies, repos, and certifications.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">Programs &amp; platforms</h3>
+                        <p class="muted" style="line-height: 1.7; margin-bottom: 0.75rem;">
+                            Tools and programs that appear in the work and credentials shared here.
+                        </p>
+                        <div class="logo-strip" aria-label="Programs and platforms">
+                            <span class="logo-chip" title="Google Cloud">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlecloud.svg" alt="Google Cloud" loading="lazy">
+                            </span>
+                            <span class="logo-chip" title="Dell">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/dell.svg" alt="Dell" loading="lazy">
+                            </span>
+                            <span class="logo-chip" title="GitHub">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="GitHub" loading="lazy">
+                            </span>
+                            <span class="logo-chip" title="Docker">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" loading="lazy">
+                            </span>
+                            <span class="logo-chip" title="OpenAI">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="OpenAI" loading="lazy">
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1392,7 +1549,7 @@
         </section>
 
         <!-- Technical Breadth -->
-        <section id="breadth" style="padding: 4rem 2rem;">
+        <section id="breadth" class="section">
             <div class="container">
                 <h2 class="section-title">Technical Breadth</h2>
                 <p class="muted" style="text-align: center; max-width: 820px; margin: 0 auto 2rem; line-height: 1.7;">
@@ -1444,13 +1601,43 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" style="padding: 4rem 2rem; background: rgba(255,255,255,0.02);">
+        <section id="projects" class="section section-subtle">
             <div class="container">
                 <h2 class="section-title">Featured Projects</h2>
 
                 <p class="muted" style="text-align: center; max-width: 820px; margin: 0 auto 0.75rem; line-height: 1.7;">
-                    Filter by category, then open any card for a short case-study view.
+                    Start with the featured picks, then filter by category for a focused view.
                 </p>
+
+                <div class="featured-picks" aria-label="Featured picks">
+                    <a class="card featured-card" href="case-studies/ocr-document-automation.html">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <strong style="color: var(--text);">OCR Document Automation</strong>
+                            <span class="muted" style="font-size: 0.9rem;">Case study</span>
+                        </div>
+                        <p class="muted" style="margin-top:0.35rem; line-height:1.7;">Validation-first OCR pipeline with explainable outputs.</p>
+                        <div class="proof-value" style="margin-top:0.65rem;">100% accuracy</div>
+                        <div class="proof-label">Field-mapping on defined set</div>
+                    </a>
+                    <a class="card featured-card" href="case-studies/rag-assistant.html">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <strong style="color: var(--text);">RAG Assistant</strong>
+                            <span class="muted" style="font-size: 0.9rem;">Case study</span>
+                        </div>
+                        <p class="muted" style="margin-top:0.35rem; line-height:1.7;">Grounded retrieval with reproducible indexing and guardrails.</p>
+                        <div class="proof-value" style="margin-top:0.65rem;">Reliable</div>
+                        <div class="proof-label">Evidence-first responses</div>
+                    </a>
+                    <a class="card featured-card" href="https://github.com/MatomeMb/FashionMNIST-Classifier" target="_blank" rel="noopener noreferrer">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <strong style="color: var(--text);">FashionMNIST Classifier</strong>
+                            <span class="muted" style="font-size: 0.9rem;">Repo</span>
+                        </div>
+                        <p class="muted" style="margin-top:0.35rem; line-height:1.7;">End-to-end training and evaluation pipeline.</p>
+                        <div class="proof-value" style="margin-top:0.65rem;">89.33%</div>
+                        <div class="proof-label">Test accuracy</div>
+                    </a>
+                </div>
 
                 <div class="project-search" aria-label="Search projects">
                     <input id="projectSearch" type="search" autocomplete="off" placeholder="Search projects (e.g., RAG, OCR, PyTorch, scheduling)…" aria-label="Search projects">
@@ -1505,10 +1692,13 @@
                             <a class="repo-link" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile (OCR Document Automation repo not public)">GitHub profile <span aria-hidden="true">↗</span></a>
                             <a class="repo-link" href="case-studies/ocr-document-automation.html" aria-label="Open OCR Document Automation case study">Case study <span aria-hidden="true">↗</span></a>
                         </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" aria-hidden="true" loading="lazy">Python</span>
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="" aria-hidden="true" loading="lazy">OpenCV</span>
-                            <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="" aria-hidden="true" loading="lazy">LLMs</span>
+                        <div class="stack-row">
+                            <span class="stack-label">Stack</span>
+                            <div class="stack-tags">
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" aria-hidden="true" loading="lazy">Python</span>
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="" aria-hidden="true" loading="lazy">OpenCV</span>
+                                <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="" aria-hidden="true" loading="lazy">LLMs</span>
+                            </div>
                         </div>
                         <ul class="list">
                             <li><strong style="color: var(--text);">Outcome:</strong> 100% field-mapping accuracy with multi-layer validation.</li>
@@ -1541,10 +1731,13 @@
                             <a class="repo-link" href="https://github.com/MatomeMb/personal-codex-agent" target="_blank" rel="noopener noreferrer" aria-label="Open personal-codex-agent repository on GitHub">Open repo <span aria-hidden="true">↗</span></a>
                             <a class="repo-link" href="case-studies/rag-assistant.html" aria-label="Open RAG Assistant case study">Case study <span aria-hidden="true">↗</span></a>
                         </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" aria-hidden="true" loading="lazy">Python</span>
-                            <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/meta.svg" alt="" aria-hidden="true" loading="lazy">FAISS</span>
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg" alt="" aria-hidden="true" loading="lazy">Streamlit</span>
+                        <div class="stack-row">
+                            <span class="stack-label">Stack</span>
+                            <div class="stack-tags">
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" aria-hidden="true" loading="lazy">Python</span>
+                                <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/meta.svg" alt="" aria-hidden="true" loading="lazy">FAISS</span>
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg" alt="" aria-hidden="true" loading="lazy">Streamlit</span>
+                            </div>
                         </div>
                         <ul class="list">
                             <li><strong style="color: var(--text);">Outcome:</strong> fast, relevant retrieval-backed answers for a focused knowledge base.</li>
@@ -1573,10 +1766,13 @@
                         <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin: 0.25rem 0 1rem;">
                             <a class="repo-link" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile (embedded repo may not be public)">GitHub profile <span aria-hidden="true">↗</span></a>
                         </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="" aria-hidden="true" loading="lazy">C++</span>
-                            <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/stmicroelectronics.svg" alt="" aria-hidden="true" loading="lazy">STM32</span>
-                            <span class="tag">Sensor Fusion</span>
+                        <div class="stack-row">
+                            <span class="stack-label">Stack</span>
+                            <div class="stack-tags">
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="" aria-hidden="true" loading="lazy">C++</span>
+                                <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/stmicroelectronics.svg" alt="" aria-hidden="true" loading="lazy">STM32</span>
+                                <span class="tag">Sensor Fusion</span>
+                            </div>
                         </div>
                         <ul class="list">
                             <li><strong style="color: var(--text);">Outcome:</strong> foundations for real-time hazard detection under latency and power constraints.</li>
@@ -1605,11 +1801,14 @@
                         <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin: 0.25rem 0 1rem;">
                             <a class="repo-link" href="mailto:matomepontso@gmail.com?subject=Portfolio%20-%20NDA%20project%20overview%20request&body=Hi%20Matome%2C%0A%0AI%27d%20love%20to%20learn%20more%20about%20the%20NDA%20project%20at%20a%20high%20level.%20Could%20we%20schedule%20a%20quick%20chat%3F%0A%0AThank%20you%2C" aria-label="Email Matome to request an NDA-safe overview">Request overview</a>
                         </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag">Architecture</span>
-                            <span class="tag">Backend</span>
-                            <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="" aria-hidden="true" loading="lazy">LLMs</span>
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" alt="" aria-hidden="true" loading="lazy">CI/CD</span>
+                        <div class="stack-row">
+                            <span class="stack-label">Stack</span>
+                            <div class="stack-tags">
+                                <span class="tag">Architecture</span>
+                                <span class="tag">Backend</span>
+                                <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="" aria-hidden="true" loading="lazy">LLMs</span>
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" alt="" aria-hidden="true" loading="lazy">CI/CD</span>
+                            </div>
                         </div>
                         <ul class="list">
                             <li><strong style="color: var(--text);">Outcome:</strong> production-ready AI product foundations and measurable delivery cadence.</li>
@@ -1632,10 +1831,13 @@
                         <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin: 0.25rem 0 1rem;">
                             <a class="repo-link" href="https://github.com/MatomeMb/FashionMNIST-Classifier" target="_blank" rel="noopener noreferrer" aria-label="Open FashionMNIST-Classifier repository on GitHub">Open repo <span aria-hidden="true">↗</span></a>
                         </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" alt="" aria-hidden="true" loading="lazy">PyTorch</span>
-                            <span class="tag">CV</span>
-                            <span class="tag">Evaluation</span>
+                        <div class="stack-row">
+                            <span class="stack-label">Stack</span>
+                            <div class="stack-tags">
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" alt="" aria-hidden="true" loading="lazy">PyTorch</span>
+                                <span class="tag">CV</span>
+                                <span class="tag">Evaluation</span>
+                            </div>
                         </div>
                         <ul class="list">
                             <li><strong style="color: var(--text);">Outcome:</strong> 89.33% test accuracy on FashionMNIST.</li>
@@ -1666,10 +1868,13 @@
                         <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin: 0.25rem 0 1rem;">
                             <a class="repo-link" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile (MyAdvisor repo not public)">GitHub profile <span aria-hidden="true">↗</span></a>
                         </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" alt="" aria-hidden="true" loading="lazy">Spring Boot</span>
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/openapi/openapi-original.svg" alt="" aria-hidden="true" loading="lazy">REST</span>
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="" aria-hidden="true" loading="lazy">MySQL</span>
+                        <div class="stack-row">
+                            <span class="stack-label">Stack</span>
+                            <div class="stack-tags">
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" alt="" aria-hidden="true" loading="lazy">Spring Boot</span>
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/openapi/openapi-original.svg" alt="" aria-hidden="true" loading="lazy">REST</span>
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="" aria-hidden="true" loading="lazy">MySQL</span>
+                            </div>
                         </div>
                         <ul class="list">
                             <li><strong style="color: var(--text);">Outcome:</strong> improved workflow efficiency and clearer user journeys.</li>
@@ -1692,10 +1897,13 @@
                             <a class="repo-link" href="https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos" target="_blank" rel="noopener noreferrer" aria-label="Open Operating-Systems-Scheduling_Algos repository on GitHub">Scheduling repo <span aria-hidden="true">↗</span></a>
                             <a class="repo-link" href="https://github.com/MatomeMb/number-range-summarizer" target="_blank" rel="noopener noreferrer" aria-label="Open number-range-summarizer repository on GitHub">Java repo <span aria-hidden="true">↗</span></a>
                         </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="" aria-hidden="true" loading="lazy">Java</span>
-                            <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" aria-hidden="true" loading="lazy">Python</span>
-                            <span class="tag">Systems</span>
+                        <div class="stack-row">
+                            <span class="stack-label">Stack</span>
+                            <div class="stack-tags">
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="" aria-hidden="true" loading="lazy">Java</span>
+                                <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" aria-hidden="true" loading="lazy">Python</span>
+                                <span class="tag">Systems</span>
+                            </div>
                         </div>
                         <ul class="list">
                             <li><strong style="color: var(--text);">Outcome:</strong> measurable efficiency gains through algorithm comparison.</li>
@@ -1848,7 +2056,7 @@
         </section>
 
         <!-- Writing / Notes (public-safe) -->
-        <section id="writing" style="padding: 4rem 2rem; background: rgba(255,255,255,0.02);">
+        <section id="writing" class="section section-subtle">
             <div class="container">
                 <h2 class="section-title">Writing</h2>
                 <p class="muted" style="text-align: center; max-width: 820px; margin: 0 auto 2rem; line-height: 1.7;">
@@ -1939,6 +2147,11 @@
                 <p class="muted" style="text-align: center; margin: -2rem auto 2rem; line-height: var(--lh-body);">
                     Best contact routes: email or LinkedIn. Resume PDF and GitHub are below.
                 </p>
+                <div class="pill-row contact-meta" aria-label="Contact availability">
+                    <span class="pill"><strong>Response</strong> 24–48h</span>
+                    <span class="pill"><strong>Availability</strong> Full-time / Contract</span>
+                    <span class="pill"><strong>Work mode</strong> Hybrid / Remote</span>
+                </div>
                 
                 <div class="card" style="padding: 2rem;">
                     <!-- Simple Contact Info -->
@@ -2073,6 +2286,29 @@
                     }
                 });
             }
+        })();
+
+        // Motion toggle (manual override + prefers-reduced-motion)
+        (function initMotionToggle() {
+            const toggle = document.querySelector('.motion-toggle');
+            if (!toggle) return;
+            const stored = localStorage.getItem('reduceMotion');
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const initial = stored ? stored === 'true' : prefersReduced;
+
+            function applyMotionState(isReduced) {
+                document.documentElement.setAttribute('data-reduce-motion', isReduced ? 'true' : 'false');
+                toggle.setAttribute('aria-pressed', isReduced ? 'true' : 'false');
+                toggle.textContent = isReduced ? 'Motion Off' : 'Motion On';
+            }
+
+            applyMotionState(initial);
+
+            toggle.addEventListener('click', () => {
+                const next = !(document.documentElement.getAttribute('data-reduce-motion') === 'true');
+                applyMotionState(next);
+                localStorage.setItem('reduceMotion', String(next));
+            });
         })();
 
         // Scroll Progress Indicator
