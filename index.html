@@ -530,6 +530,36 @@
             display: block;
         }
 
+        .stack-table {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .stack-table-row {
+            display: grid;
+            grid-template-columns: minmax(140px, 180px) 1fr;
+            gap: 0.75rem;
+            align-items: start;
+        }
+
+        .stack-table-label {
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stack-table-values {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 720px) {
+            .stack-table-row { grid-template-columns: 1fr; }
+        }
+
         .sr-only {
             position: absolute;
             width: 1px;
@@ -1543,6 +1573,203 @@
                             </a>
                         </div>
                         <p class="muted" style="margin-top: 0.75rem; line-height: 1.7;">Pragmatic shipping discipline: version control, containers, automation, and reliability checks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="private-stacks" class="section">
+            <div class="container">
+                <h2 class="section-title">Private project tech stacks</h2>
+                <p class="muted" style="text-align: center; max-width: 860px; margin: 0 auto 2rem; line-height: 1.7;">
+                    These stacks are from private work. I can discuss architecture and outcomes at a high level.
+                </p>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Commerce compiler platform</h3>
+                        <div class="stack-table">
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Commerce Compiler</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" alt="" aria-hidden="true" loading="lazy">Rust (MVP)</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Binary Format</div>
+                                <div class="stack-table-values">
+                                    <span class="tag">FlatBuffers</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Semantic Vectors</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="" aria-hidden="true" loading="lazy">CLIP (ViT-B/32)</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Signing</div>
+                                <div class="stack-table-values">
+                                    <span class="tag">Ed25519</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Compression</div>
+                                <div class="stack-table-values">
+                                    <span class="tag">Zstandard (Zstd)</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">API</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="" aria-hidden="true" loading="lazy">Node.js</span>
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vercel.svg" alt="" aria-hidden="true" loading="lazy">Vercel Edge</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Database</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="" aria-hidden="true" loading="lazy">PostgreSQL</span>
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" alt="" aria-hidden="true" loading="lazy">Supabase</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Storage</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cloudflare.svg" alt="" aria-hidden="true" loading="lazy">Cloudflare R2</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Browser Extension</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="" aria-hidden="true" loading="lazy">Vanilla JS</span>
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/webassembly/webassembly-original.svg" alt="" aria-hidden="true" loading="lazy">WASM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Product platform (private)</h3>
+                        <h4 style="margin: 0 0 0.5rem; color: var(--text);">Core technologies</h4>
+                        <div class="stack-table">
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Frontend</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nextdotjs.svg" alt="" aria-hidden="true" loading="lazy">Next.js 15</span>
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="" aria-hidden="true" loading="lazy">React 18</span>
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="" aria-hidden="true" loading="lazy">TypeScript</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Backend</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/express.svg" alt="" aria-hidden="true" loading="lazy">Express.js</span>
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/fastify.svg" alt="" aria-hidden="true" loading="lazy">Fastify</span>
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="" aria-hidden="true" loading="lazy">Node.js</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Database</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="" aria-hidden="true" loading="lazy">PostgreSQL 15</span>
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" alt="" aria-hidden="true" loading="lazy">Supabase</span>
+                                    <span class="tag">Neon</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Async Jobs</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlecloud.svg" alt="" aria-hidden="true" loading="lazy">Cloud Tasks</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Auth</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" alt="" aria-hidden="true" loading="lazy">Supabase Auth</span>
+                                    <span class="tag">JWT</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">AI Integration</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/groq.svg" alt="" aria-hidden="true" loading="lazy">GROQ API</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Payments</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/stripe.svg" alt="" aria-hidden="true" loading="lazy">Stripe</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Styling</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="" aria-hidden="true" loading="lazy">Tailwind CSS</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Build Tool</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/turborepo.svg" alt="" aria-hidden="true" loading="lazy">Turborepo</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Containers</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="" aria-hidden="true" loading="lazy">Docker</span>
+                                    <span class="tag">Docker Compose</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Infrastructure</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlecloud.svg" alt="" aria-hidden="true" loading="lazy">Cloud Run</span>
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="" aria-hidden="true" loading="lazy">Terraform</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 1rem 0 0.5rem; color: var(--text);">Development tools</h4>
+                        <div class="stack-table">
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Language</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="" aria-hidden="true" loading="lazy">TypeScript</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Linting</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/eslint.svg" alt="" aria-hidden="true" loading="lazy">ESLint</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Package Manager</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/npm.svg" alt="" aria-hidden="true" loading="lazy">npm</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">Version Control</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="" aria-hidden="true" loading="lazy">Git</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">API Testing</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/curl.svg" alt="" aria-hidden="true" loading="lazy">cURL</span>
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postman.svg" alt="" aria-hidden="true" loading="lazy">Postman</span>
+                                </div>
+                            </div>
+                            <div class="stack-table-row">
+                                <div class="stack-table-label">AI Assistant</div>
+                                <div class="stack-table-values">
+                                    <span class="tag"><img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/githubcopilot.svg" alt="" aria-hidden="true" loading="lazy">GitHub Copilot CLI</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
