@@ -26,7 +26,7 @@
     <style>
         /* CRITICAL CSS ONLY - Loads instantly */
         :root {
-            /* Colors */
+            /* Colors - Dark Mode (Default) */
             --primary: #0b0f14;   /* charcoal */
             --secondary: #12141a; /* neutral graphite */
             --accent: #22c55e;    /* professional emerald */
@@ -36,6 +36,32 @@
             --shadow: rgba(0,0,0,0.35);
             --border: rgba(148,163,184,0.16);
             --focus: var(--accent);
+        }
+
+        [data-theme="light"] {
+            /* Colors - Light Mode */
+            --primary: #ffffff;
+            --secondary: #f8fafc;
+            --accent: #16a34a;
+            --accent-2: #15803d;
+            --text: #0f172a;
+            --text-muted: #475569;
+            --shadow: rgba(0,0,0,0.1);
+            --border: rgba(148,163,184,0.3);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root:not([data-theme]) {
+                --primary: #ffffff;
+                --secondary: #f8fafc;
+                --accent: #16a34a;
+                --accent-2: #15803d;
+                --text: #0f172a;
+                --text-muted: #475569;
+                --shadow: rgba(0,0,0,0.1);
+                --border: rgba(148,163,184,0.3);
+            }
+        }
 
             /* Typography */
             --fs-900: 2.25rem;
@@ -132,6 +158,49 @@
             align-items: center;
             z-index: 1000;
             border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            z-index: 1001;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 160ms var(--ease-out);
+            margin-left: 0.5rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            background: rgba(34,197,94,0.1);
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
         }
         
         .nav-links {
@@ -261,17 +330,110 @@
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
-            transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), background-color 180ms var(--ease-out);
+            transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), background-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+            transform-style: preserve-3d;
+            will-change: transform;
         }
 
         .card:hover {
             transform: translateY(-3px);
             border-color: rgba(148,163,184,0.24);
             background: rgba(255,255,255,0.06);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         }
 
         .card:focus-within {
             border-color: rgba(34,197,94,0.45);
+        }
+
+        /* 3D Tilt Effect for Project Cards */
+        .project-card {
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out, box-shadow 0.2s ease-out;
+        }
+
+        .project-card.tilt-enabled {
+            cursor: pointer;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .project-card.tilt-enabled:hover {
+                transform: perspective(1000px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-4px);
+                box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+            }
+        }
+
+        /* Magnetic Button Effect */
+        .btn, .repo-link, .badge-link {
+            position: relative;
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn:hover, .repo-link:hover, .badge-link:hover {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Smooth reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s ease-in-out infinite;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Form animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced form input styles */
+        #contactForm input,
+        #contactForm textarea {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        #contactForm input:focus,
+        #contactForm textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(34,197,94,0.1);
+            background: rgba(255,255,255,0.07);
+        }
+
+        #contactForm button[type="submit"] {
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        #contactForm button[type="submit"]:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+        }
+
+        #contactForm button[type="submit"]:disabled {
+            cursor: not-allowed;
         }
 
         main:focus { outline: none; }
@@ -934,8 +1096,20 @@
             <a href="#about">About</a>
             <a href="resume.html">Resume</a>
             <a href="#contact">Contact</a>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark/light mode" title="Toggle theme">
+                <svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+            </button>
         </div>
     </nav>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
     <!-- Main Content -->
     <main id="content" tabindex="-1">
@@ -1933,6 +2107,124 @@
         document.body.classList.remove('loading');
         document.body.classList.add('loaded');
 
+        // Theme Toggle with System Preference Detection
+        (function initTheme() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const themeIconDark = document.querySelector('.theme-icon-dark');
+            const themeIconLight = document.querySelector('.theme-icon-light');
+            if (!themeToggle) return;
+
+            // Get saved theme or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            
+            // Apply initial theme
+            if (initialTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIconDark.style.display = 'none';
+                themeIconLight.style.display = 'block';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                themeIconDark.style.display = 'block';
+                themeIconLight.style.display = 'none';
+            }
+
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                if (newTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    themeIconDark.style.display = 'none';
+                    themeIconLight.style.display = 'block';
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeIconDark.style.display = 'block';
+                    themeIconLight.style.display = 'none';
+                }
+                
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Listen for system theme changes (if no manual preference)
+            if (!savedTheme) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                    if (!localStorage.getItem('theme')) {
+                        if (e.matches) {
+                            document.documentElement.removeAttribute('data-theme');
+                            themeIconDark.style.display = 'block';
+                            themeIconLight.style.display = 'none';
+                        } else {
+                            document.documentElement.setAttribute('data-theme', 'light');
+                            themeIconDark.style.display = 'none';
+                            themeIconLight.style.display = 'block';
+                        }
+                    }
+                });
+            }
+        })();
+
+        // Scroll Progress Indicator
+        (function initScrollProgress() {
+            const progressBar = document.getElementById('scrollProgress');
+            if (!progressBar) return;
+
+            function updateProgress() {
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollPercent = scrollTop / (documentHeight - windowHeight);
+                progressBar.style.transform = `scaleX(${Math.min(scrollPercent, 1)})`;
+            }
+
+            // Throttle scroll events for performance
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateProgress();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            updateProgress();
+        })();
+
+        // 3D Tilt Effect for Project Cards
+        (function init3DTilt() {
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReduced) return;
+
+            const projectCards = document.querySelectorAll('.project-card');
+            if (!projectCards.length) return;
+
+            projectCards.forEach(card => {
+                card.classList.add('tilt-enabled');
+                
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.setProperty('--tilt-x', `${rotateY}deg`);
+                    card.style.setProperty('--tilt-y', `${rotateX}deg`);
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.setProperty('--tilt-x', '0deg');
+                    card.style.setProperty('--tilt-y', '0deg');
+                });
+            });
+        })();
+
         // Accessible mobile nav toggle (progressive enhancement)
         (function initNav() {
             const nav = document.querySelector('nav');
@@ -2202,7 +2494,70 @@
             });
         })();
         
-        // Simple form submission
+        // Enhanced form validation helper
+        function validateField(input) {
+            const value = input.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            function showError(input, message) {
+                input.style.borderColor = '#ef4444';
+                input.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+                const errorMsg = input.parentElement.querySelector('.error-message');
+                if (errorMsg) errorMsg.remove();
+                const error = document.createElement('div');
+                error.className = 'error-message';
+                error.style.color = '#ef4444';
+                error.style.fontSize = '0.875rem';
+                error.style.marginTop = '0.25rem';
+                error.textContent = message;
+                input.parentElement.appendChild(error);
+            }
+
+            function clearError(input) {
+                input.style.borderColor = '';
+                input.style.boxShadow = '';
+                const errorMsg = input.parentElement.querySelector('.error-message');
+                if (errorMsg) errorMsg.remove();
+            }
+
+            clearError(input);
+
+            if (input.id === 'name') {
+                if (!value) { showError(input, 'Name is required'); return false; }
+                if (value.length < 2) { showError(input, 'Name must be at least 2 characters'); return false; }
+            }
+            if (input.id === 'email') {
+                if (!value) { showError(input, 'Email is required'); return false; }
+                if (!emailRegex.test(value)) { showError(input, 'Please enter a valid email address'); return false; }
+            }
+            if (input.id === 'message') {
+                if (!value) { showError(input, 'Message is required'); return false; }
+                if (value.length < 10) { showError(input, 'Message must be at least 10 characters'); return false; }
+            }
+            return true;
+        }
+
+        // Real-time form validation
+        (function initFormValidation() {
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            [nameInput, emailInput, messageInput].forEach(input => {
+                if (input) {
+                    input.addEventListener('blur', () => validateField(input));
+                    input.addEventListener('input', () => {
+                        if (input.style.borderColor) {
+                            input.style.borderColor = '';
+                            input.style.boxShadow = '';
+                            const errorMsg = input.parentElement.querySelector('.error-message');
+                            if (errorMsg) errorMsg.remove();
+                        }
+                    });
+                }
+            });
+        })();
+
+        // Enhanced form submission
         function submitForm(event) {
             event.preventDefault();
             // GitHub Pages-friendly "submission": open the user's mail client with a prefilled email.
@@ -2483,23 +2838,67 @@
         })();
     </script>
 
-    <!-- Structured data (basic Person profile) -->
+    <!-- Enhanced Structured data (Person + Organization) -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Matome Mbowene",
             "jobTitle": "Software & AI Engineer",
+            "description": "Software & AI engineer building production OCR/document automation, retrieval (RAG), and backend systems.",
             "image": "https://www.matomembowene.co.za/profile.jpg",
             "url": "https://www.matomembowene.co.za/",
+            "email": "matomepontso@gmail.com",
             "sameAs": [
                 "https://linkedin.com/in/matomembowene",
-                "https://github.com/MatomeMb"
+                "https://github.com/MatomeMb",
+                "https://www.credly.com/users/matome-mbowene"
             ],
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Cape Town",
+                "addressRegion": "Western Cape",
                 "addressCountry": "ZA"
+            },
+            "alumniOf": {
+                "@type": "EducationalOrganization",
+                "name": "University of Cape Town"
+            },
+            "knowsAbout": [
+                "Computer Vision",
+                "OCR",
+                "RAG (Retrieval Augmented Generation)",
+                "Machine Learning",
+                "Python",
+                "Backend Development",
+                "Embedded Systems"
+            ],
+            "hasCredential": [
+                {
+                    "@type": "EducationalOccupationalCredential",
+                    "credentialCategory": "Professional Certification",
+                    "recognizedBy": {
+                        "@type": "Organization",
+                        "name": "Google Cloud"
+                    }
+                }
+            ]
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Matome Mbowene Portfolio",
+            "url": "https://www.matomembowene.co.za/",
+            "author": {
+                "@type": "Person",
+                "name": "Matome Mbowene"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://www.matomembowene.co.za/#projects",
+                "query-input": "required name=search_term_string"
             }
         }
     </script>

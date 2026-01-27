@@ -1,8 +1,9 @@
-/* Minimal service worker for a static portfolio.
-   Goals: faster repeat visits + basic offline resilience.
+/* Enhanced service worker for a static portfolio.
+   Goals: faster repeat visits + basic offline resilience + stale-while-revalidate.
    No analytics, no logging. */
 
-const CACHE_NAME = 'mm-portfolio-v1';
+const CACHE_NAME = 'mm-portfolio-v2';
+const STATIC_CACHE = 'mm-portfolio-static-v2';
 
 const CORE_ASSETS = [
   '/',
@@ -23,9 +24,22 @@ const CORE_ASSETS = [
   '/case-studies/rag-assistant.html'
 ];
 
+// Static assets that rarely change
+const STATIC_ASSETS = [
+  '/favicon.svg',
+  '/og-image.svg',
+  '/profile.jpg',
+  '/robots.txt',
+  '/sitemap.xml',
+  '/.well-known/security.txt'
+];
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting())
+    Promise.all([
+      caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)),
+      caches.open(STATIC_CACHE).then((cache) => cache.addAll(STATIC_ASSETS))
+    ]).then(() => self.skipWaiting())
   );
 });
 
@@ -33,7 +47,12 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     (async () => {
       const keys = await caches.keys();
-      await Promise.all(keys.map((k) => (k === CACHE_NAME ? Promise.resolve() : caches.delete(k))));
+      await Promise.all(
+        keys.map((k) => {
+          if (k === CACHE_NAME || k === STATIC_CACHE) return Promise.resolve();
+          return caches.delete(k);
+        })
+      );
       await self.clients.claim();
     })()
   );
@@ -43,6 +62,10 @@ function isHtmlRequest(req) {
   return req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
 }
 
+function isStaticAsset(url) {
+  return STATIC_ASSETS.some(asset => url.pathname === asset);
+}
+
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
@@ -50,49 +73,85 @@ self.addEventListener('fetch', (event) => {
   // Only handle same-origin requests.
   if (url.origin !== self.location.origin) return;
 
-  // HTML: network-first (fresh content), fallback to cache/offline page.
+  // HTML: Stale-while-revalidate for faster perceived performance
   if (isHtmlRequest(req)) {
     event.respondWith(
       (async () => {
+        const cache = await caches.open(CACHE_NAME);
+        const cached = await cache.match(req);
+        
+        // Start fetching fresh content in parallel
+        const fetchPromise = fetch(req).then((fresh) => {
+          if (fresh.ok) {
+            cache.put(req, fresh.clone());
+          }
+          return fresh;
+        }).catch(() => null);
+
+        // Return cached version immediately if available, otherwise wait for network
+        if (cached) {
+          fetchPromise.catch(() => {}); // Don't wait for fetch to fail
+          return cached;
+        }
+
+        // If no cache, wait for network with fallback
+        const fresh = await fetchPromise;
+        if (fresh) return fresh;
+        
+        // Final fallback
+        return (await cache.match('/index.html')) || (await cache.match('/404.html'));
+      })()
+    );
+    return;
+  }
+
+  // Static assets: Cache-first (they rarely change)
+  if (isStaticAsset(url)) {
+    event.respondWith(
+      (async () => {
+        const cache = await caches.open(STATIC_CACHE);
+        const cached = await cache.match(req);
+        if (cached) return cached;
+
         try {
           const fresh = await fetch(req);
-          const cache = await caches.open(CACHE_NAME);
-          cache.put(req, fresh.clone());
+          if (fresh.ok) {
+            cache.put(req, fresh.clone());
+          }
           return fresh;
         } catch (_) {
-          const cached = await caches.match(req);
-          return cached || (await caches.match('/index.html')) || (await caches.match('/404.html'));
+          return new Response('', { status: 504, statusText: 'Offline' });
         }
       })()
     );
     return;
   }
 
-  // Assets: cache-first, update in background.
+  // Other assets: Stale-while-revalidate
   event.respondWith(
     (async () => {
-      const cached = await caches.match(req);
+      const cache = await caches.open(CACHE_NAME);
+      const cached = await cache.match(req);
+      
+      // Start fetching fresh content
+      const fetchPromise = fetch(req).then((fresh) => {
+        if (fresh.ok) {
+          cache.put(req, fresh.clone());
+        }
+        return fresh;
+      }).catch(() => null);
+
+      // Return cached immediately if available
       if (cached) {
-        event.waitUntil(
-          (async () => {
-            try {
-              const fresh = await fetch(req);
-              const cache = await caches.open(CACHE_NAME);
-              cache.put(req, fresh.clone());
-            } catch (_) {}
-          })()
-        );
+        fetchPromise.catch(() => {}); // Don't wait for fetch
         return cached;
       }
 
-      try {
-        const fresh = await fetch(req);
-        const cache = await caches.open(CACHE_NAME);
-        cache.put(req, fresh.clone());
-        return fresh;
-      } catch (_) {
-        return new Response('', { status: 504, statusText: 'Offline' });
-      }
+      // Wait for network
+      const fresh = await fetchPromise;
+      if (fresh) return fresh;
+      
+      return new Response('', { status: 504, statusText: 'Offline' });
     })()
   );
 });

@@ -10,7 +10,9 @@
   const state = {
     kb: null,
     open: false,
-    lastFocus: null
+    lastFocus: null,
+    messages: [],
+    voiceRecognition: null
   };
 
   function $(sel, root = document) {
@@ -287,30 +289,107 @@
     };
   }
 
-  function appendMessage(bodyEl, role, text, meta, actions) {
-    const msg = el('div', { class: 'mm-chatbot-msg', dataset: { role } });
-    msg.appendChild(el('div', { class: 'mm-chatbot-bubble', text }));
-    if (meta) msg.appendChild(el('div', { class: 'mm-chatbot-meta', text: meta }));
+  function typewriterEffect(element, text, speed = 20) {
+    return new Promise((resolve) => {
+      let index = 0;
+      element.textContent = '';
+      
+      function type() {
+        if (index < text.length) {
+          element.textContent += text.charAt(index);
+          index++;
+          setTimeout(type, speed);
+        } else {
+          resolve();
+        }
+      }
+      
+      type();
+    });
+  }
 
-    if (Array.isArray(actions) && actions.length) {
-      const row = el('div', { class: 'mm-chatbot-actions', 'aria-label': 'Quick actions' });
-      actions.slice(0, 3).forEach((a) => {
-        if (!a?.label || !a?.url) return;
-        const isMailto = String(a.url).startsWith('mailto:');
-        const link = el('a', {
-          class: 'mm-chatbot-action',
-          href: a.url,
-          ...(isMailto ? {} : { target: '_blank', rel: 'noopener noreferrer' }),
-          'aria-label': a.label,
-          text: a.label
-        });
-        row.appendChild(link);
+  function appendMessage(bodyEl, role, text, meta, actions, useTypewriter = false) {
+    const msg = el('div', { class: 'mm-chatbot-msg', dataset: { role } });
+    const bubble = el('div', { class: 'mm-chatbot-bubble' });
+    
+    if (role === 'bot' && useTypewriter) {
+      bubble.textContent = ''; // Start empty for typewriter
+      msg.appendChild(bubble);
+      if (meta) msg.appendChild(el('div', { class: 'mm-chatbot-meta', text: meta }));
+      
+      bodyEl.appendChild(msg);
+      bodyEl.scrollTop = bodyEl.scrollHeight;
+      
+      // Typewriter effect
+      typewriterEffect(bubble, text).then(() => {
+        if (Array.isArray(actions) && actions.length) {
+          const row = el('div', { class: 'mm-chatbot-actions', 'aria-label': 'Quick actions' });
+          actions.slice(0, 3).forEach((a) => {
+            if (!a?.label || !a?.url) return;
+            const isMailto = String(a.url).startsWith('mailto:');
+            const link = el('a', {
+              class: 'mm-chatbot-action',
+              href: a.url,
+              ...(isMailto ? {} : { target: '_blank', rel: 'noopener noreferrer' }),
+              'aria-label': a.label,
+              text: a.label
+            });
+            row.appendChild(link);
+          });
+          msg.appendChild(row);
+          bodyEl.scrollTop = bodyEl.scrollHeight;
+        }
       });
-      msg.appendChild(row);
+    } else {
+      bubble.textContent = text;
+      msg.appendChild(bubble);
+      if (meta) msg.appendChild(el('div', { class: 'mm-chatbot-meta', text: meta }));
+
+      if (Array.isArray(actions) && actions.length) {
+        const row = el('div', { class: 'mm-chatbot-actions', 'aria-label': 'Quick actions' });
+        actions.slice(0, 3).forEach((a) => {
+          if (!a?.label || !a?.url) return;
+          const isMailto = String(a.url).startsWith('mailto:');
+          const link = el('a', {
+            class: 'mm-chatbot-action',
+            href: a.url,
+            ...(isMailto ? {} : { target: '_blank', rel: 'noopener noreferrer' }),
+            'aria-label': a.label,
+            text: a.label
+          });
+          row.appendChild(link);
+        });
+        msg.appendChild(row);
+      }
+
+      bodyEl.appendChild(msg);
+      bodyEl.scrollTop = bodyEl.scrollHeight;
     }
 
-    bodyEl.appendChild(msg);
-    bodyEl.scrollTop = bodyEl.scrollHeight;
+    // Save to message history
+    state.messages.push({ role, text, meta, timestamp: Date.now() });
+    saveMessageHistory();
+  }
+
+  function saveMessageHistory() {
+    try {
+      localStorage.setItem('mm-chatbot-history', JSON.stringify(state.messages.slice(-50))); // Keep last 50 messages
+    } catch (e) {
+      // Ignore storage errors
+    }
+  }
+
+  function loadMessageHistory() {
+    try {
+      const saved = localStorage.getItem('mm-chatbot-history');
+      if (saved) {
+        state.messages = JSON.parse(saved);
+        return true;
+      }
+    } catch (e) {
+      // Ignore parse errors
+    }
+    return false;
   }
 
   function focusables(root) {
@@ -369,10 +448,63 @@
     });
     const sendBtn = el('button', { class: 'mm-chatbot-send', type: 'button' });
     sendBtn.textContent = 'Send';
+    
+    // Voice input button
+    const voiceBtn = el('button', { 
+      class: 'mm-chatbot-voice', 
+      type: 'button',
+      'aria-label': 'Voice input',
+      title: 'Voice input (if supported)'
+    });
+    voiceBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+        <line x1="12" y1="19" x2="12" y2="23"/>
+        <line x1="8" y1="23" x2="16" y2="23"/>
+      </svg>
+    `;
+    
+    // Check for voice recognition support
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      state.voiceRecognition = new SpeechRecognition();
+      state.voiceRecognition.continuous = false;
+      state.voiceRecognition.interimResults = false;
+      state.voiceRecognition.lang = 'en-US';
+      
+      state.voiceRecognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        input.value = transcript;
+        handleSend(transcript);
+      };
+      
+      state.voiceRecognition.onerror = () => {
+        voiceBtn.classList.remove('active');
+      };
+      
+      state.voiceRecognition.onend = () => {
+        voiceBtn.classList.remove('active');
+      };
+      
+      voiceBtn.addEventListener('click', () => {
+        if (state.voiceRecognition) {
+          if (voiceBtn.classList.contains('active')) {
+            state.voiceRecognition.stop();
+            voiceBtn.classList.remove('active');
+          } else {
+            state.voiceRecognition.start();
+            voiceBtn.classList.add('active');
+          }
+        }
+      });
+    } else {
+      voiceBtn.style.display = 'none';
+    }
 
     const footer = el('div', { class: 'mm-chatbot-footer' }, [
-      el('div', { class: 'mm-chatbot-inputRow' }, [input, sendBtn]),
-      el('div', { class: 'mm-chatbot-disclaimer', text: 'No messages are stored. This assistant answers only from a local knowledge base and refuses sensitive or NDA-specific requests.' })
+      el('div', { class: 'mm-chatbot-inputRow' }, [input, voiceBtn, sendBtn]),
+      el('div', { class: 'mm-chatbot-disclaimer', text: 'Messages are stored locally. This assistant answers only from a local knowledge base and refuses sensitive or NDA-specific requests.' })
     ]);
 
     panel.appendChild(header);
@@ -405,7 +537,16 @@
 
       const out = answerFromKb(trimmed, state.kb);
       const meta = out.source ? `Source: ${out.source}` : null;
-      appendMessage(body, 'bot', out.a, meta, out.actions);
+      appendMessage(body, 'bot', out.a, meta, out.actions, true); // Use typewriter for bot messages
+    }
+    
+    function restoreHistory() {
+      if (loadMessageHistory() && state.messages.length > 0) {
+        body.innerHTML = '';
+        state.messages.forEach(msg => {
+          appendMessage(body, msg.role, msg.text, msg.meta, null, false);
+        });
+      }
     }
 
     function seedSuggestions() {
@@ -466,6 +607,31 @@
       'Hi. I can answer questions about skills, case studies, credibility, and contact using Matome’s public portfolio notes only.',
       'Grounded: local knowledge base'
     );
+
+    // Restore message history or show initial message
+    function restoreHistory() {
+      if (loadMessageHistory() && state.messages.length > 0) {
+        body.innerHTML = '';
+        state.messages.forEach(msg => {
+          appendMessage(body, msg.role, msg.text, msg.meta, null, false);
+        });
+        return true;
+      }
+      return false;
+    }
+    
+    if (!restoreHistory()) {
+      // Initial message already added above, but update it to use typewriter
+      const lastMsg = body.querySelector('.mm-chatbot-msg[data-role="bot"]:last-child');
+      if (lastMsg) {
+        const bubble = lastMsg.querySelector('.mm-chatbot-bubble');
+        if (bubble) {
+          const text = bubble.textContent;
+          bubble.textContent = '';
+          typewriterEffect(bubble, text);
+        }
+      }
+    }
 
     seedSuggestions();
 
