@@ -1,0 +1,3246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matome Mbowene | Software &amp; AI Engineer</title>
+    <meta name="description" content="Matome Mbowene, Software & AI engineer building production OCR/document automation, retrieval (RAG), and backend systems. Based in Cape Town, South Africa.">
+    <meta name="author" content="Matome Mbowene">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://www.matomembowene.co.za/">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.svg">
+    <meta property="og:title" content="Matome Mbowene | Software &amp; AI Engineer">
+    <meta property="og:description" content="Software & AI engineer building production OCR/document automation, retrieval (RAG), and backend systems.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.matomembowene.co.za/og-image.svg">
+    <meta property="og:image:alt" content="Matome Mbowene, Software & AI Engineer">
+    <meta property="og:url" content="https://www.matomembowene.co.za/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.matomembowene.co.za/og-image.svg">
+    <meta name="theme-color" content="#0b0f14">
+    <meta name="color-scheme" content="dark light">
+    <link rel="preload" as="image" href="profile.jpg">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; font-src 'self' data:; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests">
+    <style>
+        /* CRITICAL CSS ONLY - Loads instantly */
+        :root {
+            /* Colors - Dark Mode (Default) */
+            --primary: #0b0f14;   /* charcoal */
+            --secondary: #12141a; /* neutral graphite */
+            --accent: #22c55e;    /* professional emerald */
+            --accent-2: #16a34a;  /* deeper green */
+            --text: #f8fafc;
+            --text-muted: #a1aab8;
+            --shadow: rgba(0,0,0,0.35);
+            --border: rgba(148,163,184,0.16);
+            --focus: var(--accent);
+            
+            /* Expanded Color System - Depth & Vibrancy */
+            --accent-glow: rgba(34, 197, 94, 0.3);
+            --accent-subtle: rgba(34, 197, 94, 0.1);
+            --accent-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            
+            /* Surface layers for depth */
+            --surface-1: rgba(18, 20, 26, 0.4);
+            --surface-2: rgba(18, 20, 26, 0.6);
+            --surface-3: rgba(18, 20, 26, 0.8);
+            
+            /* Enhanced shadows with color tint */
+            --shadow-sm: 0 2px 4px rgba(34, 197, 94, 0.05);
+            --shadow-md: 0 4px 8px rgba(34, 197, 94, 0.1);
+            --shadow-lg: 0 8px 16px rgba(34, 197, 94, 0.15);
+            --shadow-xl: 0 16px 32px rgba(34, 197, 94, 0.2);
+            --shadow-glow: 0 0 20px var(--accent-glow);
+        }
+
+        [data-theme="dark"] {
+            --primary: #0b0f14;
+            --secondary: #12141a;
+            --accent: #22c55e;
+            --accent-2: #16a34a;
+            --text: #f8fafc;
+            --text-muted: #a1aab8;
+            --shadow: rgba(0,0,0,0.35);
+            --border: rgba(148,163,184,0.16);
+            --focus: var(--accent);
+        }
+
+        [data-theme="light"] {
+            /* Colors - Light Mode (softened) */
+            --primary: #e8edf2;
+            --secondary: #dfe6ee;
+            --accent: #16a34a;
+            --accent-2: #15803d;
+            --text: #0f172a;
+            --text-muted: #475569;
+            --shadow: rgba(15,23,42,0.1);
+            --border: rgba(15,23,42,0.16);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root:not([data-theme]) {
+                --primary: #e8edf2;
+                --secondary: #dfe6ee;
+                --accent: #16a34a;
+                --accent-2: #15803d;
+                --text: #0f172a;
+                --text-muted: #475569;
+                --shadow: rgba(15,23,42,0.1);
+                --border: rgba(15,23,42,0.16);
+            }
+        }
+
+        [data-theme="light"] .card {
+            background: rgba(15,23,42,0.04);
+            border-color: rgba(15,23,42,0.14);
+        }
+
+        [data-theme="light"] input,
+        [data-theme="light"] textarea {
+            background: rgba(15,23,42,0.04);
+            border-color: rgba(15,23,42,0.18);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root:not([data-theme]) .card {
+                background: rgba(15,23,42,0.04);
+                border-color: rgba(15,23,42,0.14);
+            }
+
+            :root:not([data-theme]) input,
+            :root:not([data-theme]) textarea {
+                background: rgba(15,23,42,0.04);
+                border-color: rgba(15,23,42,0.18);
+            }
+        }
+
+            /* Typography */
+            --fs-900: 2.25rem;
+            --fs-700: 1.5rem;
+            --fs-600: 1.125rem;
+            --lh-body: 1.7;
+
+            /* Spacing */
+            --s-1: 0.25rem;
+            --s-2: 0.5rem;
+            --s-3: 0.75rem;
+            --s-4: 1rem;
+            --s-5: 1.5rem;
+            --s-6: 2rem;
+            --s-7: 3rem;
+            --s-8: 4rem;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary); 
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        :root {
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: 1rem;
+            background: var(--secondary);
+            color: var(--text);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(148,163,184,0.24);
+            z-index: 2000;
+            text-decoration: none;
+        }
+
+        .skip-link:focus { left: 1rem; }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            transition: color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .nav-links a:hover { color: var(--text); background: rgba(148,163,184,0.10); }
+
+        .nav-links a.active {
+            color: var(--text);
+            background: rgba(148,163,184,0.14);
+            border: 1px solid rgba(148,163,184,0.18);
+        }
+        
+        /* Loading state */
+        body.loading #content { opacity: 0; }
+        body.loaded #content { opacity: 1; transition: opacity 0.3s; }
+        
+        /* Navigation - Minimal */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(11, 15, 20, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            z-index: 1001;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 160ms var(--ease-out);
+            margin-left: 0.5rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            background: rgba(34,197,94,0.1);
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .motion-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 160ms var(--ease-out);
+            margin-left: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .motion-toggle:hover {
+            border-color: var(--accent);
+            background: rgba(34,197,94,0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid rgba(148,163,184,0.28);
+            color: var(--text);
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .nav-toggle:hover { border-color: rgba(59,130,246,0.55); }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #e5e7eb; /* neutral (avoid bluish tint) */
+            letter-spacing: -0.03em;
+            text-decoration: none;
+            display: inline-block;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        
+        .logo:hover {
+            color: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .logo:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+        
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid rgba(148,163,184,0.28);
+            color: var(--text);
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* Hero - Fast loading */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                min-height: auto;
+                padding: 4rem 1rem 2rem;
+            }
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+            top: 10%; right: 10%;
+            animation: heroGlow 10s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.04), transparent 55%),
+                        radial-gradient(circle at 80% 60%, rgba(148, 163, 184, 0.06), transparent 55%);
+            animation: heroWash 16s ease-in-out infinite;
+        }
+
+        @keyframes heroGlow {
+            0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: 0.9; }
+            50% { transform: translate3d(-18px, 10px, 0) scale(1.08); opacity: 1; }
+        }
+
+        @keyframes heroWash {
+            0%, 100% { opacity: 0.75; filter: blur(0px); }
+            50% { opacity: 1; filter: blur(1px); }
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: var(--fs-900);
+            margin-bottom: 1rem;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        h2 { font-size: var(--fs-700); }
+        h3 { font-size: var(--fs-600); }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 56px;
+            height: 3px;
+            border-radius: 999px;
+            margin: 0.85rem auto 0;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), background-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(148,163,184,0.24);
+            background: rgba(255,255,255,0.06);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .card:focus-within {
+            border-color: rgba(34,197,94,0.45);
+        }
+
+        /* 3D Tilt Effect for Project Cards */
+        .project-card {
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out, box-shadow 0.2s ease-out, opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .project-card.tilt-enabled {
+            cursor: pointer;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .project-card.tilt-enabled:hover {
+                transform: perspective(1000px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-4px);
+                box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+            }
+        }
+        
+        /* Filtered out state for project cards */
+        .project-card.filtered-out {
+            display: none !important;
+            visibility: hidden;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            pointer-events: none;
+        }
+
+        /* Magnetic Button Effect */
+        .btn, .repo-link, .badge-link {
+            position: relative;
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn:hover, .repo-link:hover, .badge-link:hover {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Smooth reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s ease-in-out infinite;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Form animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced form input styles */
+        #contactForm input,
+        #contactForm textarea {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        #contactForm input:focus,
+        #contactForm textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(34,197,94,0.1);
+            background: rgba(255,255,255,0.07);
+        }
+
+        #contactForm button[type="submit"] {
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        #contactForm button[type="submit"]:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+        }
+
+        #contactForm button[type="submit"]:disabled {
+            cursor: not-allowed;
+        }
+
+        main:focus { outline: none; }
+
+        .section { padding: var(--s-8) var(--s-6); }
+        .section.alt { background: var(--secondary); }
+        .section-subtle { background: var(--secondary); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--s-6);
+        }
+
+        .row {
+            display: flex;
+            gap: var(--s-4);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .tag {
+            background: rgba(148,163,184,0.10);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .logo-mono { filter: invert(1) brightness(1.05); }
+
+        :root[data-theme="light"] .logo-mono { filter: none; }
+
+        .logo-group-title {
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin: 0.75rem 0 0.45rem;
+        }
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .logo-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-radius: 12px;
+            border: 1px solid rgba(148,163,184,0.18);
+            background: rgba(148,163,184,0.08);
+            padding: 0.55rem 0.7rem;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .logo-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34,197,94,0.35);
+            background: rgba(34,197,94,0.10);
+        }
+
+        .logo-item img {
+            width: 26px;
+            height: 26px;
+            display: block;
+        }
+
+        .logo-label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .muted { color: var(--text-muted); }
+        .pill-row {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 0.75rem 0 1.25rem;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.22);
+            background: rgba(148,163,184,0.08);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .pill strong { color: var(--text); font-weight: 700; }
+
+        .repo-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(34,197,94,0.28);
+            background: rgba(34,197,94,0.12);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 750;
+            letter-spacing: -0.01em;
+            transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .repo-link:hover {
+            transform: translateY(-1px);
+            border-color: rgba(34,197,94,0.45);
+            background: rgba(34,197,94,0.16);
+        }
+
+        .repo-link:visited { color: var(--text); }
+
+        .project-icon-label {
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            color: var(--text);
+        }
+
+        .repo-card {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            border-color: rgba(148,163,184,0.18);
+            transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .repo-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34,197,94,0.35);
+            background: rgba(34,197,94,0.06);
+        }
+
+        .repo-card:visited { color: inherit; }
+
+        .repo-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 0.65rem;
+            color: var(--accent);
+            font-weight: 750;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
+        .repo-card:hover .repo-cta {
+            text-decoration-thickness: 2px;
+        }
+
+        .inline-link {
+            color: var(--accent);
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 160ms var(--ease-out), text-decoration-thickness 160ms var(--ease-out);
+        }
+
+        .inline-link:hover {
+            color: #34d399;
+            text-decoration-thickness: 2px;
+        }
+
+        .badge-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.65rem 0.85rem;
+            border-radius: 14px;
+            border: 1px solid rgba(148,163,184,0.20);
+            background: rgba(255,255,255,0.04);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 750;
+            line-height: 1.2;
+            transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .badge-link:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34,197,94,0.35);
+            background: rgba(34,197,94,0.06);
+        }
+
+        .badge-link svg,
+        .badge-link img {
+            width: 20px;
+            height: 20px;
+            flex: 0 0 auto;
+        }
+
+        .badge-link img { display: block; }
+
+        .badge-sub {
+            display: block;
+            color: var(--text-muted);
+            font-weight: 650;
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+        }
+
+        .mini-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            padding: 0.4rem 0.65rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.22);
+            background: rgba(148,163,184,0.08);
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 750;
+            font-size: 0.9rem;
+            transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .mini-btn:hover {
+            transform: translateY(-1px);
+            border-color: rgba(34,197,94,0.35);
+            background: rgba(34,197,94,0.10);
+        }
+
+        .contact-iconLink {
+            width: 50px;
+            height: 50px;
+            background: rgba(148,163,184,0.10);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--accent);
+            border: 1px solid rgba(148,163,184,0.18);
+            text-decoration: none;
+            transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .contact-iconLink img {
+            width: 22px;
+            height: 22px;
+            display: block;
+        }
+
+        .contact-iconLink:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34,197,94,0.40);
+            background: rgba(34,197,94,0.10);
+        }
+
+        .contact-iconLink:visited { color: var(--accent); }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--text);
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 160ms var(--ease-out), text-decoration-thickness 160ms var(--ease-out);
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            text-decoration-thickness: 2px;
+        }
+
+        .contact-text {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .project-search {
+            margin: 1rem auto 0.75rem;
+            max-width: 820px;
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .project-search input {
+            width: min(560px, 100%);
+            padding: 0.75rem 0.9rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(148,163,184,0.22);
+            border-radius: 10px;
+            color: var(--text);
+        }
+
+        .project-search .hint {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid transparent;
+            transition: transform 160ms var(--ease-out), filter 160ms var(--ease-out), background-color 160ms var(--ease-out), border-color 160ms var(--ease-out);
+        }
+
+        .cta-group .btn svg {
+            width: 16px;
+            height: 16px;
+            flex: 0 0 auto;
+        }
+
+        .btn:hover { transform: translateY(-1px); }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            color: white;
+        }
+
+        .btn-primary:hover { filter: brightness(1.05); }
+
+        .btn-secondary {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-secondary:hover { background: rgba(34,197,94,0.10); }
+
+        .btn-tertiary {
+            border-color: rgba(148,163,184,0.28);
+            color: var(--text);
+            background: transparent;
+        }
+
+        .btn-tertiary:hover { background: rgba(148,163,184,0.10); border-color: rgba(148,163,184,0.34); }
+
+        .cta-group {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-meta {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .cta-meta a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .cta-meta a:hover {
+            color: var(--text);
+        }
+
+        .proof-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+            max-width: 980px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .proof-item {
+            padding: 0.85rem 1rem;
+            border-radius: 14px;
+            border: 1px solid rgba(148,163,184,0.18);
+            background: rgba(148,163,184,0.08);
+            text-align: left;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .proof-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34,197,94,0.35);
+            background: rgba(34,197,94,0.10);
+        }
+
+        .proof-value {
+            color: var(--text);
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .proof-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.35rem;
+        }
+
+        .featured-picks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem auto 1.25rem;
+        }
+
+        .featured-card {
+            text-decoration: none;
+            color: inherit;
+            border-color: rgba(148,163,184,0.18);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34,197,94,0.35);
+            background: rgba(34,197,94,0.06);
+        }
+
+        .stack-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .contact-meta {
+            margin: -2rem auto 2rem;
+        }
+
+        .kpi-grid {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .kpi {
+            text-align: center;
+            min-width: 160px;
+        }
+
+        .kpi-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .kpi-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .details-summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.6rem;
+            border-radius: 10px;
+            border: 1px solid rgba(148,163,184,0.22);
+            background: rgba(148,163,184,0.08);
+            color: var(--text);
+            margin-top: 0.75rem;
+            transition: border-color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+        }
+
+        .details-summary:hover {
+            border-color: rgba(148,163,184,0.32);
+            background: rgba(148,163,184,0.12);
+        }
+
+        details summary::-webkit-details-marker { display: none; }
+
+        .subtle-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(148,163,184,0.18);
+            margin: 1rem 0;
+        }
+
+        .list {
+            color: var(--text-muted);
+            line-height: 1.7;
+            padding-left: 1.25rem;
+        }
+
+        .project-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1.25rem 0 2rem;
+        }
+
+        .project-filter {
+            border: 1px solid rgba(148,163,184,0.28);
+            background: rgba(148,163,184,0.08);
+            color: var(--text);
+            border-radius: 999px;
+            padding: 0.4rem 0.9rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), transform 160ms var(--ease-out);
+        }
+
+        .project-filter.active {
+            border-color: rgba(34,197,94,0.55);
+            background: rgba(34,197,94,0.12);
+            color: var(--accent);
+        }
+
+        .project-filter:hover { transform: translateY(-1px); border-color: rgba(148,163,184,0.40); }
+
+        .timeline {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(148,163,184,0.20);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0.25rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid rgba(34,197,94,0.55);
+        }
+
+        /* Reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+        }
+
+        .reveal.reveal-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .card, .btn, .project-filter, .reveal { transition: none !important; transform: none !important; }
+            .hero::before, .hero::after { animation: none !important; }
+        }
+
+        html[data-reduce-motion="true"] { scroll-behavior: auto; }
+
+        html[data-reduce-motion="true"] *,
+        html[data-reduce-motion="true"] *::before,
+        html[data-reduce-motion="true"] *::after {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.9rem; }
+            .hero { padding: 5rem 1rem 1rem; min-height: auto; }
+            nav { padding: 0.9rem 1rem; }
+
+            .nav-toggle { display: inline-flex; align-items: center; gap: 0.5rem; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                padding: 1rem;
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav[data-menu-open="true"] .nav-links { display: flex; }
+
+            .section { padding: 3rem 1rem; }
+            
+            img[src="profile.jpg"] {
+                width: 120px !important;
+                height: 120px !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 3.75rem 1rem 1.25rem; }
+            h1 { font-size: 1.7rem; }
+            img[src="profile.jpg"] {
+                width: 110px !important;
+                height: 110px !important;
+                margin-bottom: 1.25rem !important;
+            }
+            .pill-row { gap: 0.4rem; margin: 0.6rem 0 1rem; }
+            .pill {
+                font-size: 0.82rem;
+                padding: 0.3rem 0.55rem;
+                white-space: normal;
+                text-align: center;
+                line-height: 1.2;
+                max-width: 100%;
+            }
+            .cta-group { gap: 0.5rem; margin-bottom: 1.1rem; }
+            .cta-group .btn { padding: 0.6rem 1.1rem; font-size: 0.95rem; }
+            .cta-meta { gap: 0.45rem; margin-bottom: 1rem; font-size: 0.88rem; }
+            .proof-strip {
+                grid-template-columns: repeat(2, minmax(140px, 1fr));
+                gap: 0.6rem;
+                margin-bottom: 1rem;
+            }
+            .proof-item { padding: 0.6rem 0.75rem; }
+            .proof-value { font-size: 1rem; }
+            .proof-label { font-size: 0.8rem; }
+        }
+
+        @media (max-width: 420px) {
+            img[src="profile.jpg"] {
+                width: 96px !important;
+                height: 96px !important;
+            }
+            .proof-strip { grid-template-columns: 1fr; }
+        }
+    </style>
+    
+    <!-- Enhanced Design Styles (Non-critical, progressive enhancement) -->
+    <link rel="stylesheet" href="styles/enhanced.css">
+</head>
+<body class="loading">
+    <a class="skip-link" href="#content">Skip to content</a>
+    <!-- Enhanced Navigation (Sticky with Backdrop Blur) -->
+    <nav class="nav-enhanced" aria-label="Primary" data-menu-open="false">
+        <a href="#home" class="logo" aria-label="Go to home">MM</a>
+        <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="nav-menu" aria-expanded="false">
+            Menu
+        </button>
+        <div class="nav-links" id="nav-menu">
+            <a href="#projects">Case studies</a>
+            <a href="#experience">Experience</a>
+            <a href="#expertise">Expertise</a>
+            <a href="#tech-stack">Tech stack</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#writing">Writing</a>
+            <a href="#about">About</a>
+            <a href="resume.html">Resume</a>
+            <a href="#contact">Contact</a>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark/light mode" title="Toggle theme">
+                <svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+            </button>
+            <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Toggle reduced motion">
+                Motion
+            </button>
+        </div>
+    </nav>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- Main Content -->
+    <main id="content" tabindex="-1">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <img src="vendor/portfolio-website/public/images/header-section-foreground.png" alt="" class="hero-foreground" aria-hidden="true">
+            <div class="hero-content">
+                <img src="profile.jpg" alt="Portrait of Matome Mbowene" width="150" height="150" loading="eager" decoding="async" fetchpriority="high" class="hero-profile-image" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 0 auto 2rem; border: 3px solid rgba(34, 197, 94, 0.3); display: block;" onerror="console.error('Profile image failed to load from:', this.src); this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'150\' height=\'150\'%3E%3Crect width=\'150\' height=\'150\' fill=\'%2394a3b8\' opacity=\'0.2\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%2394a3b8\' font-family=\'sans-serif\' font-size=\'14\'%3EMM%3C/text%3E%3C/svg%3E';">
+                <h1 class="hero-title">Matome Mbowene</h1>
+                <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 0.75rem; font-weight: 600;">Software &amp; AI Engineer • OCR/CV • RAG • Backend</p>
+                <div class="pill-row" aria-label="Current status">
+                    <span class="pill"><strong>Open to</strong> Software • AI/ML • Backend/Cloud</span>
+                    <span class="pill"><strong>Location</strong> Cape Town</span>
+                    <span class="pill"><strong>Work mode</strong> Hybrid / Remote</span>
+                </div>
+                <p class="muted" style="margin-bottom: 1.5rem; line-height: var(--lh-body); max-width: 60ch; margin-left: auto; margin-right: auto;">
+                    I build production AI systems—document automation, retrieval, and backend services—designed for reliability.
+                </p>
+                <div class="cta-group" aria-label="Primary actions">
+                    <a class="btn btn-primary" href="mailto:matomepontso@gmail.com">
+                        <svg role="img" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                        </svg>
+                        Email
+                    </a>
+                    <a class="btn btn-secondary" href="https://linkedin.com/in/matomembowene" target="_blank" rel="noopener noreferrer">
+                        <svg role="img" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a class="btn btn-secondary" href="resume.pdf">
+                        <svg role="img" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.63 15.3c-.71-.745-2.166-1.17-4.224-1.17-1.1 0-2.377.106-3.761.354a19.443 19.443 0 0 1-2.307-2.661c-.532-.71-.994-1.49-1.42-2.236.817-2.484 1.207-4.507 1.207-5.962 0-1.632-.603-3.336-2.342-3.336-.532 0-1.065.32-1.349.781-.78 1.384-.425 4.4.923 7.381a60.277 60.277 0 0 1-1.703 4.507c-.568 1.349-1.207 2.733-1.917 4.01C2.834 18.53.314 20.34.03 21.758c-.106.533.071 1.03.462 1.42.142.107.639.533 1.49.533 2.59 0 5.323-4.188 6.707-6.707 1.065-.355 2.13-.71 3.194-.994a34.963 34.963 0 0 1 3.407-.745c2.732 2.448 5.145 2.839 6.352 2.839 1.49 0 2.023-.604 2.2-1.1.32-.64.106-1.349-.213-1.704zm-1.42 1.03c-.107.532-.64.887-1.384.887-.213 0-.39-.036-.604-.071-1.348-.32-2.626-.994-3.903-2.059a17.717 17.717 0 0 1 2.98-.248c.746 0 1.385.035 1.81.142.497.106 1.278.426 1.1 1.348zm-7.524-1.668a38.01 38.01 0 0 0-2.945.674 39.68 39.68 0 0 0-2.52.745 40.05 40.05 0 0 0 1.207-2.555c.426-.994.78-2.023 1.136-2.981.354.603.745 1.207 1.135 1.739a50.127 50.127 0 0 0 1.987 2.378zM10.038 1.46a.768.768 0 0 1 .674-.425c.745 0 .887.851.887 1.526 0 1.135-.355 2.874-.958 4.861-1.03-2.768-1.1-5.074-.603-5.962zM6.134 17.997c-1.81 2.981-3.549 4.826-4.613 4.826a.872.872 0 0 1-.532-.177c-.213-.213-.32-.461-.249-.745.213-1.065 2.271-2.555 5.394-3.904Z"/>
+                        </svg>
+                        Resume PDF
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer">
+                        <svg role="img" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+
+                <div class="cta-meta" aria-label="Secondary actions">
+                    <a href="#projects">Case studies</a>
+                    <span style="color: rgba(136,146,176,0.5);">•</span>
+                    <a href="resume.html">Resume page</a>
+                    <span style="color: rgba(136,146,176,0.5);">•</span>
+                    <a href="https://www.credly.com/users/matome-mbowene" target="_blank" rel="noopener noreferrer">Credly</a>
+                </div>
+
+                <div class="muted" style="font-weight: 700; margin-bottom: 0.6rem;">Impact</div>
+                <div class="proof-strip" aria-label="Impact highlights">
+                    <a class="proof-item" href="case-studies/ocr-document-automation.html" aria-label="Open OCR Document Automation case study">
+                        <div class="proof-value">100%</div>
+                        <div class="proof-label">OCR field-mapping accuracy</div>
+                    </a>
+                    <a class="proof-item" href="https://github.com/MatomeMb/FashionMNIST-Classifier" target="_blank" rel="noopener noreferrer" aria-label="Open FashionMNIST repository">
+                        <div class="proof-value">89.33%</div>
+                        <div class="proof-label">FashionMNIST model accuracy</div>
+                    </a>
+                    <a class="proof-item" href="https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos" target="_blank" rel="noopener noreferrer" aria-label="Open scheduling algorithms repository">
+                        <div class="proof-value">35%</div>
+                        <div class="proof-label">Scheduling efficiency gain</div>
+                    </a>
+                    <a class="proof-item" href="https://www.credly.com/users/matome-mbowene" target="_blank" rel="noopener noreferrer" aria-label="Open Credly profile">
+                        <div class="proof-value">Credly</div>
+                        <div class="proof-label">Google Cloud badge verified</div>
+                    </a>
+                </div>
+
+                <p class="muted" style="margin-bottom: 0.5rem;">Based in Cape Town • Open to hybrid/remote roles</p>
+                
+                <!-- Scroll Indicator -->
+                <div class="scroll-indicator" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section id="proof" class="section section-subtle">
+            <img src="vendor/portfolio-website/public/images/Proof & references-Recent Experience-foreground.png" alt="" class="section-foreground" aria-hidden="true">
+            <div class="container">
+                <h2 class="section-title">Proof &amp; references</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">References available</h3>
+                        <p class="muted" style="line-height: 1.7; margin-bottom: 1rem;">
+                            References available on request.
+                        </p>
+                        <p class="muted" style="line-height: 1.7;">
+                            Public proof is available via case studies, repos, and certifications.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">Programs &amp; platforms</h3>
+                        <p class="muted" style="line-height: 1.7; margin-bottom: 0.75rem;">
+                            Credentialed programs and core platforms used in delivery.
+                        </p>
+                        <ul class="list">
+                            <li>Google Cloud skill badge(s) (Credly)</li>
+                            <li>Dell Young Leaders program</li>
+                            <li>GitHub, Docker, and OpenAI used across projects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <img src="vendor/portfolio-website/public/images/Proof & references-Recent Experience-foreground.png" alt="" class="section-foreground" aria-hidden="true">
+            <div class="container">
+                <h2 class="section-title">Recent Experience</h2>
+
+                <div class="grid">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
+                            <h3 style="color: var(--text);">Computer vision &amp; document automation</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Recent</span>
+                        </div>
+                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Research collaboration (geomatics)</div>
+                        <ul class="list">
+                            <li>Delivered OCR + LLM pipeline with <span style="color: var(--text);">100% field-mapping accuracy</span> on a defined set.</li>
+                            <li>Built validation layers, confidence scoring, and audit-grade logging.</li>
+                        </ul>
+                        
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
+                            <h3 style="color: var(--text);">Retrieval systems (RAG)</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Recent</span>
+                        </div>
+                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Early-stage startup (equity-based)</div>
+                        <ul class="list">
+                            <li>Built a RAG assistant with FAISS + sentence-transformers and LLM APIs.</li>
+                            <li>Shipped the end-to-end pipeline and tightened production safeguards.</li>
+                        </ul>
+                        
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
+                            <h3 style="color: var(--text);">Embedded / edge fundamentals</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Recent</span>
+                        </div>
+                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Mobility safety startup</div>
+                        <ul class="list">
+                            <li>Developing sensor fusion and edge-AI for real-time hazard detection.</li>
+                            <li>Contributing to firmware and data architecture for LiDAR/IMU/camera integration.</li>
+                        </ul>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise & Breadth -->
+        <section id="expertise" class="section alt">
+            <img src="vendor/portfolio-website/public/images/Proof & references-Recent Experience-foreground.png" alt="" class="section-foreground" aria-hidden="true">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Expertise &amp; breadth</h2>
+                <p class="muted" style="text-align: center; max-width: 860px; margin: 0 auto 2rem; line-height: 1.7;">
+                    Depth in production AI and backend delivery, with breadth across reliability, data, and embedded systems.
+                </p>
+
+                <div class="grid">
+                    <div class="card skill-category-card animate-on-scroll">
+                        <div class="skill-category-header">
+                            <div class="skill-category-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                </svg>
+                            </div>
+                            <h3 style="color: var(--text); margin: 0;">AI / ML systems</h3>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Document automation & OCR</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">RAG systems</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot"></span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Computer Vision</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card skill-category-card animate-on-scroll">
+                        <div class="skill-category-header">
+                            <div class="skill-category-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                    <line x1="8" y1="21" x2="16" y2="21"/>
+                                    <line x1="12" y1="17" x2="12" y2="21"/>
+                                </svg>
+                            </div>
+                            <h3 style="color: var(--text); margin: 0;">Backend &amp; data</h3>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">API design & integration</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Data modeling</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot"></span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Observability</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card skill-category-card animate-on-scroll">
+                        <div class="skill-category-header">
+                            <div class="skill-category-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                                </svg>
+                            </div>
+                            <h3 style="color: var(--text); margin: 0;">Systems &amp; shipping</h3>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">CI/CD & release hygiene</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Containerization</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot"></span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Performance optimization</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card skill-category-card animate-on-scroll">
+                        <div class="skill-category-header">
+                            <div class="skill-category-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                            </div>
+                            <h3 style="color: var(--text); margin: 0;">Embedded &amp; edge</h3>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Sensor integration</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot"></span>
+                                <span class="skill-dot"></span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Real-time pipelines</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot"></span>
+                                <span class="skill-dot"></span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Edge AI fundamentals</span>
+                            <div class="skill-strength">
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot filled"></span>
+                                <span class="skill-dot"></span>
+                                <span class="skill-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech-stack" class="section section-subtle">
+            <img src="vendor/portfolio-website/public/images/Proof & references-Recent Experience-foreground.png" alt="" class="section-foreground" aria-hidden="true">
+            <div class="container">
+                <h2 class="section-title">Tech stack</h2>
+                <p class="muted" style="text-align: center; max-width: 860px; margin: 0 auto 2rem; line-height: 1.7;">
+                    Consolidated view of the tools used across projects.
+                </p>
+
+                <div class="card">
+                    <h3 style="color: var(--text); margin-bottom: 0.75rem;">Core stack</h3>
+
+                    <div class="logo-group-title">AI / ML</div>
+                    <div class="logo-grid">
+                        <a class="logo-item" href="https://pytorch.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" alt="PyTorch" loading="lazy">
+                            <span class="logo-label">PyTorch</span>
+                        </a>
+                        <a class="logo-item" href="https://opencv.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="OpenCV" loading="lazy">
+                            <span class="logo-label">OpenCV</span>
+                        </a>
+                        <a class="logo-item" href="https://platform.openai.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="OpenAI" loading="lazy">
+                            <span class="logo-label">OpenAI</span>
+                        </a>
+                        <a class="logo-item" href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/huggingface.svg" alt="Hugging Face" loading="lazy">
+                            <span class="logo-label">Hugging Face</span>
+                        </a>
+                        <a class="logo-item" href="https://github.com/facebookresearch/faiss" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/meta.svg" alt="FAISS" loading="lazy">
+                            <span class="logo-label">FAISS</span>
+                        </a>
+                        <a class="logo-item" href="https://streamlit.io/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg" alt="Streamlit" loading="lazy">
+                            <span class="logo-label">Streamlit</span>
+                        </a>
+                        <a class="logo-item" href="https://groq.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/groq.svg" alt="GROQ" loading="lazy">
+                            <span class="logo-label">GROQ</span>
+                        </a>
+                    </div>
+
+                    <div class="logo-group-title">Backend / Data</div>
+                    <div class="logo-grid">
+                        <a class="logo-item" href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy">
+                            <span class="logo-label">Node.js</span>
+                        </a>
+                        <a class="logo-item" href="https://www.java.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy">
+                            <span class="logo-label">Java</span>
+                        </a>
+                        <a class="logo-item" href="https://spring.io/projects/spring-boot" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" alt="Spring Boot" loading="lazy">
+                            <span class="logo-label">Spring Boot</span>
+                        </a>
+                        <a class="logo-item" href="https://expressjs.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/express.svg" alt="Express.js" loading="lazy">
+                            <span class="logo-label">Express.js</span>
+                        </a>
+                        <a class="logo-item" href="https://www.fastify.io/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/fastify.svg" alt="Fastify" loading="lazy">
+                            <span class="logo-label">Fastify</span>
+                        </a>
+                        <a class="logo-item" href="https://www.postgresql.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy">
+                            <span class="logo-label">PostgreSQL</span>
+                        </a>
+                        <a class="logo-item" href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy">
+                            <span class="logo-label">MySQL</span>
+                        </a>
+                        <a class="logo-item" href="https://supabase.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" alt="Supabase" loading="lazy">
+                            <span class="logo-label">Supabase</span>
+                        </a>
+                        <a class="logo-item" href="https://pandas.pydata.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="Pandas" loading="lazy">
+                            <span class="logo-label">Pandas</span>
+                        </a>
+                        <a class="logo-item" href="https://numpy.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" alt="NumPy" loading="lazy">
+                            <span class="logo-label">NumPy</span>
+                        </a>
+                        <a class="logo-item" href="https://vercel.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vercel.svg" alt="Vercel Edge" loading="lazy">
+                            <span class="logo-label">Vercel Edge</span>
+                        </a>
+                        <a class="logo-item" href="https://www.cloudflare.com/products/r2/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cloudflare.svg" alt="Cloudflare R2" loading="lazy">
+                            <span class="logo-label">Cloudflare R2</span>
+                        </a>
+                        <a class="logo-item" href="https://stripe.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/stripe.svg" alt="Stripe" loading="lazy">
+                            <span class="logo-label">Stripe</span>
+                        </a>
+                    </div>
+
+                    <div class="logo-group-title">Frontend / Platform</div>
+                    <div class="logo-grid">
+                        <a class="logo-item" href="https://nextjs.org/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nextdotjs.svg" alt="Next.js" loading="lazy">
+                            <span class="logo-label">Next.js</span>
+                        </a>
+                        <a class="logo-item" href="https://react.dev/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" loading="lazy">
+                            <span class="logo-label">React</span>
+                        </a>
+                        <a class="logo-item" href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="TypeScript" loading="lazy">
+                            <span class="logo-label">TypeScript</span>
+                        </a>
+                        <a class="logo-item" href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" loading="lazy">
+                            <span class="logo-label">Tailwind CSS</span>
+                        </a>
+                        <a class="logo-item" href="https://turbo.build/repo" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/turborepo.svg" alt="Turborepo" loading="lazy">
+                            <span class="logo-label">Turborepo</span>
+                        </a>
+                    </div>
+
+                    <div class="logo-group-title">Infra / Tooling</div>
+                    <div class="logo-grid">
+                        <a class="logo-item" href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" loading="lazy">
+                            <span class="logo-label">Docker</span>
+                        </a>
+                        <a class="logo-item" href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlecloud.svg" alt="Google Cloud" loading="lazy">
+                            <span class="logo-label">Google Cloud</span>
+                        </a>
+                        <a class="logo-item" href="https://www.terraform.io/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" loading="lazy">
+                            <span class="logo-label">Terraform</span>
+                        </a>
+                        <a class="logo-item" href="https://github.com/features/actions" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" alt="GitHub Actions" loading="lazy">
+                            <span class="logo-label">GitHub Actions</span>
+                        </a>
+                        <a class="logo-item" href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" loading="lazy">
+                            <span class="logo-label">Git</span>
+                        </a>
+                        <a class="logo-item" href="https://www.linux.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" alt="Linux" loading="lazy">
+                            <span class="logo-label">Linux</span>
+                        </a>
+                        <a class="logo-item" href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/opentelemetry.svg" alt="OpenTelemetry" loading="lazy">
+                            <span class="logo-label">OpenTelemetry</span>
+                        </a>
+                        <a class="logo-item" href="https://testing-library.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/testinglibrary.svg" alt="Testing Library" loading="lazy">
+                            <span class="logo-label">Testing Library</span>
+                        </a>
+                        <a class="logo-item" href="https://www.npmjs.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/npm.svg" alt="npm" loading="lazy">
+                            <span class="logo-label">npm</span>
+                        </a>
+                        <a class="logo-item" href="https://eslint.org/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/eslint.svg" alt="ESLint" loading="lazy">
+                            <span class="logo-label">ESLint</span>
+                        </a>
+                        <a class="logo-item" href="https://www.postman.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postman.svg" alt="Postman" loading="lazy">
+                            <span class="logo-label">Postman</span>
+                        </a>
+                        <a class="logo-item" href="https://curl.se/" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/curl.svg" alt="cURL" loading="lazy">
+                            <span class="logo-label">cURL</span>
+                        </a>
+                        <a class="logo-item" href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">
+                            <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/githubcopilot.svg" alt="GitHub Copilot" loading="lazy">
+                            <span class="logo-label">Copilot CLI</span>
+                        </a>
+                        <a class="logo-item" href="https://www.rust-lang.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" alt="Rust" loading="lazy">
+                            <span class="logo-label">Rust</span>
+                        </a>
+                        <a class="logo-item" href="https://webassembly.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/webassembly/webassembly-original.svg" alt="WebAssembly" loading="lazy">
+                            <span class="logo-label">WASM</span>
+                        </a>
+                        <a class="logo-item" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy">
+                            <span class="logo-label">JavaScript</span>
+                        </a>
+                    </div>
+
+                    <div class="logo-group-title">Additional technologies</div>
+                    <div class="stack-tags">
+                        <span class="tag">FlatBuffers</span>
+                        <span class="tag">Ed25519</span>
+                        <span class="tag">Zstandard (Zstd)</span>
+                        <span class="tag">CLIP (ViT-B/32)</span>
+                        <span class="tag">Cloud Tasks</span>
+                        <span class="tag">Cloud Run</span>
+                        <span class="tag">Supabase Auth</span>
+                        <span class="tag">JWT</span>
+                        <span class="tag">Docker Compose</span>
+                        <span class="tag">Neon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section section-subtle">
+            <img src="vendor/portfolio-website/public/images/Proof & references-Recent Experience-foreground.png" alt="" class="section-foreground" aria-hidden="true">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Featured Projects</h2>
+
+                <p class="muted" style="text-align: center; max-width: 820px; margin: 0 auto 0.75rem; line-height: 1.7;">
+                    Featured picks first; filter for detail.
+                </p>
+
+                <div class="featured-picks" aria-label="Featured picks">
+                    <a class="card featured-card" href="case-studies/ocr-document-automation.html">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <strong style="color: var(--text);">OCR Document Automation</strong>
+                            <span class="muted" style="font-size: 0.9rem;">Case study</span>
+                        </div>
+                        <p class="muted" style="margin-top:0.35rem; line-height:1.7;">Validation-first OCR pipeline with explainable outputs.</p>
+                        <div class="proof-value" style="margin-top:0.65rem;">100% accuracy</div>
+                        <div class="proof-label">Field-mapping on defined set</div>
+                    </a>
+                    <a class="card featured-card" href="case-studies/rag-assistant.html">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <strong style="color: var(--text);">RAG Assistant</strong>
+                            <span class="muted" style="font-size: 0.9rem;">Case study</span>
+                        </div>
+                        <p class="muted" style="margin-top:0.35rem; line-height:1.7;">Grounded retrieval with reproducible indexing and guardrails.</p>
+                        <div class="proof-value" style="margin-top:0.65rem;">Reliable</div>
+                        <div class="proof-label">Evidence-first responses</div>
+                    </a>
+                    <a class="card featured-card" href="https://github.com/MatomeMb/FashionMNIST-Classifier" target="_blank" rel="noopener noreferrer">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                            <strong style="color: var(--text);">FashionMNIST Classifier</strong>
+                            <span class="muted" style="font-size: 0.9rem;">Repo</span>
+                        </div>
+                        <p class="muted" style="margin-top:0.35rem; line-height:1.7;">End-to-end training and evaluation pipeline.</p>
+                        <div class="proof-value" style="margin-top:0.65rem;">89.33%</div>
+                        <div class="proof-label">Test accuracy</div>
+                    </a>
+                </div>
+
+                <div class="project-search" aria-label="Search projects">
+                    <input id="projectSearch" type="search" autocomplete="off" placeholder="Search projects (e.g., RAG, OCR, PyTorch, scheduling)…" aria-label="Search projects">
+                    <span class="hint">Tip: search matches titles, tags, and key bullets.</span>
+                </div>
+
+                <div class="project-filters" role="radiogroup" aria-label="Filter projects">
+                    <button class="project-filter active" type="button" data-filter="all" role="radio" aria-checked="true" tabindex="0">All</button>
+                    <button class="project-filter" type="button" data-filter="ai-ml" role="radio" aria-checked="false" tabindex="-1">AI/ML</button>
+                    <button class="project-filter" type="button" data-filter="backend" role="radio" aria-checked="false" tabindex="-1">Backend/Web</button>
+                    <button class="project-filter" type="button" data-filter="systems" role="radio" aria-checked="false" tabindex="-1">Systems</button>
+                    <button class="project-filter" type="button" data-filter="embedded" role="radio" aria-checked="false" tabindex="-1">Embedded</button>
+                    <button class="project-filter" type="button" data-filter="nda" role="radio" aria-checked="false" tabindex="-1">NDA</button>
+                </div>
+
+                <div class="card" style="margin: 1.25rem auto 1.75rem; max-width: 980px;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+                        <h3 style="color: var(--text); margin: 0;">NDA note (what I can share publicly)</h3>
+                        <span class="muted" style="font-size:0.9rem;">Built to protect clients and teams</span>
+                    </div>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 0.85rem;">
+                        <div>
+                            <div class="muted" style="font-weight: 700; margin-bottom: 0.5rem;">I can discuss</div>
+                            <ul class="list">
+                                <li>Problem framing, constraints, and tradeoffs</li>
+                                <li>Architecture patterns and reliability practices</li>
+                                <li>Validation, observability, and delivery workflow</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="muted" style="font-weight: 700; margin-bottom: 0.5rem;">I won’t publish</div>
+                            <ul class="list">
+                                <li>Client names, internal documents, or private metrics</li>
+                                <li>Confidential datasets, prompts, or implementation details</li>
+                                <li>Anything that violates NDA or privacy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <!-- Project 1 -->
+                    <div class="card project-card animate-on-scroll" data-category="ai-ml">
+                        <div class="project-header">
+                            <div class="project-thumbnail" style="background-image: url('vendor/portfolio-website/public/images/hero-background-1.png'); background-size: cover; background-position: center;">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="opacity: 0.9;">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                                </svg>
+                            </div>
+                            <span class="project-badge">Featured</span>
+                        </div>
+                        <div class="project-content">
+                            <h3 style="color: var(--text); margin-bottom: 0.5rem;">OCR Document Automation</h3>
+                        <p class="muted" style="margin-bottom: 1rem;">Production OCR + LLM pipeline for document-to-structured-data automation.</p>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 0 0 1.946-.806 3.42 3.42 0 0 0 3.638 0 3.42 3.42 0 0 0 1.946.806 3.42 3.42 0 0 1 .921 1.018 3.42 3.42 0 0 1 .408 2.31M7.835 4.697l-.867.12A2.42 2.42 0 0 0 4.983 7.12l-.12.867m2.972 2.972l.867.12a2.42 2.42 0 0 0 2.31-.408l.867-.867m-2.972-2.972L6.3 6.3m11.7 11.7l-2.163-2.163m-5.474-5.474L6.3 6.3m11.7 11.7L18 18"/>
+                                    </svg>
+                                    <span>100% accuracy</span>
+                                </div>
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">OpenCV</span>
+                                <span class="tech-badge">OCR</span>
+                                <span class="tech-badge">PDF Forms</span>
+                                <span class="tech-badge">LLM APIs</span>
+                            </div>
+                            <div class="project-links">
+                                <a class="link-primary" href="case-studies/ocr-document-automation.html" aria-label="Open OCR Document Automation case study">Case Study →</a>
+                                <a class="link-secondary" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        <details>
+                            <summary class="details-summary">Case study details</summary>
+                            <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
+                                <strong style="color: var(--text);">What I optimized for:</strong> correctness and traceability first.
+                                The pipeline uses layered validation (format, geometry, constraints, cross-field rules) so extraction failures are caught early and are explainable.
+                                <div style="margin-top: 0.65rem;">
+                                    <strong style="color: var(--text);">What I’d improve next:</strong> expand evaluation sets, add drift checks on input quality, and tighten “confidence-to-review” thresholds to reduce manual review time.
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="card project-card animate-on-scroll" data-category="ai-ml">
+                        <div class="project-header">
+                            <div class="project-thumbnail" style="background-image: url('vendor/portfolio-website/public/images/hero-background-2.png'); background-size: cover; background-position: center;">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="opacity: 0.9;">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                    <path d="M13 8H7M17 12H7"/>
+                                </svg>
+                            </div>
+                            <span class="project-badge">Featured</span>
+                        </div>
+                        <div class="project-content">
+                            <h3 style="color: var(--text); margin-bottom: 0.5rem;">RAG AI Assistant</h3>
+                            <p class="muted" style="margin-bottom: 1rem;">RAG assistant connecting and matching African entrepreneurs via fast retrieval + LLM responses.</p>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 0 0 1.946-.806 3.42 3.42 0 0 0 3.638 0 3.42 3.42 0 0 0 1.946.806 3.42 3.42 0 0 1 .921 1.018 3.42 3.42 0 0 1 .408 2.31M7.835 4.697l-.867.12A2.42 2.42 0 0 0 4.983 7.12l-.12.867m2.972 2.972l.867.12a2.42 2.42 0 0 0 2.31-.408l.867-.867m-2.972-2.972L6.3 6.3m11.7 11.7l-2.163-2.163m-5.474-5.474L6.3 6.3m11.7 11.7L18 18"/>
+                                    </svg>
+                                    <span>Reliable retrieval</span>
+                                </div>
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">FAISS</span>
+                                <span class="tech-badge">sentence-transformers</span>
+                                <span class="tech-badge">Streamlit</span>
+                                <span class="tech-badge">LLM APIs</span>
+                            </div>
+                            <div class="project-links">
+                                <a class="link-primary" href="case-studies/rag-assistant.html" aria-label="Open RAG Assistant case study">Case Study →</a>
+                                <a class="link-secondary" href="https://github.com/MatomeMb/personal-codex-agent" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="card project-card animate-on-scroll" data-category="embedded">
+                        <div class="project-header">
+                            <div class="project-thumbnail" style="background-image: url('vendor/portfolio-website/public/images/hero-background-3.png'); background-size: cover; background-position: center;">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="opacity: 0.9;">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 style="color: var(--text); margin-bottom: 0.5rem;">Embedded Navigation</h3>
+                            <p class="muted" style="margin-bottom: 1rem;">Sensor fusion + edge-AI foundations for real-time hazard detection.</p>
+                            <div class="tech-stack">
+                                <span class="tech-badge">C/C++</span>
+                                <span class="tech-badge">STM32</span>
+                                <span class="tech-badge">LiDAR</span>
+                                <span class="tech-badge">IMU</span>
+                                <span class="tech-badge">Camera</span>
+                            </div>
+                            <div class="project-links">
+                                <a class="link-secondary" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                            <details style="margin-top: 1rem;">
+                                <summary class="details-summary">Case study details</summary>
+                                <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
+                                    Emphasis on signal integrity and latency. Contributed to firmware/data architecture decisions to ensure
+                                    consistent sensor timing and robust downstream consumption.
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 (Discreet NDA Work) -->
+                    <div class="card project-card animate-on-scroll" data-category="nda">
+                        <div class="project-header">
+                            <div class="project-thumbnail" style="background-image: url('vendor/portfolio-website/public/images/hero-background-1.png'); background-size: cover; background-position: center;">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="opacity: 0.9;">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    <path d="M9 12l2 2 4-4"/>
+                                </svg>
+                            </div>
+                            <span class="project-badge" style="background: rgba(99, 102, 241, 0.2); border-color: rgba(99, 102, 241, 0.5); color: #a5b4fc;">NDA</span>
+                        </div>
+                        <div class="project-content">
+                            <h3 style="color: var(--text); margin-bottom: 0.5rem;">Confidential AI Product Build (NDA)</h3>
+                            <p class="muted" style="margin-bottom: 1rem;">Ongoing work on an AI-driven product with details limited by NDA.</p>
+                            <div class="tech-stack">
+                                <span class="tech-badge">LLM APIs</span>
+                                <span class="tech-badge">Backend</span>
+                                <span class="tech-badge">CI/CD</span>
+                            </div>
+                            <div class="project-links">
+                                <a class="link-primary" href="mailto:matomepontso@gmail.com?subject=Portfolio%20-%20NDA%20project%20overview%20request&body=Hi%20Matome%2C%0A%0AI%27d%20love%20to%20learn%20more%20about%20the%20NDA%20project%20at%20a%20high%20level.%20Could%20we%20schedule%20a%20quick%20chat%3F%0A%0AThank%20you%2C" aria-label="Email Matome to request an NDA-safe overview">Request Overview →</a>
+                            </div>
+                            <p class="muted" style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6;">
+                                <strong style="color: var(--text);">Note:</strong> Details limited by NDA; happy to discuss at a high level.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="card project-card animate-on-scroll" data-category="ai-ml">
+                        <div class="project-header">
+                            <div class="project-thumbnail" style="background-image: url('vendor/portfolio-website/public/images/hero-background-2.png'); background-size: cover; background-position: center;">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="opacity: 0.9;">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                                    <path d="M21 15l-5-5L5 21"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 style="color: var(--text); margin-bottom: 0.5rem;">FashionMNIST Classifier</h3>
+                        <p class="muted" style="margin-bottom: 1rem;">Neural network image classifier with an end-to-end training and evaluation pipeline.</p>
+                        <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin: 0.25rem 0 1rem;">
+                            <a class="repo-link" href="https://github.com/MatomeMb/FashionMNIST-Classifier" target="_blank" rel="noopener noreferrer" aria-label="Open FashionMNIST-Classifier repository on GitHub">Open repo <span aria-hidden="true">↗</span></a>
+                        </div>
+                        
+                        <ul class="list">
+                            <li><strong style="color: var(--text);">Outcome:</strong> 89.33% test accuracy on FashionMNIST.</li>
+                            <li><strong style="color: var(--text);">Approach:</strong> training pipeline with preprocessing and reproducible runs.</li>
+                            <li><strong style="color: var(--text);">Reliability:</strong> metrics, validation, and clear experiment tracking.</li>
+                            <li><strong style="color: var(--text);">Stack:</strong> Python, PyTorch.</li>
+                        </ul>
+                        <details>
+                            <summary class="details-summary">Case study details</summary>
+                            <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
+                                <strong style="color: var(--text);">What this demonstrates:</strong> the full ML loop (data → training → evaluation) with repeatability.
+                                <div style="margin-top: 0.65rem;">
+                                    <strong style="color: var(--text);">What I’d improve next:</strong> add calibration, stronger baselines, and automated experiment tracking to make comparisons faster and more robust.
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="card project-card animate-on-scroll" data-category="backend">
+                        <div class="project-header">
+                            <div class="project-thumbnail" style="background-image: url('vendor/portfolio-website/public/images/hero-background-3.png'); background-size: cover; background-position: center;">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="opacity: 0.9;">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                    <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 style="color: var(--text); margin-bottom: 0.5rem;">MyAdvisor (Full‑Stack Web App)</h3>
+                            <p class="muted" style="margin-bottom: 1rem;">Full-stack web app emphasizing usability, data integrity, and maintainable APIs.</p>
+                            <div class="tech-stack">
+                                <span class="tech-badge">Java</span>
+                                <span class="tech-badge">Spring Boot</span>
+                                <span class="tech-badge">MySQL</span>
+                            </div>
+                            <div class="project-links">
+                                <a class="link-secondary" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 7 -->
+                    <div class="card project-card animate-on-scroll" data-category="systems">
+                        <div class="project-header">
+                            <div class="project-thumbnail" style="background-image: url('vendor/portfolio-website/public/images/hero-background-1.png'); background-size: cover; background-position: center;">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="opacity: 0.9;">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 6v6l4 2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 style="color: var(--text); margin-bottom: 0.5rem;">Scheduling & Networking Systems</h3>
+                            <p class="muted" style="margin-bottom: 1rem;">Hands-on systems work: scheduling simulations, protocol design, and integrity checks.</p>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                    </svg>
+                                    <span>35% efficiency gain</span>
+                                </div>
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-badge">Java</span>
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">Sockets</span>
+                                <span class="tech-badge">Hashing</span>
+                            </div>
+                            <div class="project-links">
+                                <a class="link-primary" href="https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos" target="_blank" rel="noopener noreferrer" aria-label="Open Operating-Systems-Scheduling_Algos repository on GitHub">Scheduling Repo →</a>
+                                <a class="link-secondary" href="https://github.com/MatomeMb/number-range-summarizer" target="_blank" rel="noopener noreferrer" aria-label="Open number-range-summarizer repository on GitHub">Java Repo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 2.5rem;">
+                    <div class="featured-repos-banner" style="height: 140px; border-radius: 8px; margin-bottom: 1.25rem; background-size: cover; background-position: center; background-image: url('vendor/portfolio-website/public/images/ChatGPT%20Image%20Oct%203%2C%202025%2C%2002_57_25%20AM.png');" aria-hidden="true"></div>
+                    <h3 style="color: var(--text); margin-bottom: 0.75rem;">Featured repos (from GitHub)</h3>
+                    <p class="muted" style="line-height: 1.7; margin-bottom: 1rem;">
+                        A small selection of public work you can review immediately. For private/NDA work, I share high-level details and can walk through specifics live.
+                    </p>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+                        <a class="card repo-card" href="https://github.com/MatomeMb/personal-codex-agent" target="_blank" rel="noopener noreferrer">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                                <strong style="color: var(--text);">personal-codex-agent</strong>
+                                <span class="muted" style="font-size: 0.9rem;">Python</span>
+                            </div>
+                            <div class="muted" style="margin-top:0.35rem; line-height:1.7;">RAG-focused project work.</div>
+                            <span class="repo-cta">Open on GitHub <span aria-hidden="true">↗</span></span>
+                        </a>
+                        <a class="card repo-card" href="https://github.com/MatomeMb/FashionMNIST-Classifier" target="_blank" rel="noopener noreferrer">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                                <strong style="color: var(--text);">FashionMNIST-Classifier</strong>
+                                <span class="muted" style="font-size: 0.9rem;">Python</span>
+                            </div>
+                            <div class="muted" style="margin-top:0.35rem; line-height:1.7;">End-to-end training + evaluation pipeline.</div>
+                            <span class="repo-cta">Open on GitHub <span aria-hidden="true">↗</span></span>
+                        </a>
+                        <a class="card repo-card" href="https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos" target="_blank" rel="noopener noreferrer">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                                <strong style="color: var(--text);">Operating-Systems-Scheduling_Algos</strong>
+                                <span class="muted" style="font-size: 0.9rem;">Python</span>
+                            </div>
+                            <div class="muted" style="margin-top:0.35rem; line-height:1.7;">Scheduling algorithms + experimentation.</div>
+                            <span class="repo-cta">Open on GitHub <span aria-hidden="true">↗</span></span>
+                        </a>
+                        <a class="card repo-card" href="https://github.com/MatomeMb/Connected-Components-Image-Processor" target="_blank" rel="noopener noreferrer">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                                <strong style="color: var(--text);">Connected-Components-Image-Processor</strong>
+                                <span class="muted" style="font-size: 0.9rem;">C++</span>
+                            </div>
+                            <div class="muted" style="margin-top:0.35rem; line-height:1.7;">Connected components image processing.</div>
+                            <span class="repo-cta">Open on GitHub <span aria-hidden="true">↗</span></span>
+                        </a>
+                        <a class="card repo-card" href="https://github.com/MatomeMb/Slide-Puzzle-Game-Simulation" target="_blank" rel="noopener noreferrer">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                                <strong style="color: var(--text);">Slide-Puzzle-Game-Simulation</strong>
+                                <span class="muted" style="font-size: 0.9rem;">C++</span>
+                            </div>
+                            <div class="muted" style="margin-top:0.35rem; line-height:1.7;">Simulation-oriented systems thinking.</div>
+                            <span class="repo-cta">Open on GitHub <span aria-hidden="true">↗</span></span>
+                        </a>
+                        <a class="card repo-card" href="https://github.com/MatomeMb/number-range-summarizer" target="_blank" rel="noopener noreferrer">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                                <strong style="color: var(--text);">number-range-summarizer</strong>
+                                <span class="muted" style="font-size: 0.9rem;">Java</span>
+                            </div>
+                            <div class="muted" style="margin-top:0.35rem; line-height:1.7;">Small, clean algorithmic utility.</div>
+                            <span class="repo-cta">Open on GitHub <span aria-hidden="true">↗</span></span>
+                        </a>
+                    </div>
+                    <div style="display:flex; justify-content:center; margin-top: 1rem;">
+                        <a class="repo-link" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer">View all repos <span aria-hidden="true">↗</span></a>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 2.5rem;">
+                    <h3 style="color: var(--text); margin-bottom: 0.75rem;">Project timeline (high level)</h3>
+                    <p class="muted" style="line-height: 1.7;">
+                        A quick view of how my work evolved across domains. Details are intentionally high-level where needed.
+                    </p>
+                    <div class="timeline" aria-label="Project timeline">
+                        <div class="timeline-item">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+                                <strong style="color: var(--text);">Full‑stack foundations</strong>
+                                <span class="muted" style="font-size:0.9rem;">Web • APIs • Databases</span>
+                            </div>
+                            <div class="muted" style="line-height:1.7;">Shipped web app features with API design, data modeling, and UX iteration.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+                                <strong style="color: var(--text);">Systems + performance</strong>
+                                <span class="muted" style="font-size:0.9rem;">Scheduling • Networking</span>
+                            </div>
+                            <div class="muted" style="line-height:1.7;">Benchmarked algorithms and built integrity-first networking components.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+                                <strong style="color: var(--text);">Modeling + evaluation</strong>
+                                <span class="muted" style="font-size:0.9rem;">PyTorch • CV</span>
+                            </div>
+                            <div class="muted" style="line-height:1.7;">Developed training pipelines with reproducible evaluation and clear metrics.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+                                <strong style="color: var(--text);">Production AI systems</strong>
+                                <span class="muted" style="font-size:0.9rem;">OCR • RAG • Reliability</span>
+                            </div>
+                            <div class="muted" style="line-height:1.7;">Built document automation and retrieval pipelines with guardrails and operational readiness.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications" class="section" style="padding: 4rem 2rem;">
+            <img src="vendor/portfolio-website/public/images/Proof & references-Recent Experience-foreground.png" alt="" class="section-foreground" aria-hidden="true">
+            <div class="container">
+                <h2 class="section-title">Certifications</h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">Google Cloud Skill Badges</h3>
+                        <p class="muted" style="line-height: 1.7; margin-bottom: 1rem;">
+                            Verified cloud learning and hands-on labs focused on practical, production-relevant skills.
+                        </p>
+                        <ul class="list">
+                            <li><strong style="color: var(--text);">Multimodal RAG (Gemini)</strong> (view on <a class="inline-link" href="https://www.credly.com/users/matome-mbowene" target="_blank" rel="noopener noreferrer">Credly</a>)</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">Programs</h3>
+                        <p class="muted" style="line-height: 1.7; margin-bottom: 1rem;">
+                            Selected programs that strengthened leadership, communication, and technical execution.
+                        </p>
+                        <div style="display:grid; gap: 0.75rem;">
+                            <a class="badge-link" href="https://www.dellyoungleaders.org" target="_blank" rel="noopener noreferrer" aria-label="Open Dell Young Leaders program information">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/dell.svg" alt="" aria-hidden="true" loading="lazy">
+                                <span>
+                                    Dell Young Leaders
+                                    <span class="badge-sub">Program info ↗</span>
+                                </span>
+                            </a>
+                            <a class="badge-link" href="https://cloud.google.com/edu/faculty/career-launchpad" target="_blank" rel="noopener noreferrer" aria-label="Open Google Cloud Career Launchpad program information">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlecloud.svg" alt="" aria-hidden="true" loading="lazy">
+                                <span>
+                                    Google Cloud Career Launchpad (EMEA)
+                                    <span class="badge-sub">Program info ↗</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Writing / Notes (public-safe) -->
+        <section id="writing" class="section section-subtle">
+            <img src="vendor/portfolio-website/public/images/Proof & references-Recent Experience-foreground.png" alt="" class="section-foreground" aria-hidden="true">
+            <div class="container">
+                <h2 class="section-title">Writing</h2>
+                <p class="muted" style="text-align: center; max-width: 820px; margin: 0 auto 2rem; line-height: 1.7;">
+                    Short, public-safe notes on how I build and ship reliable systems.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                    <article class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">Validation-first OCR: why “accuracy” isn’t enough</h3>
+                        <p class="muted" style="line-height: 1.7;">
+                            In production OCR, errors often look “plausible” and silently poison downstream systems.
+                            My default is validation-first extraction: explicit constraints, cross-field rules, confidence thresholds, and human-review hooks.
+                            The goal is not just extracting text, but producing outputs you can trust and audit.
+                        </p>
+                        <div style="margin-top: 0.85rem;">
+                            <a class="inline-link" href="#projects">Related case study: OCR Document Automation</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">RAG guardrails: being useful without hallucinating</h3>
+                        <p class="muted" style="line-height: 1.7;">
+                            A good RAG system is as much about “when to refuse” as it is about retrieval.
+                            I focus on deterministic indexing, conservative thresholds when evidence is weak, and clear provenance (links back to sources).
+                            This keeps the assistant helpful while staying honest and grounded.
+                        </p>
+                        <div style="margin-top: 0.85rem;">
+                            <a class="inline-link" href="https://github.com/MatomeMb/personal-codex-agent" target="_blank" rel="noopener noreferrer">Related repo: personal-codex-agent</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">Shipping discipline: small checks prevent big failures</h3>
+                        <p class="muted" style="line-height: 1.7;">
+                            What helps me move fast safely: reproducible environments, dependency hygiene, automated checks, and clear “definition of done”.
+                            Even lightweight CI, good error handling, and predictable releases reduce firefighting and increase delivery cadence.
+                        </p>
+                        <div style="margin-top: 0.85rem;">
+                            <a class="inline-link" href="#tech-stack">Related: Tech stack</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- About (neutral, public-safe) -->
+        <section id="about" class="section">
+            <img src="vendor/portfolio-website/public/images/Proof & references-Recent Experience-foreground.png" alt="" class="section-foreground" aria-hidden="true">
+            <div class="container">
+                <h2 class="section-title">About</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">How I work</h3>
+                        <p class="muted" style="line-height: var(--lh-body);">
+                            I build end-to-end AI features that hold up in production: ingestion, validation, retrieval, model integration, observability, and delivery.
+                            My focus is correctness and reliability: clear interfaces, defensive checks, and measurable outcomes.
+                        </p>
+                        <hr class="subtle-divider">
+                        <h3 style="color: var(--text); margin-bottom: 0.5rem;">What I’m looking for</h3>
+                        <p class="muted" style="line-height: var(--lh-body);">
+                            Software engineering, AI/ML engineering, and backend/cloud roles. Open to hybrid or remote opportunities.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Education (approved)</h3>
+                        <p class="muted" style="line-height: var(--lh-body); margin-bottom: 0.75rem;">
+                            University of Cape Town (Computer Science &amp; Computer Engineering)
+                        </p>
+                        <hr class="subtle-divider">
+                        <h3 style="color: var(--text); margin-bottom: 0.75rem;">Core strengths</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="tag">Production OCR</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">Backend services</span>
+                            <span class="tag">CI/CD</span>
+                            <span class="tag">Reliability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <img src="vendor/portfolio-website/public/images/Proof & references-Recent Experience-foreground.png" alt="" class="section-foreground" aria-hidden="true">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 3rem; color: var(--text);">Get In Touch</h2>
+                <p class="muted" style="text-align: center; margin: -2rem auto 2rem; line-height: var(--lh-body);">
+                    Email or LinkedIn preferred. Resume and GitHub below.
+                </p>
+                <div class="pill-row contact-meta" aria-label="Contact availability">
+                    <span class="pill"><strong>Response</strong> 24–48h</span>
+                    <span class="pill"><strong>Availability</strong> Full-time / Contract</span>
+                    <span class="pill"><strong>Work mode</strong> Hybrid / Remote</span>
+                </div>
+                
+                <div class="card" style="padding: 2rem;">
+                    <!-- Simple Contact Info -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <div style="text-align: center;">
+                            <a class="contact-iconLink" href="mailto:matomepontso@gmail.com" aria-label="Email Matome">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/gmail.svg" alt="" aria-hidden="true" loading="lazy">
+                                <span class="sr-only">Email</span>
+                            </a>
+                            <div style="color: var(--text-muted);">Email</div>
+                            <div style="display:flex; justify-content:center; gap:0.6rem; align-items:center; flex-wrap:wrap;">
+                                <span class="contact-text">matomepontso@gmail.com</span>
+                                <button id="copyEmailBtn" class="mini-btn" type="button" aria-label="Copy email address">Copy</button>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <a class="contact-iconLink" href="https://linkedin.com/in/matomembowene" target="_blank" rel="noopener noreferrer" aria-label="Open Matome’s LinkedIn profile">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg" alt="" aria-hidden="true" loading="lazy">
+                                <span class="sr-only">LinkedIn</span>
+                            </a>
+                            <div style="color: var(--text-muted);">LinkedIn</div>
+                            <div class="contact-text">linkedin.com/in/matomembowene</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <a class="contact-iconLink" href="resume.pdf" aria-label="Download resume PDF">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/adobeacrobatreader.svg" alt="" aria-hidden="true" loading="lazy">
+                                <span class="sr-only">Resume PDF</span>
+                            </a>
+                            <div style="color: var(--text-muted);">Resume PDF</div>
+                            <div class="contact-text">resume.pdf</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <a class="contact-iconLink" href="https://github.com/MatomeMb" target="_blank" rel="noopener noreferrer" aria-label="Open Matome’s GitHub profile">
+                                <img class="logo-mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="" aria-hidden="true" loading="lazy">
+                                <span class="sr-only">GitHub</span>
+                            </a>
+                            <div style="color: var(--text-muted);">GitHub</div>
+                            <div class="contact-text">github.com/MatomeMb</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Simple Form -->
+                    <p class="muted" style="margin-bottom: 1rem; line-height: var(--lh-body);">
+                        Note: this form opens your email client with a pre-filled message (no server, no data storage).
+                    </p>
+                    <form id="contactForm" onsubmit="submitForm(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div>
+                            <label style="display:block; color: var(--text-muted); margin-bottom: 0.35rem;" for="name">Your Name</label>
+                            <input id="name" name="name" type="text" autocomplete="name" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(148,163,184,0.22); border-radius: 8px; color: var(--text);">
+                        </div>
+                        <div>
+                            <label style="display:block; color: var(--text-muted); margin-bottom: 0.35rem;" for="email">Your Email</label>
+                            <input id="email" name="email" type="email" autocomplete="email" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(148,163,184,0.22); border-radius: 8px; color: var(--text);">
+                        </div>
+                        <div>
+                            <label style="display:block; color: var(--text-muted); margin-bottom: 0.35rem;" for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="4" autocomplete="off" required style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(148,163,184,0.22); border-radius: 8px; color: var(--text); resize: vertical;"></textarea>
+                        </div>
+                        <button type="submit" style="background: linear-gradient(45deg, var(--accent), var(--accent-2)); color: white; padding: 0.75rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Send Message</button>
+                    </form>
+                    
+                    <div id="formMessage" style="margin-top: 1rem; text-align: center; display: none;"></div>
+                </div>
+                
+                <!-- Status -->
+                <div style="text-align: center; margin-top: 2rem; color: var(--text);">
+                    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(148,163,184,0.10); padding: 0.5rem 1rem; border-radius: 20px;">
+                        <div style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%;"></div>
+                        Open to opportunities
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer style="background: var(--secondary); padding: 2rem; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border);">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); letter-spacing: -0.03em;">MM</div>
+                <p>Software &amp; AI engineering, reliable systems, measurable outcomes</p>
+                <p style="margin-top: 0.75rem; font-size: 0.95rem;">
+                    <a class="inline-link" href="privacy.html">Privacy</a>
+                    <span aria-hidden="true" style="padding: 0 0.5rem; color: rgba(148,163,184,0.55);">•</span>
+                    <a class="inline-link" href=".well-known/security.txt">Security</a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2026 Matome Mbowene • Cape Town, South Africa</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Minimal JavaScript -->
+    <script>
+        // Show content immediately
+        document.body.classList.remove('loading');
+        document.body.classList.add('loaded');
+
+        // Theme Toggle with System Preference Detection
+        (function initTheme() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const themeIconDark = document.querySelector('.theme-icon-dark');
+            const themeIconLight = document.querySelector('.theme-icon-light');
+            if (!themeToggle) return;
+
+            // Get saved theme or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            
+            function applyTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                const isLight = theme === 'light';
+                themeIconDark.style.display = isLight ? 'none' : 'block';
+                themeIconLight.style.display = isLight ? 'block' : 'none';
+            }
+
+            // Apply initial theme
+            applyTheme(initialTheme);
+
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Listen for system theme changes (if no manual preference)
+            if (!savedTheme) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                    if (!localStorage.getItem('theme')) {
+                        applyTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            }
+        })();
+
+        // Motion toggle (manual override + prefers-reduced-motion)
+        (function initMotionToggle() {
+            const toggle = document.querySelector('.motion-toggle');
+            if (!toggle) return;
+            const stored = localStorage.getItem('reduceMotion');
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const initial = stored ? stored === 'true' : prefersReduced;
+
+            function applyMotionState(isReduced) {
+                document.documentElement.setAttribute('data-reduce-motion', isReduced ? 'true' : 'false');
+                toggle.setAttribute('aria-pressed', isReduced ? 'true' : 'false');
+                toggle.textContent = isReduced ? 'Motion Off' : 'Motion On';
+            }
+
+            applyMotionState(initial);
+
+            toggle.addEventListener('click', () => {
+                const next = !(document.documentElement.getAttribute('data-reduce-motion') === 'true');
+                applyMotionState(next);
+                localStorage.setItem('reduceMotion', String(next));
+            });
+        })();
+
+        // Scroll Progress Indicator
+        (function initScrollProgress() {
+            const progressBar = document.getElementById('scrollProgress');
+            if (!progressBar) return;
+
+            function updateProgress() {
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollPercent = scrollTop / (documentHeight - windowHeight);
+                progressBar.style.transform = `scaleX(${Math.min(scrollPercent, 1)})`;
+            }
+
+            // Throttle scroll events for performance
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateProgress();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            updateProgress();
+        })();
+
+        // 3D Tilt Effect for Project Cards
+        (function init3DTilt() {
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReduced) return;
+
+            const projectCards = document.querySelectorAll('.project-card');
+            if (!projectCards.length) return;
+
+            projectCards.forEach(card => {
+                card.classList.add('tilt-enabled');
+                
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.setProperty('--tilt-x', `${rotateY}deg`);
+                    card.style.setProperty('--tilt-y', `${rotateX}deg`);
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.setProperty('--tilt-x', '0deg');
+                    card.style.setProperty('--tilt-y', '0deg');
+                });
+            });
+        })();
+
+        // Accessible mobile nav toggle (progressive enhancement)
+        (function initNav() {
+            const nav = document.querySelector('nav');
+            const toggle = document.querySelector('.nav-toggle');
+            const menu = document.getElementById('nav-menu');
+            if (!nav || !toggle || !menu) return;
+
+            function setOpen(open) {
+                nav.setAttribute('data-menu-open', open ? 'true' : 'false');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+            }
+
+            setOpen(false);
+
+            toggle.addEventListener('click', () => {
+                const isOpen = nav.getAttribute('data-menu-open') === 'true';
+                setOpen(!isOpen);
+                if (!isOpen) menu.querySelector('a')?.focus();
+                else toggle.focus();
+            });
+
+            menu.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', () => {
+                    if (window.matchMedia('(max-width: 768px)').matches) {
+                        setOpen(false);
+                        toggle.focus();
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key !== 'Escape') return;
+                const isOpen = nav.getAttribute('data-menu-open') === 'true';
+                if (!isOpen) return;
+                setOpen(false);
+                toggle.focus();
+            });
+
+            window.addEventListener('resize', () => {
+                if (!window.matchMedia('(max-width: 768px)').matches) setOpen(false);
+            });
+        })();
+
+        // Project filtering (static, no dependencies; keyboard accessible)
+        (function () {
+            // Wait for DOM to be ready
+            function initFiltering() {
+                const filters = Array.from(document.querySelectorAll('.project-filter'));
+                const cards = Array.from(document.querySelectorAll('.project-card'));
+                const search = document.getElementById('projectSearch');
+                if (!filters.length || !cards.length) {
+                    // Retry if elements not found yet
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', initFiltering);
+                        return;
+                    }
+                    console.warn('Project filtering: filters or cards not found', { filters: filters.length, cards: cards.length });
+                    return;
+                }
+
+                let activeFilter = (filters.find(b => b.classList.contains('active'))?.dataset.filter) || 'all';
+                let query = '';
+
+                function matchCard(card, q) {
+                    if (!q) return true;
+                    const hay = (card.innerText || '').toLowerCase();
+                    return hay.includes(q.toLowerCase());
+                }
+
+                function apply() {
+                    filters.forEach(btn => {
+                        const isActive = btn.dataset.filter === activeFilter;
+                        btn.classList.toggle('active', isActive);
+                        btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
+                        btn.setAttribute('tabindex', isActive ? '0' : '-1');
+                    });
+                    
+                    let visibleCount = 0;
+                    cards.forEach((card, idx) => {
+                        const category = card.getAttribute('data-category');
+                        const categoryOk = activeFilter === 'all' || category === activeFilter;
+                        const queryOk = matchCard(card, query);
+                        const show = categoryOk && queryOk;
+                        
+                        // Use class-based hiding for CSS Grid compatibility
+                        if (show) {
+                            card.classList.remove('filtered-out');
+                            visibleCount++;
+                            
+                            // Stagger animation
+                            requestAnimationFrame(() => {
+                                card.style.opacity = '0';
+                                card.style.transform = 'translateY(10px)';
+                                const delay = Math.min(visibleCount * 35, 200);
+                                setTimeout(() => {
+                                    card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+                                    card.style.opacity = '1';
+                                    card.style.transform = 'translateY(0)';
+                                }, delay);
+                            });
+                        } else {
+                            card.classList.add('filtered-out');
+                            card.style.opacity = '0';
+                            card.style.transform = '';
+                        }
+                    });
+                }
+
+                filters.forEach(btn => {
+                    btn.setAttribute('aria-checked', btn.classList.contains('active') ? 'true' : 'false');
+                    btn.addEventListener('click', () => { 
+                        activeFilter = (btn.dataset.filter || 'all'); 
+                        apply(); 
+                    });
+                    btn.addEventListener('keydown', (e) => {
+                        const key = e.key;
+                        const idx = filters.indexOf(btn);
+                        if (idx < 0) return;
+
+                        const isArrow = key === 'ArrowLeft' || key === 'ArrowRight' || key === 'ArrowUp' || key === 'ArrowDown';
+                        const isHomeEnd = key === 'Home' || key === 'End';
+                        const isSelect = key === 'Enter' || key === ' ';
+                        if (!isArrow && !isHomeEnd && !isSelect) return;
+                        e.preventDefault();
+
+                        let nextIdx = idx;
+                        if (isHomeEnd) nextIdx = key === 'Home' ? 0 : (filters.length - 1);
+                        else if (isArrow) {
+                            const dir = (key === 'ArrowRight' || key === 'ArrowDown') ? 1 : -1;
+                            nextIdx = (idx + dir + filters.length) % filters.length;
+                        }
+
+                        const target = filters[nextIdx] || btn;
+                        const filter = target.dataset.filter || 'all';
+                        activeFilter = filter;
+                        apply();
+                        target.focus();
+                    });
+                });
+
+                if (search) {
+                    search.addEventListener('input', () => {
+                        query = (search.value || '').trim();
+                        apply();
+                    });
+                }
+
+                apply();
+            }
+            
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initFiltering);
+            } else {
+                // DOM already loaded, initialize immediately
+                setTimeout(initFiltering, 0);
+            }
+        })();
+
+        // Scrollspy: highlight current section in nav
+        (function () {
+            const nav = document.querySelector('nav');
+            const links = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+            if (!nav || !links.length) return;
+
+            const ids = links
+                .map(a => (a.getAttribute('href') || '').slice(1))
+                .filter(Boolean);
+
+            const sections = ids
+                .map(id => document.getElementById(id))
+                .filter(Boolean);
+
+            function setActive(id) {
+                links.forEach(a => {
+                    const isActive = (a.getAttribute('href') || '') === `#${id}`;
+                    a.classList.toggle('active', isActive);
+                    if (isActive) a.setAttribute('aria-current', 'page');
+                    else a.removeAttribute('aria-current');
+                });
+            }
+
+            const obs = new IntersectionObserver((entries) => {
+                const visible = entries
+                    .filter(e => e.isIntersecting)
+                    .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0))[0];
+                if (visible?.target?.id) setActive(visible.target.id);
+            }, { rootMargin: '-30% 0px -60% 0px', threshold: [0.08, 0.15, 0.25] });
+
+            sections.forEach(s => obs.observe(s));
+            setActive(sections[0]?.id || ids[0]);
+        })();
+
+        // Reveal-on-scroll (subtle, reduced-motion aware)
+        (function () {
+            const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReduced) return;
+
+            const targets = [
+                ...document.querySelectorAll('.section-title'),
+                ...document.querySelectorAll('.card'),
+                ...document.querySelectorAll('.kpi')
+            ];
+            const unique = Array.from(new Set(targets));
+            unique.forEach(el => el.classList.add('reveal'));
+
+            const ro = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('reveal-in');
+                        ro.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+
+            unique.forEach(el => ro.observe(el));
+        })();
+
+        // Copy email (simple trust/UX enhancement)
+        (function () {
+            const btn = document.getElementById('copyEmailBtn');
+            if (!btn) return;
+            const email = 'matomepontso@gmail.com';
+            btn.addEventListener('click', async () => {
+                try {
+                    if (navigator.clipboard?.writeText) {
+                        await navigator.clipboard.writeText(email);
+                    } else {
+                        const ta = document.createElement('textarea');
+                        ta.value = email;
+                        ta.setAttribute('readonly', 'true');
+                        ta.style.position = 'absolute';
+                        ta.style.left = '-9999px';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(ta);
+                    }
+                    const prev = btn.textContent;
+                    btn.textContent = 'Copied';
+                    setTimeout(() => { btn.textContent = prev; }, 1200);
+                } catch (_) {
+                    btn.textContent = 'Copy failed';
+                    setTimeout(() => { btn.textContent = 'Copy'; }, 1400);
+                }
+            });
+        })();
+        
+        // Enhanced form validation helper
+        function validateField(input) {
+            const value = input.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            function showError(input, message) {
+                input.style.borderColor = '#ef4444';
+                input.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+                const errorMsg = input.parentElement.querySelector('.error-message');
+                if (errorMsg) errorMsg.remove();
+                const error = document.createElement('div');
+                error.className = 'error-message';
+                error.style.color = '#ef4444';
+                error.style.fontSize = '0.875rem';
+                error.style.marginTop = '0.25rem';
+                error.textContent = message;
+                input.parentElement.appendChild(error);
+            }
+
+            function clearError(input) {
+                input.style.borderColor = '';
+                input.style.boxShadow = '';
+                const errorMsg = input.parentElement.querySelector('.error-message');
+                if (errorMsg) errorMsg.remove();
+            }
+
+            clearError(input);
+
+            if (input.id === 'name') {
+                if (!value) { showError(input, 'Name is required'); return false; }
+                if (value.length < 2) { showError(input, 'Name must be at least 2 characters'); return false; }
+            }
+            if (input.id === 'email') {
+                if (!value) { showError(input, 'Email is required'); return false; }
+                if (!emailRegex.test(value)) { showError(input, 'Please enter a valid email address'); return false; }
+            }
+            if (input.id === 'message') {
+                if (!value) { showError(input, 'Message is required'); return false; }
+                if (value.length < 10) { showError(input, 'Message must be at least 10 characters'); return false; }
+            }
+            return true;
+        }
+
+        // Real-time form validation
+        (function initFormValidation() {
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            [nameInput, emailInput, messageInput].forEach(input => {
+                if (input) {
+                    input.addEventListener('blur', () => validateField(input));
+                    input.addEventListener('input', () => {
+                        if (input.style.borderColor) {
+                            input.style.borderColor = '';
+                            input.style.boxShadow = '';
+                            const errorMsg = input.parentElement.querySelector('.error-message');
+                            if (errorMsg) errorMsg.remove();
+                        }
+                    });
+                }
+            });
+        })();
+
+        // Enhanced form submission
+        function submitForm(event) {
+            event.preventDefault();
+            // GitHub Pages-friendly "submission": open the user's mail client with a prefilled email.
+            // If you want a real form backend, switch to Formspree (or similar) later.
+            const name = document.getElementById('name')?.value?.trim() || '';
+            const email = document.getElementById('email')?.value?.trim() || '';
+            const message = document.getElementById('message')?.value?.trim() || '';
+            const subject = encodeURIComponent(`Portfolio inquiry from ${name || 'Website visitor'}`);
+            const body = encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`
+            );
+            window.location.href = `mailto:matomepontso@gmail.com?subject=${subject}&body=${body}`;
+
+            const formMessage = document.getElementById('formMessage');
+            formMessage.textContent = 'Opening your email client… If it doesn’t open, please email me directly at matomepontso@gmail.com.';
+            formMessage.style.display = 'block';
+            formMessage.style.color = '#4ade80';
+            // Do not reset immediately (user may want to copy message if mail client fails)
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Simple counter animation
+        function animateCounter(element, target, decimals) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toFixed(decimals) + (element.dataset.suffix || '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = current.toFixed(decimals) + (element.dataset.suffix || '');
+                }
+            }, 30);
+        }
+        
+        // Start counters when in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.kpi-value[data-kpi]').forEach(el => {
+                        const target = parseFloat(el.dataset.kpi || '');
+                        const decimals = (String(target).split('.')[1] || '').length;
+                        el.dataset.suffix = el.dataset.suffix || '';
+                        if (!isNaN(target)) animateCounter(el, target, decimals);
+                    });
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(document.querySelector('.hero'));
+    </script>
+
+    <!-- Embedded chatbot knowledge base (prevents fetch 404s) -->
+    <script type="application/json" id="mm-chatbot-kb">
+{
+  "meta": {
+    "name": "Matome Mbowene Portfolio Knowledge Base",
+    "version": "1.0.0",
+    "updated": "2026-01-14",
+    "groundingRule": "Answer only using this knowledge base. If the answer is not here, say you do not have that detail in the public portfolio notes and offer contact options."
+  },
+  "profile": {
+    "name": "Matome Mbowene",
+    "title": "Software & AI Engineer",
+    "location": "Cape Town, South Africa",
+    "workPolicy": "Open to software engineering, AI/ML, and backend/cloud roles. Open to hybrid or remote opportunities.",
+    "bio": "Matome builds production-focused AI features that hold up in real deployments: ingestion, validation, retrieval, model integration, observability, and delivery. The focus is correctness, reliability, and measurable outcomes."
+  },
+  "links": {
+    "email": "mailto:matomepontso@gmail.com",
+    "github": "https://github.com/MatomeMb",
+    "linkedin": "https://linkedin.com/in/matomembowene",
+    "credly": "https://www.credly.com/users/matome-mbowene",
+    "resume": "https://www.matomembowene.co.za/resume.pdf"
+  },
+  "education": {
+    "approvedLine": "University of Cape Town (Computer Science & Computer Engineering)"
+  },
+  "highlights": [
+    "100% OCR field-mapping accuracy on a defined document set using a validation-first approach.",
+    "35% scheduling efficiency improvement from workflow automation work (public-safe summary).",
+    "Delivered full-stack functionality for real users (public-safe summary).",
+    "89.33% model accuracy on FashionMNIST (public/public-demo context)."
+  ],
+  "skills": {
+    "ocrComputerVision": [
+      "Document understanding and extraction workflows",
+      "Field mapping with validation-first design",
+      "Confidence scoring, fallbacks, and explainable extraction for debugging"
+    ],
+    "retrievalRag": [
+      "Ingestion \u2192 chunking \u2192 embeddings \u2192 index persistence \u2192 retrieval \u2192 response generation",
+      "Retrieval gating and conservative behavior when evidence is weak",
+      "Reproducible indexing and operational hygiene"
+    ],
+    "backendServices": [
+      "API design and integration work",
+      "Data validation and structured outputs",
+      "Logging and operational visibility patterns"
+    ],
+    "shippingDiscipline": [
+      "CI/CD practices, dependency pinning, automated checks",
+      "Testing mindset and defensive engineering"
+    ],
+    "embeddedFundamentals": [
+      "Real-time pipeline considerations",
+      "Sensor integration patterns (high level)"
+    ]
+  },
+  "certifications": [
+    { "name": "Dell Young Leaders", "proof": "https://www.dellyoungleaders.org" },
+    { "name": "Google Cloud Career Launchpad (EMEA)", "proof": "https://cloud.google.com/edu/faculty/career-launchpad" },
+    { "name": "Google Cloud skill badge: Multimodal RAG (Gemini)", "proof": "https://www.credly.com/users/matome-mbowene" }
+  ],
+  "experience": [
+    {
+      "area": "Computer vision & document automation",
+      "summary": [
+        "Built a production OCR pipeline with multi-layer validation, confidence scoring, and audit logging.",
+        "Delivered structured outputs suitable for downstream systems and user review."
+      ]
+    },
+    {
+      "area": "Retrieval systems (RAG)",
+      "summary": [
+        "Developed retrieval pipelines and demos, emphasizing reproducibility and guardrails for low-evidence queries.",
+        "Improved production readiness with CI checks and dependency management."
+      ]
+    },
+    {
+      "area": "Confidential / NDA work (high level only)",
+      "summary": [
+        "Contributed to engineering foundations and production readiness on confidential work where details are restricted.",
+        "Approved line: Details can be discussed at a high level in interviews."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "OCR document automation",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "100% field-mapping accuracy on a defined set.",
+        "approach": "Validation-first extraction, confidence scoring, and structured output mapping.",
+        "reliability": "Multi-layer checks, fallbacks, and audit logging for traceability.",
+        "stack": ["Python", "OpenCV", "OCR tooling", "PDF/structured outputs", "LLM APIs (as needed)"],
+        "links": [
+          { "label": "Case study", "url": "https://www.matomembowene.co.za/case-studies/ocr-document-automation.html" },
+          { "label": "GitHub (selected work)", "url": "https://github.com/MatomeMb" }
+        ]
+      }
+    },
+    {
+      "name": "Retrieval assistant (RAG)",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "Responsive retrieval demo with reproducible indexing runs (public-safe summary).",
+        "approach": "Ingestion \u2192 embeddings \u2192 persistent index \u2192 retrieval \u2192 response generation.",
+        "reliability": "Reproducible indexing, retrieval gating when evidence is weak, and operational safeguards.",
+        "stack": ["Python", "FAISS", "sentence-transformers", "UI demo tooling"],
+        "links": [
+          { "label": "Case study", "url": "https://www.matomembowene.co.za/case-studies/rag-assistant.html" },
+          { "label": "Repo", "url": "https://github.com/MatomeMb/personal-codex-agent" }
+        ]
+      }
+    },
+    {
+      "name": "FashionMNIST classifier",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "89.33% test accuracy on FashionMNIST (public/public-demo context).",
+        "approach": "End-to-end training pipeline with reproducible evaluation runs.",
+        "reliability": "Clear metrics, validation, and repeatable experiments.",
+        "stack": ["Python", "PyTorch"],
+        "links": [{ "label": "Repo", "url": "https://github.com/MatomeMb/FashionMNIST-Classifier" }]
+      }
+    },
+    {
+      "name": "Scheduling & systems exercises",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "Benchmarked scheduling approaches and built deterministic simulations (public-safe summary).",
+        "approach": "Algorithm comparison and measurement-driven iteration.",
+        "reliability": "Deterministic tests and repeatable runs.",
+        "stack": ["Python", "Java"],
+        "links": [
+          { "label": "Scheduling repo", "url": "https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos" },
+          { "label": "Java repo", "url": "https://github.com/MatomeMb/number-range-summarizer" }
+        ]
+      }
+    },
+    {
+      "name": "Embedded / edge foundations",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "Contributed to reliable real-time pipeline foundations (public-safe).",
+        "approach": "Sensor integration patterns and timing-consistency considerations.",
+        "reliability": "Defensive design for constrained, real-time contexts.",
+        "stack": ["Embedded tooling (high level)", "Sensor integration", "Edge AI fundamentals"],
+        "links": [
+          { "label": "C++ image processing repo", "url": "https://github.com/MatomeMb/Connected-Components-Image-Processor" },
+          { "label": "C++ simulation repo", "url": "https://github.com/MatomeMb/Slide-Puzzle-Game-Simulation" }
+        ]
+      }
+    },
+    {
+      "name": "Confidential AI product build (NDA)",
+      "nda": true,
+      "caseStudy": {
+        "outcome": "Improved production readiness and delivery foundations (public-safe).",
+        "approach": "Architecture and delivery practices at a high level.",
+        "reliability": "Validation patterns, release hygiene, and operational checks (no internal artifacts).",
+        "stack": ["Backend/services (high level)", "LLM APIs (high level)", "CI/CD practices"],
+        "links": []
+      }
+    }
+  ],
+  "safety": {
+    "allowedTopics": ["skills", "projects", "experience (sanitized)", "certifications", "work policy and availability", "contact and proof links"],
+    "disallowedTopics": [
+      "Sensitive academic/legal/medical details",
+      "Degree completion/status/dates",
+      "Disciplinary processes or codes",
+      "Registrar codes or transcript identifiers",
+      "NDA client/company names, internal documents, internal metrics, confidential datasets",
+      "Personal identifiers beyond the published portfolio links"
+    ],
+    "refusals": {
+      "sensitive": "I can\u2019t help with that. I can share a public-safe overview of Matome\u2019s skills, projects, and how to contact him.",
+      "degreeStatus": "I can share the approved education line for the portfolio, but I can\u2019t comment on degree completion or academic status.",
+      "nda": "Some work is under NDA. I can discuss the engineering approach and outcomes at a high level, but not the client, internal data, or confidential implementation details.",
+      "unknown": "I don\u2019t have that detail in my public portfolio notes. If you share what you need, I can connect you with Matome directly."
+    }
+  },
+  "faq": [
+    { "id": "roles", "q": "What roles is Matome looking for?", "a": "Software engineering, AI/ML engineering, and backend/cloud roles. Based in Cape Town; open to hybrid or remote opportunities." },
+    { "id": "skills-summary", "q": "What are Matome\u2019s core strengths?", "a": "Production OCR/computer vision, retrieval systems (RAG), backend/services, CI/CD and shipping discipline, and embedded fundamentals." },
+    { "id": "ocr", "q": "What is the OCR document automation work about?", "a": "A production document-to-structured-data pipeline designed for correctness and auditability. Public highlight: 100% OCR field-mapping accuracy on a defined document set." },
+    { "id": "rag", "q": "Does Matome have RAG experience?", "a": "Yes. Work includes ingestion \u2192 embeddings \u2192 persistent index \u2192 retrieval \u2192 response generation, with guardrails and conservative behavior when evidence is weak." },
+    { "id": "certs", "q": "What certifications or credentials are publicly verifiable?", "a": "Google Cloud badge(s) via Credly (see Credly link). Dell Young Leaders and Google Cloud Career Launchpad (EMEA) are listed as credentials." },
+    { "id": "contact", "q": "How do I contact Matome?", "a": "Email or LinkedIn are best. Email: matomepontso@gmail.com. LinkedIn: linkedin.com/in/matomembowene." },
+    { "id": "resume", "q": "Where can I view Matome\u2019s resume?", "a": "You can download the resume PDF at https://www.matomembowene.co.za/resume.pdf and view the resume page at https://www.matomembowene.co.za/resume.html." },
+    { "id": "nda", "q": "Can you share details about confidential/NDA work?", "a": "Only at a high level. I can discuss engineering approach and outcomes, but not client names, internal documents, or confidential implementation details." }
+  ]
+}
+    </script>
+
+    <!-- Enhanced JavaScript (Interactions & Animations) -->
+    <script defer src="js/enhanced.js"></script>
+    
+    <!-- Chatbot widget (local, grounded) -->
+    <link rel="stylesheet" href="chatbot/chatbot.css">
+    <script defer src="chatbot/chatbot.js"></script>
+
+    <!-- Service worker (static, privacy-safe) -->
+    <script>
+        (function () {
+            if (!('serviceWorker' in navigator)) return;
+            // GitHub Pages uses HTTPS; still guard in case of local file loads.
+            if (location.protocol !== 'https:' && location.hostname !== 'localhost') return;
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js').catch(() => {});
+            });
+        })();
+    </script>
+
+    <!-- Enhanced Structured data (Person + Organization) -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Matome Mbowene",
+            "jobTitle": "Software & AI Engineer",
+            "description": "Software & AI engineer building production OCR/document automation, retrieval (RAG), and backend systems.",
+            "image": "https://www.matomembowene.co.za/profile.jpg",
+            "url": "https://www.matomembowene.co.za/",
+            "email": "matomepontso@gmail.com",
+            "sameAs": [
+                "https://linkedin.com/in/matomembowene",
+                "https://github.com/MatomeMb",
+                "https://www.credly.com/users/matome-mbowene"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Cape Town",
+                "addressRegion": "Western Cape",
+                "addressCountry": "ZA"
+            },
+            "alumniOf": {
+                "@type": "EducationalOrganization",
+                "name": "University of Cape Town"
+            },
+            "knowsAbout": [
+                "Computer Vision",
+                "OCR",
+                "RAG (Retrieval Augmented Generation)",
+                "Machine Learning",
+                "Python",
+                "Backend Development",
+                "Embedded Systems"
+            ],
+            "hasCredential": [
+                {
+                    "@type": "EducationalOccupationalCredential",
+                    "credentialCategory": "Professional Certification",
+                    "recognizedBy": {
+                        "@type": "Organization",
+                        "name": "Google Cloud"
+                    }
+                }
+            ]
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Matome Mbowene Portfolio",
+            "url": "https://www.matomembowene.co.za/",
+            "author": {
+                "@type": "Person",
+                "name": "Matome Mbowene"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://www.matomembowene.co.za/#projects",
+                "query-input": "required name=search_term_string"
+            }
+        }
+    </script>
+</body>
+</html>

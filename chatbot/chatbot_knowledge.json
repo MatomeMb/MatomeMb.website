@@ -1,0 +1,242 @@
+{
+  "meta": {
+    "name": "Matome Mbowene Portfolio Knowledge Base",
+    "version": "1.0.0",
+    "updated": "2026-01-14",
+    "groundingRule": "Answer only using this knowledge base. If the answer is not here, say you do not have that detail in the public portfolio notes and offer contact options."
+  },
+  "profile": {
+    "name": "Matome Mbowene",
+    "title": "Software & AI Engineer",
+    "location": "Cape Town, South Africa",
+    "workPolicy": "Open to software engineering, AI/ML, and backend/cloud roles. Open to hybrid or remote opportunities.",
+    "bio": "Matome builds production-focused AI features that hold up in real deployments: ingestion, validation, retrieval, model integration, observability, and delivery. The focus is correctness, reliability, and measurable outcomes."
+  },
+  "links": {
+    "email": "mailto:matomepontso@gmail.com",
+    "github": "https://github.com/MatomeMb",
+    "linkedin": "https://linkedin.com/in/matomembowene",
+    "credly": "https://www.credly.com/users/matome-mbowene",
+    "resume": "https://www.matomembowene.co.za/resume.pdf"
+  },
+  "education": {
+    "approvedLine": "University of Cape Town (Computer Science & Computer Engineering)"
+  },
+  "highlights": [
+    "100% OCR field-mapping accuracy on a defined document set using a validation-first approach.",
+    "35% scheduling efficiency improvement from workflow automation work (public-safe summary).",
+    "Delivered full-stack functionality for real users (public-safe summary).",
+    "89.33% model accuracy on FashionMNIST (public/public-demo context)."
+  ],
+  "skills": {
+    "ocrComputerVision": [
+      "Document understanding and extraction workflows",
+      "Field mapping with validation-first design",
+      "Confidence scoring, fallbacks, and explainable extraction for debugging"
+    ],
+    "retrievalRag": [
+      "Ingestion → chunking → embeddings → index persistence → retrieval → response generation",
+      "Retrieval gating and conservative behavior when evidence is weak",
+      "Reproducible indexing and operational hygiene"
+    ],
+    "backendServices": [
+      "API design and integration work",
+      "Data validation and structured outputs",
+      "Logging and operational visibility patterns"
+    ],
+    "shippingDiscipline": [
+      "CI/CD practices, dependency pinning, automated checks",
+      "Testing mindset and defensive engineering"
+    ],
+    "embeddedFundamentals": [
+      "Real-time pipeline considerations",
+      "Sensor integration patterns (high level)"
+    ]
+  },
+  "certifications": [
+    {
+      "name": "Dell Young Leaders",
+      "proof": "https://www.dellyoungleaders.org"
+    },
+    {
+      "name": "Google Cloud Career Launchpad (EMEA)",
+      "proof": "https://cloud.google.com/edu/faculty/career-launchpad"
+    },
+    {
+      "name": "Google Cloud skill badge: Multimodal RAG (Gemini)",
+      "proof": "https://www.credly.com/users/matome-mbowene"
+    }
+  ],
+  "experience": [
+    {
+      "area": "Computer vision & document automation",
+      "summary": [
+        "Built a production OCR pipeline with multi-layer validation, confidence scoring, and audit logging.",
+        "Delivered structured outputs suitable for downstream systems and user review."
+      ]
+    },
+    {
+      "area": "Retrieval systems (RAG)",
+      "summary": [
+        "Developed retrieval pipelines and demos, emphasizing reproducibility and guardrails for low-evidence queries.",
+        "Improved production readiness with CI checks and dependency management."
+      ]
+    },
+    {
+      "area": "Confidential / NDA work (high level only)",
+      "summary": [
+        "Contributed to engineering foundations and production readiness on confidential work where details are restricted.",
+        "Approved line: Details can be discussed at a high level in interviews."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "OCR document automation",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "100% field-mapping accuracy on a defined set.",
+        "approach": "Validation-first extraction, confidence scoring, and structured output mapping.",
+        "reliability": "Multi-layer checks, fallbacks, and audit logging for traceability.",
+        "stack": ["Python", "OpenCV", "OCR tooling", "PDF/structured outputs", "LLM APIs (as needed)"],
+        "links": [
+          { "label": "Case study", "url": "https://www.matomembowene.co.za/case-studies/ocr-document-automation.html" },
+          { "label": "GitHub (selected work)", "url": "https://github.com/MatomeMb" }
+        ]
+      }
+    },
+    {
+      "name": "Retrieval assistant (RAG)",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "Responsive retrieval demo with reproducible indexing runs (public-safe summary).",
+        "approach": "Ingestion → embeddings → persistent index → retrieval → response generation.",
+        "reliability": "Reproducible indexing, retrieval gating when evidence is weak, and operational safeguards.",
+        "stack": ["Python", "FAISS", "sentence-transformers", "UI demo tooling"],
+        "links": [
+          { "label": "Case study", "url": "https://www.matomembowene.co.za/case-studies/rag-assistant.html" },
+          { "label": "Repo", "url": "https://github.com/MatomeMb/personal-codex-agent" }
+        ]
+      }
+    },
+    {
+      "name": "FashionMNIST classifier",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "89.33% test accuracy on FashionMNIST (public/public-demo context).",
+        "approach": "End-to-end training pipeline with reproducible evaluation runs.",
+        "reliability": "Clear metrics, validation, and repeatable experiments.",
+        "stack": ["Python", "PyTorch"],
+        "links": [
+          { "label": "Repo", "url": "https://github.com/MatomeMb/FashionMNIST-Classifier" }
+        ]
+      }
+    },
+    {
+      "name": "Scheduling & systems exercises",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "Benchmarked scheduling approaches and built deterministic simulations (public-safe summary).",
+        "approach": "Algorithm comparison and measurement-driven iteration.",
+        "reliability": "Deterministic tests and repeatable runs.",
+        "stack": ["Python", "Java"],
+        "links": [
+          { "label": "Scheduling repo", "url": "https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos" },
+          { "label": "Java repo", "url": "https://github.com/MatomeMb/number-range-summarizer" }
+        ]
+      }
+    },
+    {
+      "name": "Embedded / edge foundations",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "Contributed to reliable real-time pipeline foundations (public-safe).",
+        "approach": "Sensor integration patterns and timing-consistency considerations.",
+        "reliability": "Defensive design for constrained, real-time contexts.",
+        "stack": ["Embedded tooling (high level)", "Sensor integration", "Edge AI fundamentals"],
+        "links": [
+          { "label": "C++ image processing repo", "url": "https://github.com/MatomeMb/Connected-Components-Image-Processor" },
+          { "label": "C++ simulation repo", "url": "https://github.com/MatomeMb/Slide-Puzzle-Game-Simulation" }
+        ]
+      }
+    },
+    {
+      "name": "Confidential AI product build (NDA)",
+      "nda": true,
+      "caseStudy": {
+        "outcome": "Improved production readiness and delivery foundations (public-safe).",
+        "approach": "Architecture and delivery practices at a high level.",
+        "reliability": "Validation patterns, release hygiene, and operational checks (no internal artifacts).",
+        "stack": ["Backend/services (high level)", "LLM APIs (high level)", "CI/CD practices"],
+        "links": []
+      }
+    }
+  ],
+  "safety": {
+    "allowedTopics": [
+      "skills",
+      "projects",
+      "experience (sanitized)",
+      "certifications",
+      "work policy and availability",
+      "contact and proof links"
+    ],
+    "disallowedTopics": [
+      "Sensitive academic/legal/medical details",
+      "Degree completion/status/dates",
+      "Disciplinary processes or codes",
+      "Registrar codes or transcript identifiers",
+      "NDA client/company names, internal documents, internal metrics, confidential datasets",
+      "Personal identifiers beyond the published portfolio links"
+    ],
+    "refusals": {
+      "sensitive": "I can’t help with that. I can share a public-safe overview of Matome’s skills, projects, and how to contact him.",
+      "degreeStatus": "I can share the approved education line for the portfolio, but I can’t comment on degree completion or academic status.",
+      "nda": "Some work is under NDA. I can discuss the engineering approach and outcomes at a high level, but not the client, internal data, or confidential implementation details.",
+      "unknown": "I don’t have that detail in my public portfolio notes. If you share what you need, I can connect you with Matome directly."
+    }
+  },
+  "faq": [
+    {
+      "id": "roles",
+      "q": "What roles is Matome looking for?",
+      "a": "Software engineering, AI/ML engineering, and backend/cloud roles. Based in Cape Town; open to hybrid or remote opportunities."
+    },
+    {
+      "id": "skills-summary",
+      "q": "What are Matome’s core strengths?",
+      "a": "Production OCR/computer vision, retrieval systems (RAG), backend/services, CI/CD and shipping discipline, and embedded fundamentals."
+    },
+    {
+      "id": "ocr",
+      "q": "What is the OCR document automation work about?",
+      "a": "A production document-to-structured-data pipeline designed for correctness and auditability. Public highlight: 100% OCR field-mapping accuracy on a defined document set."
+    },
+    {
+      "id": "rag",
+      "q": "Does Matome have RAG experience?",
+      "a": "Yes. Work includes ingestion → embeddings → persistent index → retrieval → response generation, with guardrails and conservative behavior when evidence is weak."
+    },
+    {
+      "id": "certs",
+      "q": "What certifications or credentials are publicly verifiable?",
+      "a": "Google Cloud badge(s) via Credly (see Credly link). Dell Young Leaders and Google Cloud Career Launchpad (EMEA) are listed as credentials."
+    },
+    {
+      "id": "contact",
+      "q": "How do I contact Matome?",
+      "a": "Email or LinkedIn are best. Email: matomepontso@gmail.com. LinkedIn: linkedin.com/in/matomembowene."
+    },
+    {
+      "id": "resume",
+      "q": "Where can I view Matome’s resume?",
+      "a": "You can download the resume PDF at https://www.matomembowene.co.za/resume.pdf and view the resume page at https://www.matomembowene.co.za/resume.html."
+    },
+    {
+      "id": "nda",
+      "q": "Can you share details about confidential/NDA work?",
+      "a": "Only at a high level. I can discuss engineering approach and outcomes, but not client names, internal documents, or confidential implementation details."
+    }
+  ]
+}
+

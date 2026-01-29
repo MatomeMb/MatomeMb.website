@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0f14"/>
+      <stop offset="1" stop-color="#12141a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22c55e"/>
+      <stop offset="1" stop-color="#16a34a"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.55 0" result="s"/>
+      <feMerge>
+        <feMergeNode in="s"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- subtle abstract accents -->
+  <circle cx="250" cy="170" r="140" fill="#22c55e" opacity="0.08" filter="url(#soft)"/>
+  <circle cx="980" cy="470" r="190" fill="#22c55e" opacity="0.06" filter="url(#soft)"/>
+  <path d="M120 520 C 320 420, 500 610, 720 500 C 920 400, 1030 520, 1160 450"
+        fill="none" stroke="rgba(148,163,184,0.18)" stroke-width="2"/>
+
+  <!-- mark -->
+  <g transform="translate(86 92)">
+    <rect x="0" y="0" width="92" height="92" rx="20" fill="rgba(255,255,255,0.06)" stroke="rgba(148,163,184,0.22)"/>
+    <text x="46" y="58" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif"
+          font-size="38" font-weight="800" fill="#f8fafc">MM</text>
+  </g>
+
+  <!-- name + role -->
+  <text x="86" y="245" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif"
+        font-size="56" font-weight="800" fill="#f8fafc" letter-spacing="-0.02em">Matome Mbowene</text>
+
+  <text x="86" y="305" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif"
+        font-size="28" font-weight="650" fill="#a1aab8">Software &amp; AI Engineer</text>
+
+  <!-- understated value proposition -->
+  <text x="86" y="372" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif"
+        font-size="24" fill="#a1aab8">Production AI " OCR / Document Automation " Retrieval (RAG) " Backend Systems</text>
+
+  <!-- accent bar -->
+  <rect x="86" y="408" width="560" height="10" rx="5" fill="url(#accent)"/>
+
+  <!-- url -->
+  <text x="86" y="520" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif"
+        font-size="22" fill="rgba(248,250,252,0.85)">www.matomembowene.co.za</text>
+</svg>

@@ -1,0 +1,30 @@
+{
+  "name": "matome-portfolio-functions",
+  "description": "Firebase Functions for Matome's Portfolio",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.5.0",
+    "firebase-functions": "^6.4.0",
+    "openai": "^4.62.0",
+    "@google-cloud/functions-framework": "^3.4.0",
+    "glob": "^10.4.5",
+    "compression": "^1.7.4"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "functions-framework": {
+    "source": "index.js"
+  },
+  "private": true
+}

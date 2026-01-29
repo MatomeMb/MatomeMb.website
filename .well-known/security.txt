@@ -1,0 +1,8 @@
+Contact: mailto:matomepontso@gmail.com
+Preferred-Languages: en
+Expires: 2027-01-01T00:00:00.000Z
+Canonical: https://www.matomembowene.co.za/.well-known/security.txt
+
+# Security policy (brief)
+# - This is a static portfolio site (no server-side processing).
+# - Please include steps to reproduce and the affected URL.

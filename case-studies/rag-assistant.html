@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://www.matomembowene.co.za/case-studies/rag-assistant.html">
+  <title>RAG Assistant | Case Study</title>
+  <meta name="description" content="Case study: a grounded retrieval-augmented generation (RAG) assistant with reproducible indexing and guardrails for low-evidence queries.">
+  <meta property="og:title" content="RAG Assistant | Case Study">
+  <meta property="og:description" content="Grounded RAG assistant with reproducible indexing and guardrails for low-evidence queries.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://www.matomembowene.co.za/case-studies/og-rag.svg">
+  <meta property="og:image:alt" content="RAG Assistant case study">
+  <meta property="og:url" content="https://www.matomembowene.co.za/case-studies/rag-assistant.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.matomembowene.co.za/case-studies/og-rag.svg">
+  <meta name="theme-color" content="#0b0f14">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <style>
+    :root{
+      --primary:#0b0f14;--secondary:#12141a;--accent:#22c55e;--accent2:#16a34a;
+      --text:#f8fafc;--muted:#a1aab8;--border:rgba(148,163,184,0.16);--shadow:rgba(0,0,0,0.35);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--primary);color:var(--text);min-height:100vh}
+    .wrap{max-width:980px;margin:0 auto;padding:2.25rem 1rem 3rem}
+    .top{display:flex;gap:1rem;justify-content:space-between;align-items:center;flex-wrap:wrap}
+    .pill{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .85rem;border-radius:999px;border:1px solid rgba(148,163,184,.20);background:rgba(148,163,184,.08);color:var(--muted);text-decoration:none;font-weight:750}
+    .pill:hover{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.10)}
+    h1{margin:1.25rem 0 .35rem;letter-spacing:-.02em}
+    .sub{color:var(--muted);line-height:1.7;max-width:72ch}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1.5rem}
+    .card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:16px;padding:1.25rem;box-shadow:0 12px 30px var(--shadow)}
+    ul{margin:.75rem 0 0;padding-left:1.2rem;color:var(--muted);line-height:1.7}
+    .tagrow{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+    .tag{border:1px solid rgba(148,163,184,.22);background:rgba(148,163,184,.08);color:var(--muted);padding:.3rem .55rem;border-radius:999px;font-size:.9rem;font-weight:700}
+    .cta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
+    .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1rem;border-radius:999px;text-decoration:none;font-weight:800;border:1px solid rgba(34,197,94,.28);background:rgba(34,197,94,.12);color:var(--text)}
+    .btn:hover{border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.16)}
+    .note{margin-top:1.25rem;color:var(--muted);font-size:.95rem;line-height:1.7}
+    hr{border:0;border-top:1px solid rgba(148,163,184,.16);margin:1.25rem 0}
+    h2{margin:0 0 .5rem;font-size:1.05rem;color:var(--text)}
+    .para{color:var(--muted);line-height:1.7;margin:.4rem 0 0}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top">
+      <a class="pill" href="../">← Back to portfolio</a>
+      <a class="pill" href="mailto:matomepontso@gmail.com?subject=Portfolio%20-%20RAG%20case%20study%20question">Discuss this case study</a>
+    </div>
+
+    <h1>RAG Assistant</h1>
+    <p class="sub">
+      A retrieval-augmented assistant designed to be useful and honest: reproducible indexing, clear guardrails, and conservative behavior when evidence is weak.
+      Public-safe summary.
+    </p>
+
+    <div class="grid" style="margin-top: 1rem;">
+      <section class="card">
+        <h2>Problem</h2>
+        <p class="para">Users needed reliable answers grounded in a limited knowledge base without hallucinations.</p>
+      </section>
+      <section class="card">
+        <h2>Approach</h2>
+        <p class="para">Deterministic indexing, retrieval gating, and conservative response rules when evidence is weak.</p>
+      </section>
+      <section class="card">
+        <h2>Outcome</h2>
+        <p class="para">Stable retrieval quality with reproducible runs and clear guardrails.</p>
+      </section>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Core pipeline</h2>
+        <p class="para">Ingestion → embeddings → persistent index → retrieval → response generation</p>
+        <div class="tagrow">
+          <span class="tag">Python</span>
+          <span class="tag">FAISS</span>
+          <span class="tag">Embeddings</span>
+          <span class="tag">Guardrails</span>
+          <span class="tag">Streamlit</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Reliability posture</h2>
+        <ul>
+          <li><strong style="color:var(--text)">Deterministic indexing:</strong> reproducible builds of the knowledge index.</li>
+          <li><strong style="color:var(--text)">Retrieval gating:</strong> conservative responses when evidence is weak.</li>
+          <li><strong style="color:var(--text)">Provenance:</strong> links back to sources where possible.</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="grid" style="margin-top: 1rem;">
+      <section class="card">
+        <h2>Approach (high level)</h2>
+        <ul>
+          <li>Normalize content into predictable chunks.</li>
+          <li>Embed and store vectors with persistence across runs.</li>
+          <li>Retrieve top matches and apply a confidence threshold.</li>
+          <li>Generate responses only when retrieval evidence is sufficient; otherwise refuse or ask for clarification.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>What I’d improve next</h2>
+        <ul>
+          <li>Evaluation harness (retrieval precision/recall + end-to-end QA checks).</li>
+          <li>Citations-by-default and stricter refusal policies for ambiguous prompts.</li>
+          <li>Performance profiling for faster cold start and lower latency.</li>
+        </ul>
+        <div class="cta">
+          <a class="btn" href="https://github.com/MatomeMb/personal-codex-agent" target="_blank" rel="noopener noreferrer">Repo <span aria-hidden="true">↗</span></a>
+          <a class="btn" href="../#projects">More projects <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="note">Note: the portfolio assistant on the main site is deliberately grounded and privacy-safe (local-only knowledge base, no logging).</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
