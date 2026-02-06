@@ -231,7 +231,7 @@ This document provides **implementable**, public-safe UX + content + chatbot spe
 - **Secondary CTAs (optional)**: View projects • View GitHub • View Credly • Resume (PDF)
 
 ### Proof strip (under hero; 3–4 items)
-- 100% OCR field-mapping accuracy (validation-first pipeline)
+- High accuracy OCR field-mapping (validation-first pipeline)
 - 35% scheduling efficiency improvement (workflow automation)
 - 800+ users supported (full-stack delivery)
 - Google Cloud badge (Credly verified)
@@ -241,7 +241,7 @@ I build end-to-end AI features that hold up in production: ingestion, validation
 
 ### Experience bullets (NDA-safe, role-based)
 **Document automation (OCR + CV)**
-- Delivered a production OCR pipeline that achieved **100% field-mapping accuracy** on a defined document set using multi-layer validation and confidence scoring.
+- Delivered a production OCR pipeline that achieved **high accuracy field-mapping** on a defined document set using multi-layer validation and confidence scoring.
 - Built “explainable extraction” tooling (debug views and audit logs) to speed up troubleshooting and improve operational trust.
 - Shipped structured outputs into editable PDF forms with robust fallbacks for messy scans.
 
@@ -398,7 +398,7 @@ The chatbot must only answer using a **local knowledge base file** (Markdown/JSO
 2) **What’s Matome strongest in?**
    - Production OCR/CV, retrieval (RAG), backend/services, and shipping discipline (testing, CI/CD).
 3) **What’s the OCR work about?**
-   - Document automation that extracts structured data reliably using validation-first pipelines and confidence scoring; outcome includes 100% field-mapping accuracy on a defined set.
+   - Document automation that extracts structured data reliably using validation-first pipelines and confidence scoring; outcome includes high accuracy field-mapping on a defined set.
 4) **What does “validation-first” mean here?**
    - Multiple checks (format, geometry, field constraints, confidence thresholds) plus fallbacks and audit logs.
 5) **Does Matome have RAG experience?**
@@ -410,7 +410,7 @@ The chatbot must only answer using a **local knowledge base file** (Markdown/JSO
 8) **What’s the CI/CD approach?**
    - Dependency pinning, automated checks, reproducible pipelines, and clear release hygiene.
 9) **What’s an example of measurable impact?**
-   - 100% OCR field-mapping accuracy; 35% scheduling efficiency improvement; 800+ users supported in a shipped app.
+   - High accuracy OCR field-mapping; 35% scheduling efficiency improvement; 800+ users supported in a shipped app.
 10) **What’s the 800+ users project?**
    - A full-stack app; details are summarized publicly at a high level and can be expanded in interviews.
 11) **Does Matome have embedded experience?**
@@ -436,7 +436,7 @@ The chatbot must only answer using a **local knowledge base file** (Markdown/JSO
 
 ### 10 example conversations (including sensitive probing)
 1) **Recruiter: “Quick summary?”**
-   - Assistant: “Matome is a software & AI engineer focused on production OCR/CV, retrieval (RAG), and backend systems. Highlights: 100% OCR field-mapping accuracy on a defined set, 35% scheduling efficiency improvement, and shipped work supporting 800+ users. Links: GitHub, LinkedIn, Credly.”
+   - Assistant: “Matome is a software & AI engineer focused on production OCR/CV, retrieval (RAG), and backend systems. Highlights: high accuracy OCR field-mapping on a defined set, 35% scheduling efficiency improvement, and shipped work supporting 800+ users. Links: GitHub, LinkedIn, Credly.”
 
 2) **Hiring manager: “How do you handle RAG failures?”**
    - Assistant: “Use retrieval gating and ‘cite-or-refuse’ behavior. If evidence is weak, respond conservatively and route to a follow-up instead of guessing. Keep indexes reproducible and log retrieval quality.”

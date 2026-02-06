@@ -46,7 +46,7 @@ Matome builds production-focused AI features that hold up in real deployments: i
 - Sensor integration patterns (high level)
 
 ## Public-safe outcomes (approved)
-- **100% OCR field-mapping accuracy** on a defined document set using a validation-first approach.
+- **High accuracy OCR field-mapping** on a defined document set using a validation-first approach.
 - **35% scheduling efficiency improvement** from workflow automation work (public-safe summary).
 - Delivered full-stack functionality for real users (public-safe summary).
 - **89.33% model accuracy** on FashionMNIST (public/public-demo context).
@@ -66,7 +66,7 @@ Matome builds production-focused AI features that hold up in real deployments: i
 
 ## Projects (sanitized case studies)
 ### OCR document automation (public-safe)
-- **Outcome**: 100% field-mapping accuracy on a defined set.
+- **Outcome**: High accuracy field-mapping on a defined set.
 - **Approach**: validation-first extraction, confidence scoring, and structured output mapping.
 - **Reliability**: multi-layer checks, fallbacks, and audit logging for traceability.
 - **Stack (high level)**: Python, OpenCV, OCR tooling, PDF/structured outputs, LLM APIs where appropriate.
