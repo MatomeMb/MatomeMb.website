@@ -23,7 +23,7 @@
     "approvedLine": "University of Cape Town (Computer Science & Computer Engineering)"
   },
   "highlights": [
-    "100% OCR field-mapping accuracy on a defined document set using a validation-first approach.",
+    "High accuracy OCR field-mapping on a defined document set using a validation-first approach.",
     "35% scheduling efficiency improvement from workflow automation work (public-safe summary).",
     "Delivered full-stack functionality for real users (public-safe summary).",
     "89.33% model accuracy on FashionMNIST (public/public-demo context)."
@@ -95,7 +95,7 @@
       "name": "OCR document automation",
       "nda": false,
       "caseStudy": {
-        "outcome": "100% field-mapping accuracy on a defined set.",
+        "outcome": "High accuracy field-mapping on a defined set.",
         "approach": "Validation-first extraction, confidence scoring, and structured output mapping.",
         "reliability": "Multi-layer checks, fallbacks, and audit logging for traceability.",
         "stack": ["Python", "OpenCV", "OCR tooling", "PDF/structured outputs", "LLM APIs (as needed)"],
@@ -210,7 +210,7 @@
     {
       "id": "ocr",
       "q": "What is the OCR document automation work about?",
-      "a": "A production document-to-structured-data pipeline designed for correctness and auditability. Public highlight: 100% OCR field-mapping accuracy on a defined document set."
+      "a": "A production document-to-structured-data pipeline designed for correctness and auditability. Public highlight: high accuracy OCR field-mapping on a defined document set."
     },
     {
       "id": "rag",
