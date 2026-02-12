@@ -15,6 +15,7 @@ Matome builds production-focused AI features that hold up in real deployments: i
 - **GitHub**: https://github.com/MatomeMb
 - **LinkedIn**: https://linkedin.com/in/matomembowene
 - **Credly**: https://www.credly.com/users/matome-mbowene
+- **Google Cloud Innovators**: https://developers.google.com/community/cloud/innovators
 - **Resume (PDF)**: https://www.matomembowene.co.za/resume.pdf
 - **Resume (page)**: https://www.matomembowene.co.za/resume.html
 
@@ -93,7 +94,7 @@ The assistant can answer questions about:
 
 The assistant must refuse and redirect on:
 - Sensitive academic/legal/medical topics
-- Degree completion/status/dates
+- Private academic records/transcript details
 - NDA client/company names, internal documents, internal metrics, confidential datasets
 
 ## Contact (approved)

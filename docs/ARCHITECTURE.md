@@ -43,7 +43,6 @@
 ├── sitemap.xml                  # SEO sitemap
 ├── robots.txt                   # Search engine directives
 │
-├── vendor/                      # Archived reference (not deployed)
 └── docs/                        # Documentation (development only)
 ```
 

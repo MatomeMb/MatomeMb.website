@@ -114,8 +114,6 @@
       /health/i,
       /legal/i,
       /case\s+number/i,
-      /degree/i,
-      /graduat/i,
       /\bnda\b.*(client|company|name)/i,
       /(client|company)\s+name/i
     ];
@@ -290,7 +288,6 @@
     if (isSensitivePrompt(text)) {
       const actions = contactActions(kb);
       if (isNdaProbe(text)) return { a: safety.refusals?.nda || 'Some work is under NDA.', source: 'Safety policy', actions };
-      if (/degree|graduat/i.test(text)) return { a: safety.refusals?.degreeStatus || 'I can’t comment on degree status.', source: 'Safety policy', actions };
       return { a: safety.refusals?.sensitive || 'I can’t help with that.', source: 'Safety policy', actions };
     }
 
@@ -341,7 +338,7 @@
       });
       return { a: lines.join('\n'), source: 'Experience' };
     }
-    if (/\b(education|university|uct)\b/.test(t)) {
+    if (/\b(education|university|uct|degree|graduat)\b/.test(t)) {
       const edu = kb.education || {};
       const line = edu.status
         ? `${edu.institution || ''} — ${edu.field || ''}. ${edu.status}.`

@@ -61,8 +61,8 @@
       "proof": "https://www.dellyoungleaders.org"
     },
     {
-      "name": "Google Cloud Career Launchpad (EMEA)",
-      "proof": "https://cloud.google.com/edu/faculty/career-launchpad"
+      "name": "Google Cloud Innovators (Legacy Member)",
+      "proof": "https://developers.google.com/community/cloud/innovators"
     },
     {
       "name": "Google Cloud skill badge: Multimodal RAG (Gemini)",
@@ -204,7 +204,7 @@
     ],
     "disallowedTopics": [
       "Sensitive academic/legal/medical details",
-      "Degree completion/status/dates",
+      "Private academic records/transcript details",
       "Disciplinary processes or codes",
       "Registrar codes or transcript identifiers",
       "NDA client/company names, internal documents, internal metrics, confidential datasets",
@@ -241,7 +241,7 @@
     {
       "id": "certs",
       "q": "What certifications or credentials are publicly verifiable?",
-      "a": "Google Cloud badge(s) via Credly (see Credly link). Dell Young Leaders and Google Cloud Career Launchpad (EMEA) are listed as credentials."
+      "a": "Google Cloud Innovators (Legacy Member) and Google Cloud badge(s) via Credly are listed, alongside Dell Young Leaders."
     },
     {
       "id": "contact",
