@@ -20,7 +20,9 @@
     "resume": "https://www.matomembowene.co.za/resume.pdf"
   },
   "education": {
-    "approvedLine": "University of Cape Town (Computer Science & Computer Engineering)"
+    "institution": "University of Cape Town",
+    "field": "Computer Science & Computer Engineering",
+    "status": "Completed undergraduate coursework (degree not conferred)"
   },
   "highlights": [
     "100% OCR field-mapping accuracy on a defined document set using a validation-first approach.",
@@ -87,6 +89,14 @@
       "summary": [
         "Contributed to engineering foundations and production readiness on confidential work where details are restricted.",
         "Approved line: Details can be discussed at a high level in interviews."
+      ]
+    },
+    {
+      "area": "Technical Co-founder (MVP stage)",
+      "summary": [
+        "Co-founded a funded 2-person startup building an ethical shopping Chrome extension.",
+        "Designed and built the full stack: TypeScript monorepo, Rust to WASM compiler, Chrome MV3 extension, Next.js web app, Supabase auth, Stripe checkout.",
+        "Shipped 6 sprint cycles from zero to working MVP."
       ]
     }
   ],
@@ -158,6 +168,17 @@
           { "label": "C++ image processing repo", "url": "https://github.com/MatomeMb/Connected-Components-Image-Processor" },
           { "label": "C++ simulation repo", "url": "https://github.com/MatomeMb/Slide-Puzzle-Game-Simulation" }
         ]
+      }
+    },
+    {
+      "name": "Ethical shopping platform (startup MVP)",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "Working MVP shipped across Chrome extension, web app, and compiler surfaces.",
+        "approach": "TypeScript monorepo with Turborepo, Rust to WASM compiler for catalog scoring, Chrome MV3 extension, Next.js web app.",
+        "reliability": "CI/CD pipelines, Supabase auth with row-level security, Stripe integration, 6 sprint cycles delivered.",
+        "stack": ["TypeScript", "Rust", "WASM", "Chrome MV3", "Next.js", "Supabase", "Stripe", "Turborepo", "GitHub Actions"],
+        "links": []
       }
     },
     {
@@ -236,6 +257,11 @@
       "id": "nda",
       "q": "Can you share details about confidential/NDA work?",
       "a": "Only at a high level. I can discuss engineering approach and outcomes, but not client names, internal documents, or confidential implementation details."
+    },
+    {
+      "id": "startup",
+      "q": "Tell me about the startup work",
+      "a": "Matome is technical co-founder (MVP stage) of a funded 2-person startup building an ethical shopping Chrome extension. He designed and built the full stack: TypeScript monorepo, Rust to WASM compiler, Chrome MV3 extension, Next.js web app, Supabase auth, and Stripe checkout. Shipped 6 sprint cycles from zero to working MVP."
     }
   ]
 }

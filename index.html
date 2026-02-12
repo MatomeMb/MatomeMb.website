@@ -1170,7 +1170,8 @@
 
             .section { padding: 3rem 1rem; }
             
-            img[src="profile.jpg"] {
+            img[src="profile.jpg"],
+            .hero-profile-image {
                 width: 120px !important;
                 height: 120px !important;
             }
@@ -1179,7 +1180,8 @@
         @media (max-width: 640px) {
             .hero { padding: 3.75rem 1rem 1.25rem; }
             h1 { font-size: 1.7rem; }
-            img[src="profile.jpg"] {
+            img[src="profile.jpg"],
+            .hero-profile-image {
                 width: 110px !important;
                 height: 110px !important;
                 margin-bottom: 1.25rem !important;
@@ -1207,7 +1209,8 @@
         }
 
         @media (max-width: 420px) {
-            img[src="profile.jpg"] {
+            img[src="profile.jpg"],
+            .hero-profile-image {
                 width: 96px !important;
                 height: 96px !important;
             }
@@ -1260,7 +1263,10 @@
         <section id="home" class="hero">
             <img src="vendor/portfolio-website/public/images/header-section-foreground.png" alt="" class="hero-foreground" aria-hidden="true">
             <div class="hero-content">
-                <img src="profile.jpg" alt="Portrait of Matome Mbowene" width="150" height="150" loading="eager" decoding="async" fetchpriority="high" class="hero-profile-image" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 0 auto 2rem; border: 3px solid rgba(34, 197, 94, 0.3); display: block;" onerror="console.error('Profile image failed to load from:', this.src); this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'150\' height=\'150\'%3E%3Crect width=\'150\' height=\'150\' fill=\'%2394a3b8\' opacity=\'0.2\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%2394a3b8\' font-family=\'sans-serif\' font-size=\'14\'%3EMM%3C/text%3E%3C/svg%3E';">
+                <picture>
+                    <source srcset="profile.webp" type="image/webp">
+                    <img src="profile.jpg" alt="Portrait of Matome Mbowene" width="150" height="150" loading="eager" decoding="async" fetchpriority="high" class="hero-profile-image" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin: 0 auto 2rem; border: 3px solid rgba(34, 197, 94, 0.3); display: block;" onerror="console.error('Profile image failed to load from:', this.src); this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'150\' height=\'150\'%3E%3Crect width=\'150\' height=\'150\' fill=\'%2394a3b8\' opacity=\'0.2\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%2394a3b8\' font-family=\'sans-serif\' font-size=\'14\'%3EMM%3C/text%3E%3C/svg%3E';">
+                </picture>
                 <h1 class="hero-title">Matome Mbowene</h1>
                 <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 0.75rem; font-weight: 600;">Software &amp; AI Engineer • OCR/CV • RAG • Backend</p>
                 <div class="pill-row" aria-label="Current status">
@@ -1410,6 +1416,28 @@
                             <li>Contributing to firmware and data architecture for LiDAR/IMU/camera integration.</li>
                         </ul>
                         
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
+                            <h3 style="color: var(--text);">Technical Co-founder (MVP stage)</h3>
+                            <span style="color: var(--text-muted); font-size: 0.9rem;">Current</span>
+                        </div>
+                        <div style="color: var(--text-muted); margin-bottom: 0.75rem;">Funded 2-person startup · 20% equity · Ethical shopping Chrome extension</div>
+                        <ul class="list">
+                            <li>Designed and built the full technical stack: TypeScript monorepo, Rust → WASM compiler, Chrome MV3 extension, and Next.js web app.</li>
+                            <li>Implemented Supabase auth, Stripe checkout integration, and CI/CD pipelines with GitHub Actions.</li>
+                            <li>Shipped 6 sprint cycles from zero to working MVP across extension, compiler, and web surfaces.</li>
+                        </ul>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Rust</span>
+                            <span class="tag">WASM</span>
+                            <span class="tag">Chrome MV3</span>
+                            <span class="tag">Next.js</span>
+                            <span class="tag">Supabase</span>
+                            <span class="tag">Turborepo</span>
+                        </div>
                     </div>
 
                 </div>
@@ -2027,6 +2055,48 @@
                         </div>
                     </div>
 
+                    <!-- Project: Startup -->
+                    <div class="card project-card animate-on-scroll" data-category="backend">
+                        <div class="project-header">
+                            <div class="project-thumbnail" style="background-image: url('vendor/portfolio-website/public/images/hero-background-2.png'); background-size: cover; background-position: center;">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="opacity: 0.9;">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                </svg>
+                            </div>
+                            <span class="project-badge">Active</span>
+                        </div>
+                        <div class="project-content">
+                            <h3 style="color: var(--text); margin-bottom: 0.5rem;">Ethical Shopping Platform (MVP)</h3>
+                            <p class="muted" style="margin-bottom: 1rem;">Chrome extension and web app for ethical product discovery. Built from zero as technical co-founder of a funded 2-person startup.</p>
+                            <div class="tech-stack">
+                                <span class="tech-badge">TypeScript</span>
+                                <span class="tech-badge">Rust</span>
+                                <span class="tech-badge">WASM</span>
+                                <span class="tech-badge">Chrome MV3</span>
+                                <span class="tech-badge">Next.js</span>
+                                <span class="tech-badge">Supabase</span>
+                                <span class="tech-badge">Turborepo</span>
+                            </div>
+                            <div class="project-links">
+                                <a class="link-primary" href="mailto:matomepontso@gmail.com?subject=Portfolio%20-%20Startup%20project%20overview%20request&body=Hi%20Matome%2C%0A%0AI%27d%20love%20to%20learn%20more%20about%20your%20startup%20work.%20Could%20we%20chat%3F%0A%0AThank%20you%2C" aria-label="Email Matome about startup work">Request Overview →</a>
+                            </div>
+                            <details style="margin-top: 1rem;">
+                                <summary class="details-summary">What I built</summary>
+                                <div class="muted" style="margin-top: 0.75rem; line-height: 1.7;">
+                                    <ul class="list" style="margin-top: 0;">
+                                        <li>Designed the monorepo architecture (Turborepo, shared packages for types, UI, compiler).</li>
+                                        <li>Built a Rust → WASM compiler for product catalog scoring at browser-native speed.</li>
+                                        <li>Implemented Chrome MV3 extension with background service worker and content scripts.</li>
+                                        <li>Set up Supabase auth + row-level security, Stripe checkout, and CI/CD pipelines.</li>
+                                        <li>Shipped 6 sprint cycles from project inception to working MVP.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
                     <!-- Project 5 -->
                     <div class="card project-card animate-on-scroll" data-category="ai-ml">
                         <div class="project-header">
@@ -2282,7 +2352,9 @@
                             The goal is not just extracting text, but producing outputs you can trust and audit.
                         </p>
                         <div style="margin-top: 0.85rem;">
-                            <a class="inline-link" href="#projects">Related case study: OCR Document Automation</a>
+                            <a class="inline-link" href="blog/validation-first-ocr.html">Read full article →</a>
+                            <span style="color: rgba(148,163,184,0.4); padding: 0 0.5rem;">·</span>
+                            <a class="inline-link" href="#projects">Related case study</a>
                         </div>
                     </article>
 
@@ -2294,7 +2366,9 @@
                             This keeps the assistant helpful while staying honest and grounded.
                         </p>
                         <div style="margin-top: 0.85rem;">
-                            <a class="inline-link" href="https://github.com/MatomeMb/personal-codex-agent" target="_blank" rel="noopener noreferrer">Related repo: personal-codex-agent</a>
+                            <a class="inline-link" href="blog/rag-guardrails.html">Read full article →</a>
+                            <span style="color: rgba(148,163,184,0.4); padding: 0 0.5rem;">·</span>
+                            <a class="inline-link" href="https://github.com/MatomeMb/personal-codex-agent" target="_blank" rel="noopener noreferrer">Related repo</a>
                         </div>
                     </article>
 
@@ -2305,6 +2379,8 @@
                             Even lightweight CI, good error handling, and predictable releases reduce firefighting and increase delivery cadence.
                         </p>
                         <div style="margin-top: 0.85rem;">
+                            <a class="inline-link" href="blog/shipping-discipline.html">Read full article →</a>
+                            <span style="color: rgba(148,163,184,0.4); padding: 0 0.5rem;">·</span>
                             <a class="inline-link" href="#tech-stack">Related: Tech stack</a>
                         </div>
                     </article>
@@ -3051,6 +3127,14 @@
         "Contributed to engineering foundations and production readiness on confidential work where details are restricted.",
         "Approved line: Details can be discussed at a high level in interviews."
       ]
+    },
+    {
+      "area": "Technical Co-founder (MVP stage)",
+      "summary": [
+        "Co-founded a funded 2-person startup building an ethical shopping Chrome extension.",
+        "Designed and built the full stack: TypeScript monorepo, Rust to WASM compiler, Chrome MV3 extension, Next.js web app, Supabase auth, Stripe checkout.",
+        "Shipped 6 sprint cycles from zero to working MVP."
+      ]
     }
   ],
   "projects": [
@@ -3122,6 +3206,17 @@
       }
     },
     {
+      "name": "Ethical shopping platform (startup MVP)",
+      "nda": false,
+      "caseStudy": {
+        "outcome": "Working MVP shipped across Chrome extension, web app, and compiler surfaces.",
+        "approach": "TypeScript monorepo with Turborepo, Rust to WASM compiler for catalog scoring, Chrome MV3 extension, Next.js web app.",
+        "reliability": "CI/CD pipelines, Supabase auth with row-level security, Stripe integration, 6 sprint cycles delivered.",
+        "stack": ["TypeScript", "Rust", "WASM", "Chrome MV3", "Next.js", "Supabase", "Stripe", "Turborepo", "GitHub Actions"],
+        "links": []
+      }
+    },
+    {
       "name": "Confidential AI product build (NDA)",
       "nda": true,
       "caseStudy": {
@@ -3158,7 +3253,8 @@
     { "id": "certs", "q": "What certifications or credentials are publicly verifiable?", "a": "Google Cloud badge(s) via Credly (see Credly link). Dell Young Leaders and Google Cloud Career Launchpad (EMEA) are listed as credentials." },
     { "id": "contact", "q": "How do I contact Matome?", "a": "Email or LinkedIn are best. Email: matomepontso@gmail.com. LinkedIn: linkedin.com/in/matomembowene." },
     { "id": "resume", "q": "Where can I view Matome\u2019s resume?", "a": "You can download the resume PDF at https://www.matomembowene.co.za/resume.pdf and view the resume page at https://www.matomembowene.co.za/resume.html." },
-    { "id": "nda", "q": "Can you share details about confidential/NDA work?", "a": "Only at a high level. I can discuss engineering approach and outcomes, but not client names, internal documents, or confidential implementation details." }
+    { "id": "nda", "q": "Can you share details about confidential/NDA work?", "a": "Only at a high level. I can discuss engineering approach and outcomes, but not client names, internal documents, or confidential implementation details." },
+    { "id": "startup", "q": "Tell me about the startup work", "a": "Matome is technical co-founder (MVP stage) of a funded 2-person startup building an ethical shopping Chrome extension. He designed and built the full stack: TypeScript monorepo, Rust to WASM compiler, Chrome MV3 extension, Next.js web app, Supabase auth, and Stripe checkout. Shipped 6 sprint cycles from zero to working MVP." }
   ]
 }
     </script>

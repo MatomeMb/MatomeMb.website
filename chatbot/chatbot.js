@@ -43,15 +43,62 @@
   function tokenize(s) {
     const t = normalize(s).split(' ').filter(Boolean);
     // Remove very common stop-words; keep it minimal to avoid unexpected behavior
-    const stop = new Set(['the', 'a', 'an', 'and', 'or', 'to', 'of', 'in', 'on', 'for', 'with', 'is', 'are', 'do', 'does', 'can', 'you', 'i']);
+    const stop = new Set(['the', 'a', 'an', 'and', 'or', 'to', 'of', 'in', 'on', 'for', 'with', 'is', 'are', 'do', 'does', 'can', 'you', 'i', 'me', 'my', 'his', 'her', 'he', 'she', 'it', 'this', 'that', 'what', 'how', 'about', 'has', 'have', 'was', 'be']);
     return t.filter((w) => !stop.has(w));
+  }
+
+  // Lightweight stemmer — strips common suffixes for better matching
+  function stem(word) {
+    if (word.length < 4) return word;
+    return word
+      .replace(/ies$/, 'y')
+      .replace(/ying$/, 'y')
+      .replace(/tion$/, 't')
+      .replace(/sion$/, 's')
+      .replace(/ment$/, '')
+      .replace(/ness$/, '')
+      .replace(/able$/, '')
+      .replace(/ible$/, '')
+      .replace(/ally$/, '')
+      .replace(/ful$/, '')
+      .replace(/ing$/, '')
+      .replace(/ous$/, '')
+      .replace(/ive$/, '')
+      .replace(/ed$/, '')
+      .replace(/er$/, '')
+      .replace(/ly$/, '')
+      .replace(/s$/, '');
+  }
+
+  // Synonym map for common query variations
+  const SYNONYMS = {
+    'job': 'role', 'jobs': 'role', 'position': 'role', 'positions': 'role', 'opening': 'role', 'hire': 'role', 'hiring': 'role', 'employ': 'role', 'work': 'role',
+    'cv': 'resume', 'curriculum': 'resume',
+    'school': 'education', 'study': 'education', 'studied': 'education', 'university': 'education', 'college': 'education', 'degree': 'education',
+    'cert': 'certification', 'certs': 'certification', 'badges': 'certification', 'badge': 'certification', 'credential': 'certification', 'credentials': 'certification',
+    'reach': 'contact', 'connect': 'contact', 'message': 'contact', 'email': 'contact', 'mail': 'contact',
+    'tech': 'skill', 'technologies': 'skill', 'tools': 'skill', 'stack': 'skill', 'proficient': 'skill', 'expertise': 'skill',
+    'project': 'projects', 'portfolio': 'projects', 'built': 'projects', 'build': 'projects',
+    'background': 'experience', 'history': 'experience', 'career': 'experience',
+    'ai': 'ml', 'machine learning': 'ml', 'deep learning': 'ml', 'artificial intelligence': 'ml',
+    'cofounder': 'startup', 'co-founder': 'startup', 'founder': 'startup', 'company': 'startup'
+  };
+
+  function expandSynonyms(tokens) {
+    return tokens.map((t) => SYNONYMS[t] || t);
   }
 
   function overlapScore(aTokens, bTokens) {
     if (!aTokens.length || !bTokens.length) return 0;
-    const b = new Set(bTokens);
+    const aStemmed = aTokens.map(stem);
+    const bStemmed = bTokens.map(stem);
+    const aExpanded = expandSynonyms(aStemmed);
+    const bExpanded = new Set([...bStemmed, ...expandSynonyms(bStemmed)]);
     let hit = 0;
-    aTokens.forEach((t) => { if (b.has(t)) hit += 1; });
+    aExpanded.forEach((t) => { if (bExpanded.has(t)) hit += 1; });
+    // Also check original tokens for exact matches
+    const bOrigSet = new Set(bTokens);
+    aTokens.forEach((t) => { if (bOrigSet.has(t)) hit += 0.5; });
     return hit / Math.max(aTokens.length, bTokens.length);
   }
 
@@ -82,18 +129,31 @@
 
   function pickFaqAnswer(text, faq) {
     const qTokens = tokenize(text);
-    let best = null;
-    let bestScore = 0;
+    const candidates = [];
     for (const item of faq || []) {
       const s = overlapScore(qTokens, tokenize(item.q));
-      if (s > bestScore) {
-        bestScore = s;
-        best = item;
+      if (s > 0) candidates.push({ item, score: s });
+    }
+    // Also try matching against FAQ answer text for better recall
+    for (const item of faq || []) {
+      const s = overlapScore(qTokens, tokenize(item.a));
+      const existing = candidates.find((c) => c.item.id === item.id);
+      if (existing) {
+        existing.score = Math.max(existing.score, s * 0.7); // Discount answer matches slightly
+      } else if (s > 0) {
+        candidates.push({ item, score: s * 0.7 });
       }
     }
+    candidates.sort((a, b) => b.score - a.score);
     // Conservative threshold to avoid mismatched answers
-    if (best && bestScore >= 0.25) return best;
+    if (candidates.length && candidates[0].score >= 0.2) return candidates[0].item;
     return null;
+  }
+
+  // Detect greetings for a friendlier first response
+  function isGreeting(text) {
+    const t = normalize(text);
+    return /^(hi|hello|hey|howdy|sup|yo|greetings|good\s*(morning|afternoon|evening))(\s|$)/i.test(t);
   }
 
   function formatHighlights(kb) {
@@ -132,6 +192,7 @@
       { re: /\bocr\b|\bcomputer vision\b|\bdocument automation\b/, name: 'OCR document automation' },
       { re: /\brag\b|\bretrieval\b|\bfaiss\b/, name: 'Retrieval assistant (RAG)' },
       { re: /\bembedded\b|\bedge\b|\bstm32\b|\bsensor\b/, name: 'Embedded / edge foundations' },
+      { re: /\bstartup\b|\bchrome extension\b|\bethical shopping\b|\bco.?found\b|\bwasm\b|\bturborepo\b/, name: 'Ethical shopping platform (startup MVP)' },
       { re: /\bnda\b|\bconfidential\b/, name: 'Confidential AI product build (NDA)' }
     ];
     for (const k of keywordToName) {
@@ -235,6 +296,14 @@
 
     const t = normalize(text);
 
+    // Greetings
+    if (isGreeting(text)) {
+      return {
+        a: 'Hi! I can help with questions about Matome\'s skills, projects, experience, certifications, or contact info. What would you like to know?',
+        source: 'Greeting'
+      };
+    }
+
     // Specific project deep-dive (more insightful, still grounded)
     const projectHit = pickProject(text, kb);
     if (projectHit && /\b(project|case|study|work|tell|about|explain|details)\b/.test(t)) {
@@ -273,10 +342,20 @@
       return { a: lines.join('\n'), source: 'Experience' };
     }
     if (/\b(education|university|uct)\b/.test(t)) {
-      return { a: `Education (approved): ${kb.education?.approvedLine || ''}`.trim(), source: 'Education' };
+      const edu = kb.education || {};
+      const line = edu.status
+        ? `${edu.institution || ''} — ${edu.field || ''}. ${edu.status}.`
+        : edu.approvedLine || '';
+      return { a: `Education: ${line}`.trim(), source: 'Education' };
     }
     if (/\b(role|roles|looking for|availability|remote|hybrid)\b/.test(t)) {
       return { a: kb.profile?.workPolicy || safety.refusals?.unknown, source: 'Work policy' };
+    }
+    if (/\b(startup|co.?found|founder)\b/.test(t)) {
+      const startupProject = pickProject('startup chrome extension ethical shopping', kb);
+      if (startupProject) {
+        return { a: formatProjectCaseStudy(startupProject), source: 'Projects (startup)' };
+      }
     }
 
     const faqHit = pickFaqAnswer(text, kb.faq || []);
