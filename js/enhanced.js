@@ -401,6 +401,72 @@
     }
 
     // ============================================
+    // PROJECT SEARCH & FILTER
+    // ============================================
+
+    function initProjectFiltering() {
+        const projectsSection = document.getElementById('projects');
+        const searchInput = document.getElementById('projectSearch');
+        const filterButtons = Array.from(document.querySelectorAll('.project-filter'));
+        const cards = projectsSection
+            ? Array.from(projectsSection.querySelectorAll('.project-card'))
+            : Array.from(document.querySelectorAll('.project-card'));
+
+        if (!filterButtons.length || !cards.length) return;
+
+        let activeFilter = 'all';
+        let searchQuery = '';
+
+        function matchCard(card, q) {
+            if (!q) return true;
+            const text = (card.textContent || '').toLowerCase();
+            const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+            return terms.every(term => text.includes(term));
+        }
+
+        function applyFilter() {
+            filterButtons.forEach(btn => {
+                const filter = btn.dataset.filter || 'all';
+                const isActive = filter === activeFilter;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
+                btn.setAttribute('tabindex', isActive ? 0 : -1);
+            });
+
+            cards.forEach((card, idx) => {
+                const category = card.getAttribute('data-category') || '';
+                const categoryMatch = activeFilter === 'all' || category === activeFilter;
+                const searchMatch = matchCard(card, searchQuery);
+                const show = categoryMatch && searchMatch;
+
+                if (show) {
+                    card.classList.remove('filtered-out');
+                    card.style.opacity = '1';
+                    card.style.transform = '';
+                } else {
+                    card.classList.add('filtered-out');
+                }
+            });
+        }
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                activeFilter = btn.dataset.filter || 'all';
+                applyFilter();
+            });
+        });
+
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                searchQuery = (searchInput.value || '').trim();
+                applyFilter();
+            });
+        }
+
+        applyFilter();
+    }
+
+    // ============================================
     // INITIALIZATION
     // ============================================
 
@@ -422,6 +488,7 @@
         initMobileMenu();
         initReducedMotion();
         initLazyLoading();
+        initProjectFiltering();
 
         // Remove loading class
         document.body.classList.remove('loading');

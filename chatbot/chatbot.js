@@ -80,8 +80,7 @@
     'tech': 'skill', 'technologies': 'skill', 'tools': 'skill', 'stack': 'skill', 'proficient': 'skill', 'expertise': 'skill',
     'project': 'projects', 'portfolio': 'projects', 'built': 'projects', 'build': 'projects',
     'background': 'experience', 'history': 'experience', 'career': 'experience',
-    'ai': 'ml', 'machine learning': 'ml', 'deep learning': 'ml', 'artificial intelligence': 'ml',
-    'cofounder': 'startup', 'co-founder': 'startup', 'founder': 'startup', 'company': 'startup'
+    'ai': 'ml', 'machine learning': 'ml', 'deep learning': 'ml', 'artificial intelligence': 'ml'
   };
 
   function expandSynonyms(tokens) {
@@ -176,7 +175,7 @@
       });
     }
     lines.push('');
-    lines.push('If you want, ask: “Show skills summary”, “Show experience”, or “How do I contact Matome?”');
+    lines.push('If you want, ask: “Show skills”, “Show experience”, or “How do I contact Matome?”');
     return lines.join('\n');
   }
 
@@ -190,7 +189,6 @@
       { re: /\bocr\b|\bcomputer vision\b|\bdocument automation\b/, name: 'OCR document automation' },
       { re: /\brag\b|\bretrieval\b|\bfaiss\b/, name: 'Retrieval assistant (RAG)' },
       { re: /\bembedded\b|\bedge\b|\bstm32\b|\bsensor\b/, name: 'Embedded / edge foundations' },
-      { re: /\bstartup\b|\bchrome extension\b|\bethical shopping\b|\bco.?found\b|\bwasm\b|\bturborepo\b/, name: 'Ethical shopping platform (startup MVP)' },
       { re: /\bnda\b|\bconfidential\b/, name: 'Confidential AI product build (NDA)' }
     ];
     for (const k of keywordToName) {
@@ -347,12 +345,6 @@
     }
     if (/\b(role|roles|looking for|availability|remote|hybrid)\b/.test(t)) {
       return { a: kb.profile?.workPolicy || safety.refusals?.unknown, source: 'Work policy' };
-    }
-    if (/\b(startup|co.?found|founder)\b/.test(t)) {
-      const startupProject = pickProject('startup chrome extension ethical shopping', kb);
-      if (startupProject) {
-        return { a: formatProjectCaseStudy(startupProject), source: 'Projects (startup)' };
-      }
     }
 
     const faqHit = pickFaqAnswer(text, kb.faq || []);
