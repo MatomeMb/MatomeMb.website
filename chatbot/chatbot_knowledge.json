@@ -22,7 +22,8 @@
   "education": {
     "institution": "University of Cape Town",
     "field": "Computer Science & Computer Engineering",
-    "status": "Completed undergraduate coursework (degree not conferred)"
+    "status": "",
+    "approvedLine": "University of Cape Town, Computer Science & Computer Engineering"
   },
   "highlights": [
     "High OCR field-mapping accuracy on a defined document set using a validation-first approach.",
