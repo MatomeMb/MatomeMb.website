@@ -1,0 +1,180 @@
+/* ============================================
+   RESPONSIVE - Mobile-First Breakpoints
+   ============================================ */
+
+/* TABLETS (768px and up) */
+@media (max-width: 768px) {
+  /* NAVIGATION */
+  .nav-links {
+    gap: var(--space-md);
+  }
+  
+  .nav-links a {
+    font-size: var(--font-size-xs);
+  }
+  
+  /* HERO SECTION */
+  .hero {
+    margin-top: 60px;
+    min-height: auto;
+    padding: var(--space-xl) var(--space-md);
+  }
+  
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  
+  .hero-content-left h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: var(--font-size-base);
+  }
+  
+  .proof-metrics {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .profile-glow {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .hero-cta {
+    gap: var(--space-sm);
+  }
+  
+  /* PROJECTS */
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* SKILLS */
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bento-item.featured {
+    grid-column: span 1;
+  }
+}
+
+/* MOBILE (480px and below) */
+@media (max-width: 480px) {
+  :root {
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 2.5rem;
+  }
+  
+  /* NAVIGATION */
+  .nav-container {
+    padding: 0 var(--space-md);
+  }
+  
+  .logo {
+    font-size: var(--font-size-lg);
+  }
+  
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  /* HERO SECTION */
+  .hero {
+    margin-top: 56px;
+    padding: var(--space-xl) var(--space-md);
+  }
+  
+  .hero::before {
+    width: 300px;
+    height: 300px;
+    top: -20%;
+    right: -20%;
+  }
+  
+  .hero-content-left h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+  }
+  
+  .proof-metrics {
+    padding: var(--space-md) 0;
+  }
+  
+  .metric strong {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .profile-glow {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .availability-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .hero-cta {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  /* SECTIONS */
+  .projects,
+  .expertise,
+  .contact-cta {
+    padding: var(--space-xl) var(--space-md);
+  }
+  
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .section-subtitle {
+    font-size: var(--font-size-base);
+  }
+  
+  .project-card {
+    padding: var(--space-md);
+  }
+  
+  .bento-item {
+    padding: var(--space-md);
+  }
+  
+  .bento-item.featured {
+    padding: var(--space-lg);
+  }
+  
+  /* CONTACT LINKS */
+  .contact-links {
+    gap: var(--space-sm);
+    flex-direction: column;
+  }
+  
+  /* FOOTER */
+  footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer-links {
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,225 @@
+/* ============================================
+   ANIMATIONS - Motion & Scroll Triggers
+   ============================================ */
+
+/* FADE IN ON SCROLL */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* STAGGER CHILDREN */
+.fade-in.visible > * {
+  animation: staggerFadeIn 0.6s var(--ease-out) both;
+}
+
+.fade-in.visible > :nth-child(1) { animation-delay: 0s; }
+.fade-in.visible > :nth-child(2) { animation-delay: 0.1s; }
+.fade-in.visible > :nth-child(3) { animation-delay: 0.2s; }
+.fade-in.visible > :nth-child(4) { animation-delay: 0.3s; }
+.fade-in.visible > :nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SLIDE IN FROM LEFT */
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* SLIDE IN FROM RIGHT */
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* SCALE UP */
+.scale-up {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.scale-up.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* HOVER EFFECTS */
+.hover-lift {
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* BORDER GLOW ON HOVER */
+.hover-glow {
+  transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.hover-glow:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+/* TEXT UNDERLINE ANIMATION */
+.underline-animate {
+  position: relative;
+  text-decoration: none;
+}
+
+.underline-animate::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width 0.3s var(--ease-out);
+}
+
+.underline-animate:hover::after {
+  width: 100%;
+}
+
+/* BUTTON RIPPLE EFFECT */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ROTATING LOADER */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* PULSE ANIMATION */
+@keyframes pulse-animation {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: pulse-animation 2s var(--ease-in-out) infinite;
+}
+
+/* GLOW ANIMATION */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+}
+
+.glow {
+  animation: glow 2s var(--ease-in-out) infinite;
+}
+
+/* BOUNCE ANIMATION */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bounce {
+  animation: bounce 2s var(--ease-in-out) infinite;
+}
+
+/* SCROLL INDICATOR */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  animation: bounce 2s var(--ease-in-out) infinite;
+  color: var(--color-neutral-500);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.scroll-indicator::after {
+  content: '';
+  display: block;
+  width: 2px;
+  height: 20px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  animation: scrollLine 1.5s var(--ease-in-out) infinite;
+}
+
+@keyframes scrollLine {
+  0%, 100% {
+    opacity: 0;
+    height: 10px;
+  }
+  50% {
+    opacity: 1;
+    height: 20px;
+  }
+}
+
+/* DISABLE ANIMATIONS FOR REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
