@@ -1,86 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://www.matomembowene.co.za/privacy.html">
-  <title>Privacy | Matome Mbowene</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy — Matome Mbowene</title>
+  <meta name="description" content="Privacy commitments for matomembowene.co.za: no tracking, no cookies, no data collection — a fully static site." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.matomembowene.co.za/privacy.html" />
   <style>
-    :root {
-      --primary: #0b0f14;
-      --secondary: #12141a;
-      --accent: #22c55e;
-      --text: #f8fafc;
-      --text-muted: #a1aab8;
-      --border: rgba(148,163,184,0.16);
-    }
-    * { box-sizing: border-box; }
+    :root { --ink:#111827; --body:#374151; --muted:#6b7280; --line:#e5e7eb; --accent:#2563eb; }
+    * { box-sizing:border-box; margin:0; padding:0; }
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--primary);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 2rem 1rem;
+      background:#ffffff; color:var(--body);
+      font-family:"Inter",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      font-size:15px; line-height:1.6;
     }
-    .container { width: min(860px, 100%); margin: 0 auto; }
-    .card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-    }
-    a { color: var(--accent); text-underline-offset: 3px; }
-    h1 { margin: 0 0 0.75rem; letter-spacing: -0.02em; }
-    h2 { margin: 1.25rem 0 0.5rem; font-size: 1.05rem; }
-    p, li { color: var(--text-muted); line-height: 1.7; }
-    .top { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:baseline; }
-    .pill {
-      display:inline-flex;
-      align-items:center;
-      gap:0.45rem;
-      padding: 0.45rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.20);
-      background: rgba(148,163,184,0.08);
-      color: var(--text-muted);
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-decoration: none;
-    }
-    .pill:hover { border-color: rgba(34,197,94,0.35); background: rgba(34,197,94,0.10); }
+    main { max-width:680px; margin:0 auto; padding:56px 24px; }
+    h1 { font-size:28px; font-weight:800; letter-spacing:-0.02em; color:var(--ink); }
+    .lede { margin-top:10px; }
+    a { color:var(--accent); text-decoration:none; }
+    ul.items { margin-top:28px; list-style:none; }
+    ul.items li { border-left:2px solid var(--line); padding-left:18px; margin-top:22px; }
+    h2 { font-size:16px; font-weight:700; color:var(--ink); }
+    p.body { margin-top:6px; }
+    footer { margin-top:36px; padding-top:18px; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
+    nav.back { margin-bottom:24px; font-size:14px; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="top" style="margin-bottom: 1rem;">
-      <a class="pill" href="./">← Back to portfolio</a>
-      <span class="pill" aria-label="Last updated">Last updated: 2026-01-15</span>
-    </div>
-
-    <main class="card">
-      <h1>Privacy</h1>
-      <p>This is a static portfolio website. It’s designed to be lightweight and respectful of privacy.</p>
-
-      <h2>Data collection</h2>
-      <ul>
-        <li><strong>No sign-in</strong>, no user accounts, and no server-side form processing.</li>
-        <li>The “Contact” form opens your email client; messages are not stored by this site.</li>
-        <li>No advertising trackers are intentionally included.</li>
-      </ul>
-
-      <h2>Third-party links</h2>
-      <p>
-        This site links to third-party services (e.g., GitHub, LinkedIn, Credly, program pages). Those sites may collect data under their own policies.
-      </p>
-
-      <h2>Security reporting</h2>
-      <p>
-        If you believe you’ve found a security issue, please email
-        <a href="mailto:matomepontso@gmail.com">matomepontso@gmail.com</a>.
-      </p>
-    </main>
-  </div>
+  <main>
+    <nav class="back"><a href="https://www.matomembowene.co.za/">&larr; matomembowene.co.za</a></nav>
+    <h1>Privacy</h1>
+    <p class="lede">
+      Privacy here is not a policy — it is an architecture. This site cannot leak your data because
+      it never has your data.
+    </p>
+    <ul class="items">
+      <li>
+        <h2>No tracking</h2>
+        <p class="body">
+          No analytics scripts, no cookies, no fingerprinting, no third-party pixels. The site makes
+          exactly two classes of external request: font files from Google Fonts, and (on the home
+          page) a read-only call to the public GitHub API to list repositories.
+        </p>
+      </li>
+      <li>
+        <h2>No data collection</h2>
+        <p class="body">
+          There is no backend. Nothing you view or type is transmitted anywhere for storage. The
+          contact form composes a message inside your own email client via a mailto: link — it never
+          posts to a server.
+        </p>
+      </li>
+      <li>
+        <h2>No accounts, no secrets</h2>
+        <p class="body">
+          The site is a fully static build served by GitHub Pages. There are no logins, no sessions
+          and no server-side state to breach.
+        </p>
+      </li>
+    </ul>
+    <footer>
+      Last updated July 2026. Questions:
+      <a href="mailto:matomepontso@gmail.com">matomepontso@gmail.com</a>
+    </footer>
+  </main>
 </body>
 </html>

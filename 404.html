@@ -1,59 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex,nofollow">
-  <title>Page not found | Matome Mbowene</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found — Matome Mbowene</title>
+  <meta name="robots" content="noindex" />
   <style>
-    :root {
-      --primary: #0b0f14;
-      --secondary: #12141a;
-      --accent: #22c55e;
-      --text: #f8fafc;
-      --text-muted: #a1aab8;
-      --border: rgba(148,163,184,0.16);
-    }
-    * { box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--primary);
-      color: var(--text);
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 2rem;
+      margin: 0; background: #ffffff; color: #374151;
+      font-family: "Inter", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex; align-items: center; justify-content: center; min-height: 100vh;
     }
-    .card {
-      width: min(720px, 100%);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.75rem;
-    }
-    h1 { margin: 0 0 0.5rem; font-size: 1.6rem; letter-spacing: -0.02em; }
-    p { margin: 0.25rem 0 1.25rem; color: var(--text-muted); line-height: 1.7; }
-    a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.65rem 0.95rem;
-      border-radius: 999px;
-      border: 1px solid rgba(34,197,94,0.28);
-      background: rgba(34,197,94,0.12);
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 750;
-    }
-    a:hover { border-color: rgba(34,197,94,0.45); background: rgba(34,197,94,0.16); }
+    main { text-align: center; padding: 24px; }
+    .code { font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: #6b7280; }
+    h1 { font-size: 24px; color: #111827; margin: 12px 0 8px; }
+    p { margin: 0 0 20px; }
+    a { color: #2563eb; text-decoration: none; font-weight: 600; }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>Page not found</h1>
-    <p>The link may be outdated, or the page may have moved.</p>
-    <a href="./">Back to portfolio <span aria-hidden="true">↩</span></a>
+  <main>
+    <p class="code">404 / not-found</p>
+    <h1>This page doesn&rsquo;t exist here anymore.</h1>
+    <p>The site was rebuilt in 2026; taking you to the current version&hellip;</p>
+    <p><a id="home-link" href="/">matomembowene.co.za</a></p>
   </main>
+  <script>
+    // Redirect legacy (pre-rebuild) URLs to their hash-routed equivalents,
+    // then fall back to the home page for anything unrecognised.
+    (function () {
+      var legacy = {
+        "/case-studies/ocr-document-automation.html": "/#/project/ocr-document-automation",
+        "/case-studies/rag-assistant.html": "/#/project/rag-assistant",
+        "/blog/validation-first-ocr.html": "/#/writing",
+        "/blog/rag-guardrails.html": "/#/writing",
+        "/blog/shipping-discipline.html": "/#/writing",
+        "/blog": "/#/writing",
+        "/case-studies": "/#/projects",
+        "/projects": "/#/projects",
+        "/experience": "/#/experience",
+        "/architecture": "/#/architecture",
+        "/writing": "/#/writing",
+        "/resume": "/#/resume",
+        "/contact": "/#/contact"
+      };
+      var path = window.location.pathname.replace(/\/+$/, "") || "/";
+      var target = legacy[path] || legacy[path + ".html"] || "/";
+      var home = document.getElementById("home-link");
+      if (home) home.setAttribute("href", target);
+      window.location.replace(target);
+    })();
+  </script>
 </body>
 </html>

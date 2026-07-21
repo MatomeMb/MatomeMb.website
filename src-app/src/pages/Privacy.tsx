@@ -1,28 +1,45 @@
-import React from 'react';
-import { Shield } from 'lucide-react';
+
+const commitments = [
+  {
+    title: "No tracking",
+    body: "No analytics scripts, no cookies, no fingerprinting, no third-party pixels. This site makes exactly two classes of external request: font files from Google Fonts, and (on the home page) a read-only call to the public GitHub API to list repositories.",
+  },
+  {
+    title: "No data collection",
+    body: "There is no backend. Nothing you view or type is transmitted anywhere for storage. The contact form composes a message inside your own email client via a mailto: link — it never posts to a server.",
+  },
+  {
+    title: "No accounts, no secrets",
+    body: "The site is a fully static build served by GitHub Pages. There are no logins, no sessions and no server-side state to breach.",
+  },
+];
 
 export default function Privacy() {
   return (
-    <div className="max-w-3xl mx-auto space-y-8 py-8">
-      <div className="flex items-center gap-3 border-b border-[#1E293B] pb-4">
-        <Shield className="text-[#2563EB]" size={28} />
-        <h1 className="text-3xl font-bold tracking-tight text-[#F8FAFC]">Privacy Policy</h1>
-      </div>
-      
-      <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4 text-sm text-[#CBD5E1] leading-relaxed">
-        <p>
-          This website is built with strict privacy-by-design standards:
+    <div className="mx-auto max-w-2xl space-y-10 py-14">
+      <header className="space-y-3">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Privacy</h1>
+        <p className="leading-relaxed text-gray-600">
+          Privacy here is not a policy — it is an architecture. The site cannot leak your data
+          because it never has your data.
         </p>
-        <ul className="list-disc pl-5 space-y-2">
-          <li><strong>Zero Tracking:</strong> No cookies, analytics pixels, or telemetry collectors are loaded or executed.</li>
-          <li><strong>Zero Logging:</strong> No personal details, IP logs, or conversation logs are stored on any database.</li>
-          <li><strong>Grounded Local Chatbot:</strong> The portfolio chatbot runs completely locally in your browser. Messages do not leave your device and are processed purely clientside.</li>
-          <li><strong>Contact Form Security:</strong> Submitting the contact form constructs a prefilled <code>mailto:</code> link which launches your own native email client, ensuring your message is transmitted securely via standard email protocols.</li>
-        </ul>
-        <p className="pt-4 border-t border-[#1E293B] text-xs text-slate-500">
-          Last updated: July 21, 2026.
-        </p>
-      </div>
+      </header>
+
+      <ul className="space-y-6">
+        {commitments.map((item) => (
+          <li key={item.title} className="border-l-2 border-gray-200 pl-5">
+            <h2 className="font-semibold text-gray-900">{item.title}</h2>
+            <p className="mt-1 leading-relaxed text-gray-600">{item.body}</p>
+          </li>
+        ))}
+      </ul>
+
+      <footer className="border-t border-gray-200 pt-6 text-sm text-gray-500">
+        Last updated July 2026. Questions:{" "}
+        <a href="mailto:matomepontso@gmail.com" className="text-blue-600 hover:underline">
+          matomepontso@gmail.com
+        </a>
+      </footer>
     </div>
   );
 }

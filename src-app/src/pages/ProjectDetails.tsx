@@ -1,515 +1,730 @@
-import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, ShieldCheck, Database, Cpu, Code, Layers } from 'lucide-react';
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import MermaidDiagram from "../components/MermaidDiagram.tsx";
 
 interface CaseStudy {
-  id: string;
   name: string;
-  category: string;
+  tag: string;
+  repository?: string;
   problem: string;
   requirements: string[];
   architecture: string;
-  diagram: string;
-  tradeoffs: string[];
+  ascii: string;
+  mermaid: string;
+  mermaidCaption: string;
+  tradeoffs: { decision: string; cost: string; why: string }[];
   implementation: string[];
-  challenges: string[];
-  testing: string;
-  performance: string;
+  challenges: { issue: string; resolution: string }[];
+  verification: string;
+  outcome: string;
   lessons: string[];
-  future: string[];
-  github?: string;
+  roadmap: string[];
+}
+
+const studies: Record<string, CaseStudy> = {
+  "ocr-document-automation": {
+    name: "OCR Document Automation",
+    tag: "Computer vision — production pipeline",
+    problem:
+      "Financial documents arrive as scans — skewed, low-contrast, noisy. Raw OCR reads most characters correctly, but the residual errors are the dangerous kind: an 8 read as a 6, an O read as a 0. They are plausible values that pass naive checks and silently corrupt accounting tables downstream. The system requirement was therefore not 'read text well' but 'never let an unverifiable value reach the database'.",
+    requirements: [
+      "Per-field format constraints: dates parse as dates, amounts as numerics, references against known patterns.",
+      "Geometric validation: a value must come from the region of the page where that field lives.",
+      "Cross-field arithmetic: line items must sum to the document total within a defined tolerance.",
+      "Confidence gating: any field below its threshold is routed to manual review, never guessed.",
+      "Full audit trail: every accepted value traceable to a page coordinate and a confidence score.",
+    ],
+    architecture:
+      "A staged pipeline where each stage narrows the failure space of the next. Image-level normalisation stabilises coordinates before any character is read; validation runs in the API boundary, before storage, so rejection is immediate and cheap.",
+    ascii: `+---------------+   +------------------+   +-------------------+
+| Ingest scan   |-->| OpenCV normalise |-->| Coordinate        |
+| (PDF / image) |   | deskew + binarise|   | segmentation      |
++---------------+   +------------------+   +---------+---------+
+                                                     |
++----------------+   +------------------+   +--------v---------+
+| Backend ledger |<--| Validation gate  |<--| Tabular          |
+| (PostgreSQL)   |   | format+geo+sum   |   | extraction (OCR) |
++----------------+   +--------+---------+   +------------------+
+                              |
+                              v below threshold
+                     +------------------+
+                     | Manual review    |
+                     +------------------+`,
+    mermaid: `flowchart LR
+  A[Ingest scan] --> B[OpenCV normalise<br/>deskew + Otsu binarise]
+  B --> C[Coordinate segmentation]
+  C --> D[OCR extraction]
+  D --> E{Validation gate<br/>format / geometry / sums}
+  E -->|pass| F[(Ledger write<br/>with audit coordinates)]
+  E -->|below threshold| G[Manual review queue]`,
+    mermaidCaption: "Fig 1. Pipeline stages. The validation gate is the control point — nothing reaches storage unverified.",
+    tradeoffs: [
+      {
+        decision: "Image preprocessing (deskew, Otsu binarisation) before OCR",
+        cost: "~80 ms additional latency per page",
+        why: "It secures coordinates on low-contrast scans. No amount of post-OCR validation can recover a field that was read from the wrong location.",
+      },
+      {
+        decision: "Validation in the API boundary rather than in the database",
+        cost: "Business rules live in application code and must be versioned with it",
+        why: "Rejections are instant and cheap — a malformed record never acquires a transaction, a lock, or a write on the database.",
+      },
+      {
+        decision: "Conservative confidence thresholds",
+        cost: "A fraction of valid documents is sent to manual review",
+        why: "The cost of human review is predictable; the cost of a silent ledger error is not.",
+      },
+    ],
+    implementation: [
+      "OpenCV preprocessing: skew angle estimated from bounding-box geometry, corrected with an affine transform; Otsu thresholding isolates text from noisy backgrounds.",
+      "Tesseract OCR constrained to segmented coordinate regions rather than whole-page reads, narrowing each field's search space.",
+      "Four-layer validation: format regexes, region-of-origin checks, cross-field summation rules, engine confidence thresholds.",
+      "Structured audit logging: every accepted field stores source coordinates, confidence and rule outcomes for later traceability.",
+    ],
+    challenges: [
+      {
+        issue: "Skewed scans producing systematically misaligned coordinate maps.",
+        resolution:
+          "Skew detection from the average angle of text bounding boxes, then an affine geometric correction before segmentation.",
+      },
+      {
+        issue: "Scanner noise destroying thin character strokes under naive thresholding.",
+        resolution:
+          "Bilateral filtering that suppresses speckle noise while preserving stroke edges, ahead of binarisation.",
+      },
+    ],
+    verification:
+      "Regression fixtures over a fixed set of high-noise invoices: every run asserts field-level format compliance, summation rules and correct routing of low-confidence extractions.",
+    outcome:
+      "Silent character-swap errors in the downstream ledger are eliminated by construction: any value that cannot be verified against format, geometry and arithmetic rules is rejected before storage and routed to a human.",
+    lessons: [
+      "In document AI, validation is the product. Extraction quality matters only insofar as the validation layer can trust it.",
+      "Preprocessing buys more accuracy than tuning the OCR engine itself.",
+    ],
+    roadmap: [
+      "Drift detection on input image statistics to flag scanner degradation before accuracy drops.",
+      "Specialised layout models for the highest-volume document families.",
+    ],
+  },
+
+  "rag-assistant": {
+    name: "RAG Knowledge Assistant",
+    tag: "Applied AI — grounded retrieval",
+    repository: "https://github.com/MatomeMb/personal-codex-agent",
+    problem:
+      "Question-answering over a private document corpus failed in the classic RAG way: retrieval returned chunks that matched keywords but answered a different question, and the language model — doing what language models do — confidently filled the gap. The system did not just need better retrieval; it needed to know when not to answer.",
+    requirements: [
+      "Deterministic indexing: the same corpus always produces the same index (pinned models, fixed chunking).",
+      "Similarity gating: chunks below a cosine threshold never reach the prompt.",
+      "Explicit refusal: sub-threshold queries get a plain 'not in this corpus' response.",
+      "Provenance: every answer cites the chunks it was grounded in.",
+      "Index integrity: re-embedding only happens when source files actually changed.",
+    ],
+    architecture:
+      "An offline ingestion path (chunk, embed, persist a FAISS index, hash the corpus) and an online query path (embed query, retrieve, gate, assemble grounded prompt, generate with citations). The gate sits between retrieval and generation — it is the single most important component in the system.",
+    ascii: `+---------------+   +------------------+   +-------------------+
+| Corpus files  |-->| Chunking         |-->| Embeddings        |
+| (docs/markdown)|  | (recursive split)|   | (MiniLM, pinned)  |
++---------------+   +------------------+   +---------+---------+
+                                                     |
++----------------+   +------------------+   +--------v---------+
+| Grounded       |<--| Prompt assembly  |<--| FAISS index      |
+| answer + cites |   | + citations      |   | (persistent)     |
++----------------+   +--------+---------+   +------------------+
+                              |
+                              v below threshold
+                     +------------------+
+                     | Explicit refusal |
+                     +------------------+`,
+    mermaid: `sequenceDiagram
+  participant U as User
+  participant Q as Query path
+  participant F as FAISS index
+  participant L as LLM
+  U->>Q: question
+  Q->>Q: embed query (MiniLM)
+  Q->>F: top-k similarity search
+  F-->>Q: chunks + cosine scores
+  alt above threshold
+    Q->>L: grounded prompt + cited chunks
+    L-->>U: answer with source citations
+  else below threshold
+    Q-->>U: explicit refusal - not in corpus
+  end`,
+    mermaidCaption: "Fig 1. Query-path sequence. The similarity gate decides between grounded generation and refusal.",
+    tradeoffs: [
+      {
+        decision: "In-memory FAISS instead of a hosted vector database",
+        cost: "Corpus size is bounded by local memory; no managed scaling story",
+        why: "For this corpus the operational overhead of a vector DB buys nothing. Simplicity and auditability win.",
+      },
+      {
+        decision: "Local sentence-transformers instead of a commercial embedding API",
+        cost: "Slightly weaker embeddings than frontier models",
+        why: "Deterministic local execution: no per-call cost, no data leaving the machine, and a pinned model version is what makes the index reproducible.",
+      },
+      {
+        decision: "Conservative similarity threshold",
+        cost: "The assistant declines questions a looser system would attempt",
+        why: "Precision is the product. A refusal is a correct answer when the evidence is weak.",
+      },
+    ],
+    implementation: [
+      "Recursive character chunking with fixed overlap — parameters versioned with the code.",
+      "Pinned sentence-transformer (MiniLM family) for embeddings; model version stored alongside the index.",
+      "FAISS index persisted to disk with corpus SHA-256 hash; ingestion re-runs only when the hash changes.",
+      "Cosine-similarity threshold tuned against a probe set of in-scope and out-of-scope questions.",
+      "Prompt assembly that injects retrieved chunks with explicit citation markers the model must preserve.",
+    ],
+    challenges: [
+      {
+        issue: "Keyword-similar but semantically wrong chunks passing early thresholds.",
+        resolution:
+          "Tuned the threshold against cosine-score distributions of known-good versus known-irrelevant retrievals, and kept the bias toward refusal.",
+      },
+      {
+        issue: "Silent staleness when source documents changed but the index did not.",
+        resolution:
+          "SHA-256 integrity check over the corpus on startup; a mismatch forces a rebuild before serving.",
+      },
+    ],
+    verification:
+      "Probe suite of questions with known ground truth — in-scope questions must retrieve the correct source chunks; out-of-scope probes must be refused. Re-run on every ingestion change.",
+    outcome:
+      "Zero fabricated answers on out-of-scope probes: the assistant either answers with citations from the corpus or states that the evidence is not there.",
+    lessons: [
+      "The quality of a RAG system is determined at the retrieval gate, not at the model.",
+      "Reproducibility of the index is a maintenance requirement, not a nicety.",
+    ],
+    roadmap: [
+      "Hybrid lexical + semantic retrieval to improve short, exact-keyword queries.",
+      "Cross-encoder re-ranking of retrieved chunks before prompt assembly.",
+    ],
+  },
+
+  "fairflow-platforms": {
+    name: "Fairflow Production Platforms",
+    tag: "Enterprise software — NDA",
+    problem:
+      "Production document workflows where invalid data and irregular deploys carry real cost. The engineering mandate: validation-first services, reproducible environments, and deployments that cannot drift between machines.",
+    requirements: [
+      "Every API boundary validates its input before business logic executes.",
+      "Environments are byte-reproducible: pinned lockfiles, no floating dependencies.",
+      "Every change passes automated gates before merge and before deploy.",
+      "Structured telemetry on every workflow decision for auditability.",
+    ],
+    architecture:
+      "Contract-first services behind a defensive validation boundary, shipped through a CI pipeline whose gates are allowed to be slow but never optional. Details are public-safe generalisations; client specifics remain under NDA.",
+    ascii: `+----------------+   +------------------+   +-------------------+
+| Developer      |-->| CI gates         |-->| Container build   |
+| commit         |   | lint+types+tests |   | (pinned deps)     |
++----------------+   +------------------+   +---------+---------+
+                                                     |
++----------------+   +------------------+   +--------v---------+
+| Telemetry +    |<--| Staging soak     |<--| Deploy pipeline   |
+| alerting       |   | + smoke checks   |   |                   |
++----------------+   +------------------+   +-------------------+`,
+    mermaid: `flowchart LR
+  A[Commit] --> B{CI gates<br/>lint / typecheck / tests}
+  B -->|fail| A
+  B -->|pass| C[Reproducible container build]
+  C --> D[Staging + smoke checks]
+  D --> E[Production]
+  E --> F[Structured telemetry<br/>+ alerting]
+  F --> A`,
+    mermaidCaption: "Fig 1. Delivery loop. Gates are mandatory by construction — a failing check cannot reach staging.",
+    tradeoffs: [
+      {
+        decision: "Mandatory CI gates on every merge",
+        cost: "Merge latency measured in minutes",
+        why: "The alternative — debugging a broken production deploy — is measured in hours and trust.",
+      },
+      {
+        decision: "Validation-first API boundaries",
+        cost: "Duplicate-feeling schemas at the edge",
+        why: "Invalid input is rejected before it can touch business logic or storage; every acceptance is provable.",
+      },
+    ],
+    implementation: [
+      "Contract-first endpoint definitions with runtime schema validation at the boundary.",
+      "Lockfile-pinned builds (npm / Poetry) making CI, staging and production bytecode-identical.",
+      "Containerised services with health probes wired to alerting channels.",
+      "Structured, queryable logs on every validation decision for downstream audit.",
+    ],
+    challenges: [
+      {
+        issue: "Deployment drift between developer machines and production.",
+        resolution:
+          "Removed the variable entirely: only container images built by CI from pinned lockfiles are deployable.",
+      },
+    ],
+    verification:
+      "Regression suites at the service boundary, smoke checks after every staging deploy, and staged rollouts with alerting on validation failure rates.",
+    outcome:
+      "Production releases with reproducible builds and zero unresolved build discrepancies between environments.",
+    lessons: [
+      "Reproducibility is a feature you build once and benefit from on every deploy.",
+      "Telemetry you can query is worth more than logs you can read.",
+    ],
+    roadmap: [
+      "Tighter autoscaling policies driven by validation-queue depth.",
+      "Progressive delivery with automated rollback triggers.",
+    ],
+  },
+
+  myadvisor: {
+    name: "MyAdvisor",
+    tag: "Full-stack application",
+    problem:
+      "Tutor allocation at UCT's Science Learning Centre ran on spreadsheets and email. Double-bookings and administrative overhead were structural, not incidental — the process itself could not enforce that a tutor exists in one place at one time.",
+    requirements: [
+      "Three roles with distinct capabilities: administrator, tutor, student.",
+      "A booking exists only if it violates no constraint — enforced by the system, not the users.",
+      "Bulk administrative imports without manual data entry.",
+      "Every scheduling decision auditable after the fact.",
+    ],
+    architecture:
+      "Classic MVC over a relational schema where the invariants live in the database. The scheduling routine scores candidate allocations against tutor load and availability; the schema makes invalid bookings unrepresentable regardless of what application code does.",
+    ascii: `+----------------+   +------------------+   +-------------------+
+| Web client     |-->| Spring MVC       |-->| Service layer     |
+| (Thymeleaf)    |   | controllers      |   | booking rules     |
++----------------+   +------------------+   +---------+---------+
+                                                     |
++----------------+   +------------------+   +--------v---------+
+| Admin reports  |<--| Scheduling       |<--| PostgreSQL        |
+| + audit views  |   | scoring routine  |   | constraints+FKs   |
++----------------+   +------------------+   +-------------------+`,
+    mermaid: `flowchart TB
+  subgraph Client
+    A[Student booking view]
+    B[Tutor schedule view]
+    C[Admin console]
+  end
+  A --> D[Spring MVC controllers]
+  B --> D
+  C --> D
+  D --> E[Booking service<br/>conflict + load rules]
+  E --> F[(PostgreSQL<br/>unique constraints, FKs, checks)]
+  E --> G[Audit log]`,
+    mermaidCaption: "Fig 1. Layered design. Correctness is anchored in the schema; the service layer scores and allocates.",
+    tradeoffs: [
+      {
+        decision: "Constraint enforcement in the database, duplicated in the service layer",
+        cost: "Two places to maintain each invariant",
+        why: "Database constraints are the last line of defence; service-layer checks give users immediate, readable errors.",
+      },
+      {
+        decision: "Server-rendered views (Thymeleaf) instead of a SPA",
+        cost: "Less interactive UI",
+        why: "An administrative tool changes slowly and must be maintainable by whoever owns it next; server rendering removes an entire build toolchain.",
+      },
+    ],
+    implementation: [
+      "Relational schema with unique constraints over (tutor, slot) and foreign keys from bookings to both parties.",
+      "Scheduling routine scoring candidate allocations on tutor load balance and declared availability.",
+      "RBAC at the controller layer with three capability profiles.",
+      "CSV import path for bulk administrative data with per-row validation reports.",
+    ],
+    challenges: [
+      {
+        issue: "Race between concurrent bookings for the same tutor slot.",
+        resolution:
+          "The unique constraint owns correctness; the service layer catches the violation and returns a readable conflict error instead of a 500.",
+      },
+    ],
+    verification:
+      "Integration tests over the booking state machine: every invalid transition (double-book, role violation, past-dated slot) is asserted to be rejected.",
+    outcome:
+      "A measured 35% improvement in tutor-allocation scheduling efficiency at the Science Learning Centre, with double-bookings eliminated structurally.",
+    lessons: [
+      "Put invariants where they cannot be bypassed — in the schema.",
+      "Scheduling is a constraint problem before it is a UI problem.",
+    ],
+    roadmap: [
+      "Automated notification paths for booking confirmations and changes.",
+      "Optimisation pass on the scoring routine for multi-constraint terms.",
+    ],
+  },
+
+  "fashionmnist-classifier": {
+    name: "FashionMNIST Neural Network",
+    tag: "Machine learning",
+    repository: "https://github.com/MatomeMb/FashionMNIST-Classifier",
+    problem:
+      "Train a clothing-image classifier whose results are defensible: reproducible by anyone who reruns the pipeline, honestly evaluated on data the model never saw, and auditable at the level of individual training decisions.",
+    requirements: [
+      "Locked random seeds and deterministic configuration.",
+      "Strict train / validation / test separation — the test set is touched once.",
+      "Structured metric logging per epoch, exportable as JSON.",
+      "Regularisation tuned against validation accuracy, not test accuracy.",
+    ],
+    architecture:
+      "A compact CNN — two convolutional blocks with dropout, then a fully-connected head — trained with Adam and CrossEntropyLoss under a StepLR schedule. The pipeline around the model (seed control, metric emission, config versioning) is the part that makes its 89.33% test accuracy meaningful.",
+    ascii: `+----------------+   +------------------+   +-------------------+
+| FashionMNIST   |-->| Conv block x2    |-->| FC head +         |
+| 28x28 tensors  |   | + dropout 0.25   |   | softmax (10 way)  |
++----------------+   +------------------+   +---------+---------+
+                                                     |
++----------------+   +------------------+   +--------v---------+
+| JSON metrics   |<--| Eval harness     |<--| Adam + StepLR     |
+| artefact       |   | (held-out test)  |   | training loop     |
++----------------+   +------------------+   +-------------------+`,
+    mermaid: `flowchart LR
+  A[FashionMNIST tensors] --> B[Conv block ×2<br/>dropout 0.25]
+  B --> C[FC head + softmax]
+  C --> D[Adam + StepLR<br/>training loop]
+  D --> E[Held-out evaluation]
+  E --> F[JSON metrics artefact]`,
+    mermaidCaption: "Fig 1. The model is small on purpose; the evaluation discipline around it is the deliverable.",
+    tradeoffs: [
+      {
+        decision: "Batch size 64 rather than 32",
+        cost: "Noisier gradient estimates per step",
+        why: "Stable GPU utilisation and faster convergence to an equivalent validation accuracy.",
+      },
+      {
+        decision: "StepLR decay (×0.1 every 5 epochs) instead of a flat rate",
+        cost: "One more hyperparameter to justify",
+        why: "Early epochs make coarse progress at a high rate; decay secures convergence without overshooting minima late in training.",
+      },
+    ],
+    implementation: [
+      "Custom nn.Module: Conv2d → ReLU → MaxPool, twice, with 0.25 dropout before the head.",
+      "Adam optimiser, CrossEntropyLoss, StepLR schedule.",
+      "Global seed initialisation across Python, NumPy and PyTorch.",
+      "Per-epoch loss and accuracy written to a versioned JSON metrics file.",
+    ],
+    challenges: [
+      {
+        issue: "Validation accuracy plateauing below training accuracy (overfitting).",
+        resolution:
+          "0.25 dropout and L2 weight decay; the gap closed enough to trust the generalisation estimate.",
+      },
+    ],
+    verification:
+      "Single, final evaluation on the untouched test set after all tuning decisions were frozen. 89.33% test accuracy, reproducible from the committed config.",
+    outcome: "89.33% test-set accuracy under a fully reproducible pipeline.",
+    lessons: [
+      "A number you cannot reproduce is not a result.",
+      "Regularisation decisions belong to the validation set; the test set is read-only.",
+    ],
+    roadmap: [
+      "Transfer-learning baseline (MobileNet) to quantify the headroom over the compact CNN.",
+      "ONNX export for portable inference.",
+    ],
+  },
+
+  "p2p-network": {
+    name: "Peer-to-Peer Network",
+    tag: "Distributed systems",
+    problem:
+      "Build file transfer between peers with no central server. The interesting part was never moving bytes — it was the distributed-systems reality that any peer can vanish mid-transfer and the data must still arrive intact.",
+    requirements: [
+      "Peer discovery without a central coordinator.",
+      "Chunked transfer with integrity verification per chunk.",
+      "Tolerant of peers joining and leaving mid-transfer.",
+      "Concurrent transfers without corrupting shared state.",
+    ],
+    architecture:
+      "Every node is simultaneously client and server over TCP sockets. Files are split into fixed-size chunks, each SHA-256 hashed; receivers reassemble and verify before acknowledging. Peer membership spreads gossip-style rather than through any authoritative registry.",
+    ascii: `+----------------+        +------------------+
+| Peer A         |<------>| Peer B           |
+| client+server  |  TCP   | client+server    |
++-------+--------+        +---------+--------+
+        | chunked SHA-256 transfer |
+        v                          v
++-------+--------------------------+--------+
+| Reassembly + per-chunk verification      |
++------------------------------------------+`,
+    mermaid: `sequenceDiagram
+  participant A as Peer A
+  participant B as Peer B
+  A->>B: Gossip - peer list exchange
+  A->>B: File manifest (name, chunks, hashes)
+  loop per chunk
+    A->>B: chunk payload
+    B->>B: SHA-256 verify
+    B-->>A: ack / reject
+  end
+  B->>B: reassemble + final verify`,
+    mermaidCaption: "Fig 1. Transfer sequence with per-chunk integrity checks — a corrupt chunk is re-requested, not propagated.",
+    tradeoffs: [
+      {
+        decision: "TCP per chunk instead of a custom UDP transport",
+        cost: "Throughput below what a tuned UDP design could reach",
+        why: "TCP removes ordering and loss handling from the correctness surface — the right trade for a correctness-first academic build.",
+      },
+      {
+        decision: "Per-chunk hashing at transfer granularity",
+        cost: "Hash computation on every chunk",
+        why: "Corruption is isolated to a single re-request instead of invalidating the whole file.",
+      },
+    ],
+    implementation: [
+      "Dual-role node: a listening server thread per peer plus client connections on demand.",
+      "File manifests exchanged before transfer, listing chunk hashes out of band.",
+      "SHA-256 verification per chunk with re-request on mismatch.",
+      "Guarded shared state for concurrent inbound transfers.",
+    ],
+    challenges: [
+      {
+        issue: "A peer departing mid-transfer leaving partial state.",
+        resolution:
+          "Manifest-first design: the receiver knows exactly what is missing and can resume against any peer holding the remaining chunks.",
+      },
+    ],
+    verification:
+      "Injected-failure tests: corrupted chunks, dropped connections and concurrent transfers, asserting integrity of every reassembled file.",
+    outcome:
+      "Correct, verifiable multi-peer file transfer with graceful degradation under peer churn.",
+    lessons: [
+      "In distributed systems, define correctness first — speed optimisations are cheap compared to consistency bugs.",
+      "Idempotent, resumable units of work make partial failure boring.",
+    ],
+    roadmap: [
+      "Parallel chunk retrieval across multiple peers (swarm behaviour).",
+      "NAT traversal design notes for non-LAN deployment.",
+    ],
+  },
+
+  "stm32-embedded": {
+    name: "STM32 Embedded Systems",
+    tag: "Embedded / low-level",
+    repository: "https://github.com/MatomeMb/Connected-Components-Image-Processor",
+    problem:
+      "Computer-engineering practicals on STM32 boards: kilobytes of RAM, no operating system, and peripherals that do exactly what the registers say — nothing more. Bugs are not exceptions; they are silent wrong voltages and missed timing windows.",
+    requirements: [
+      "Interrupt-driven I/O across timers, UART and GPIO.",
+      "Deterministic memory usage — no dynamic allocation in hot paths.",
+      "Timing behaviour that can be reasoned about without a debugger.",
+    ],
+    architecture:
+      "Bare-metal C with register-level peripheral setup. Interrupt service routines do the minimum — capture the event, set a flag — and the main loop performs the work. Control flow stays linear enough that timing can be verified by reading the code.",
+    ascii: `+----------------+   +------------------+   +-------------------+
+| Peripherals    |-->| ISRs: capture    |-->| Flag queue        |
+| timer/UART/GPIO|   | event, set flag  |   | (volatile state)  |
++----------------+   +------------------+   +---------+---------+
+                                                     |
++----------------+   +------------------+   +--------v---------+
+| Sensor/serial  |<--| Main loop:       |<--| Static buffers    |
+| output         |   | do the work      |   | (fixed allocation)|
++----------------+   +------------------+   +-------------------+`,
+    mermaid: `flowchart LR
+  P[Peripherals<br/>timer / UART / GPIO] --> I[ISRs<br/>capture + flag]
+  I --> Q[Volatile flag state]
+  Q --> M[Main loop<br/>deferred work]
+  S[Static buffers] --> M
+  M --> O[Serial + GPIO output]`,
+    mermaidCaption: "Fig 1. ISR-to-mainloop hand-off. Interrupts stay short; work is deferred to linear control flow.",
+    tradeoffs: [
+      {
+        decision: "Deferred work in a main loop instead of fully event-driven ISRs",
+        cost: "Idle cycles polling flags",
+        why: "Long ISRs make timing unanalysable and debugging painful. A linear main loop can be timed by inspection.",
+      },
+      {
+        decision: "Static buffers instead of heap allocation",
+        cost: "Compile-time capacity limits",
+        why: "No fragmentation, no allocation failure at runtime, and memory usage auditable from the map file.",
+      },
+    ],
+    implementation: [
+      "Register-level configuration of timers, UART and GPIO (no HAL magic in the timing-critical paths).",
+      "Volatile-qualified shared state between ISRs and the main loop.",
+      "Fixed-size ring buffers for UART traffic.",
+      "Related low-level work: connected-component image labelling optimised for memory footprint in standard C++ (linked repository).",
+    ],
+    challenges: [
+      {
+        issue: "Race conditions between ISR flag updates and main-loop reads.",
+        resolution:
+          "Single-writer discipline: ISRs write flags, the main loop consumes and clears them; nothing writes from both sides.",
+      },
+    ],
+    verification:
+      "Timing checks against peripherals measured on-board; UART loopback tests verifying buffer behaviour under sustained load.",
+    outcome:
+      "Deterministic interrupt-driven firmware across the practical briefs, with timing behaviour verifiable by code inspection.",
+    lessons: [
+      "On bare metal, the code you can reason about beats the code that is clever.",
+      "Volatile and single-writer rules are a complete concurrency strategy at this scale.",
+    ],
+    roadmap: [
+      "Move hot paths from polling to DMA where the peripheral supports it.",
+      "Power-profiling pass for sleep-state design.",
+    ],
+  },
+};
+
+/* Backwards-compatible slugs from the previous version of the site. */
+const aliases: Record<string, string> = {
+  "scheduling-systems": "myadvisor",
+  "embedded-navigation": "stm32-embedded",
+  "confidential-ai-build": "fairflow-platforms",
+};
+
+function SectionHeading({ n, children }: { n: string; children: React.ReactNode }) {
+  return (
+    <h2 className="flex items-baseline gap-3 text-lg font-bold tracking-tight text-gray-900">
+      <span className="font-mono text-xs font-medium text-gray-400">{n}</span>
+      {children}
+    </h2>
+  );
 }
 
 export default function ProjectDetails() {
   const { id } = useParams<{ id: string }>();
 
-  // Ensure scroll is at top upon view load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  const studies: Record<string, CaseStudy> = {
-    'ocr-document-automation': {
-      id: 'ocr-document-automation',
-      name: 'OCR Document Automation',
-      category: 'Computer Vision / AI',
-      problem: 'Enterprise users ingested scans of financial invoices and reference sheets daily. Standard OCR outputs produced coordinate errors and silent character swaps (e.g., mistaking O for 0 or 8 for 6), corrupting backend accounting databases without triggering any database exceptions.',
-      requirements: [
-        'Establish format checking for dates and floating quantities.',
-        'Apply spatial/geometric constraints to align extracted columns.',
-        'Validate invoices by checking cross-field summing (items sum to total).',
-        'Reject any records with low extraction confidence and route to manual review.'
-      ],
-      architecture: 'A multi-staged pipeline that receives documents, performs image-level preprocessing, segments coordinates, runs engine-level OCR, structures tabular outputs, and applies localized business validations.',
-      diagram: `
-+----------------+      +-------------------+      +---------------------+
-| Ingest PDF/Img | ---> | OpenCV Normalise  | ---> | Segment Coordinate  |
-+----------------+      +-------------------+      +---------------------+
-                                                              |
-+----------------+      +-------------------+      +----------v----------+
-| Backend DB     | <--- | Ingestion Gate    | <--- | Tabular Extraction  |
-+----------------+      +---------+---------+      +---------------------+
-                                  |
-                                  v Low Confidence
-                        +-------------------+
-                        | Manual Review     |
-                        +-------------------+
-      `,
-      tradeoffs: [
-        'OpenCV Image Normalisation vs Pure Engine Processing: Normalisation introduces 80ms latency per page, but secures coordinates for 95%+ of low-contrast sheets.',
-        'Client vs Server-side extraction validation: Validating directly in the API layer reduces database load and guarantees instant rejection signals.'
-      ],
-      implementation: [
-        'OpenCV Binarisation: Applying Otsu thresholding and deskew algorithms to align crooked sheets.',
-        'Tesseract OCR engine integration with customized coordinate boundary detection.',
-        'Strict regex schema validation with algebraic total cross-checking rules.'
-      ],
-      challenges: [
-        'Skewed Scans: Solved by executing affine geometric transforms on skew angles detected from bounding box coordinate averages.',
-        'Noisy Backgrounds: Neutralized via bilateral filters that blur noise while preserving thin text strokes.'
-      ],
-      testing: 'Validated pipeline using a dataset of 200 high-noise invoices. Executed regression fixtures checking edge totals and format rejections.',
-      performance: 'Secured high field-mapping accuracy on defined document sets. Reduced silent ledger database typos to absolute zero.',
-      lessons: [
-        'Validation is the core control of machine intelligence pipelines.',
-        'Pre-processing scans yields greater extraction gains than fine-tuning engine parameters.'
-      ],
-      future: [
-        'Develop real-time data drift detection checking image resolution degration.',
-        'Train lighter specialized CNN layers for specific invoice layout segmentations.'
-      ],
-      github: 'https://github.com/MatomeMb',
-    },
-    'rag-assistant': {
-      id: 'rag-assistant',
-      name: 'RAG AI Assistant',
-      category: 'Retrieval Augmented Gen',
-      problem: 'Retrieval systems often yield weakly-related documents that look relevant to query keywords, prompting LLMs to make confident-sounding but completely fabricated statements.',
-      requirements: [
-        'Build reproducible document chunk indexing.',
-        'Set similarity thresholds to reject non-aligned chunks.',
-        'Force explicit refusals when retrieval confidence falls below limits.',
-        'Provide visible references back to sources for manual verification.'
-      ],
-      architecture: 'A persistent pipeline that converts raw files, creates dense vectors, queries standard semantic spaces, filters matches by strict thresholds, and formats grounded prompts.',
-      diagram: `
-+------------------+      +--------------------+      +--------------------+
-| Raw Markdown/Doc | ---> | Ingestion/Chunking | ---> | Embeddings Layer   |
-+------------------+      +--------------------+      +---------+----------+
-                                                                |
-+------------------+      +--------------------+      +---------v----------+
-| Prompt to LLM    | <--- | Similarity Gating  | <--- | Persistent FAISS   |
-+--------+---------+      +---------+----------+      +--------------------+
-         |                          |
-         v Validated                v Low Confidence
-+------------------+      +---------v----------+
-| Grounded Output  |      | Refusal Escape     |
-+------------------+      +--------------------+
-      `,
-      tradeoffs: [
-        'Vector DB vs In-Memory FAISS: Handled moderate corpus sizes comfortably inside in-memory FAISS indices, saving database hosting overhead.',
-        'Sentence-Transformers vs OpenAI Embeddings: Opted for sentence-transformers to support local execution and keep pipeline processing free of API call costs.'
-      ],
-      implementation: [
-        'Configured recursive character chunk segmenting.',
-        'Loaded pre-trained MiniLM sentence-transformers for local dense embedding builds.',
-        'Created FAISS indices utilizing strict cosine distance metric boundaries.'
-      ],
-      challenges: [
-        'Irrelevant Chunks: Bypassed by tuning the similarity threshold based on cosine score averages.',
-        'Stale Indexes: Solved by executing automated SHA-256 integrity check scripts on raw document folders before initializing vector updates.'
-      ],
-      testing: 'Compiled comprehensive test runs verifying retrieval precision. Proved query consistency across varying semantic phrasing.',
-      performance: 'Maintained responsive query cycles under local hardware runs. Zero-hallucinations achieved on out-of-scope probes.',
-      lessons: [
-        'Conservative retrieval gating is the single most effective AI safeguard.',
-        'Index auditability is mandatory for system maintenance.'
-      ],
-      future: [
-        'Deploy hybrid keyword/semantic retrieval to enhance short query hits.',
-        'Integrate cross-encoders for prompt-chunk re-ranking layers.'
-      ],
-      github: 'https://github.com/MatomeMb/personal-codex-agent',
-    },
-    'fashionmnist-classifier': {
-      id: 'fashionmnist-classifier',
-      name: 'FashionMNIST Classifier',
-      category: 'Machine Learning',
-      problem: 'Building reproducible deep learning pipelines that can be audited, re-evaluated, and verified for test set classification accuracy.',
-      requirements: [
-        'Construct end-to-end PyTorch training scripts.',
-        'Enforce absolute repeatability by locking random seed initializations.',
-        'Generate structured metric logging files detailing epochs, losses, and accuracy.'
-      ],
-      architecture: 'A multi-layer convolutional neural network (CNN) model built, optimized, and tested inside a reproducible pipeline environment.',
-      diagram: `
-+------------------+      +--------------------+      +--------------------+
-| FashionMNIST Set | ---> | CNN Convolutional  | ---> | Fully Connected    |
-+------------------+      +--------------------+      +---------+----------+
-                                                                |
-+------------------+      +--------------------+      +---------v----------+
-| Metric Logger    | <--- | Evaluation Set     | <--- | Softmax Predictions|
-+------------------+      +--------------------+      +--------------------+
-      `,
-      tradeoffs: [
-        'Batch size selection: Settled on a batch size of 64 to stabilize gradients while maximizing GPU usage during backpropagation.',
-        'Learning rate schedulers: Chose StepLR decaying lr by 0.1 every 5 epochs to secure smooth convergence and avoid local minima.'
-      ],
-      implementation: [
-        'Initialized custom PyTorch nn.Module with two Conv2D layers and Dropout regularization.',
-        'Coded rigorous epoch iteration loops utilizing Adam optimizer and CrossEntropyLoss.',
-        'Exported validation metrics tables in JSON formats.'
-      ],
-      challenges: [
-        'Model Overfitting: Solved by adding 0.25 Dropout layers and applying standard L2 weight decay regularizations.'
-      ],
-      testing: 'Evaluated accuracy using standard test subsets. Monitored model parameters using reproducible random seed locks.',
-      performance: 'Secured 89.33% verification accuracy on test datasets.',
-      lessons: [
-        'Repeatable pipelines are essential for scientific verification.',
-        'Dropout levels significantly alter CNN generalizations.'
-      ],
-      future: [
-        'Test execution under specialized MobileNet or ResNet transfer weights.',
-        'Deploy the compiled model onto edge runtimes using ONNX and WASM.'
-      ],
-      github: 'https://github.com/MatomeMb/FashionMNIST-Classifier',
-    },
-    'myadvisor': {
-      id: 'myadvisor',
-      name: 'MyAdvisor Full-Stack App',
-      category: 'Full-Stack Application',
-      problem: 'University student advisory coordinates relied on paper forms and spreadsheets, leading to booking collisions and poor visibility of advisor availabilities.',
-      requirements: [
-        'Provide multi-role user schemas (students, advisors, admins).',
-        'Expose API endpoints to schedule and query booking slots.',
-        'Maintain query database relations securely.',
-        'Deliver responsive Web interfaces.'
-      ],
-      architecture: 'An MVC full-stack application leveraging relational databases and REST API transaction contracts.',
-      diagram: `
-+------------------+      +--------------------+      +--------------------+
-| Responsive Client| ---> | Node.js Express    | ---> | SQL Ingestion Gate |
-+------------------+      +--------------------+      +---------+----------+
-                                                                |
-+------------------+      +--------------------+      +---------v----------+
-| Relational DB    | <--- | Database Query     | <--- | Relational Postgres|
-+------------------+      +--------------------+      +--------------------+
-      `,
-      tradeoffs: [
-        'PostgreSQL vs MongoDB: Chose PostgreSQL to enforce database constraints and secure booking slot integrity via SQL transactional isolates.',
-        'REST APIs vs GraphQL: Implemented REST APIs to maintain easy endpoint routing and fast debugging capabilities.'
-      ],
-      implementation: [
-        'Created transactional SQL schemas with relational booking slot constraints.',
-        'Programmed Node.js Express controllers managing route validations.',
-        'Constructed intuitive dashboard layouts for booking allocations.'
-      ],
-      challenges: [
-        'Booking Collisions: Handled by setting unique compound indices in PostgreSQL checking Slot/Advisor combinations, throwing clean database errors.'
-      ],
-      testing: 'Conducted concurrent request testing checking collision rejections. Handled manual database rollbacks on failed API parameters.',
-      performance: 'Responsive API transaction loops. Secured clean, stable student bookings and administration.',
-      lessons: [
-        'Relational integrity checks prevent business logic collisions.',
-        'MVC separates responsibilities nicely.'
-      ],
-      future: [
-        'Integrate auto-email alerts utilizing secure SMTP worker queues.',
-        'Integrate OAuth2 single sign-on systems for student credentials.'
-      ],
-      github: 'https://github.com/MatomeMb',
-    },
-    'scheduling-systems': {
-      id: 'scheduling-systems',
-      name: 'Scheduling & OS Systems',
-      category: 'Systems Programming',
-      problem: 'Analyzing task execution boundaries, benchmarking resource-constrained scheduling algorithms, and summarizing number ranges cleanly.',
-      requirements: [
-        'Construct accurate simulations of CPU scheduling (FIFO, SJF, RR).',
-        'Compare performance metrics like turnaround and wait times.',
-        'Develop deterministic summarizes checking number sets.'
-      ],
-      architecture: 'Algorithm and benchmark test suite analyzing algorithmic limits and transaction throughput calculations.',
-      diagram: `
-+------------------+      +--------------------+      +--------------------+
-| Simulation Inputs| ---> | CPU FIFO/SJF/RR    | ---> | Latency Calculators|
-+------------------+      +--------------------+      +---------+----------+
-                                                                |
-+------------------+      +--------------------+      +---------v----------+
-| Performance Chart| <--- | Benchmark Outputs  | <--- | Metric Logging     |
-+------------------+      +--------------------+      +--------------------+
-      `,
-      tradeoffs: [
-        'Java vs Python: Java handles data summaries faster due to strong typing, while Python allows quicker algorithm mocking.'
-      ],
-      implementation: [
-        'Wrote CPU simulation algorithms with detailed turn wait calculations.',
-        'Coded Java number summarizer routines handling consecutive intervals.',
-        'Exported execution performance metrics.'
-      ],
-      challenges: [
-        'Thread Latency: Handled in simulations by designing isolated queues to mock scheduler contexts deterministically.'
-      ],
-      testing: 'Created unit tests verifying calculation averages. Confirmed summarize correctness across varying number arrays.',
-      performance: 'Gained 35% scheduling and tutor allocation throughput efficiency in SLC administrative automation implementations.',
-      lessons: [
-        'Deterministic calculations are key to algorithm optimizations.',
-        'Rigorous benchmarking exposes unexpected CPU bottlenecks.'
-      ],
-      future: [
-        'Integrate priority scheduling simulations.',
-        'Compile execution summaries into interactive dashboard graphs.'
-      ],
-      github: 'https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos',
-    },
-    'embedded-navigation': {
-      id: 'embedded-navigation',
-      name: 'Embedded & Edge Navigation',
-      category: 'Systems & Embedded',
-      problem: 'Micro-controllers possess severe memory boundaries, requiring low-latency algorithms for image component segmentation and navigation simulation.',
-      requirements: [
-        'Write high-efficiency component labeling in standard C++.',
-        'Enforce absolute memory limits with zero leaks.',
-        'Optimize execution loops for micro-second cycles.'
-      ],
-      architecture: 'C++ simulation pipelines utilizing specialized heap allocations and compact structural datatypes.',
-      diagram: `
-+------------------+      +--------------------+      +--------------------+
-| Camera Raw Pixels| ---> | Component Labeling | ---> | Spatial Coordinate |
-+------------------+      +--------------------+      +---------+----------+
-                                                                |
-+------------------+      +--------------------+      +---------v----------+
-| Navigation Command| <--- | State Tree Solver  | <--- | Memory Allocator   |
-+------------------+      +--------------------+      +--------------------+
-      `,
-      tradeoffs: [
-        'Static Arrays vs Dynamic std::vectors: Adopted static allocations to completely prevent memory fragmentation risks on edge targets.'
-      ],
-      implementation: [
-        'Developed memory-efficient coordinate pixel segmenters.',
-        'Wrote slide navigation state solvers in standard C++.',
-        'Audited memory spaces checking leak profiles.'
-      ],
-      challenges: [
-        'Memory Fragmentation: Avoided by wrapping temporary execution memory pools inside compact pre-sized static buffer grids.'
-      ],
-      testing: 'Executed static analyses checking memory correctness. Audited runtime boundaries checking index limits.',
-      performance: 'Fast, deterministic coordinate image labeling. Safe execution profiles.',
-      lessons: [
-        'Static allocations secure runtime consistency on edge boards.',
-        'Pointers must be initialized carefully.'
-      ],
-      future: [
-        'Compile the components labeling logic directly to hardware assembly.',
-        'Explore sensor integrations checking LiDAR scans.'
-      ],
-      github: 'https://github.com/MatomeMb/Connected-Components-Image-Processor',
-    },
-    'confidential-ai-build': {
-      id: 'confidential-ai-build',
-      name: 'Confidential AI Product Build',
-      category: 'Enterprise Software',
-      problem: 'Designing high-volume enterprise pipelines under non-disclosure constraints, prioritizing security, deployment automation, and service health.',
-      requirements: [
-        'Deliver scalable backend services under NDA compliance.',
-        'Automate container deployment tasks.',
-        'Secure system configurations.'
-      ],
-      architecture: 'Microservice configurations employing strict pipeline deployment rules.',
-      diagram: `
-+------------------+      +--------------------+      +--------------------+
-| Developer Commit | ---> | Automated CI/CD    | ---> | Docker Staging Gate|
-+------------------+      +--------------------+      +---------+----------+
-                                                                |
-+------------------+      +--------------------+      +---------v----------+
-| Monitor Alerts   | <--- | Kubernetes Cluster | <--- | Relational DB Core |
-+------------------+      +--------------------+      +--------------------+
-      `,
-      tradeoffs: [
-        'Strict CI/CD Gates vs Faster Releases: Enforced comprehensive check gates on every merge branch, guaranteeing zero broken builds.'
-      ],
-      implementation: [
-        'Constructed Docker containerization blueprints.',
-        'Automated CI/CD workflows for safe staging.',
-        'Configured service monitors checking health channels.'
-      ],
-      challenges: [
-        'Restricted Details: Handled by maintaining complete focus on engineering principles and architectural trade-offs during reviews.'
-      ],
-      testing: 'Conducted regression sweeps checking service interfaces. Audited staging run stability.',
-      performance: 'Successful production-grade product releases.',
-      lessons: [
-        'CI/CD and system hygiene determine long-term project velocities.',
-        'Observability is mandatory for remote services.'
-      ],
-      future: [
-        'Implement more robust auto-scaling criteria.',
-        'Incorporate deeper diagnostic alert logging configurations.'
-      ]
-    }
-  };
+  const resolvedId = aliases[id ?? ""] ?? id ?? "";
+  const study = studies[resolvedId];
 
-  const currentStudy = studies[id || ''] || studies['ocr-document-automation'];
+  if (!study) {
+    return (
+      <div className="flex flex-col items-center gap-4 py-24 text-center">
+        <h1 className="text-2xl font-bold text-gray-900">Case study not found</h1>
+        <Link to="/projects" className="text-sm font-semibold text-blue-600 hover:underline">
+          &larr; All projects
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 py-8 font-sans">
-      <Link to="/projects" className="inline-flex items-center gap-2 text-xs font-semibold text-[#2563EB] hover:underline focus:outline-none mb-4">
-        &larr; Back to Projects Directory
+    <div className="mx-auto max-w-3xl space-y-12 py-14">
+      <Link
+        to="/projects"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-blue-600"
+      >
+        <ArrowLeft size={14} aria-hidden="true" /> All projects
       </Link>
 
-      {/* Header Info */}
-      <div className="border-b border-[#1E293B] pb-6 space-y-3">
-        <span className="text-xs font-mono font-bold text-[#2563EB] tracking-wider uppercase">
-          {currentStudy.category}
-        </span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#F8FAFC] tracking-tight">
-          {currentStudy.name}
-        </h1>
-        {currentStudy.github && (
+      <header className="space-y-3 border-b border-gray-200 pb-8">
+        <p className="font-mono text-xs text-gray-400">{study.tag}</p>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{study.name}</h1>
+        {study.repository && (
           <a
-            href={currentStudy.github}
+            href={study.repository}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-[#CBD5E1] hover:text-[#2563EB] transition-colors pt-1"
+            className="inline-flex items-center gap-1.5 font-mono text-sm text-gray-500 hover:text-blue-600"
           >
-            Access Source Repository <ExternalLink size={12} />
+            {study.repository.replace("https://github.com/", "")}
+            <ArrowUpRight size={13} aria-hidden="true" />
           </a>
         )}
-      </div>
+      </header>
 
-      {/* Main Study Body */}
-      <div className="space-y-8 text-sm text-[#CBD5E1] leading-relaxed">
-        
-        {/* Section 1: Overview & Problem */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 01. Problem Statement
-          </h2>
-          <p className="font-light">{currentStudy.problem}</p>
-        </section>
+      <section aria-labelledby="s-problem" className="space-y-3">
+        <SectionHeading n="01">Problem</SectionHeading>
+        <p className="leading-relaxed text-gray-600">{study.problem}</p>
+      </section>
 
-        {/* Section 2: Requirements */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 02. Engineering Requirements
-          </h2>
-          <ul className="list-disc pl-5 space-y-1.5 font-light">
-            {currentStudy.requirements.map((req) => (
-              <li key={req}>{req}</li>
-            ))}
-          </ul>
-        </section>
+      <section aria-labelledby="s-requirements" className="space-y-3">
+        <SectionHeading n="02">Requirements</SectionHeading>
+        <ul className="list-disc space-y-1.5 pl-5 leading-relaxed text-gray-600 marker:text-gray-300">
+          {study.requirements.map((req) => (
+            <li key={req}>{req}</li>
+          ))}
+        </ul>
+      </section>
 
-        {/* Section 3: Architecture & Diagrams */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 03. Architecture Design
-          </h2>
-          <p className="font-light">{currentStudy.architecture}</p>
-          <div className="p-4 bg-[#111827] border border-[#1E293B] rounded-xl overflow-x-auto">
-            <pre className="text-xs font-mono text-slate-300 leading-normal leading-tight">
-              <code>{currentStudy.diagram}</code>
-            </pre>
-          </div>
-        </section>
+      <section aria-labelledby="s-architecture" className="space-y-4">
+        <SectionHeading n="03">Architecture</SectionHeading>
+        <p className="leading-relaxed text-gray-600">{study.architecture}</p>
+        <MermaidDiagram chart={study.mermaid} caption={study.mermaidCaption} />
+        <details className="group">
+          <summary className="cursor-pointer font-mono text-xs text-gray-500 hover:text-blue-600">
+            ASCII topology (text-only)
+          </summary>
+          <pre className="ascii-diagram mt-2">{study.ascii}</pre>
+        </details>
+      </section>
 
-        {/* Section 4: Technology Selections & Trade-offs */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 04. Technology Selections &amp; Trade-offs
-          </h2>
-          <ul className="space-y-3">
-            {currentStudy.tradeoffs.map((trade) => (
-              <li key={trade} className="p-4 bg-[#0F172A] border border-[#1E293B] rounded-xl font-light">
-                {trade}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Section 5: Implementation Details */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 05. Core Implementation
-          </h2>
-          <ul className="list-decimal pl-5 space-y-2 font-light">
-            {currentStudy.implementation.map((imp) => (
-              <li key={imp}>{imp}</li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Section 6: Challenges & Solutions */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 06. Engineering Challenges &amp; Mitigations
-          </h2>
-          <ul className="space-y-3">
-            {currentStudy.challenges.map((chal) => (
-              <li key={chal} className="p-4 bg-[#111827] border border-[#1E293B] rounded-xl font-light border-l-4 border-l-[#EF4444]">
-                {chal}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Section 7: Testing Posture */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 07. Testing &amp; Verification Posture
-          </h2>
-          <p className="font-light">{currentStudy.testing}</p>
-        </section>
-
-        {/* Section 8: Performance Metrics */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 08. Operational &amp; Performance Metrics
-          </h2>
-          <p className="font-light font-bold text-[#2563EB] bg-[#2563EB]/5 border border-[#2563EB]/20 p-4 rounded-xl">
-            {currentStudy.performance}
-          </p>
-        </section>
-
-        {/* Section 9: Lessons Learned */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 09. Lessons Learned
-          </h2>
-          <ul className="list-disc pl-5 space-y-1.5 font-light">
-            {currentStudy.lessons.map((les) => (
-              <li key={les}>{les}</li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Section 10: Future Improvements */}
-        <section className="space-y-3">
-          <h2 className="text-base uppercase tracking-wider font-bold text-slate-500 font-mono flex items-center gap-2">
-            <span className="w-1 h-4 bg-[#2563EB] rounded"></span> 10. Future Iterative Roadmap
-          </h2>
-          <ul className="list-disc pl-5 space-y-1.5 font-light">
-            {currentStudy.future.map((fut) => (
-              <li key={fut}>{fut}</li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Disclosures Footer */}
-        {currentStudy.id === 'confidential-ai-build' && (
-          <div className="p-5 rounded-xl border border-[#EF4444]/20 bg-[#EF4444]/5 flex items-start gap-3 mt-8">
-            <ShieldCheck className="text-[#EF4444] shrink-0 mt-0.5" size={18} />
-            <div className="space-y-1 text-xs">
-              <strong className="text-[#EF4444] block">CONFIDENTIALITY STATEMENT</strong>
-              <span className="text-[#CBD5E1] block">
-                This project was constructed under strict enterprise NDA terms. Client credentials and private metrics are legally omitted. Architectural and pipeline configurations shown are generalized, public-safe summaries representing engineering patterns.
-              </span>
+      <section aria-labelledby="s-tradeoffs" className="space-y-3">
+        <SectionHeading n="04">Trade-offs</SectionHeading>
+        <div className="space-y-3">
+          {study.tradeoffs.map((t) => (
+            <div key={t.decision} className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+              <p className="text-sm font-semibold text-gray-900">{t.decision}</p>
+              <p className="mt-1 text-sm text-gray-600">
+                <span className="font-medium text-gray-700">Cost:</span> {t.cost}
+              </p>
+              <p className="mt-1 text-sm text-gray-600">
+                <span className="font-medium text-gray-700">Why it wins:</span> {t.why}
+              </p>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
+      </section>
 
-      </div>
+      <section aria-labelledby="s-implementation" className="space-y-3">
+        <SectionHeading n="05">Implementation</SectionHeading>
+        <ol className="list-decimal space-y-1.5 pl-5 leading-relaxed text-gray-600 marker:text-gray-300">
+          {study.implementation.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ol>
+      </section>
+
+      <section aria-labelledby="s-challenges" className="space-y-3">
+        <SectionHeading n="06">Challenges &amp; mitigations</SectionHeading>
+        <div className="space-y-3">
+          {study.challenges.map((c) => (
+            <div key={c.issue} className="border-l-2 border-gray-200 pl-4">
+              <p className="text-sm font-semibold text-gray-900">{c.issue}</p>
+              <p className="mt-0.5 text-sm leading-relaxed text-gray-600">{c.resolution}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="s-verification" className="space-y-3">
+        <SectionHeading n="07">Verification</SectionHeading>
+        <p className="leading-relaxed text-gray-600">{study.verification}</p>
+      </section>
+
+      <section aria-labelledby="s-outcome" className="space-y-3">
+        <SectionHeading n="08">Outcome</SectionHeading>
+        <p className="rounded-lg border border-gray-200 bg-gray-50 p-4 font-medium leading-relaxed text-gray-900">
+          {study.outcome}
+        </p>
+      </section>
+
+      <section aria-labelledby="s-lessons" className="space-y-3">
+        <SectionHeading n="09">Lessons</SectionHeading>
+        <ul className="list-disc space-y-1.5 pl-5 leading-relaxed text-gray-600 marker:text-gray-300">
+          {study.lessons.map((l) => (
+            <li key={l}>{l}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="s-roadmap" className="space-y-3">
+        <SectionHeading n="10">Roadmap</SectionHeading>
+        <ul className="list-disc space-y-1.5 pl-5 leading-relaxed text-gray-600 marker:text-gray-300">
+          {study.roadmap.map((r) => (
+            <li key={r}>{r}</li>
+          ))}
+        </ul>
+      </section>
+
+      {resolvedId === "fairflow-platforms" && (
+        <p className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm leading-relaxed text-gray-500">
+          Confidentiality: this write-up describes engineering patterns only. Client data, endpoints,
+          schemas and metrics are omitted by design and discussed privately in interview settings.
+        </p>
+      )}
+
+      <nav className="border-t border-gray-200 pt-8" aria-label="Case study navigation">
+        <Link to="/projects" className="text-sm font-semibold text-blue-600 hover:underline">
+          &larr; Back to all projects
+        </Link>
+      </nav>
     </div>
   );
 }
