@@ -57,6 +57,14 @@ const skills: { group: string; items: string[] }[] = [
 
 const featuredProjects = [
   {
+    id: "fairflow",
+    name: "Fairflow",
+    tag: "Open-source commerce infrastructure",
+    line: "Merchant portal, Paystack checkout, Sumsub KYC, portable .thing artifacts — open-source commerce infrastructure for South African merchants.",
+    liveUrl: "https://fairflow.co.za",
+    repoUrl: "https://github.com/MatomeMb/.Things-That-Matter",
+  },
+  {
     id: "ocr-document-automation",
     name: "OCR Document Automation",
     tag: "Computer Vision",
@@ -166,6 +174,88 @@ export default function Home() {
             </div>
           ))}
         </dl>
+      </section>
+
+      {/* ── Fairflow feature block ────────────────────────────────────── */}
+      <section aria-labelledby="fairflow-heading" className="space-y-6 border-t border-gray-200 pt-12">
+        <div className="flex items-start justify-between gap-4 flex-wrap">
+          <div className="space-y-2">
+            <p className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
+              Flagship project
+            </p>
+            <h2 id="fairflow-heading" className="text-2xl font-bold tracking-tight text-gray-900">
+              Fairflow — Open-source commerce infrastructure for South African merchants
+            </h2>
+            <p className="max-w-2xl text-lg leading-relaxed text-gray-600">
+              I designed and built Fairflow end-to-end: a TypeScript monorepo with a Hono commerce API,
+              React merchant/admin portal, Supabase auth, Paystack payments, and production-minded
+              open-source documentation. It&rsquo;s a real product codebase, not a tutorial demo.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 shrink-0">
+            <a
+              href="https://fairflow.co.za"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:outline-none"
+            >
+              View live <ArrowUpRight size={15} aria-hidden="true" />
+            </a>
+            <a
+              href="https://github.com/MatomeMb/.Things-That-Matter"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
+            >
+              <FolderGit2 size={15} aria-hidden="true" />
+              Source code
+            </a>
+            <Link
+              to="/project/fairflow"
+              className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
+            >
+              Case study <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+            <h3 className="font-semibold text-gray-900">Monorepo architecture</h3>
+            <p className="mt-1 text-sm text-gray-600">
+              Three apps (auth-portal, shadow-index, matter-core) in npm workspaces — shared config,
+              type-safe contracts, independent deploys.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+            <h3 className="font-semibold text-gray-900">Paystack + Sumsub integration</h3>
+            <p className="mt-1 text-sm text-gray-600">
+              SA card/mobile-money checkout with HMAC-verified webhooks; KYC and payout orchestration
+              via Sumsub, admin-proxied so secrets never hit the browser.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+            <h3 className="font-semibold text-gray-900">Multi-actor auth model</h3>
+            <p className="mt-1 text-sm text-gray-600">
+              Merchant JWTs (stateless), Supabase sessions (staff), admin proxy (server-only
+              ADMIN_SECRET) — clean separation, zero secret leakage.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 sm:col-span-3">
+            <h3 className="font-semibold text-gray-900">Portable product artifacts (.thing)</h3>
+            <p className="mt-1 text-sm text-gray-600">
+              Rust-backed schema validation (matter-core) produces signed, portable product files
+              that work across any Fairflow-compatible surface — checkout, portal, extension.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 sm:col-span-3">
+            <h3 className="font-semibold text-gray-900">Production-minded open source</h3>
+            <p className="mt-1 text-sm text-gray-600">
+              Dockerised dev/prod parity, Vitest + Playwright CI, OpenAPI specs, ADRs, sanitised
+              fixtures, public architecture docs — OSS at the standard of a shipped product.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* ── Featured work ────────────────────────────────────────── */}

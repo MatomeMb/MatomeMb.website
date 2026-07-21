@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, FolderGit2 } from "lucide-react";
+import { ArrowUpRight, FolderGit2, ExternalLink } from "lucide-react";
 
 interface ProjectEntry {
   id: string;
@@ -11,6 +11,8 @@ interface ProjectEntry {
   tradeoffs: string;
   stack: string[];
   repository?: string;
+  liveUrl?: string;
+  featured?: boolean;
 }
 
 /*
@@ -19,6 +21,37 @@ interface ProjectEntry {
  * Full case studies (with diagrams) are linked per project.
  */
 const projects: ProjectEntry[] = [
+  {
+    id: "fairflow",
+    name: "Fairflow",
+    tag: "Open-source commerce infrastructure",
+    problem:
+      "South African merchants rely on fragmented tools for operations, payments, KYC and product data. There is no unified, merchant-owned infrastructure — platforms own the data, the checkout and the payout rails. Fairflow exists to change that: a self-hostable, open-source commerce stack with a merchant portal, Paystack checkout, Sumsub KYC/payouts, and portable .thing product artifacts.",
+    requirements:
+      "Multi-actor auth (merchant JWT, Supabase staff RBAC, admin proxy); Paystack webhook verification with HMAC; dual storage (local JSON dev / Cloudflare R2 prod); portable product artifacts (.thing files) with Rust-backed validation; production-minded OSS docs and CI.",
+    design:
+      "TypeScript monorepo (npm workspaces) with three apps: auth-portal (React merchant/admin UI), shadow-index (Hono API on Node/Vercel), and matter-core (Rust library for .thing schema validation). Supabase Auth + Postgres for staff/admin; merchant JWTs issued by shadow-index. Admin actions route through a server-only proxy so ADMIN_SECRET never touches the browser. Paystack handles SA card/mobile money rails; Sumsub handles KYC. R2 for production artifacts, local JSON for zero-config dev.",
+    tradeoffs:
+      "Hono on serverless (Vercel) keeps ops near-zero but constrains long-running work — webhooks must be fast and idempotent. Merchant JWTs vs Supabase sessions splits auth models cleanly but doubles the mental model. Dual storage (local/R2) adds abstraction overhead but makes local dev zero-config and prod cloud-native. Open-sourcing a production codebase means sanitising fixtures, documenting ADRs and hardening secrets — slower release cadence, but the codebase stays honest.",
+    stack: [
+      "TypeScript",
+      "React",
+      "Vite",
+      "Hono",
+      "Node.js",
+      "Supabase",
+      "PostgreSQL",
+      "Paystack",
+      "Sumsub",
+      "Cloudflare R2",
+      "Rust",
+      "Docker",
+      "GitHub Actions",
+    ],
+    repository: "https://github.com/MatomeMb/.Things-That-Matter",
+    liveUrl: "https://fairflow.co.za",
+    featured: true,
+  },
   {
     id: "fairflow-platforms",
     name: "Fairflow Production Platforms",
@@ -161,25 +194,36 @@ export default function Projects() {
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-col gap-2 pt-1 text-sm">
-                  <Link
-                    to={`/project/${project.id}`}
-                    className="inline-flex items-center gap-1.5 font-semibold text-blue-600 hover:underline"
+<div className="flex flex-col gap-2 pt-1 text-sm">
+                <Link
+                  to={`/project/${project.id}`}
+                  className="inline-flex items-center gap-1.5 font-semibold text-blue-600 hover:underline"
+                >
+                  Read the case study <ArrowUpRight size={14} aria-hidden="true" />
+                </Link>
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-gray-500 hover:text-blue-600"
                   >
-                    Read the case study <ArrowUpRight size={14} aria-hidden="true" />
-                  </Link>
-                  {project.repository && (
-                    <a
-                      href={project.repository}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-gray-500 hover:text-blue-600"
-                    >
-                      <FolderGit2 size={14} aria-hidden="true" />
-                      {project.repository.replace("https://github.com/", "")}
-                    </a>
-                  )}
-                </div>
+                    <ExternalLink size={14} aria-hidden="true" />
+                    Live
+                  </a>
+                )}
+                {project.repository && (
+                  <a
+                    href={project.repository}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-gray-500 hover:text-blue-600"
+                  >
+                    <FolderGit2 size={14} aria-hidden="true" />
+                    {project.repository.replace("https://github.com/", "")}
+                  </a>
+                )}
+              </div>
               </div>
 
               {/* Engineering substance */}
@@ -217,9 +261,10 @@ export default function Projects() {
       </ol>
 
       <p className="border-t border-gray-200 pt-8 text-sm text-gray-500">
-        Fairflow work is described under NDA: frames, architectures and trade-offs are discussed
-        openly; client data, endpoints and metrics are not. That boundary is deliberate and
-        non-negotiable.
+        Fairflow Production Platforms (the NDA entry above) describes engineering patterns only;
+        client data, endpoints and metrics are omitted by design. Fairflow (the open-source project
+        above) is public — code, architecture and docs are at
+        <a href="https://github.com/MatomeMb/.Things-That-Matter" className="text-blue-600 hover:underline">github.com/MatomeMb/.Things-That-Matter</a>.
       </p>
     </div>
   );
