@@ -1,81 +1,68 @@
-# Architecture & Technical Design
+# System Architecture - Personal Portfolio & Engineering Platform
 
-## Current Stack
+This document describes the production-grade system architecture and design principles of Matome Mbowene's personal portfolio engineering platform.
 
-**Frontend:**
-- HTML5 (single-page, no build step)
-- CSS3 (inline + external stylesheets)
-- Vanilla JavaScript (no frameworks)
-- Service Worker (PWA support)
+---
 
-**Backend:**
-- GitHub Pages (static hosting)
-- No external APIs or backend servers
+## 1. Dual-Architecture Pattern
 
-**Key Features:**
-- Local, knowledge-base grounded chatbot (no external APIs)
-- Progressive Web App (offline support)
-- SEO optimized (sitemap, robots.txt, Open Graph)
-
-## Directory Structure
+To reconcile the need for a modern **React 19 / TypeScript / Vite / Tailwind v4** development environment with **instant, zero-overhead, zero-downtime hosting on GitHub Pages**, we implement a **Dual-Architecture compilation loop**.
 
 ```
-├── index.html                    # Main portfolio page
-├── resume.html                   # Downloadable resume
-├── privacy.html                  # Privacy policy
-│
-├── chatbot/                      # Local chatbot (no APIs)
-│   ├── chatbot.js               # Chatbot logic
-│   ├── chatbot.css              # Chatbot styles
-│   └── chatbot_knowledge.json   # Knowledge base (source of truth)
-│
-├── case-studies/                # Detailed project case studies
-│   ├── ocr-document-automation.html
-│   └── rag-assistant.html
-│
-├── js/                          # JavaScript utilities
-├── styles/                      # Global stylesheets
-├── icons/                       # Icon assets
-├── images/                      # Image assets
-│
-├── service-worker.js            # PWA service worker
-├── site.webmanifest             # PWA manifest
-├── sitemap.xml                  # SEO sitemap
-├── robots.txt                   # Search engine directives
-│
-└── docs/                        # Documentation (development only)
++--------------------------------------------------------+
+| DEVELOPMENT WORKSPACE (src-app/)                       |
+| - React 19, TS, Vite, Tailwind v4, TanStack Query      |
++---------------------------+----------------------------+
+                            |
+                            | npm run build
+                            v
++---------------------------+----------------------------+
+| COMPILED STATIC DELIVERABLES (/)                       |
+| - index.html, assets/ (JS/CSS assets)                  |
+| - Directly served via GitHub Pages CDN (edge)          |
++--------------------------------------------------------+
 ```
 
-## Deployment
+### Architectural Key Points:
+1. **Source Isolation**: The entire React application resides in the `src-app/` subdirectory.
+2. **Relative Bundling**: Vite compiles files using a relative `./` base path, making the site asset paths resilient.
+3. **OutDir Redirection**: The `build.outDir` in `vite.config.ts` compiles the production bundle directly to the root of the repository (`../`), overwriting previous builds automatically.
+4. **Preserved Entities**: Root metadata assets like `robots.txt`, `sitemap.xml`, and `resume.html` are fully preserved in the root, preventing file contamination.
 
-**Host:** GitHub Pages  
-**Domain:** https://www.matomembowene.co.za (custom DNS)  
-**Branch:** `main` (automatically deployed on push)
+---
 
-## Performance Notes
+## 2. Technical Stack & State Topology
 
-- **First Paint:** < 1s (minimal CSS, inlined critical paths)
-- **Service Worker:** Caches assets for offline use
-- **Chatbot:** Runs entirely in-browser (no network calls needed)
-- **Zero external dependencies:** No CDN calls or external libraries
+The platform leverages bleeding-edge components configured to secure performance, correctness, and accessibility:
 
-## Privacy & Security
+### Ingestion & Form Pipeline (Contact)
+- **React Hook Form**: Handles form states cleanly, preventing unnecessary re-renders.
+- **Zod Schema Validation**: Enforces type safety on contact inputs (name, email, subject, message) clientside before the system triggers the link compiler.
 
-- **No analytics tracking** (no Google Analytics, etc.)
-- **No user data collection** (chatbot stores no messages)
-- **No external API calls** from portfolio pages
-- **HTTPS only** (GitHub Pages enforces TLS)
+### State Topology & Caching
+- **TanStack Query (React Query)**: Orchestrates real-time API transactions (e.g., retrieving live repository parameters from `api.github.com`). It stores fetched parameters in memory, preventing API limit exhaustions on multiple page navigations.
 
-## Browser Support
+### Interface & Layout
+- **Tailwind CSS v4**: Utilizes direct CSS theme configurations via `@theme`, eliminating slow, heavy JS configs and compiling compact, highly optimized stylesheets.
+- **Lucide React**: Provides standard accessible UI icons (Briefcase, Clock, Calendar, Database, Cpu).
+- **Reusable Brand Icons**: Brand elements (like GitHub and LinkedIn) are extracted into customized inline SVG components (`src/components/SocialIcons.tsx`) due to lucide-react brand omissions, ensuring zero runtime fetch overhead.
 
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile browsers (iOS Safari, Chrome Mobile)
+---
 
-## Future Enhancements
+## 3. Interactive Resume & PDF Compile Pipeline
 
-- Image optimization (WebP/AVIF with fallbacks)
-- Advanced analytics (privacy-respecting)
-- Dynamic case study filtering
-- API integration (optional, for future expansion)
+The resume framework satisfies two contradicting goals: **high screen interactivity** and **pristine printing/PDF export**.
+
+1. **Recruiter Profiles Selector**: Choose from 5 tailored profiles (Software Engineer, Backend Engineer, Data Engineer, Data Analyst, AI Engineer). Clicking on tabs updates the active DOM text nodes instantly.
+2. **Standalone `resume.html` Compatibility**: To feed the automated Puppeteer PDF converter, we maintain a standalone, styled `resume.html` in the root.
+3. **Media Print Optimization**: `@media print` rules hide interactive components and print the active CV beautifully in black-on-white.
+
+---
+
+## 4. Grounded Chatbot Architecture
+
+The assistant runs **100% locally in the browser**, complying with maximum privacy standards.
+
+1. **Embedded Grounding Payload**: The complete profile, FAQ, and project summaries dataset is embedded in the compiled `index.html` as an application JSON script block.
+2. **Local Tokenization & Overlap Scoring**: The chatbot tokenizes queries, applies a basic suffix stemmer and synonym expansion maps, and compares them with the JSON payload to generate fully grounded responses.
+3. **Traceability Logging**: Bot outputs include sources metadata (`Source: FAQ` or `Source: Case Studies`) to support clear, honest audit trails.
