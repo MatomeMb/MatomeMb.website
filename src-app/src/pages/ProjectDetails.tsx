@@ -8,6 +8,7 @@ interface CaseStudy {
   tag: string;
   repository?: string;
   liveUrl?: string;
+  deepDiveUrl?: string;
   problem: string;
   requirements: string[];
   architecture: string;
@@ -29,6 +30,7 @@ const studies: Record<string, CaseStudy> = {
     tag: "Open-source commerce infrastructure — TypeScript, Hono, React, Supabase, Paystack, Rust",
     repository: "https://github.com/MatomeMb/.Things-That-Matter",
     liveUrl: "https://fairflow.co.za",
+    deepDiveUrl: "/architecture/fairflow",
     problem:
       "South African merchants rely on fragmented tools for operations, payments, KYC and product data. There is no unified, merchant-owned infrastructure — platforms own the data, the checkout and the payout rails. Fairflow exists to change that: a self-hostable, open-source commerce stack with a merchant portal, Paystack checkout, Sumsub KYC/payouts, and portable .thing product artifacts.",
     requirements: [
@@ -816,6 +818,14 @@ export default function ProjectDetails() {
           </summary>
           <pre className="ascii-diagram mt-2">{study.ascii}</pre>
         </details>
+        {study.deepDiveUrl && (
+          <p className="text-sm leading-relaxed text-gray-500">
+            Sequence diagrams, sub-system notes and the decision log:{" "}
+            <Link to={study.deepDiveUrl} className="font-medium text-blue-600 hover:underline">
+              Architecture deep dive &rarr;
+            </Link>
+          </p>
+        )}
       </section>
 
       <section aria-labelledby="s-tradeoffs" className="space-y-3">
