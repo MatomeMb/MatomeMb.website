@@ -7,6 +7,7 @@ interface CaseStudy {
   name: string;
   tag: string;
   repository?: string;
+  liveUrl?: string;
   problem: string;
   requirements: string[];
   architecture: string;
@@ -23,6 +24,177 @@ interface CaseStudy {
 }
 
 const studies: Record<string, CaseStudy> = {
+  "fairflow": {
+    name: "Fairflow",
+    tag: "Open-source commerce infrastructure — TypeScript, Hono, React, Supabase, Paystack, Rust",
+    repository: "https://github.com/MatomeMb/.Things-That-Matter",
+    liveUrl: "https://fairflow.co.za",
+    problem:
+      "South African merchants rely on fragmented tools for operations, payments, KYC and product data. There is no unified, merchant-owned infrastructure — platforms own the data, the checkout and the payout rails. Fairflow exists to change that: a self-hostable, open-source commerce stack with a merchant portal, Paystack checkout, Sumsub KYC/payouts, and portable .thing product artifacts.",
+    requirements: [
+      "Multi-actor authentication: merchant JWTs (stateless), Supabase sessions (staff), admin proxy (server-only ADMIN_SECRET).",
+      "Paystack integration: checkout sessions, HMAC-verified webhooks, idempotent event processing.",
+      "Sumsub integration: applicant flow, webhook handling, payout orchestration via admin proxy.",
+      "Dual storage abstraction: local JSON files for zero-config development, Cloudflare R2 for production — same interface, zero config switch.",
+      "Portable product artifacts (.thing files): Rust-backed schema validation (matter-core), signed payloads, portable across any Fairflow-compatible surface.",
+      "Production-minded open source: Docker dev/prod parity, Vitest + Playwright CI, OpenAPI specs, ADRs, sanitised fixtures, public architecture docs.",
+    ],
+    architecture:
+      "A TypeScript monorepo (npm workspaces) with three primary apps. auth-portal is a React + Vite SPA for merchant onboarding, dashboard, product management and admin operations. shadow-index is a Hono API (Node on Vercel serverless) handling checkout, webhooks, webhook verification, product CRUD, and admin endpoints. matter-core is a Rust library compiled to a Node addon (via napi-rs) that validates and signs .thing product artifacts. Supabase provides Auth (staff/admin) and Postgres (merchant records, products, webhook events, audit logs). Paystack handles South African card and mobile-money rails. Sumsub handles KYC. Cloudflare R2 stores production artifacts; local JSON files mirror the same schema for development. Admin actions route through a server-only proxy so ADMIN_SECRET never reaches the browser.",
+    ascii: `+------------------+     +-------------------+     +-------------------+
+|  auth-portal     |<--->|  shadow-index     |<--->|  Supabase         |
+|  (React/Vite)    |     |  (Hono/Node)      |     |  Auth + Postgres  |
++--------+---------+     +--------+----------+     +--------+----------+
+         |                          |                        |
+         |                          |                        |
+         |                   +-------v-------+     +---------v----------+
+         |                   |  matter-core  |     |  Cloudflare R2 /   |
+         |                   |  (Rust/napi)   |     |  Local JSON        |
+         |                   +-------+-------+     +--------------------+
+         |                          |
+         |                   +-------v-------+     +--------------------+
+         |                   |  Paystack     |     |  Sumsub            |
+         +------------------>|  Checkout +   |     |  KYC / Payouts     |
+                           |  Webhooks      |     +--------------------+
+                           +----------------+`,
+
+    mermaid: `flowchart LR
+  subgraph Portal[auth-portal — React + Vite]
+    direction TB
+    M[Merchant Dashboard]
+    A[Admin Console]
+    S[Staff Views]
+  end
+
+  subgraph API[shadow-index — Hono on Node]
+    direction TB
+    CH[Checkout Sessions]
+    WH[Webhook Handler]
+    PR[Product CRUD]
+    AD[Admin Endpoints]
+    AP[Admin Proxy]
+  end
+
+  subgraph Core[matter-core — Rust/napi-rs]
+    MV[.thing Validation]
+    SN[Signing]
+  end
+
+  subgraph Data[Data Layer]
+    SB[(Supabase Auth + Postgres)]
+    R2[(Cloudflare R2 / Local JSON)]
+  end
+
+  subgraph Ext[External]
+    PS[Paystack]
+    SS[Sumsub]
+  end
+
+  M --> API
+  A --> API
+  S --> API
+  API --> Core
+  API --> Data
+  API --> PS
+  AP --> SS
+  Core --> Data`,
+
+    mermaidCaption: "Fig 1. Fairflow architecture. Three apps (portal, API, core) with Supabase, R2, Paystack, Sumsub. Admin proxy keeps secrets server-side.",
+
+    tradeoffs: [
+      {
+        decision: "Hono on Vercel serverless for the commerce API",
+        cost: "Cold starts, 60s execution limit, no long-running workers",
+        why: "Near-zero ops, native Node, great DX, auto-scaling. Webhooks are fast and idempotent by design; long tasks (KYC polling) are pushed to client or scheduled via cron — acceptable trade-off for a commerce API.",
+      },
+      {
+        decision: "Merchant JWTs vs Supabase sessions for staff/admin",
+        cost: "Two auth models to maintain, document and reason about",
+        why: "Merchants are external customers — stateless JWTs scale, revoke via key rotation, no Supabase seat cost. Staff/admin are internal — Supabase Auth gives RLS, MFA, session management, audit logs out of the box. Mixing them would leak internal auth concerns to merchants.",
+      },
+      {
+        decision: "Admin proxy so ADMIN_SECRET never hits the browser",
+        cost: "Extra hop for every admin action; proxy must be kept minimal and audited",
+        why: "The admin secret is a root credential. Exposing it to the browser — even in an env var — is a supply-chain risk. A thin serverless proxy (Hono route) validates the caller's Supabase session, checks RBAC, then forwards with the secret. The browser never sees it.",
+      },
+      {
+        decision: "Paystack for South African payment rails",
+        cost: "Single-provider dependency; webhook HMAC verification is mandatory",
+        why: "Paystack is the de-facto standard for SA card/mobile-money. The API is well-documented, webhooks are reliable, and the fee structure is transparent. We verify every webhook with HMAC-SHA512 and process events idempotently — no double-charges, no missed fulfilments.",
+      },
+      {
+        decision: "Dual storage: local JSON dev / R2 prod",
+        cost: "Abstraction layer to maintain; parity tests needed",
+        why: "Zero-config local dev is a DX multiplier — clone, npm install, npm run dev, it works. R2 gives S3-compatible, globally distributed object storage for production. The storage interface is identical; the adapter swaps on NODE_ENV. No Docker, no Supabase local, no MinIO required for a contributor's first run.",
+      },
+      {
+        decision: "matter-core in Rust (napi-rs) for .thing validation",
+        cost: "Rust toolchain in CI; native build complexity; smaller contributor pool",
+        why: "Schema validation is a trust boundary. A .thing file can come from any source — merchant upload, API import, extension. Rust gives memory safety, zero-cost abstractions, and a single source of truth for the schema (JSON Schema + serde). The napi-rs binding keeps the API ergonomic from TypeScript. The correctness payoff justifies the build complexity.",
+      },
+      {
+        decision: "Open-source the production codebase with sanitised fixtures",
+        cost: "Slower releases — every secret, fixture and internal ref must be scrubbed",
+        why: "A production codebase released as OSS is a stronger portfolio signal than a tutorial repo. It forces ADRs, OpenAPI specs, structured logging, CI gates and documentation that survive scrutiny. The sanitisation discipline (env-only secrets, public fixtures, no PII) is itself a transferable engineering skill.",
+      },
+    ],
+
+    implementation: [
+      "auth-portal: React 19 + Vite + TypeScript; React Router v7; TanStack Query for server state; Tailwind CSS v4; component library with Radix primitives; JWT auth context with auto-refresh; role-based route guards (merchant, staff, admin).",
+      "shadow-index: Hono + Node on Vercel; Zod validation at every route; structured JSON logging (pino); OpenAPI 3.1 spec generated from routes; Paystack checkout session creation + webhook verification (HMAC-SHA512); Sumsub applicant SDK + webhook handling; Supabase admin client for staff/admin operations.",
+      "matter-core: Rust workspace with serde, schemars, json-schema; napi-rs bindings; validates .thing JSON against generated JSON Schema; produces detached Ed25519 signatures; publishes npm package with native binaries for linux/mac/win.",
+      "Supabase: Row-level security policies on all tables; merchant isolation via JWT claims; staff/admin via Supabase Auth with custom roles; webhook_events table for idempotency keys; audit_log table with immutable inserts.",
+      "CI/CD: GitHub Actions — lint, typecheck, unit tests (Vitest), e2e (Playwright), Docker build, native Rust build, OpenAPI spec validation, dependency audit. Deploy on merge to main (Vercel for portal + API, npm for matter-core).",
+      "Documentation: ARCHITECTURE.md with Mermaid diagrams; ADR log (001-hono-serverless, 002-merchant-jwt, 003-admin-proxy, 004-dual-storage, 005-rust-core); CONTRIBUTING.md with dev setup, testing, release process; public fixtures in docs/fixtures/.",
+    ],
+
+    challenges: [
+      {
+        issue: "Paystack webhook HMAC verification failing in serverless due to raw body parsing.",
+        resolution:
+          "Hono's default body parser consumes the stream. Configured a custom middleware to capture the raw text body before parsing, then verify HMAC-SHA512 against the x-paystack-signature header. Added idempotency keys (event ID) to webhook_events table to guarantee exactly-once processing.",
+      },
+      {
+        issue: "Supabase RLS policies conflicting with admin operations that need cross-merchant access.",
+        resolution:
+          "Created a service-role Supabase client used only in the admin proxy (server-side). The proxy validates the caller's staff session and RBAC role, then executes the operation with the service role — bypassing RLS intentionally and audibly. All admin actions are logged to audit_log.",
+      },
+      {
+        issue: "Rust napi-rs native builds failing on GitHub Actions macOS runners due to linker flags.",
+        resolution:
+          "Pinned Rust toolchain; added cargo-xcode for macOS; used maturin-style build script with explicit linker args; published prebuilt binaries for linux-x64, macos-x64, macos-arm64, win32-x64 via GitHub Actions matrix. npm package now installs without Rust on the consumer machine.",
+      },
+      {
+        issue: "Merchant JWT revocation without a central token store.",
+        resolution:
+          "Short-lived access tokens (15 min) + refresh tokens stored hashed in Supabase. Revocation = delete refresh token. Key rotation via JWKS endpoint on shadow-index; portal fetches JWKS on 401. No central blacklist needed — stateless verification with short TTL.",
+      },
+    ],
+
+    verification:
+      "Vitest unit tests for Zod schemas, JWT issuance/verification, storage adapters (local + R2 parity), .thing validation vectors. Playwright e2e: merchant signup → product create → checkout session → webhook simulation → order fulfilment. CI runs on every PR; Docker compose stack spins Supabase, R2 (minio), API, portal for integration tests. OpenAPI spec validated against actual routes. Dependency audit (npm audit, cargo audit) gates merges.",
+
+    outcome:
+      "Fairflow is a live, open-source commerce stack at fairflow.co.za. The monorepo demonstrates production-grade TypeScript, Rust, React, Hono, Supabase, Paystack and Sumsub integration — with Docker parity, CI gates, OpenAPI docs, ADRs and sanitised public fixtures. It serves as both a usable merchant product and a reference architecture for commerce infrastructure in emerging markets.",
+
+    lessons: [
+      "Serverless (Vercel/Hono) is a genuine ops simplification for commerce APIs — if you design for idempotent, fast webhooks from day one.",
+      "Auth model separation (customer JWTs vs staff sessions) pays off in clarity and cost. Don't force one model to serve both.",
+      "Admin secrets belong in a proxy, not env vars the browser can see. The proxy pattern is reusable across any privileged operation.",
+      "Dual storage (local/dev, cloud/prod) behind a single interface is a DX force-multiplier for OSS projects. Contributors run the full stack locally with zero cloud config.",
+      "Rust for trust boundaries (schema validation, signing) is worth the build complexity. The correctness guarantee travels with the artifact.",
+      "Open-sourcing a production codebase forces documentation, ADR and fixture hygiene that private repos defer indefinitely. The discipline is the asset.",
+    ],
+
+    roadmap: [
+      "Multi-currency support (ZAR, USD, EUR) with Paystack + Stripe fallback.",
+      "Chrome extension for one-click product capture → .thing artifact.",
+      "Merchant-facing analytics dashboard (revenue, conversion, payout timeline).",
+      "Plugin system for custom checkout fields, webhook extensions, storage backends.",
+      "Formal security audit of matter-core and webhook verification paths.",
+    ],
+  },
+
   "ocr-document-automation": {
     name: "OCR Document Automation",
     tag: "Computer vision — production pipeline",
@@ -562,6 +734,7 @@ const aliases: Record<string, string> = {
   "scheduling-systems": "myadvisor",
   "embedded-navigation": "stm32-embedded",
   "confidential-ai-build": "fairflow-platforms",
+  "fairflow": "fairflow",
 };
 
 function SectionHeading({ n, children }: { n: string; children: React.ReactNode }) {
