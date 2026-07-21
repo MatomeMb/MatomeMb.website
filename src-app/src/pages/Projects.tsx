@@ -1,242 +1,226 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Search, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { ArrowUpRight, FolderGit2 } from "lucide-react";
 
-interface Project {
+interface ProjectEntry {
   id: string;
   name: string;
-  category: 'ai-ml' | 'backend' | 'systems' | 'nda';
-  categoryLabel: string;
-  summary: string;
+  tag: string;
   problem: string;
-  solution: string;
-  outcome: string;
-  tech: string[];
-  github?: string;
-  hasCaseStudy: boolean;
+  requirements: string;
+  design: string;
+  tradeoffs: string;
+  stack: string[];
+  repository?: string;
 }
 
+/*
+ * Every project is presented as a condensed product page — problem, requirement
+ * summary, design decision and trade-off — rather than as a decorative card.
+ * Full case studies (with diagrams) are linked per project.
+ */
+const projects: ProjectEntry[] = [
+  {
+    id: "fairflow-platforms",
+    name: "Fairflow Production Platforms",
+    tag: "Enterprise software — NDA",
+    problem:
+      "A production platform handling high-consequence document workflows required backend services that could not fail silently: every invalid input had to be rejected before it reached storage, and every deployment had to be reproducible.",
+    requirements:
+      "Validation-first API boundaries, pinned environments, structured telemetry, auditable data writes.",
+    design:
+      "Defensive service layer where schema validation runs before business logic; CI gates reject any build with failing checks; lockfiles make every environment byte-identical.",
+    tradeoffs:
+      "Stricter CI gates slow merges by minutes, but eliminate the far more expensive class of failures where a bad deploy or a malformed record reaches production.",
+    stack: ["TypeScript", "Python", "PostgreSQL", "Docker", "GitHub Actions"],
+  },
+  {
+    id: "ocr-document-automation",
+    name: "OCR Document Automation",
+    tag: "Computer vision",
+    problem:
+      "Scanned financial documents were OCR-processed into backend accounting tables. Raw character accuracy looked high, but the residual errors were plausible-looking wrong values — an 8 read as a 6 — that passed naive validation and corrupted downstream ledgers.",
+    requirements:
+      "Format constraints per field, geometric field alignment, cross-field arithmetic validation, confidence gating with a manual-review path.",
+    design:
+      "A staged pipeline: OpenCV normalisation (deskew, Otsu binarisation) → coordinate segmentation → engine OCR → tabular structuring → four-layer validation gate before any database write.",
+    tradeoffs:
+      "Preprocessing adds ~80 ms per page, but secures coordinates on low-contrast scans that no amount of post-validation could recover.",
+    stack: ["Python", "OpenCV", "Tesseract", "Pandas", "PostgreSQL"],
+  },
+  {
+    id: "rag-assistant",
+    name: "RAG Knowledge Assistant",
+    tag: "Applied AI",
+    problem:
+      "LLM answers over a private document corpus sounded confident even when the source material did not contain the answer. The failure mode was not the model — it was retrieval returning weakly-related chunks and the model papering over the gap.",
+    requirements:
+      "Deterministic, reproducible indexing; similarity thresholds tuned to refuse; provenance from every answer back to source chunks; explicit refusal path.",
+    design:
+      "Document chunking → sentence-transformer embeddings → persistent FAISS index → conservative cosine-threshold gating → grounded prompt assembly with citations, or a plain-text refusal.",
+    tradeoffs:
+      "A conservative gate answers fewer questions. That is the point: an assistant that sometimes says 'not in this corpus' is deployable; one that never refuses is not.",
+    stack: ["Python", "FAISS", "Sentence Transformers", "LLM APIs", "Streamlit"],
+    repository: "https://github.com/MatomeMb/personal-codex-agent",
+  },
+  {
+    id: "myadvisor",
+    name: "MyAdvisor",
+    tag: "Full-stack application",
+    problem:
+      "Tutor allocation at UCT's Science Learning Centre was coordinated manually — spreadsheets, emails and collisions — costing administrative hours and producing double-bookings.",
+    requirements:
+      "Multi-role access (admin, tutor, student), conflict-free booking, auditable scheduling decisions, automated imports.",
+    design:
+      "MVC web application with a relational schema enforcing booking invariants at the database level, and a scheduling routine that scores candidate allocations against tutor load and availability constraints.",
+    tradeoffs:
+      "Constraint checks in the database add write latency but make invalid states unrepresentable — application code cannot accidentally double-book a tutor.",
+    stack: ["Java", "Spring Boot", "PostgreSQL", "Thymeleaf", "Docker"],
+  },
+  {
+    id: "fashionmnist-classifier",
+    name: "FashionMNIST Neural Network",
+    tag: "Machine learning",
+    problem:
+      "A coursework classifier that had to be scientifically defensible: reproducible, auditable and honestly evaluated, not just a notebook with a good run.",
+    requirements:
+      "Locked random seeds, versioned configs, structured metric logging per epoch, clean train/validation/test separation.",
+    design:
+      "Two-conv-layer CNN in PyTorch with dropout regularisation, Adam + CrossEntropy, StepLR scheduling; every run emits a JSON metrics artefact so results can be re-verified.",
+    tradeoffs:
+      "Batch size 64 over 32: slightly noisier gradient estimates per step, but stable GPU utilisation and faster convergence to the same test accuracy (89.33%).",
+    stack: ["Python", "PyTorch", "NumPy", "Matplotlib"],
+    repository: "https://github.com/MatomeMb/FashionMNIST-Classifier",
+  },
+  {
+    id: "p2p-network",
+    name: "Peer-to-Peer Network",
+    tag: "Distributed systems",
+    problem:
+      "Coursework brief: transfer files between peers without a central server, which forces the real distributed-systems questions — discovery, partial failure, concurrent access and data integrity.",
+    requirements:
+      "Peer discovery, chunked transfer with checksums, graceful handling of peers joining/leaving mid-transfer, no central coordination point.",
+    design:
+      "Socket-based peer protocol: each node is simultaneously client and server; files are split into hashed chunks reassembled and verified by the receiver; a tracker-free gossip-style peer list.",
+    tradeoffs:
+      "TCP per chunk is slower than a tuned UDP transport, but removes an entire class of ordering and loss bugs — the right call for a correctness-first academic build.",
+    stack: ["Java", "TCP Sockets", "Threads", "SHA-256"],
+  },
+  {
+    id: "stm32-embedded",
+    name: "STM32 Embedded Systems",
+    tag: "Embedded / low-level",
+    problem:
+      "Computer-engineering practicals on STM32 microcontrollers: hard memory limits, no operating system, and timing requirements that punish sloppy abstractions.",
+    requirements:
+      "Interrupt-driven I/O (timers, UART, GPIO), deterministic memory usage, no dynamic allocation in hot paths.",
+    design:
+      "Bare-metal C with register-level peripheral configuration; interrupt service routines kept to flag-setting, with work deferred to a main loop to keep latency bounded and debuggable.",
+    tradeoffs:
+      "Polling a main loop costs idle cycles versus a fully event-driven design, but keeps control flow linear enough to reason about timing on hardware without a debugger attached.",
+    stack: ["C", "STM32", "UART", "Timers", "GPIO"],
+    repository: "https://github.com/MatomeMb/Connected-Components-Image-Processor",
+  },
+];
+
 export default function Projects() {
-  const [searchTerm, setSearchInput] = useState('');
-  const [activeFilter, setActiveFilter] = useState<'all' | 'ai-ml' | 'backend' | 'systems' | 'nda'>('all');
-
-  const projectsList: Project[] = [
-    {
-      id: 'ocr-document-automation',
-      name: 'OCR Document Automation',
-      category: 'ai-ml',
-      categoryLabel: 'Computer Vision / AI',
-      summary: 'A validation-first document processing pipeline designed to eliminate manual data entry. Built with layered validation rules, confidence-based gating, and trace-logging.',
-      problem: 'Silent OCR errors polluting downstream services.',
-      solution: 'Multi-layer constraints & confidence review gating.',
-      outcome: 'High coordinate field-mapping accuracy on defined sets.',
-      tech: ['Python', 'OpenCV', 'OCR Tooling', 'Data Validation'],
-      github: 'https://github.com/MatomeMb',
-      hasCaseStudy: true,
-    },
-    {
-      id: 'rag-assistant',
-      name: 'RAG AI Assistant',
-      category: 'ai-ml',
-      categoryLabel: 'Retrieval Augmented Gen',
-      summary: 'A private, grounded information retrieval system designed to eliminate model hallucinations. Employs deterministic FAISS indexing, embedding persistence, and strict confidence gating.',
-      problem: 'AI models hallucinating facts absent from the corpus.',
-      solution: 'Deterministic index & strict retrieval gating constraints.',
-      outcome: 'Zero-hallucination queries with high retrieval precision.',
-      tech: ['Python', 'FAISS', 'Embeddings', 'Streamlit'],
-      github: 'https://github.com/MatomeMb/personal-codex-agent',
-      hasCaseStudy: true,
-    },
-    {
-      id: 'fashionmnist-classifier',
-      name: 'FashionMNIST Classifier',
-      category: 'ai-ml',
-      categoryLabel: 'Machine Learning',
-      summary: 'An end-to-end PyTorch training and evaluation pipeline for clothing image classification, featuring strict parameter tracking and automated metric logging.',
-      problem: 'Need for a reproducible, auditable deep learning training config.',
-      solution: 'Repeatable neural pipeline with strict seed lock.',
-      outcome: '89.33% verification test accuracy under clean runs.',
-      tech: ['Python', 'PyTorch', 'Neural Networks', 'Metrics Evaluation'],
-      github: 'https://github.com/MatomeMb/FashionMNIST-Classifier',
-      hasCaseStudy: true,
-    },
-    {
-      id: 'myadvisor',
-      name: 'MyAdvisor Full-Stack App',
-      category: 'backend',
-      categoryLabel: 'Full-Stack Application',
-      summary: 'A robust full-stack web application designed for student advisory and academic guidance services. Employs modern backend services and databases.',
-      problem: 'Inefficient manual academic advisor scheduling and tracking.',
-      solution: 'Automated MVC student booking pipeline and notifications.',
-      outcome: 'Streamlined tutoring administration with robust logs.',
-      tech: ['TypeScript', 'Node.js', 'PostgreSQL', 'APIs'],
-      github: 'https://github.com/MatomeMb',
-      hasCaseStudy: true,
-    },
-    {
-      id: 'scheduling-systems',
-      name: 'Scheduling & OS Systems',
-      category: 'systems',
-      categoryLabel: 'Systems Programming',
-      summary: 'Operating system CPU scheduling algorithm simulations (FIFO, SJF, RR) and number range summarization benchmarks in Python and Java.',
-      problem: 'CPU bottlenecking due to non-optimized task schedulers.',
-      solution: 'Measurement-driven algorithmic simulations to benchmark FIFO/SJF.',
-      outcome: '35% tutoring scheduler booking throughput improvement.',
-      tech: ['Python', 'Java', 'Algorithms', 'Benchmarking'],
-      github: 'https://github.com/MatomeMb/Operating-Systems-Scheduling_Algos',
-      hasCaseStudy: true,
-    },
-    {
-      id: 'embedded-navigation',
-      name: 'Embedded & Edge Navigation',
-      category: 'systems',
-      categoryLabel: 'Systems & Embedded',
-      summary: 'Connected components image labeling and slide puzzle simulations optimized for memory footprint and execution speed in standard C++.',
-      problem: 'Compute boundaries on resource-constrained micro-controllers.',
-      solution: 'Memory-safe component allocation & deterministic state trees.',
-      outcome: 'Extremely fast coordinate image processing cycles.',
-      tech: ['C++', 'Algorithms', 'Memory Optimization'],
-      github: 'https://github.com/MatomeMb/Connected-Components-Image-Processor',
-      hasCaseStudy: true,
-    },
-    {
-      id: 'confidential-ai-build',
-      name: 'Confidential AI Product Build',
-      category: 'nda',
-      categoryLabel: 'Enterprise Software',
-      summary: 'Designed enterprise AI features, scalable data flows, and CI/CD foundations on a production pipeline under strict NDA guidelines.',
-      problem: 'Undisclosed private pipeline constraints.',
-      solution: 'High-availability microservice architecture & defensive logic.',
-      outcome: 'Successful production release (architecture public-safe).',
-      tech: ['Proprietary Tech', 'Microservices', 'CI Pipelines'],
-      hasCaseStudy: true,
-    },
-  ];
-
-  const filteredProjects = projectsList.filter((proj) => {
-    const text = (proj.name + ' ' + proj.summary + ' ' + proj.tech.join(' ')).toLowerCase();
-    const matchesSearch = text.includes(searchTerm.toLowerCase());
-    const matchesFilter = activeFilter === 'all' || proj.category === activeFilter;
-    return matchesSearch && matchesFilter;
-  });
-
   return (
-    <div className="max-w-6xl mx-auto space-y-8 py-8">
-      {/* Header & Controls */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#1E293B] pb-4">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold tracking-tight text-[#F8FAFC]">Engineering Projects</h1>
-          <p className="text-[#CBD5E1] text-sm">Real products and repositories built for production stability and high correctness.</p>
-        </div>
-
-        {/* Filter Toolbar */}
-        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-          <div className="relative">
-            <Search className="absolute left-3 top-3 text-slate-500" size={16} />
-            <input
-              type="search"
-              placeholder="Search tech/projects..."
-              value={searchTerm}
-              onChange={(e) => setSearchInput(e.target.value)}
-              className="pl-9 pr-4 py-2 text-sm bg-[#0F172A] border border-[#1E293B] rounded-lg text-[#F8FAFC] placeholder-slate-500 focus:outline-none focus:border-[#2563EB] w-full sm:w-48"
-            />
-          </div>
-
-          <div className="flex flex-wrap gap-1 border border-[#1E293B] bg-[#0F172A]/50 p-1 rounded-lg">
-            {(['all', 'ai-ml', 'backend', 'systems', 'nda'] as const).map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`text-xs font-semibold px-3 py-1.5 rounded-md border border-transparent transition-all ${
-                  activeFilter === filter
-                    ? 'bg-[#2563EB] text-white'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                {filter.toUpperCase()}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* NDA Disclosures Banner */}
-      <div className="p-5 rounded-xl border border-[#1E293B] bg-[#111827]/40 space-y-3 text-sm">
-        <h3 className="text-[#F8FAFC] font-bold flex items-center gap-2">
-          <ShieldCheck className="text-[#2563EB]" size={18} />
-          NDA Disclosures Framework
-        </h3>
-        <p className="text-[#CBD5E1] leading-relaxed text-xs">
-          Client listings, private endpoints, and proprietary schemas are restricted.
-          I discuss problem framings, architectural trade-offs, testing models, and high-level validation boundaries openly during professional interview cycles.
+    <div className="space-y-10 py-14">
+      <header className="max-w-2xl space-y-3">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Projects</h1>
+        <p className="leading-relaxed text-gray-600">
+          Seven systems, presented the way I would write them up for a design review: the problem,
+          the requirement that mattered most, the decision I made, and what it cost. Public-safe
+          case studies are linked for each.
         </p>
-      </div>
+      </header>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {filteredProjects.map((proj) => (
-          <div
-            key={proj.id}
-            className="flex flex-col justify-between border border-[#1E293B] bg-[#111827]/10 p-6 rounded-2xl hover-lift"
-          >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-[#2563EB] tracking-wider uppercase">
-                  {proj.categoryLabel}
-                </span>
-                <span className="text-[10px] text-slate-500 font-mono uppercase bg-[#0F172A] px-2 py-0.5 border border-[#1E293B] rounded">
-                  {proj.category}
-                </span>
+      <ol className="space-y-14">
+        {projects.map((project, i) => (
+          <li key={project.id} className="border-t border-gray-200 pt-10">
+            <article aria-labelledby={`project-${project.id}`} className="grid gap-8 lg:grid-cols-12">
+              {/* Identity column */}
+              <div className="space-y-4 lg:col-span-4">
+                <div className="space-y-1.5">
+                  <p className="font-mono text-xs text-gray-400">
+                    {String(i + 1).padStart(2, "0")} — {project.tag}
+                  </p>
+                  <h2
+                    id={`project-${project.id}`}
+                    className="text-xl font-bold tracking-tight text-gray-900"
+                  >
+                    {project.name}
+                  </h2>
+                </div>
+                <ul className="flex flex-wrap gap-1.5" aria-label="Tech stack">
+                  {project.stack.map((item) => (
+                    <li
+                      key={item}
+                      className="rounded border border-gray-200 bg-gray-50 px-2 py-0.5 font-mono text-xs text-gray-600"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-col gap-2 pt-1 text-sm">
+                  <Link
+                    to={`/project/${project.id}`}
+                    className="inline-flex items-center gap-1.5 font-semibold text-blue-600 hover:underline"
+                  >
+                    Read the case study <ArrowUpRight size={14} aria-hidden="true" />
+                  </Link>
+                  {project.repository && (
+                    <a
+                      href={project.repository}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-gray-500 hover:text-blue-600"
+                    >
+                      <FolderGit2 size={14} aria-hidden="true" />
+                      {project.repository.replace("https://github.com/", "")}
+                    </a>
+                  )}
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-[#F8FAFC] tracking-tight">{proj.name}</h3>
-              <p className="text-[#CBD5E1] text-xs leading-relaxed font-light">{proj.summary}</p>
-              
-              <div className="grid grid-cols-3 gap-2 text-xs bg-[#020617]/50 p-3 rounded-lg border border-[#1E293B]/60 font-mono text-[10px]">
+
+              {/* Engineering substance */}
+              <dl className="space-y-5 lg:col-span-8">
                 <div>
-                  <span className="block text-slate-500 uppercase text-[9px]">Problem</span>
-                  <span className="text-[#CBD5E1] font-medium block truncate">{proj.problem}</span>
+                  <dt className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400">
+                    Problem
+                  </dt>
+                  <dd className="mt-1.5 leading-relaxed text-gray-600">{project.problem}</dd>
                 </div>
                 <div>
-                  <span className="block text-slate-500 uppercase text-[9px]">Solution</span>
-                  <span className="text-[#CBD5E1] font-medium block truncate">{proj.solution}</span>
+                  <dt className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400">
+                    Requirements
+                  </dt>
+                  <dd className="mt-1.5 leading-relaxed text-gray-600">{project.requirements}</dd>
                 </div>
                 <div>
-                  <span className="block text-slate-500 uppercase text-[9px]">Outcome</span>
-                  <span className="text-[#2563EB] font-bold block truncate">{proj.outcome}</span>
+                  <dt className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400">
+                    Design decision
+                  </dt>
+                  <dd className="mt-1.5 leading-relaxed text-gray-600">{project.design}</dd>
                 </div>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5 pt-2">
-                {proj.tech.map((tech) => (
-                  <span key={tech} className="px-2 py-0.5 bg-[#0F172A] border border-[#1E293B] text-[#CBD5E1] text-xs font-mono rounded">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 pt-6 border-t border-[#1E293B]/60 mt-6 text-sm font-medium">
-              {proj.hasCaseStudy ? (
-                <Link to={`/project/${proj.id}`} className="inline-flex items-center gap-1.5 text-[#2563EB] hover:text-[#1D4ED8] transition-colors">
-                  Read Case Study &rarr;
-                </Link>
-              ) : (
-                <span className="text-xs text-slate-500 italic">No case study required</span>
-              )}
-              {proj.github && (
-                <a
-                  href={proj.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-slate-400 hover:text-slate-200 transition-colors ml-auto"
-                >
-                  GitHub <ExternalLink size={14} />
-                </a>
-              )}
-            </div>
-          </div>
+                <div>
+                  <dt className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400">
+                    Trade-off
+                  </dt>
+                  <dd className="mt-1.5 border-l-2 border-gray-200 pl-4 leading-relaxed text-gray-600">
+                    {project.tradeoffs}
+                  </dd>
+                </div>
+              </dl>
+            </article>
+          </li>
         ))}
-      </div>
+      </ol>
+
+      <p className="border-t border-gray-200 pt-8 text-sm text-gray-500">
+        Fairflow work is described under NDA: frames, architectures and trade-offs are discussed
+        openly; client data, endpoints and metrics are not. That boundary is deliberate and
+        non-negotiable.
+      </p>
     </div>
   );
 }

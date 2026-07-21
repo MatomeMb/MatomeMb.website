@@ -1,8 +1,9 @@
 {
-  "name": "matomembowene-website-react",
-  "version": "1.0.0",
+  "name": "matomembowene-website",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
+  "description": "Source for matomembowene.co.za — engineering portfolio built with React 19, TypeScript, Vite and Tailwind CSS v4. Compiles to the repository root for GitHub Pages.",
   "scripts": {
     "dev": "vite",
     "build": "node clean-root-assets.js && vite build",
@@ -12,7 +13,6 @@
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
     "@tanstack/react-query": "^5.101.4",
-    "framer-motion": "^12.42.2",
     "lucide-react": "^1.25.0",
     "mermaid": "^11.16.0",
     "react": "^19.2.8",
@@ -26,11 +26,8 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
-    "eslint": "^10.7.0",
-    "prettier": "^3.9.6",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
-    "vite": "^8.1.5",
-    "vitest": "^4.1.10"
+    "vite": "^8.1.5"
   }
 }
