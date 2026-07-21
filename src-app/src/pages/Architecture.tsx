@@ -159,6 +159,11 @@ export default function Architecture() {
           <Link to="/project/fairflow-platforms" className="text-blue-600 hover:underline">
             Full case study
           </Link>
+          . For the open-source Fairflow stack itself — sequence diagrams for checkout, artifact
+          creation, KYC and admin actions, plus the ADR log — see the{" "}
+          <Link to="/architecture/fairflow" className="text-blue-600 hover:underline">
+            Fairflow architecture deep dive
+          </Link>
           .
         </p>
         <MermaidDiagram

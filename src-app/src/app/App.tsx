@@ -11,8 +11,9 @@ import Resume from "../pages/Resume.tsx";
 import Contact from "../pages/Contact.tsx";
 import Privacy from "../pages/Privacy.tsx";
 
-// Mermaid is heavy — the Architecture page ships as its own chunk.
+// Mermaid is heavy — the Architecture pages ship as their own chunks.
 const Architecture = lazy(() => import("../pages/Architecture.tsx"));
+const FairflowArchitecture = lazy(() => import("../pages/FairflowArchitecture.tsx"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -59,6 +60,20 @@ export default function App() {
                   }
                 >
                   <Architecture />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/architecture/fairflow"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="py-24 text-center font-mono text-sm text-gray-500">
+                      Loading diagrams&hellip;
+                    </div>
+                  }
+                >
+                  <FairflowArchitecture />
                 </Suspense>
               }
             />
