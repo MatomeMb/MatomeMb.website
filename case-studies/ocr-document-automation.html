@@ -15,38 +15,201 @@
   <meta property="og:url" content="https://www.matomembowene.co.za/case-studies/ocr-document-automation.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://www.matomembowene.co.za/case-studies/og-ocr.svg">
-  <meta name="theme-color" content="#0b0f14">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="theme-color" content="#020617">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --primary:#0b0f14;--secondary:#12141a;--accent:#22c55e;--accent2:#16a34a;
-      --text:#f8fafc;--muted:#a1aab8;--border:rgba(148,163,184,0.16);--shadow:rgba(0,0,0,0.35);
+    :root {
+      --primary: #020617;
+      --secondary: #0F172A;
+      --accent: #38BDF8;
+      --accent2: #0284C7;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --border: rgba(148, 163, 184, 0.1);
+      --shadow: rgba(0, 0, 0, 0.5);
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--primary);color:var(--text);min-height:100vh}
-    .wrap{max-width:980px;margin:0 auto;padding:2.25rem 1rem 3rem}
-    .top{display:flex;gap:1rem;justify-content:space-between;align-items:center;flex-wrap:wrap}
-    .pill{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .85rem;border-radius:999px;border:1px solid rgba(148,163,184,.20);background:rgba(148,163,184,.08);color:var(--muted);text-decoration:none;font-weight:750}
-    .pill:hover{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.10)}
-    h1{margin:1.25rem 0 .35rem;letter-spacing:-.02em}
-    .sub{color:var(--muted);line-height:1.7;max-width:72ch}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1.5rem}
-    .card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:16px;padding:1.25rem;box-shadow:0 12px 30px var(--shadow)}
-    .kpi{display:flex;gap:.75rem;align-items:baseline;flex-wrap:wrap}
-    .kpi strong{color:var(--accent);font-size:1.25rem}
-    ul{margin:.75rem 0 0;padding-left:1.2rem;color:var(--muted);line-height:1.7}
-    .tagrow{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
-    .tag{border:1px solid rgba(148,163,184,.22);background:rgba(148,163,184,.08);color:var(--muted);padding:.3rem .55rem;border-radius:999px;font-size:.9rem;font-weight:700}
-    .cta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
-    .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1rem;border-radius:999px;text-decoration:none;font-weight:800;border:1px solid rgba(34,197,94,.28);background:rgba(34,197,94,.12);color:var(--text)}
-    .btn:hover{border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.16)}
-    .note{margin-top:1.25rem;color:var(--muted);font-size:.95rem;line-height:1.7}
-    hr{border:0;border-top:1px solid rgba(148,163,184,.16);margin:1.25rem 0}
-    h2{margin:0 0 .5rem;font-size:1.05rem;color:var(--text)}
-    .para{color:var(--muted);line-height:1.7;margin:.4rem 0 0}
+    
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--primary);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Grid background effect */
+    .grid-bg {
+      background-image: radial-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1rem 4rem;
+    }
+    
+    .top {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(148, 163, 184, 0.05);
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    
+    .pill:hover {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.05);
+      color: var(--text);
+    }
+    
+    h1 {
+      margin: 2rem 0 0.5rem;
+      letter-spacing: -0.02em;
+      font-size: 2.5rem;
+      font-weight: 850;
+    }
+    
+    .sub {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 72ch;
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .card {
+      background: var(--secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px var(--shadow);
+    }
+    
+    .kpi {
+      display: flex;
+      gap: 0.75rem;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    
+    .kpi strong {
+      color: var(--accent);
+      font-size: 1.5rem;
+      font-family: 'Geist Mono', monospace;
+    }
+    
+    ul {
+      margin: 0.75rem 0 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    
+    .tagrow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .tag {
+      border: 1px solid var(--border);
+      background: rgba(148, 163, 184, 0.05);
+      color: var(--muted);
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: 'Geist Mono', monospace;
+    }
+    
+    .cta {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    
+    .btn:hover {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.15);
+    }
+    
+    .note {
+      margin-top: 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+    
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 1.5rem 0;
+    }
+    
+    h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text);
+    }
+    
+    .para {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0.5rem 0 0;
+      font-size: 0.95rem;
+    }
   </style>
 </head>
-<body>
+<body class="grid-bg">
   <main class="wrap">
     <div class="top">
       <a class="pill" href="../">← Back to portfolio</a>
@@ -76,7 +239,7 @@
 
     <div class="grid">
       <section class="card">
-        <div class="kpi"><strong>High</strong><span style="color:var(--muted);font-weight:700;">field-mapping accuracy (defined set)</span></div>
+        <div class="kpi"><strong>High</strong><span style="color:var(--muted);font-weight:700;font-size:0.9rem;">field-mapping accuracy (defined set)</span></div>
         <div class="tagrow">
           <span class="tag">Python</span>
           <span class="tag">OpenCV</span>
@@ -87,7 +250,7 @@
       </section>
 
       <section class="card">
-        <h2>Outcome</h2>
+        <h2>Outcome Detail</h2>
         <p class="para">Reliable extraction with guardrails: correct mappings, explainable failures, and outputs suitable for downstream use and review.</p>
         <hr>
         <h2>Why it matters</h2>
