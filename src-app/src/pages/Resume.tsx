@@ -23,7 +23,7 @@ const profiles: Record<string, Profile> = {
     ],
     experience: [
       {
-        heading: "Fairflow — Software Engineer",
+        heading: "Fairflow — Co-Founder & Software Engineer",
         period: "Jan 2026 – Apr 2026",
         bullets: [
           "Design validation-first backend services in Python and TypeScript; schema validation runs before business logic at every API boundary.",
@@ -54,7 +54,7 @@ const profiles: Record<string, Profile> = {
     ],
     experience: [
       {
-        heading: "Fairflow — Software Engineer",
+        heading: "Fairflow — Co-Founder & Software Engineer",
         period: "Jan 2026 – Apr 2026",
         bullets: [
           "Service-layer defensive design: validation-first boundaries, structured telemetry on every workflow decision.",
@@ -85,7 +85,7 @@ const profiles: Record<string, Profile> = {
     ],
     experience: [
       {
-        heading: "Fairflow — Software Engineer",
+        heading: "Fairflow — Co-Founder & Software Engineer",
         period: "Jan 2026 – Apr 2026",
         bullets: [
           "Document ingestion pipelines: OpenCV normalisation, tabular extraction, validation gating before ledger writes.",
@@ -115,7 +115,7 @@ const profiles: Record<string, Profile> = {
     ],
     experience: [
       {
-        heading: "Fairflow — Software Engineer",
+        heading: "Fairflow — Co-Founder & Software Engineer",
         period: "Jan 2026 – Apr 2026",
         bullets: [
           "Confidence-score distributions used to tune review thresholds with precision/recall evidence.",
@@ -145,7 +145,7 @@ const profiles: Record<string, Profile> = {
     ],
     experience: [
       {
-        heading: "Fairflow — Software Engineer",
+        heading: "Fairflow — Co-Founder & Software Engineer",
         period: "Jan 2026 – Apr 2026",
         bullets: [
           "RAG assistant: sentence-transformer embeddings, pinned model versions, deterministic indices, gated generation.",

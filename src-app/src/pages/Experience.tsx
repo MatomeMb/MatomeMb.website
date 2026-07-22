@@ -14,7 +14,7 @@ interface TimelineEntry {
 const timeline: TimelineEntry[] = [
   {
     organisation: "Fairflow",
-    role: "Software Engineer",
+    role: "Co-Founder & Software Engineer",
     period: "Jan 2026 – Apr 2026",
     type: "Work",
     summary:

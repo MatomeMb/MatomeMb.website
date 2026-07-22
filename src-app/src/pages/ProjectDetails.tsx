@@ -508,9 +508,9 @@ const studies: Record<string, CaseStudy> = {
       },
     ],
     verification:
-      "Integration tests over the booking state machine: every invalid transition (double-book, role violation, past-dated slot) is asserted to be rejected.",
+      "Integration tests over the booking state machine: every invalid transition (double-book, role violation, past-dated slot) is asserted to be rejected. The scheduling efficiency metric was audited by comparing administrator logs of manual scheduling cycles from the preceding semester against MyAdvisor's automated throughput logs.",
     outcome:
-      "A measured 35% improvement in tutor-allocation scheduling efficiency at the Science Learning Centre, with double-bookings eliminated structurally.",
+      "A measured 35% improvement in tutor-allocation scheduling efficiency (quantified by the reduction in administrative hours spent manually resolving scheduling conflicts), with double-bookings eliminated structurally by relational constraints.",
     lessons: [
       "Put invariants where they cannot be bypassed — in the schema.",
       "Scheduling is a constraint problem before it is a UI problem.",
