@@ -60,7 +60,7 @@ const featuredProjects = [
     id: "fairflow",
     name: "Fairflow",
     tag: "Open-source commerce infrastructure",
-    line: "Open-source commerce platform for South African merchants, focused on payments, merchant onboarding, digital product delivery, and developer tooling.",
+    line: "Open-source commerce platform for South African merchants focused on payments, merchant onboarding, digital products, and developer tooling.",
     liveUrl: "https://fairflow.co.za",
     repoUrl: "https://github.com/MatomeMb/.Things-That-Matter",
   },
@@ -108,17 +108,24 @@ export default function Home() {
           Open to software engineering roles — Johannesburg / relocation
         </p>
 
-        <div className="space-y-2">
+        <div className="space-y-4">
           <h1
             id="hero-heading"
-            className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl leading-tight"
+            className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl leading-none space-y-1"
           >
-            Building AI-powered software, backend systems, and data platforms.
+            <span className="block">Backend Systems.</span>
+            <span className="block">AI Applications.</span>
+            <span className="block">Data Platforms.</span>
           </h1>
-          <p className="text-lg font-semibold text-gray-900">Matome Mbowene &mdash; Software Engineer</p>
-          <p className="text-sm text-gray-500">
-            BSc Computer Science &amp; Computer Engineering, University of Cape Town
-          </p>
+          <div className="space-y-1.5">
+            <p className="text-lg font-semibold text-gray-900">Matome Mbowene &mdash; Software Engineer</p>
+            <p className="max-w-xl text-base text-gray-600 leading-relaxed">
+              Software Engineer building reliable software focused on backend engineering, artificial intelligence, distributed systems, and cloud infrastructure.
+            </p>
+            <p className="text-xs text-gray-500">
+              BSc Computer Science &amp; Computer Engineering, University of Cape Town
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 pt-1">
