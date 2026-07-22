@@ -50,7 +50,7 @@ const timeline: TimelineEntry[] = [
     summary:
       "Tutoring administration systems for the Science Learning Centre: scheduling, booking integrity and administrative automation.",
     impact: [
-      "Built the MyAdvisor scheduling system: constraint-anchored relational schema plus an allocation scoring routine — a measured 35% improvement in tutor-allocation efficiency.",
+      "Built the MyAdvisor scheduling system: constraint-anchored relational schema plus an allocation scoring routine — reduced the average time required to resolve tutor scheduling conflicts by approximately 35% compared with the previous manual allocation process.",
       "Automated administrative imports with per-row validation, removing manual data-entry classes of error.",
     ],
     stack: ["Java", "Spring Boot", "PostgreSQL", "Python", "SQL"],

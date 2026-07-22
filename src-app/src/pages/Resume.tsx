@@ -18,7 +18,7 @@ const profiles: Record<string, Profile> = {
       "Software engineer building production systems that hold up in deployment: validation-first OCR document automation, grounded retrieval (RAG) assistants, and backend platforms anchored in database-enforced correctness. BSc Computer Science & Computer Engineering, University of Cape Town.",
     outcomes: [
       "Eliminated silent OCR character-swap errors in production ledgers via four-layer validation gates at the API boundary.",
-      "Measured 35% improvement in tutor-allocation efficiency through constraint-anchored scheduling software (UCT Science Learning Centre).",
+      "Reduced the average time required to resolve tutor scheduling conflicts by approximately 35% compared with the previous manual process (UCT Science Learning Centre).",
       "89.33% reproducible test accuracy on FashionMNIST with a fully seed-locked PyTorch pipeline.",
     ],
     experience: [
@@ -110,7 +110,7 @@ const profiles: Record<string, Profile> = {
       "Analytics work that starts from defensible data: validated inputs, reproducible transformations, and metrics that can be traced back to the records that produced them.",
     outcomes: [
       "Model evaluation discipline: 89.33% test accuracy reported from a single held-out evaluation, reproducible from committed config.",
-      "Scheduling efficiency quantified (35%) from before/after operational comparison.",
+      "Quantified a 35% reduction in administrative conflict resolution time through database-backed automated scheduling.",
       "Structured telemetry converted into queryable operational insight.",
     ],
     experience: [

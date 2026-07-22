@@ -161,6 +161,57 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Timeline ──────────────────────────────────────────────── */}
+      <section aria-labelledby="timeline-heading" className="grid gap-6 border-t border-gray-200 pt-12 md:grid-cols-3">
+        <h2 id="timeline-heading" className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
+          Timeline
+        </h2>
+        <div className="md:col-span-2">
+          <ol className="relative border-l border-gray-200 pl-6 space-y-6">
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-black" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-gray-500">2020</span>
+                <p className="text-sm font-semibold text-gray-900">Started BSc Computer Science &amp; Computer Engineering</p>
+                <p className="text-xs text-gray-500">University of Cape Town</p>
+              </div>
+            </li>
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-neutral-300" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-gray-500">2023</span>
+                <p className="text-sm font-semibold text-gray-900">Dell Young Leaders &amp; EY Uncovered</p>
+                <p className="text-xs text-gray-500">Leadership development and consulting programmes</p>
+              </div>
+            </li>
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-neutral-300" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-gray-500">2025</span>
+                <p className="text-sm font-semibold text-gray-900">Systems Developer, Science Learning Centre</p>
+                <p className="text-xs text-gray-500">University of Cape Town</p>
+              </div>
+            </li>
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-black" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-gray-500">2026</span>
+                <p className="text-sm font-semibold text-gray-900">Co-Founded Fairflow</p>
+                <p className="text-xs text-gray-500">Open-source commerce infrastructure for South African merchants</p>
+              </div>
+            </li>
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-green-600" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-green-600">Today</span>
+                <p className="text-sm font-semibold text-gray-900">Building AI, Backend and Data Systems</p>
+                <p className="text-xs text-gray-500">Open to new engineering challenges</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
       {/* ── Skills ───────────────────────────────────────────────── */}
       <section aria-labelledby="skills-heading" className="space-y-6 border-t border-gray-200 pt-12">
         <h2 id="skills-heading" className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">

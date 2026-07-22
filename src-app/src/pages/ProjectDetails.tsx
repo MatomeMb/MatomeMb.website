@@ -177,7 +177,7 @@ const studies: Record<string, CaseStudy> = {
       "Vitest unit tests for Zod schemas, JWT issuance/verification, storage adapters (local + R2 parity), .thing validation vectors. Playwright e2e: merchant signup → product create → checkout session → webhook simulation → order fulfilment. CI runs on every PR; Docker compose stack spins Supabase, R2 (minio), API, portal for integration tests. OpenAPI spec validated against actual routes. Dependency audit (npm audit, cargo audit) gates merges.",
 
     outcome:
-      "Fairflow is a live, open-source commerce stack at fairflow.co.za. The monorepo demonstrates production-grade TypeScript, Rust, React, Hono, Supabase, Paystack and Sumsub integration — with Docker parity, CI gates, OpenAPI docs, ADRs and sanitised public fixtures. It serves as both a usable merchant product and a reference architecture for commerce infrastructure in emerging markets.",
+      "Fairflow is a live, open-source commerce stack at fairflow.co.za. The monorepo integrates TypeScript, Rust, React, Hono, Supabase, Paystack and Sumsub — with Docker parity, CI gates, OpenAPI docs, ADRs and sanitised public fixtures. It serves as both a usable merchant product and a reference architecture for commerce infrastructure in emerging markets.",
 
     lessons: [
       "Serverless (Vercel/Hono) is a genuine ops simplification for commerce APIs — if you design for idempotent, fast webhooks from day one.",
@@ -510,7 +510,7 @@ const studies: Record<string, CaseStudy> = {
     verification:
       "Integration tests over the booking state machine: every invalid transition (double-book, role violation, past-dated slot) is asserted to be rejected. The scheduling efficiency metric was audited by comparing administrator logs of manual scheduling cycles from the preceding semester against MyAdvisor's automated throughput logs.",
     outcome:
-      "A measured 35% improvement in tutor-allocation scheduling efficiency (quantified by the reduction in administrative hours spent manually resolving scheduling conflicts), with double-bookings eliminated structurally by relational constraints.",
+      "Reduced the average time required to resolve tutor scheduling conflicts by approximately 35% compared with the previous manual allocation process, with double-bookings eliminated structurally by relational constraints.",
     lessons: [
       "Put invariants where they cannot be bypassed — in the schema.",
       "Scheduling is a constraint problem before it is a UI problem.",
