@@ -516,7 +516,7 @@ export default function Writing() {
         <footer className="mt-12 border-t border-gray-200 pt-6">
           <p className="text-sm text-gray-500">
             Questions or corrections?{" "}
-            <a href="mailto:matomepontso@gmail.com" className="font-medium text-blue-600 hover:underline">
+            <a href="mailto:matomepontso@gmail.com" className="font-semibold text-gray-900 transition-colors hover:text-blue-600 hover:underline">
               matomepontso@gmail.com
             </a>
           </p>

@@ -129,7 +129,7 @@ export default function Home() {
         <div className="flex flex-wrap items-center gap-3 pt-1">
           <Link
             to="/projects"
-            className="inline-flex items-center gap-1.5 rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:outline-none"
+            className="inline-flex items-center gap-1.5 rounded-md bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-900 focus:outline-none"
           >
             View Projects <ArrowRight size={15} aria-hidden="true" />
           </Link>
@@ -197,7 +197,7 @@ export default function Home() {
               href="https://fairflow.co.za"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:outline-none"
+              className="inline-flex items-center gap-1.5 rounded-md bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-900 focus:outline-none"
             >
               View live <ArrowUpRight size={15} aria-hidden="true" />
             </a>
@@ -264,7 +264,7 @@ export default function Home() {
           <h2 id="featured-heading" className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
             Featured engineering work
           </h2>
-          <Link to="/projects" className="text-sm font-medium text-blue-600 hover:underline">
+          <Link to="/projects" className="text-sm font-semibold text-gray-900 transition-colors hover:text-blue-600 hover:underline">
             All projects
           </Link>
         </div>
@@ -305,7 +305,7 @@ export default function Home() {
             href="https://github.com/MatomeMb"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-blue-600 hover:underline"
+            className="text-sm font-semibold text-gray-900 transition-colors hover:text-blue-600 hover:underline"
           >
             github.com/MatomeMb
           </a>

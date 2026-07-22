@@ -180,7 +180,7 @@ export default function Layout({ children }: LayoutProps) {
               href="https://github.com/MatomeMb/MatomeMb.website"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-gray-500 transition-colors hover:text-blue-600 hover:underline"
             >
               github.com/MatomeMb/MatomeMb.website
             </a>

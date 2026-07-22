@@ -24,7 +24,7 @@ const profiles: Record<string, Profile> = {
     experience: [
       {
         heading: "Fairflow — Software Engineer",
-        period: "2025 — Present",
+        period: "Jan 2026 – Apr 2026",
         bullets: [
           "Design validation-first backend services in Python and TypeScript; schema validation runs before business logic at every API boundary.",
           "Built grounded RAG assistant: deterministic FAISS indices, conservative retrieval gating, explicit refusal paths.",
@@ -33,7 +33,7 @@ const profiles: Record<string, Profile> = {
       },
       {
         heading: "Science Learning Centre, UCT — Systems Developer",
-        period: "Feb 2025 — Nov 2025",
+        period: "Feb 2025 – Nov 2025",
         bullets: [
           "Built MyAdvisor scheduling system: relational invariants plus allocation scoring routine.",
           "Automated administrative imports with per-row validation.",
@@ -55,7 +55,7 @@ const profiles: Record<string, Profile> = {
     experience: [
       {
         heading: "Fairflow — Software Engineer",
-        period: "2025 — Present",
+        period: "Jan 2026 – Apr 2026",
         bullets: [
           "Service-layer defensive design: validation-first boundaries, structured telemetry on every workflow decision.",
           "PostgreSQL schema work: constraints, index shaping to measured access patterns, safe migrations.",
@@ -64,7 +64,7 @@ const profiles: Record<string, Profile> = {
       },
       {
         heading: "Science Learning Centre, UCT — Systems Developer",
-        period: "Feb 2025 — Nov 2025",
+        period: "Feb 2025 – Nov 2025",
         bullets: [
           "Spring Boot MVC services with RBAC across three roles and database-anchored booking invariants.",
           "Reduced administrative overhead via automated, validated bulk imports.",
@@ -86,7 +86,7 @@ const profiles: Record<string, Profile> = {
     experience: [
       {
         heading: "Fairflow — Software Engineer",
-        period: "2025 — Present",
+        period: "Jan 2026 – Apr 2026",
         bullets: [
           "Document ingestion pipelines: OpenCV normalisation, tabular extraction, validation gating before ledger writes.",
           "Deterministic data routines: hash-guarded rebuilds, no silent staleness.",
@@ -94,7 +94,7 @@ const profiles: Record<string, Profile> = {
       },
       {
         heading: "Science Learning Centre, UCT — Systems Developer",
-        period: "Feb 2025 — Nov 2025",
+        period: "Feb 2025 – Nov 2025",
         bullets: [
           "ETL-style CSV import paths with per-row validation and rejection reporting.",
           "PostgreSQL schema and constraint design for scheduling data.",
@@ -116,7 +116,7 @@ const profiles: Record<string, Profile> = {
     experience: [
       {
         heading: "Fairflow — Software Engineer",
-        period: "2025 — Present",
+        period: "Jan 2026 – Apr 2026",
         bullets: [
           "Confidence-score distributions used to tune review thresholds with precision/recall evidence.",
           "Structured logs as the dataset for operational reporting.",
@@ -124,7 +124,7 @@ const profiles: Record<string, Profile> = {
       },
       {
         heading: "Science Learning Centre, UCT — Systems Developer",
-        period: "Feb 2025 — Nov 2025",
+        period: "Feb 2025 – Nov 2025",
         bullets: [
           "Quantified scheduling throughput before and after automation.",
           "Administrative reporting built on clean relational sources.",
@@ -146,7 +146,7 @@ const profiles: Record<string, Profile> = {
     experience: [
       {
         heading: "Fairflow — Software Engineer",
-        period: "2025 — Present",
+        period: "Jan 2026 – Apr 2026",
         bullets: [
           "RAG assistant: sentence-transformer embeddings, pinned model versions, deterministic indices, gated generation.",
           "OCR pipeline: skew correction, Otsu binarisation, coordinate segmentation, confidence gating.",
@@ -154,7 +154,7 @@ const profiles: Record<string, Profile> = {
       },
       {
         heading: "University of Cape Town — BSc CS & Computer Engineering",
-        period: "2020 — 2025",
+        period: "2020 – 2025",
         bullets: [
           "PyTorch CNN classifier with locked seeds and held-out evaluation discipline.",
           "Coursework across ML, computer vision and algorithms.",
@@ -193,7 +193,7 @@ export default function Resume() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex items-center gap-1.5 rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800 focus:outline-none"
+            className="inline-flex items-center gap-1.5 rounded-md bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-neutral-900 focus:outline-none"
           >
             <Printer size={14} aria-hidden="true" /> Print / Save PDF
           </button>
@@ -210,7 +210,7 @@ export default function Resume() {
             onClick={() => setActiveId(id)}
             className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus:outline-none ${
               activeId === id
-                ? "border-gray-900 bg-gray-900 text-white"
+                ? "border-black bg-black text-white"
                 : "border-gray-300 bg-white text-gray-600 hover:border-gray-400 hover:text-gray-900"
             }`}
           >

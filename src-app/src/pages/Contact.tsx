@@ -101,7 +101,7 @@ export default function Contact() {
           <a
             href="resume.pdf"
             download
-            className="inline-flex items-center gap-1.5 rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-800 focus:outline-none"
+            className="inline-flex items-center gap-1.5 rounded-md bg-black px-5 py-2.5 text-sm font-semibold text-white hover:bg-neutral-900 focus:outline-none"
           >
             Download Resume
           </a>
@@ -225,7 +225,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full rounded-md bg-gray-900 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:outline-none disabled:opacity-50"
+              className="w-full rounded-md bg-black py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-900 focus:outline-none disabled:opacity-50"
             >
               Compose email
             </button>

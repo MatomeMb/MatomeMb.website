@@ -36,7 +36,7 @@ export default function Privacy() {
 
       <footer className="border-t border-gray-200 pt-6 text-sm text-gray-500">
         Last updated July 2026. Questions:{" "}
-        <a href="mailto:matomepontso@gmail.com" className="text-blue-600 hover:underline">
+        <a href="mailto:matomepontso@gmail.com" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">
           matomepontso@gmail.com
         </a>
       </footer>

@@ -59,7 +59,7 @@ export default function Architecture() {
           The document pipeline treats extraction as untrusted input. Four validation layers —
           format, geometry, cross-field arithmetic, engine confidence — run at the API boundary
           before any write.{" "}
-          <Link to="/project/ocr-document-automation" className="text-blue-600 hover:underline">
+          <Link to="/project/ocr-document-automation" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">
             Full case study
           </Link>
           .
@@ -90,7 +90,7 @@ export default function Architecture() {
         <p className="leading-relaxed text-gray-600">
           Two paths share one contract — the FAISS index. Ingestion is deterministic and
           hash-guarded; querying is gated on cosine thresholds with an explicit refusal branch.{" "}
-          <Link to="/project/rag-assistant" className="text-blue-600 hover:underline">
+          <Link to="/project/rag-assistant" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">
             Full case study
           </Link>
           .
@@ -124,7 +124,7 @@ export default function Architecture() {
           Booking correctness is anchored in the schema. The unique constraint on
           (tutor, slot) is the system&rsquo;s last line of defence against double-booking — application
           code can be wrong; the constraint cannot.{" "}
-          <Link to="/project/myadvisor" className="text-blue-600 hover:underline">
+          <Link to="/project/myadvisor" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">
             Full case study
           </Link>
           .
@@ -156,12 +156,12 @@ export default function Architecture() {
         <p className="leading-relaxed text-gray-600">
           The deployment pattern behind the enterprise work: mandatory gates, reproducible builds,
           staging soak, telemetry back into the next commit.{" "}
-          <Link to="/project/fairflow-platforms" className="text-blue-600 hover:underline">
+          <Link to="/project/fairflow-platforms" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">
             Full case study
           </Link>
           . For the open-source Fairflow stack itself — sequence diagrams for checkout, artifact
           creation, KYC and admin actions, plus the ADR log — see the{" "}
-          <Link to="/architecture/fairflow" className="text-blue-600 hover:underline">
+          <Link to="/architecture/fairflow" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">
             Fairflow architecture deep dive
           </Link>
           .
