@@ -27,7 +27,7 @@ interface CaseStudy {
 const studies: Record<string, CaseStudy> = {
   "fairflow": {
     name: "Fairflow",
-    tag: "Open-source commerce infrastructure — TypeScript, Hono, React, Supabase, Paystack, Rust",
+    tag: "Open-source commerce platform &mdash; TypeScript, Hono, React, Supabase, Paystack, Rust",
     repository: "https://github.com/MatomeMb/.Things-That-Matter",
     liveUrl: "https://fairflow.co.za",
     deepDiveUrl: "/architecture/fairflow",

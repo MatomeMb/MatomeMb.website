@@ -299,9 +299,9 @@ export default function Resume() {
               Programmes
             </h3>
             <ul className="space-y-1 text-sm text-gray-700">
-              <li>Google Cloud Career Launchpad — Cloud Engineering track</li>
-              <li>Dell Young Leaders — leadership development programme</li>
-              <li>EY Uncovered — technology consulting insight programme</li>
+              <li>Google Cloud Career Launchpad &mdash; Cloud Engineering track (2024)</li>
+              <li>Dell Young Leaders &mdash; leadership development programme (2021 &ndash; 2025)</li>
+              <li>EY Uncovered &mdash; technology consulting insight programme (2025)</li>
             </ul>
           </div>
         </section>

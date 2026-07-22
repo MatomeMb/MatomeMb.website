@@ -60,7 +60,7 @@ const featuredProjects = [
     id: "fairflow",
     name: "Fairflow",
     tag: "Open-source commerce infrastructure",
-    line: "Merchant portal, Paystack checkout, Sumsub KYC, portable .thing artifacts — open-source commerce infrastructure for South African merchants.",
+    line: "Open-source commerce platform for South African merchants, focused on payments, merchant onboarding, digital product delivery, and developer tooling.",
     liveUrl: "https://fairflow.co.za",
     repoUrl: "https://github.com/MatomeMb/.Things-That-Matter",
   },
@@ -111,20 +111,15 @@ export default function Home() {
         <div className="space-y-2">
           <h1
             id="hero-heading"
-            className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl"
+            className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl leading-tight"
           >
-            Matome Mbowene
+            Building AI-powered software, backend systems, and data platforms.
           </h1>
-          <p className="text-lg font-semibold text-gray-900">Software Engineer</p>
+          <p className="text-lg font-semibold text-gray-900">Matome Mbowene &mdash; Software Engineer</p>
           <p className="text-sm text-gray-500">
             BSc Computer Science &amp; Computer Engineering, University of Cape Town
           </p>
         </div>
-
-        <p className="max-w-xl text-xl leading-relaxed text-gray-600">
-          Building backend systems, AI-powered software, automation platforms, and scalable data
-          solutions.
-        </p>
 
         <div className="flex flex-wrap items-center gap-3 pt-1">
           <Link
@@ -179,32 +174,32 @@ export default function Home() {
             <li className="relative">
               <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-neutral-300" aria-hidden="true" />
               <div className="space-y-0.5">
-                <span className="font-mono text-xs font-semibold text-gray-500">2023</span>
-                <p className="text-sm font-semibold text-gray-900">Dell Young Leaders &amp; EY Uncovered</p>
-                <p className="text-xs text-gray-500">Leadership development and consulting programmes</p>
+                <span className="font-mono text-xs font-semibold text-gray-500">2021</span>
+                <p className="text-sm font-semibold text-gray-900">Selected as a Dell Young Leader</p>
+                <p className="text-xs text-gray-500">Multi-year leadership and professional development programme</p>
               </div>
             </li>
             <li className="relative">
               <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-neutral-300" aria-hidden="true" />
               <div className="space-y-0.5">
                 <span className="font-mono text-xs font-semibold text-gray-500">2025</span>
-                <p className="text-sm font-semibold text-gray-900">Systems Developer, Science Learning Centre</p>
-                <p className="text-xs text-gray-500">University of Cape Town</p>
+                <p className="text-sm font-semibold text-gray-900">Systems Developer, Science Learning Centre, UCT &amp; EY Uncovered</p>
+                <p className="text-xs text-gray-500">Built scheduling systems and completed consulting insights</p>
               </div>
             </li>
             <li className="relative">
               <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-black" aria-hidden="true" />
               <div className="space-y-0.5">
-                <span className="font-mono text-xs font-semibold text-gray-500">2026</span>
-                <p className="text-sm font-semibold text-gray-900">Co-Founded Fairflow</p>
-                <p className="text-xs text-gray-500">Open-source commerce infrastructure for South African merchants</p>
+                <span className="font-mono text-xs font-semibold text-gray-500">Jan 2026 – Apr 2026</span>
+                <p className="text-sm font-semibold text-gray-900">Co-Founder &amp; Software Engineer, Fairflow</p>
+                <p className="text-xs text-gray-500">Open-source commerce platform for South African merchants</p>
               </div>
             </li>
             <li className="relative">
               <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-green-600" aria-hidden="true" />
               <div className="space-y-0.5">
                 <span className="font-mono text-xs font-semibold text-green-600">Today</span>
-                <p className="text-sm font-semibold text-gray-900">Building AI, Backend and Data Systems</p>
+                <p className="text-sm font-semibold text-gray-900">Building Backend Systems, AI Applications &amp; Data Platforms</p>
                 <p className="text-xs text-gray-500">Open to new engineering challenges</p>
               </div>
             </li>

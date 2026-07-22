@@ -70,7 +70,7 @@ const timeline: TimelineEntry[] = [
   {
     organisation: "Dell Young Leaders",
     role: "Leadership Development Programme",
-    period: "2022 – 2025",
+    period: "2021 – 2025",
     type: "Programme",
     summary:
       "Multi-year leadership programme for university students, combining professional skills development with a sponsored technology package.",
@@ -81,7 +81,7 @@ const timeline: TimelineEntry[] = [
   {
     organisation: "EY Uncovered",
     role: "Technology Consulting Insight Programme",
-    period: "2023",
+    period: "2025",
     type: "Programme",
     summary:
       "Insight programme on how enterprise technology engagements are scoped, delivered and governed.",
