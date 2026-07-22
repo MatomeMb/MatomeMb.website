@@ -46,13 +46,12 @@ const fallbackRepos: Repo[] = [
   },
 ];
 
-const skills: { group: string; items: string[] }[] = [
-  { group: "Languages", items: ["Python", "Java", "TypeScript", "SQL", "C/C++"] },
-  { group: "Backend", items: ["Spring Boot", "Node.js", "Hono", "REST API design", "WebSockets"] },
-  { group: "Cloud", items: ["Google Cloud", "Compute Engine", "Cloud Storage", "IAM", "Cloudflare R2", "Supabase"] },
-  { group: "Data", items: ["PostgreSQL", "MySQL", "ETL pipelines", "Pandas", "Schema design"] },
-  { group: "AI", items: ["PyTorch", "FAISS", "Sentence embeddings", "RAG systems", "OpenCV"] },
-  { group: "Infrastructure", items: ["Docker", "GitHub Actions", "CI/CD", "Linux / Bash", "Nginx"] },
+const skills = [
+  { group: "Backend", items: ["Python", "Java", "TypeScript", "Rust"] },
+  { group: "AI & Machine Learning", items: ["PyTorch", "FAISS", "OpenCV", "LLMs"] },
+  { group: "Data", items: ["PostgreSQL", "SQL", "ETL", "OCR"] },
+  { group: "Cloud", items: ["Google Cloud", "Supabase", "Cloudflare"] },
+  { group: "Infrastructure", items: ["Docker", "GitHub Actions", "Linux"] },
 ];
 
 const featuredProjects = [
@@ -66,31 +65,31 @@ const featuredProjects = [
     id: "ocr-document-automation",
     name: "OCR Document Automation",
     tag: "Computer Vision",
-    line: "Validation-first extraction pipeline with geometric audits, cross-field arithmetic validation, and confidence-gated manual reviews.",
+    line: "Validation-first document extraction pipeline with coordinate audits, cross-field arithmetic checks, and confidence-gated manual reviews.",
   },
   {
     id: "myadvisor",
     name: "MyAdvisor",
     tag: "Scheduling System",
-    line: "Constraint-anchored tutor booking and scheduling system that structurally eliminated double-bookings and administrative conflicts.",
+    line: "Constraint-anchored scheduling system for tutoring allocation that structurally eliminated double-bookings.",
   },
   {
     id: "rag-assistant",
     name: "RAG Knowledge Assistant",
     tag: "Applied AI",
-    line: "Grounded semantic retrieval system with persistent index gating and deterministic refusal boundaries for hallucination prevention.",
+    line: "Grounded semantic retrieval system with persistent FAISS index gating and explicit refusal boundaries.",
   },
   {
     id: "fashionmnist-classifier",
     name: "FashionMNIST Classifier",
     tag: "Machine Learning",
-    line: "Fully reproducible PyTorch image classification pipeline with seed locking and structured telemetry outputs.",
+    line: "Fully reproducible PyTorch CNN classifier with seed locking and epoch-level metric outputs.",
   },
   {
     id: "stm32-embedded",
     name: "STM32 Embedded Systems",
     tag: "Embedded / Low-level",
-    line: "Bare-metal microcontroller practicals with register-level peripheral configurations and interrupt service routines.",
+    line: "Bare-metal C microcontroller firmware featuring register-level peripheral configurations and UART timing windows.",
   },
 ];
 
@@ -132,16 +131,16 @@ export default function Home() {
           >
             Building reliable backend systems, AI applications, and developer platforms.
           </h1>
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <p className="text-xl font-bold tracking-tight text-gray-900">Matome Mbowene</p>
             <p className="text-sm font-semibold text-gray-500">Software Engineer</p>
             <p className="text-xs text-gray-400">
               BSc Computer Science &amp; Computer Engineering, University of Cape Town
             </p>
+            <p className="text-xs text-gray-400 font-semibold">
+              Johannesburg, South Africa
+            </p>
           </div>
-          <p className="max-w-xl text-base text-gray-600 leading-relaxed font-medium">
-            I enjoy building systems that are reliable, observable, and easy for other engineers to extend.
-          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -155,7 +154,7 @@ export default function Home() {
             to="/resume"
             className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
           >
-            View Resume
+            Resume
           </Link>
           <Link
             to="/contact"
@@ -185,7 +184,7 @@ export default function Home() {
               to="/project/fairflow"
               className="inline-flex items-center gap-1.5 rounded-md bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-900 focus:outline-none"
             >
-              View Case Study <ArrowRight size={15} aria-hidden="true" />
+              Case Study <ArrowRight size={15} aria-hidden="true" />
             </Link>
             <a
               href="https://github.com/MatomeMb/.Things-That-Matter"
@@ -212,38 +211,24 @@ export default function Home() {
           <p className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
             System Topology
           </p>
-          <MermaidDiagram chart={fairflowChart} caption="Fig 1. Fairflow context topology. Three custom sub-systems integrated with Paystack, Sumsub, Supabase and Cloudflare R2." />
+          <MermaidDiagram chart={fairflowChart} caption="Fig 1. Fairflow context topology. Custom monorepo architecture integrated with Paystack, Sumsub, Supabase and Cloudflare R2." />
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 pt-2">
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="font-semibold text-gray-900">Monorepo architecture</h3>
-            <p className="mt-1 text-sm text-gray-600">
-              Three apps (auth-portal, shadow-index, matter-core) in npm workspaces &mdash; shared config,
-              type-safe contracts, and independent deploys.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="font-semibold text-gray-900">Paystack + Sumsub integration</h3>
-            <p className="mt-1 text-sm text-gray-600">
-              SA card/mobile-money checkout with HMAC-verified webhooks; KYC and payout orchestration
-              via Sumsub, admin-proxied so secrets never hit the browser.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="font-semibold text-gray-900">Multi-actor auth model</h3>
-            <p className="mt-1 text-sm text-gray-600">
-              Merchant JWTs (stateless), Supabase sessions (staff), admin proxy (server-only
-              ADMIN_SECRET) &mdash; clean separation and zero secret leakage.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="font-semibold text-gray-900">Portable product artifacts (.thing)</h3>
-            <p className="mt-1 text-sm text-gray-600">
-              Rust-backed schema validation (matter-core) produces signed, portable product files
-              that work across any Fairflow-compatible surface &mdash; checkout, portal, extension.
-            </p>
-          </div>
+        {/* Small technology chips */}
+        <div className="pt-2 space-y-2">
+          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400">
+            Key Technologies
+          </p>
+          <ul className="flex flex-wrap gap-1.5" aria-label="Key technologies">
+            {["TypeScript", "Rust", "React", "Supabase", "Hono", "Docker", "Paystack", "Cloudflare R2"].map((tech) => (
+              <li
+                key={tech}
+                className="rounded border border-gray-200 bg-gray-50 px-2.5 py-0.5 font-mono text-xs text-gray-600"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -310,7 +295,7 @@ export default function Home() {
               <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-black" aria-hidden="true" />
               <div className="space-y-0.5">
                 <span className="font-mono text-xs font-semibold text-gray-500">2020</span>
-                <p className="text-sm font-semibold text-gray-900">BSc Computer Science &amp; Computer Engineering</p>
+                <p className="text-sm font-semibold text-gray-900">Started BSc Computer Science &amp; Computer Engineering</p>
                 <p className="text-xs text-gray-500">University of Cape Town</p>
               </div>
             </li>
@@ -350,8 +335,7 @@ export default function Home() {
               <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-green-600" aria-hidden="true" />
               <div className="space-y-0.5">
                 <span className="font-mono text-xs font-semibold text-green-600">Today</span>
-                <p className="text-sm font-semibold text-gray-900">Building Backend Systems, AI Applications &amp; Data Platforms</p>
-                <p className="text-xs text-gray-500">Focused on reliability, observability and extensibility</p>
+                <p className="text-sm font-semibold text-gray-900">Backend Engineering &middot; AI Systems &middot; Open Source</p>
               </div>
             </li>
           </ol>
