@@ -117,7 +117,7 @@ export default function FairflowArchitecture() {
       <header className="space-y-3 border-b border-gray-200 pb-8">
         <p className="font-mono text-xs text-gray-400">
           System deep dive — fairflow.co.za &middot; companion to the{" "}
-          <Link to="/project/fairflow" className="text-blue-600 hover:underline">
+          <Link to="/project/fairflow" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">
             case study
           </Link>
         </p>
@@ -466,11 +466,11 @@ export default function FairflowArchitecture() {
       <section className="space-y-3 border-t border-gray-200 pt-8">
         <p className="text-sm leading-relaxed text-gray-500">
           Read the business case and trade-offs in the{" "}
-          <Link to="/project/fairflow" className="text-blue-600 hover:underline">
+          <Link to="/project/fairflow" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">
             Fairflow case study
           </Link>
           , browse the other system notes on the{" "}
-          <Link to="/architecture" className="text-blue-600 hover:underline">
+          <Link to="/architecture" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">
             architecture index
           </Link>
           , or inspect the source — ADRs, OpenAPI spec and public fixtures included — on{" "}
@@ -478,7 +478,7 @@ export default function FairflowArchitecture() {
             href="https://github.com/MatomeMb/.Things-That-Matter"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:underline"
+            className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline"
           >
             GitHub
           </a>

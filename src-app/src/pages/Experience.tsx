@@ -14,8 +14,8 @@ interface TimelineEntry {
 const timeline: TimelineEntry[] = [
   {
     organisation: "Fairflow",
-    role: "Software Engineer / CTO",
-    period: "2025 — Present",
+    role: "Co-Founder & Software Engineer",
+    period: "Jan 2026 – Apr 2026",
     type: "Work",
     summary:
       "Designed and shipped Fairflow end-to-end: a TypeScript monorepo with a Hono commerce API, React merchant/admin portal, Supabase auth, Paystack payments, Sumsub KYC, and production-minded open-source documentation. It's a real product codebase, not a tutorial demo.",
@@ -45,12 +45,12 @@ const timeline: TimelineEntry[] = [
   {
     organisation: "Science Learning Centre — University of Cape Town",
     role: "Systems Developer",
-    period: "Feb 2025 — Nov 2025",
+    period: "Feb 2025 – Nov 2025",
     type: "Work",
     summary:
       "Tutoring administration systems for the Science Learning Centre: scheduling, booking integrity and administrative automation.",
     impact: [
-      "Built the MyAdvisor scheduling system: constraint-anchored relational schema plus an allocation scoring routine — a measured 35% improvement in tutor-allocation efficiency.",
+      "Built the MyAdvisor scheduling system: constraint-anchored relational schema plus an allocation scoring routine — reduced the average time required to resolve tutor scheduling conflicts by approximately 35% compared with the previous manual allocation process.",
       "Automated administrative imports with per-row validation, removing manual data-entry classes of error.",
     ],
     stack: ["Java", "Spring Boot", "PostgreSQL", "Python", "SQL"],
@@ -70,7 +70,7 @@ const timeline: TimelineEntry[] = [
   {
     organisation: "Dell Young Leaders",
     role: "Leadership Development Programme",
-    period: "2022 — 2025",
+    period: "2021 – 2025",
     type: "Programme",
     summary:
       "Multi-year leadership programme for university students, combining professional skills development with a sponsored technology package.",
@@ -81,7 +81,7 @@ const timeline: TimelineEntry[] = [
   {
     organisation: "EY Uncovered",
     role: "Technology Consulting Insight Programme",
-    period: "2023",
+    period: "2025",
     type: "Programme",
     summary:
       "Insight programme on how enterprise technology engagements are scoped, delivered and governed.",
@@ -92,7 +92,7 @@ const timeline: TimelineEntry[] = [
   {
     organisation: "University of Cape Town",
     role: "BSc Computer Science & Computer Engineering",
-    period: "2020 — 2025",
+    period: "2020 – 2025",
     type: "Education",
     summary:
       "Double major spanning the stack from transistor to distributed system: algorithms, operating systems, computer architecture, embedded systems, networks and machine learning.",
@@ -104,7 +104,7 @@ const timeline: TimelineEntry[] = [
 ];
 
 const typeStyles: Record<EntryType, string> = {
-  Work: "bg-gray-900 text-white",
+  Work: "bg-black text-white",
   Programme: "bg-gray-100 text-gray-700 border border-gray-200",
   Education: "bg-gray-100 text-gray-700 border border-gray-200",
 };
@@ -126,7 +126,7 @@ export default function Experience() {
             <span
               aria-hidden="true"
               className={`absolute -left-[37px] top-1.5 h-2.5 w-2.5 rounded-full ${
-                entry.type === "Work" ? "bg-gray-900" : "bg-gray-300"
+                entry.type === "Work" ? "bg-black" : "bg-neutral-300"
               }`}
             />
             <article className="space-y-4">

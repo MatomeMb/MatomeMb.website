@@ -27,7 +27,7 @@ interface CaseStudy {
 const studies: Record<string, CaseStudy> = {
   "fairflow": {
     name: "Fairflow",
-    tag: "Open-source commerce infrastructure — TypeScript, Hono, React, Supabase, Paystack, Rust",
+    tag: "Open-source commerce platform &mdash; TypeScript, Hono, React, Supabase, Paystack, Rust",
     repository: "https://github.com/MatomeMb/.Things-That-Matter",
     liveUrl: "https://fairflow.co.za",
     deepDiveUrl: "/architecture/fairflow",
@@ -177,7 +177,7 @@ const studies: Record<string, CaseStudy> = {
       "Vitest unit tests for Zod schemas, JWT issuance/verification, storage adapters (local + R2 parity), .thing validation vectors. Playwright e2e: merchant signup → product create → checkout session → webhook simulation → order fulfilment. CI runs on every PR; Docker compose stack spins Supabase, R2 (minio), API, portal for integration tests. OpenAPI spec validated against actual routes. Dependency audit (npm audit, cargo audit) gates merges.",
 
     outcome:
-      "Fairflow is a live, open-source commerce stack at fairflow.co.za. The monorepo demonstrates production-grade TypeScript, Rust, React, Hono, Supabase, Paystack and Sumsub integration — with Docker parity, CI gates, OpenAPI docs, ADRs and sanitised public fixtures. It serves as both a usable merchant product and a reference architecture for commerce infrastructure in emerging markets.",
+      "Fairflow is a live, open-source commerce stack at fairflow.co.za. The monorepo integrates TypeScript, Rust, React, Hono, Supabase, Paystack and Sumsub — with Docker parity, CI gates, OpenAPI docs, ADRs and sanitised public fixtures. It serves as both a usable merchant product and a reference architecture for commerce infrastructure in emerging markets.",
 
     lessons: [
       "Serverless (Vercel/Hono) is a genuine ops simplification for commerce APIs — if you design for idempotent, fast webhooks from day one.",
@@ -199,7 +199,7 @@ const studies: Record<string, CaseStudy> = {
 
   "ocr-document-automation": {
     name: "OCR Document Automation",
-    tag: "Computer vision — production pipeline",
+    tag: "Computer vision — Python, OpenCV, Tesseract, Pandas, PostgreSQL",
     problem:
       "Financial documents arrive as scans — skewed, low-contrast, noisy. Raw OCR reads most characters correctly, but the residual errors are the dangerous kind: an 8 read as a 6, an O read as a 0. They are plausible values that pass naive checks and silently corrupt accounting tables downstream. The system requirement was therefore not 'read text well' but 'never let an unverifiable value reach the database'.",
     requirements: [
@@ -284,7 +284,7 @@ const studies: Record<string, CaseStudy> = {
 
   "rag-assistant": {
     name: "RAG Knowledge Assistant",
-    tag: "Applied AI — grounded retrieval",
+    tag: "Applied AI — Python, FAISS, Sentence Transformers, LLM APIs",
     repository: "https://github.com/MatomeMb/personal-codex-agent",
     problem:
       "Question-answering over a private document corpus failed in the classic RAG way: retrieval returned chunks that matched keywords but answered a different question, and the language model — doing what language models do — confidently filled the gap. The system did not just need better retrieval; it needed to know when not to answer.",
@@ -379,7 +379,7 @@ const studies: Record<string, CaseStudy> = {
 
   "fairflow-platforms": {
     name: "Fairflow Production Platforms",
-    tag: "Enterprise software — NDA",
+    tag: "Enterprise software (NDA) — TypeScript, Python, PostgreSQL, Docker, GitHub Actions",
     problem:
       "Production document workflows where invalid data and irregular deploys carry real cost. The engineering mandate: validation-first services, reproducible environments, and deployments that cannot drift between machines.",
     requirements: [
@@ -449,7 +449,7 @@ const studies: Record<string, CaseStudy> = {
 
   myadvisor: {
     name: "MyAdvisor",
-    tag: "Full-stack application",
+    tag: "Full-stack application — Java, Spring Boot, PostgreSQL, Thymeleaf, Docker",
     problem:
       "Tutor allocation at UCT's Science Learning Centre ran on spreadsheets and email. Double-bookings and administrative overhead were structural, not incidental — the process itself could not enforce that a tutor exists in one place at one time.",
     requirements: [
@@ -508,9 +508,9 @@ const studies: Record<string, CaseStudy> = {
       },
     ],
     verification:
-      "Integration tests over the booking state machine: every invalid transition (double-book, role violation, past-dated slot) is asserted to be rejected.",
+      "Integration tests over the booking state machine: every invalid transition (double-book, role violation, past-dated slot) is asserted to be rejected. The scheduling efficiency metric was audited by comparing administrator logs of manual scheduling cycles from the preceding semester against MyAdvisor's automated throughput logs.",
     outcome:
-      "A measured 35% improvement in tutor-allocation scheduling efficiency at the Science Learning Centre, with double-bookings eliminated structurally.",
+      "Reduced the average time required to resolve tutor scheduling conflicts by approximately 35% compared with the previous manual allocation process, with double-bookings eliminated structurally by relational constraints.",
     lessons: [
       "Put invariants where they cannot be bypassed — in the schema.",
       "Scheduling is a constraint problem before it is a UI problem.",
@@ -523,7 +523,7 @@ const studies: Record<string, CaseStudy> = {
 
   "fashionmnist-classifier": {
     name: "FashionMNIST Neural Network",
-    tag: "Machine learning",
+    tag: "Machine learning — Python, PyTorch, NumPy, Matplotlib",
     repository: "https://github.com/MatomeMb/FashionMNIST-Classifier",
     problem:
       "Train a clothing-image classifier whose results are defensible: reproducible by anyone who reruns the pipeline, honestly evaluated on data the model never saw, and auditable at the level of individual training decisions.",
@@ -762,7 +762,7 @@ export default function ProjectDetails() {
     return (
       <div className="flex flex-col items-center gap-4 py-24 text-center">
         <h1 className="text-2xl font-bold text-gray-900">Case study not found</h1>
-        <Link to="/projects" className="text-sm font-semibold text-blue-600 hover:underline">
+        <Link to="/projects" className="text-sm font-semibold text-gray-900 transition-colors hover:text-blue-600 hover:underline">
           &larr; All projects
         </Link>
       </div>
@@ -821,7 +821,7 @@ export default function ProjectDetails() {
         {study.deepDiveUrl && (
           <p className="text-sm leading-relaxed text-gray-500">
             Sequence diagrams, sub-system notes and the decision log:{" "}
-            <Link to={study.deepDiveUrl} className="font-medium text-blue-600 hover:underline">
+            <Link to={study.deepDiveUrl} className="font-semibold text-gray-900 transition-colors hover:text-blue-600 hover:underline">
               Architecture deep dive &rarr;
             </Link>
           </p>
@@ -904,7 +904,7 @@ export default function ProjectDetails() {
       )}
 
       <nav className="border-t border-gray-200 pt-8" aria-label="Case study navigation">
-        <Link to="/projects" className="text-sm font-semibold text-blue-600 hover:underline">
+        <Link to="/projects" className="text-sm font-semibold text-gray-900 transition-colors hover:text-blue-600 hover:underline">
           &larr; Back to all projects
         </Link>
       </nav>

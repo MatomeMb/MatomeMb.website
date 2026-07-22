@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, ArrowUpRight, Star, FolderGit2 } from "lucide-react";
+import MermaidDiagram from "../components/MermaidDiagram.tsx";
 
 interface Repo {
   name: string;
@@ -45,44 +46,59 @@ const fallbackRepos: Repo[] = [
   },
 ];
 
-const skills: { group: string; items: string[] }[] = [
-  { group: "Languages", items: ["Python", "Java", "TypeScript", "SQL", "C/C++"] },
-  { group: "Backend", items: ["Spring Boot", "Node.js", "Express", "FastAPI", "REST API design", "WebSockets"] },
-  { group: "AI", items: ["PyTorch", "FAISS", "Sentence embeddings", "RAG pipelines", "OpenCV", "LLM APIs"] },
-  { group: "Cloud", items: ["Google Cloud", "Compute Engine", "Cloud Storage", "IAM", "Managed databases"] },
-  { group: "Data", items: ["PostgreSQL", "MySQL", "ETL pipelines", "Pandas", "Schema design"] },
-  { group: "DevOps", items: ["Docker", "GitHub Actions", "CI/CD", "Linux / Bash", "Nginx"] },
-  { group: "Tools", items: ["Git", "Jira", "Postman", "VS Code", "Advanced Excel"] },
+const skills = [
+  { group: "Backend", items: ["Python", "Java", "TypeScript", "Rust"] },
+  { group: "AI & Machine Learning", items: ["PyTorch", "FAISS", "OpenCV", "LLMs"] },
+  { group: "Data", items: ["PostgreSQL", "SQL", "ETL", "OCR"] },
+  { group: "Cloud", items: ["Google Cloud", "Supabase", "Cloudflare"] },
+  { group: "Infrastructure", items: ["Docker", "GitHub Actions", "Linux"] },
 ];
 
 const featuredProjects = [
   {
     id: "fairflow",
     name: "Fairflow",
-    tag: "Open-source commerce infrastructure",
-    line: "Merchant portal, Paystack checkout, Sumsub KYC, portable .thing artifacts — open-source commerce infrastructure for South African merchants.",
-    liveUrl: "https://fairflow.co.za",
-    repoUrl: "https://github.com/MatomeMb/.Things-That-Matter",
+    tag: "Open-source commerce",
+    line: "Open-source commerce platform for South African merchants focused on payments, merchant onboarding, digital products, and developer tooling.",
   },
   {
     id: "ocr-document-automation",
     name: "OCR Document Automation",
     tag: "Computer Vision",
-    line: "Validation-first extraction pipeline with coordinate audits and confidence gating.",
+    line: "Validation-first document extraction pipeline with coordinate audits, cross-field arithmetic checks, and confidence-gated manual reviews.",
+  },
+  {
+    id: "myadvisor",
+    name: "MyAdvisor",
+    tag: "Scheduling System",
+    line: "Constraint-anchored scheduling system for tutoring allocation that structurally eliminated double-bookings.",
   },
   {
     id: "rag-assistant",
     name: "RAG Knowledge Assistant",
     tag: "Applied AI",
-    line: "Grounded retrieval over a private corpus with deterministic indices and explicit refusals.",
+    line: "Grounded semantic retrieval system with persistent FAISS index gating and explicit refusal boundaries.",
   },
   {
-    id: "fairflow-platforms",
-    name: "Fairflow Production Platforms",
-    tag: "Enterprise / NDA",
-    line: "Backend services and CI/CD foundations for a production pipeline, discussed public-safe.",
+    id: "fashionmnist-classifier",
+    name: "FashionMNIST Classifier",
+    tag: "Machine Learning",
+    line: "Fully reproducible PyTorch CNN classifier with seed locking and epoch-level metric outputs.",
+  },
+  {
+    id: "stm32-embedded",
+    name: "STM32 Embedded Systems",
+    tag: "Embedded / Low-level",
+    line: "Bare-metal C microcontroller firmware featuring register-level peripheral configurations and UART timing windows.",
   },
 ];
+
+const fairflowChart = `flowchart LR
+  Portal["auth-portal (React/Vite)"] <--> API["shadow-index (Hono/Vercel)"]
+  API <--> Supabase["Supabase (Auth + Postgres)"]
+  API <--> R2["Cloudflare R2 (Artifacts)"]
+  API <--> Paystack["Paystack (Payments)"]
+  API <--> Sumsub["Sumsub (KYC)"]`;
 
 export default function Home() {
   const { data: repos, isError } = useQuery<Repo[]>({
@@ -108,99 +124,68 @@ export default function Home() {
           Open to software engineering roles — Johannesburg / relocation
         </p>
 
-        <div className="space-y-2">
+        <div className="space-y-4">
           <h1
             id="hero-heading"
-            className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl"
+            className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl leading-tight"
           >
-            Matome Mbowene
+            Building reliable backend systems, AI applications, and developer platforms.
           </h1>
-          <p className="text-lg font-semibold text-gray-900">Software Engineer</p>
-          <p className="text-sm text-gray-500">
-            BSc Computer Science &amp; Computer Engineering, University of Cape Town
-          </p>
+          <div className="space-y-1">
+            <p className="text-xl font-bold tracking-tight text-gray-900">Matome Mbowene</p>
+            <p className="text-sm font-semibold text-gray-500">Software Engineer</p>
+            <p className="text-xs text-gray-400">
+              BSc Computer Science &amp; Computer Engineering, University of Cape Town
+            </p>
+            <p className="text-xs text-gray-400 font-semibold">
+              Johannesburg, South Africa
+            </p>
+          </div>
         </div>
-
-        <p className="max-w-xl text-xl leading-relaxed text-gray-600">
-          Building backend systems, AI-powered software, automation platforms, and scalable data
-          solutions.
-        </p>
 
         <div className="flex flex-wrap items-center gap-3 pt-1">
           <Link
             to="/projects"
-            className="inline-flex items-center gap-1.5 rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:outline-none"
+            className="inline-flex items-center gap-1.5 rounded-md bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-900 focus:outline-none"
           >
             View Projects <ArrowRight size={15} aria-hidden="true" />
           </Link>
-          <a
-            href="resume.pdf"
-            download
+          <Link
+            to="/resume"
             className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
           >
-            Download Resume
-          </a>
+            Resume
+          </Link>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
+          >
+            Contact
+          </Link>
         </div>
       </section>
 
-      {/* ── Profile ──────────────────────────────────────────────── */}
-      <section aria-labelledby="profile-heading" className="grid gap-6 border-t border-gray-200 pt-12 md:grid-cols-3">
-        <h2 id="profile-heading" className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
-          Profile
-        </h2>
-        <div className="space-y-4 md:col-span-2">
-          <p className="max-w-2xl leading-relaxed text-gray-600">
-            I am a software engineer working across backend services, applied AI and data systems.
-            At Fairflow I build validation-first document automation and grounded retrieval systems
-            that run in production. My degree in Computer Science and Computer Engineering from the
-            University of Cape Town covered everything from embedded C to distributed systems, and I
-            still work comfortably at both ends of that stack. I care about correctness, auditability
-            and systems that fail safely — and I document what I build so other engineers can verify
-            it. I write about the systems I ship and the trade-offs behind them.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Skills ───────────────────────────────────────────────── */}
-      <section aria-labelledby="skills-heading" className="space-y-6 border-t border-gray-200 pt-12">
-        <h2 id="skills-heading" className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
-          Skills
-        </h2>
-        <dl className="divide-y divide-gray-100 border-y border-gray-100">
-          {skills.map((row) => (
-            <div key={row.group} className="grid gap-1 py-3.5 sm:grid-cols-4 sm:gap-4">
-              <dt className="text-sm font-semibold text-gray-900">{row.group}</dt>
-              <dd className="text-sm text-gray-600 sm:col-span-3">{row.items.join(" · ")}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      {/* ── Fairflow feature block ────────────────────────────────────── */}
+      {/* ── Fairflow Centerpiece ────────────────────────────────────── */}
       <section aria-labelledby="fairflow-heading" className="space-y-6 border-t border-gray-200 pt-12">
-        <div className="flex items-start justify-between gap-4 flex-wrap">
+        <div className="space-y-4">
           <div className="space-y-2">
             <p className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
-              Flagship project
+              Featured Project
             </p>
-            <h2 id="fairflow-heading" className="text-2xl font-bold tracking-tight text-gray-900">
-              Fairflow — Open-source commerce infrastructure for South African merchants
+            <h2 id="fairflow-heading" className="text-3xl font-extrabold tracking-tight text-gray-900">
+              Fairflow
             </h2>
             <p className="max-w-2xl text-lg leading-relaxed text-gray-600">
-              I designed and built Fairflow end-to-end: a TypeScript monorepo with a Hono commerce API,
-              React merchant/admin portal, Supabase auth, Paystack payments, and production-minded
-              open-source documentation. It&rsquo;s a real product codebase, not a tutorial demo.
+              Open-source commerce platform for South African merchants focused on payments, merchant onboarding, digital products, and developer tooling.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 shrink-0">
-            <a
-              href="https://fairflow.co.za"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:outline-none"
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <Link
+              to="/project/fairflow"
+              className="inline-flex items-center gap-1.5 rounded-md bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-900 focus:outline-none"
             >
-              View live <ArrowUpRight size={15} aria-hidden="true" />
-            </a>
+              Case Study <ArrowRight size={15} aria-hidden="true" />
+            </Link>
             <a
               href="https://github.com/MatomeMb/.Things-That-Matter"
               target="_blank"
@@ -208,67 +193,56 @@ export default function Home() {
               className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
             >
               <FolderGit2 size={15} aria-hidden="true" />
-              Source code
+              GitHub
             </a>
-            <Link
-              to="/project/fairflow"
+            <a
+              href="https://fairflow.co.za"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
             >
-              Case study <ArrowRight size={15} aria-hidden="true" />
-            </Link>
+              Live Demo <ArrowUpRight size={15} aria-hidden="true" />
+            </a>
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="font-semibold text-gray-900">Monorepo architecture</h3>
-            <p className="mt-1 text-sm text-gray-600">
-              Three apps (auth-portal, shadow-index, matter-core) in npm workspaces — shared config,
-              type-safe contracts, independent deploys.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="font-semibold text-gray-900">Paystack + Sumsub integration</h3>
-            <p className="mt-1 text-sm text-gray-600">
-              SA card/mobile-money checkout with HMAC-verified webhooks; KYC and payout orchestration
-              via Sumsub, admin-proxied so secrets never hit the browser.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <h3 className="font-semibold text-gray-900">Multi-actor auth model</h3>
-            <p className="mt-1 text-sm text-gray-600">
-              Merchant JWTs (stateless), Supabase sessions (staff), admin proxy (server-only
-              ADMIN_SECRET) — clean separation, zero secret leakage.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 sm:col-span-3">
-            <h3 className="font-semibold text-gray-900">Portable product artifacts (.thing)</h3>
-            <p className="mt-1 text-sm text-gray-600">
-              Rust-backed schema validation (matter-core) produces signed, portable product files
-              that work across any Fairflow-compatible surface — checkout, portal, extension.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 sm:col-span-3">
-            <h3 className="font-semibold text-gray-900">Production-minded open source</h3>
-            <p className="mt-1 text-sm text-gray-600">
-              Dockerised dev/prod parity, Vitest + Playwright CI, OpenAPI specs, ADRs, sanitised
-              fixtures, public architecture docs — OSS at the standard of a shipped product.
-            </p>
-          </div>
+        {/* Live Architecture Diagram of the centerpiece */}
+        <div className="pt-2">
+          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
+            System Topology
+          </p>
+          <MermaidDiagram chart={fairflowChart} caption="Fig 1. Fairflow context topology. Custom monorepo architecture integrated with Paystack, Sumsub, Supabase and Cloudflare R2." />
+        </div>
+
+        {/* Small technology chips */}
+        <div className="pt-2 space-y-2">
+          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-400">
+            Key Technologies
+          </p>
+          <ul className="flex flex-wrap gap-1.5" aria-label="Key technologies">
+            {["TypeScript", "Rust", "React", "Supabase", "Hono", "Docker", "Paystack", "Cloudflare R2"].map((tech) => (
+              <li
+                key={tech}
+                className="rounded border border-gray-200 bg-gray-50 px-2.5 py-0.5 font-mono text-xs text-gray-600"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* ── Featured work ────────────────────────────────────────── */}
+      {/* ── Selected Engineering Work ────────────────────────────── */}
       <section aria-labelledby="featured-heading" className="space-y-6 border-t border-gray-200 pt-12">
         <div className="flex items-baseline justify-between gap-4">
           <h2 id="featured-heading" className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
-            Featured engineering work
+            Selected Engineering Work
           </h2>
-          <Link to="/projects" className="text-sm font-medium text-blue-600 hover:underline">
+          <Link to="/projects" className="text-sm font-semibold text-gray-900 transition-colors hover:text-blue-600 hover:underline">
             All projects
           </Link>
         </div>
-        <ol className="divide-y divide-gray-100 border-y border-gray-100">
+        <ol className="divide-y divide-gray-100 border-y divide-solid">
           {featuredProjects.map((project, i) => (
             <li key={project.id}>
               <Link
@@ -295,17 +269,90 @@ export default function Home() {
         </ol>
       </section>
 
-      {/* ── GitHub repositories ──────────────────────────────────── */}
+      {/* ── Skills & Tech Stack ──────────────────────────────────── */}
+      <section aria-labelledby="skills-heading" className="space-y-6 border-t border-gray-200 pt-12">
+        <h2 id="skills-heading" className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
+          Tech Stack
+        </h2>
+        <dl className="divide-y divide-gray-100 border-y border-gray-100">
+          {skills.map((row) => (
+            <div key={row.group} className="grid gap-1 py-3.5 sm:grid-cols-4 sm:gap-4">
+              <dt className="text-sm font-semibold text-gray-900">{row.group}</dt>
+              <dd className="text-sm text-gray-600 sm:col-span-3">{row.items.join(" · ")}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* ── Engineering Journey (Chronological Experience) ────────── */}
+      <section aria-labelledby="timeline-heading" className="grid gap-6 border-t border-gray-200 pt-12 md:grid-cols-3">
+        <h2 id="timeline-heading" className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
+          Engineering Journey
+        </h2>
+        <div className="md:col-span-2">
+          <ol className="relative border-l border-gray-200 pl-6 space-y-6">
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-black" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-gray-500">2020</span>
+                <p className="text-sm font-semibold text-gray-900">Started BSc Computer Science &amp; Computer Engineering</p>
+                <p className="text-xs text-gray-500">University of Cape Town</p>
+              </div>
+            </li>
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-neutral-300" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-gray-500">2021</span>
+                <p className="text-sm font-semibold text-gray-900">Dell Young Leaders</p>
+                <p className="text-xs text-gray-500">Multi-year leadership and professional development programme</p>
+              </div>
+            </li>
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-neutral-300" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-gray-500">2025</span>
+                <p className="text-sm font-semibold text-gray-900">Systems Developer, Science Learning Centre, UCT</p>
+                <p className="text-xs text-gray-500">Built scheduling systems and database invariants</p>
+              </div>
+            </li>
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-neutral-300" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-gray-500">2025</span>
+                <p className="text-sm font-semibold text-gray-900">EY Uncovered</p>
+                <p className="text-xs text-gray-500">Enterprise technology consulting insight programme</p>
+              </div>
+            </li>
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-black" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-gray-500">Jan 2026 – Apr 2026</span>
+                <p className="text-sm font-semibold text-gray-900">Co-Founder &amp; Software Engineer, Fairflow</p>
+                <p className="text-xs text-gray-500">Open-source commerce platform for South African merchants</p>
+              </div>
+            </li>
+            <li className="relative">
+              <span className="absolute -left-[29px] top-1 h-2 w-2 rounded-full bg-green-600" aria-hidden="true" />
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs font-semibold text-green-600">Today</span>
+                <p className="text-sm font-semibold text-gray-900">Backend Engineering &middot; AI Systems &middot; Open Source</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      {/* ── Recent GitHub repositories ────────────────────────────── */}
       <section aria-labelledby="github-heading" className="space-y-6 border-t border-gray-200 pt-12">
         <div className="flex items-baseline justify-between gap-4">
           <h2 id="github-heading" className="font-mono text-xs font-semibold uppercase tracking-widest text-gray-500">
-            Recent repositories
+            Recent Repositories
           </h2>
           <a
             href="https://github.com/MatomeMb"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-blue-600 hover:underline"
+            className="text-sm font-semibold text-gray-900 transition-colors hover:text-blue-600 hover:underline"
           >
             github.com/MatomeMb
           </a>

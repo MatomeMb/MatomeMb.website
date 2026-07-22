@@ -197,7 +197,7 @@ export default function Projects() {
 <div className="flex flex-col gap-2 pt-1 text-sm">
                 <Link
                   to={`/project/${project.id}`}
-                  className="inline-flex items-center gap-1.5 font-semibold text-blue-600 hover:underline"
+                  className="inline-flex items-center gap-1.5 font-semibold text-gray-900 transition-colors hover:text-blue-600 hover:underline"
                 >
                   Read the case study <ArrowUpRight size={14} aria-hidden="true" />
                 </Link>
@@ -264,7 +264,7 @@ export default function Projects() {
         Fairflow Production Platforms (the NDA entry above) describes engineering patterns only;
         client data, endpoints and metrics are omitted by design. Fairflow (the open-source project
         above) is public — code, architecture and docs are at
-        <a href="https://github.com/MatomeMb/.Things-That-Matter" className="text-blue-600 hover:underline">github.com/MatomeMb/.Things-That-Matter</a>.
+        <a href="https://github.com/MatomeMb/.Things-That-Matter" className="text-gray-900 font-semibold transition-colors hover:text-blue-600 hover:underline">github.com/MatomeMb/.Things-That-Matter</a>.
       </p>
     </div>
   );
