@@ -49,9 +49,13 @@ export default function Layout({ children }: LayoutProps) {
             className="group flex items-center gap-2.5 rounded px-1 focus:outline-none"
             aria-label="Matome Mbowene — home"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded border border-gray-200 bg-gray-50 font-mono text-xs font-semibold text-gray-900 transition-colors group-hover:border-gray-400">
-              MM
-            </span>
+            <img
+              src="matome-Headshot.jpg"
+              alt="Matome Mbowene"
+              className="h-8 w-8 rounded object-cover"
+              width={32}
+              height={32}
+            />
             <span className="text-[15px] font-semibold tracking-tight text-gray-900 transition-colors group-hover:text-blue-600">
               Matome Mbowene
             </span>

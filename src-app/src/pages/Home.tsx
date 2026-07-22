@@ -124,26 +124,34 @@ export default function Home() {
           Open to software engineering roles — Johannesburg / relocation
         </p>
 
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <h1
-              id="hero-heading"
-              className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl"
-            >
-              Matome Mbowene
-            </h1>
-            <p className="text-xl font-semibold text-gray-900">Software Engineer</p>
-            <p className="text-sm text-gray-500">
-              BSc Computer Science &amp; Computer Engineering, University of Cape Town
-            </p>
-            <p className="text-xs text-gray-400 font-semibold">
-              Johannesburg, South Africa
+        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+          <img
+            src="matome-Headshot.jpg"
+            alt="Matome Mbowene profile picture"
+            className="h-24 w-24 rounded-lg object-cover shadow-sm"
+            width={96}
+            height={96}
+          />
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <h1
+                id="hero-heading"
+                className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl"
+              >
+                Matome Mbowene
+              </h1>
+              <p className="text-xl font-semibold text-gray-900">Software Engineer</p>
+              <p className="text-sm text-gray-500">
+                BSc Computer Science &amp; Computer Engineering, University of Cape Town
+              </p>
+              <p className="text-xs text-gray-400 font-semibold">
+                Johannesburg, South Africa
+              </p>
+            </div>
+            <p className="max-w-xl text-lg text-gray-600 leading-relaxed font-medium">
+              Building reliable backend systems, AI applications, and developer platforms.
             </p>
           </div>
-          <p className="max-w-xl text-lg text-gray-600 leading-relaxed font-medium">
-            Building reliable backend systems, AI applications, and developer platforms.
-          </p>
-        </div>
 
         <div className="flex flex-wrap items-center gap-3 pt-1">
           <Link
