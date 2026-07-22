@@ -151,27 +151,27 @@ export default function Home() {
             <p className="max-w-xl text-lg text-gray-600 leading-relaxed font-medium">
               Building reliable backend systems, AI applications, and developer platforms.
             </p>
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-1.5 rounded-md bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-900 focus:outline-none"
+              >
+                View Projects <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+              <Link
+                to="/resume"
+                className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
+              >
+                Resume
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
+              >
+                Contact
+              </Link>
+            </div>
           </div>
-
-        <div className="flex flex-wrap items-center gap-3 pt-1">
-          <Link
-            to="/projects"
-            className="inline-flex items-center gap-1.5 rounded-md bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-900 focus:outline-none"
-          >
-            View Projects <ArrowRight size={15} aria-hidden="true" />
-          </Link>
-          <Link
-            to="/resume"
-            className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
-          >
-            Resume
-          </Link>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:outline-none"
-          >
-            Contact
-          </Link>
         </div>
       </section>
 
